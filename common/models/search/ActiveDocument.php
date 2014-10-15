@@ -1,0 +1,167 @@
+<?php
+/**
+ * @copyright Copyright (c) Gayazov Roman, 2014
+ * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @link https://github.com/menst/yii2-cms.git#readme
+ * @package yii2-cms
+ * @version 1.0.0
+ */
+
+namespace menst\cms\common\models\search;
+
+
+use menst\cms\common\interfaces\ViewableInterface;
+use yii\base\Event;
+use yii\base\InvalidConfigException;
+
+/**
+ * Class ActiveRecord
+ * Данный класс отслеживает состояние стандартных ActiveRecord объектов, в случае изменения, создания или удаления,
+ * заносит соответсвующие изменения в ElasticSearch бд, тоесть служит своеобразным клеем для ActiveRecord и ElasticSearch
+ * Связь с ActiveRecord определяется в статическом методе [[self::model()]]
+ * @package yii2-cms
+ * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ */
+class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements ViewableInterface {
+    public function rules()
+    {
+        return [
+            [$this->attributes(), 'safe']
+        ];
+    }
+
+    public static function index()
+    {
+        return 'cms';
+    }
+    /**
+     * @return string
+     */
+    public static function model()
+    {
+        throw new InvalidConfigException('The model() method of elasticsearch ActiveDocument has to be implemented by child classes.');
+    }
+
+    /**
+     * @param \yii\db\ActiveRecord $model
+     */
+    public function loadModel($model)
+    {
+        $this->attributes = $model->toArray();
+    }
+
+    public function getViewLink()
+    {
+        $modelClass = $this->model();
+
+        return $modelClass::viewLink($this);
+    }
+
+    public static function viewLink($model)
+    {
+        $modelClass = static::model();
+
+        return $modelClass::viewLink($model);
+    }
+
+    public static function filter()
+    {
+        return [];
+    }
+
+    //баг ActiveDataProvider - почемуто пытается записать свойство _id
+    public function get_Id()
+    {
+        return $this->getPrimaryKey(false);
+    }
+
+    public function set_Id($value)
+    {
+        $this->setPrimaryKey($value);
+    }
+
+    private static $_documents = [];
+
+    public static function watch($documentClasses)
+    {
+        foreach ($documentClasses as $class) {
+            /** @var ActiveDocument|string $class */
+            if (!is_subclass_of($class, __CLASS__)) {
+                throw new InvalidConfigException("The {$class} class has to inherit from the class " . __CLASS__ . ".");
+            }
+            self::$_documents[$class::type()] = $class;
+        }
+
+        self::subscribe();
+    }
+
+    public static function registeredDocuments()
+    {
+        return self::$_documents;
+    }
+
+    public static function registeredTypes()
+    {
+        return array_keys(self::$_documents);
+    }
+
+    private static function subscribe()
+    {
+        static $subscribed;
+        if (!isset($subscribed)) {
+            Event::on(\yii\db\ActiveRecord::className(), \yii\db\ActiveRecord::EVENT_AFTER_INSERT, [self::className(), 'indexDocument']);
+            Event::on(\yii\db\ActiveRecord::className(), \yii\db\ActiveRecord::EVENT_AFTER_UPDATE, [self::className(), 'indexDocument']);
+            Event::on(\yii\db\ActiveRecord::className(), \yii\db\ActiveRecord::EVENT_AFTER_DELETE, [self::className(), 'deleteDocument']);
+            $subscribed = true;
+        }
+    }
+
+    /**
+     * @param $event \yii\base\Event
+     */
+    public static function indexDocument($event)
+    {
+        /** @var \yii\db\ActiveRecord $model */
+        if ($model = $event->sender) {
+            foreach (self::findDocumentsByModelClass($model->className()) as $documentClass) {
+                /** @var ActiveDocument $documentClass */
+                if (!($document = $documentClass::get($model->getPrimaryKey()))) {
+                    /** @var ActiveDocument $document */
+                    $document = new $documentClass;
+                    $document->setPrimaryKey($model->getPrimaryKey());
+                }
+                $document->loadModel($model);
+                $document->save();
+            }
+        }
+    }
+
+    /**
+     * @param $event \yii\base\Event
+     */
+    public static function deleteDocument($event)
+    {
+        /** @var \yii\db\ActiveRecord $model */
+        if ($model = $event->sender) {
+            foreach (self::findDocumentsByModelClass($model->className()) as $documentClass) {
+                /** @var ActiveDocument $documentClass */
+                if ($document = $documentClass::findOne($model->getPrimaryKey())) {
+                    $document->delete();
+                }
+            }
+        }
+    }
+
+    public static function findDocumentsByModelClass($modelClass)
+    {
+        return array_filter(self::$_documents, function($documentClass) use ($modelClass) {
+            /** @var ActiveDocument $documentClass */
+            return $documentClass::model() == $modelClass;
+        });
+    }
+
+    public static function findDocumentByType($type)
+    {
+        return isset(self::$_documents[$type]) ? self::$_documents[$type] : false;
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "name": "menst/yii2-cms",
+    "description": "CMS for Yii2.",
+    "keywords": ["yii", "application", "cms"],
+    "type": "yii2-extension",
+    "license": "GNU-GPL-v2",
+    "authors": [
+        {
+            "name": "Roman Gayazov",
+            "email": "roman.tlt-84@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": "*",
+		"yiisoft/yii2-swiftmailer": "*",
+        "yiisoft/yii2-imagine": "*",
+		"mihaildev/yii2-ckeditor": "*",
+		"mihaildev/yii2-elfinder": "*",
+		"kartik-v/yii2-widgets": "dev-master",
+        "kartik-v/yii2-helpers": "dev-master",
+        "kartik-v/yii2-grid": "dev-master",
+        "kartik-v/bootstrap-fileinput": "dev-master",
+        "zhuravljov/yii2-datetime-widgets" : "dev-master",
+        "2amigos/yii2-transliterator-helper": "dev-master",
+        "creocoder/yii2-nested-set-behavior": "*",
+        "yurkinx/yii2-rss": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "menst\\cms\\": ""
+        }
+    }
+}
