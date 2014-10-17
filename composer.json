@@ -26,7 +26,7 @@
         "2amigos/yii2-transliterator-helper": "dev-master",
         "2amigos/yii2-selectize-widget" : "*",
         "creocoder/yii2-nested-set-behavior": "*",
-        "yurkinx/yii2-rss": "dev-master",
+        "zelenin/yii2-rss": "dev-master",
         "menst/yii2-models": "*",
         "menst/yii2-widgets": "*"
     },
