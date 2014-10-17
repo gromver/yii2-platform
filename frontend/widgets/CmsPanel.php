@@ -74,7 +74,6 @@ class CmsPanel extends Widget {
             $items = [];
             if(Yii::$app->user->can('admin')) {
                 $items[] = ['label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::t('menst.cms', 'Admin Panel'), 'url' => Yii::$app->urlManagerBackend->createUrl('/')];
-                //$items[] = ['label' => '<i class="glyphicon glyphicon-pencil"></i> Настройки', 'url' => ['/cms/default/params']];
                 $items[] = ModalIFrame::widget([
                     'buttonOptions' => [
                         'tag' => 'li'

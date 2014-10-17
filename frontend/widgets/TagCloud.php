@@ -12,6 +12,7 @@ namespace menst\cms\frontend\widgets;
 use menst\cms\common\models\Tag;
 use menst\cms\common\widgets\Widget;
 use yii\db\Query;
+use Yii;
 
 /**
  * Class TagCloud
@@ -34,13 +35,13 @@ class TagCloud extends Widget {
     {
         parent::init();
 
-        $language = $this->language == 'auto' ? \Yii::$app->language : $this->language;
+        $this->language or $this->language = Yii::$app->language;
 
         $this->_tags = (new Query())
             ->select('t.id, t.title, t.alias, count(t2m.item_id) AS weight')
             ->from(Tag::tableName() . ' t')
             ->innerJoin(Tag::pivotTableName() . ' t2m', 't.id=t2m.tag_id')
-            ->where(['t.language' => $language])
+            ->where(['t.language' => $this->language])
             ->groupBy('t.id')->all();
 
         shuffle($this->_tags);
@@ -73,6 +74,6 @@ class TagCloud extends Widget {
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

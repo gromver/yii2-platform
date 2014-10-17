@@ -12,6 +12,7 @@ namespace menst\cms\frontend\widgets;
 use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Post;
 use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  * Class PostView
@@ -49,13 +50,13 @@ class PostView extends Widget {
             @list($id, $postAlias, $categoryAlias) = explode(':', $this->source);
             $this->source = null;
 
-            if ($this->language && $postAlias && $categoryAlias) {
-                $language = $this->language == 'auto' ? \Yii::$app->language : $this->language;
+            if ($postAlias && $categoryAlias) {
+                $this->language or $this->language = Yii::$app->language;
 
                 $this->source = Post::find()->innerJoinWith([
-                    'category' => function($query) use($categoryAlias, $language) {
+                    'category' => function($query) use($categoryAlias) {
                             /** @var $query \yii\db\ActiveQuery */
-                            $query->andOnCondition(['{{%cms_category}}.language' => $language, '{{%cms_category}}.path' => $categoryAlias]);
+                            $query->andOnCondition(['{{%cms_category}}.language' => $this->language, '{{%cms_category}}.path' => $categoryAlias]);
                         }
                 ])->andWhere(['{{%cms_post}}.alias' => $postAlias])->one();
             }
@@ -66,7 +67,7 @@ class PostView extends Widget {
         }
 
         if (empty($this->source)) {
-            throw new InvalidConfigException('Статья не найдена.');
+            throw new InvalidConfigException(Yii::t('menst.cms', 'Post not found.'));
         }
     }
 
@@ -81,13 +82,13 @@ class PostView extends Widget {
     public static function layouts()
     {
         return [
-            'post/viewArticle' => 'Статья',
-            'post/viewNews' => 'Новость',
+            'post/viewArticle' => Yii::t('menst.cms', 'Article'),
+            'post/viewNews' => Yii::t('menst.cms', 'Issue'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

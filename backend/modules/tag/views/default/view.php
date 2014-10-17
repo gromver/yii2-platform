@@ -15,9 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('menst.cms', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('menst.cms', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
+        <?= Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('menst.cms', 'Add'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> ' . Yii::t('menst.cms', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-default']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('menst.cms', 'Delete'), ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger pull-right',
             'data' => [
                 'confirm' => Yii::t('menst.cms', 'Are you sure you want to delete this item?'),
                 'method' => 'post',

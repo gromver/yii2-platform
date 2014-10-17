@@ -9,7 +9,7 @@
 
 namespace menst\cms\frontend\modules\tag\components;
 
-use menst\cms\common\models\Menu;
+use menst\cms\common\models\MenuItem;
 use menst\cms\common\models\Tag;
 use menst\cms\frontend\behaviors\MenuUrlRuleBehavior;
 
@@ -42,7 +42,7 @@ class TagMenuUrlRuleBehavior extends MenuUrlRuleBehavior
             if($path = $event->menuMap->getMenuPathByRoute('cms/tag/default/index')) {
                 $path .= '/' . (isset($event->requestParams['alias']) ? $event->requestParams['alias'] : $event->requestParams['id']);
                 unset($event->requestParams['id'], $event->requestParams['alias']);
-                $event->resolve(Menu::toRoute($path, $event->requestParams));
+                $event->resolve(MenuItem::toRoute($path, $event->requestParams));
             }
         }
     }

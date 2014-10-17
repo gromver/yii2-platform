@@ -10,10 +10,9 @@
 namespace menst\cms\frontend\widgets;
 
 use menst\cms\common\widgets\Widget;
-use menst\cms\common\models\Category;
 use menst\cms\common\models\Post;
 use menst\cms\common\models\Tag;
-use yii\base\InvalidConfigException;
+use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -72,10 +71,10 @@ class TagPosts extends Widget {
             @list($id, $alias) = explode(':', $this->source);
             $this->source = null;
 
-            if ($this->language && $alias) {
-                $language = $this->language == 'auto' ? \Yii::$app->language : $this->language;
+            if ($alias) {
+                $this->language or $this->language = Yii::$app->language;
 
-                $this->source = Tag::find()->andWhere(['alias' => $alias, 'language' => $language])->one();
+                $this->source = Tag::find()->andWhere(['alias' => $alias, 'language' => $this->language])->one();
             }
 
             if (empty($this->source)) {
@@ -111,15 +110,15 @@ class TagPosts extends Widget {
     public static function layouts()
     {
         return [
-            'tag/postsDefault' => 'По умолчанию',
-            'tag/postsOnly' => 'Только список',
+            'tag/postsDefault' => Yii::t('menst.cms', 'Default'),
+            'tag/postsList' => Yii::t('menst.cms', 'List'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemPost' => 'По умолчанию',
+            '_itemPost' => Yii::t('menst.cms', 'Default'),
         ];
     }
 
@@ -127,23 +126,23 @@ class TagPosts extends Widget {
     public static function sortColumns()
     {
         return [
-            'published_at' => 'По дате публикации',
-            'created_at' => 'По дате создания',
-            'title' => 'По названию',
-            'ordering' => 'По порядку',
+            'published_at' => Yii::t('menst.cms', 'By publish date'),
+            'created_at' => Yii::t('menst.cms', 'By create date'),
+            'title' => Yii::t('menst.cms', 'By name'),
+            'ordering' => Yii::t('menst.cms', 'By order'),
         ];
     }
 
     public static function sortDirections()
     {
         return [
-            SORT_ASC => 'По возрастанию',
-            SORT_DESC => 'По убыванию',
+            SORT_ASC => Yii::t('menst.cms', 'Asc'),
+            SORT_DESC => Yii::t('menst.cms', 'Desc'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

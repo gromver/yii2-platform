@@ -102,6 +102,8 @@ class DefaultController extends Controller
     {
         $model = new Tag();
         $model->loadDefaultValues();
+        $model->language = Yii::$app->language;
+        $model->status = Tag::STATUS_PUBLISHED;
 
         if($language) $model->language = $language;
 

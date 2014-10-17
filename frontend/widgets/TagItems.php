@@ -11,6 +11,7 @@ namespace menst\cms\frontend\widgets;
 
 use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Tag;
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 
@@ -53,10 +54,10 @@ class TagItems extends Widget {
             @list($id, $alias) = explode(':', $this->source);
             $this->source = null;
 
-            if ($this->language && $alias) {
-                $language = $this->language == 'auto' ? \Yii::$app->language : $this->language;
+            if ($alias) {
+                $this->language or $this->language = Yii::$app->language;
 
-                $this->source = Tag::find()->andWhere(['alias' => $alias, 'language' => $language])->one();
+                $this->source = Tag::find()->andWhere(['alias' => $alias, 'language' => $this->language])->one();
             }
 
             if (empty($this->source)) {
@@ -65,7 +66,7 @@ class TagItems extends Widget {
         }
 
         if (empty($this->source)) {
-            throw new InvalidConfigException('Тег не найден.');
+            throw new InvalidConfigException(Yii::t('menst.cms', 'Tag not found.'));
         }
     }
 
@@ -90,21 +91,21 @@ class TagItems extends Widget {
     public static function layouts()
     {
         return [
-            'tag/itemsDefault' => 'По умолчанию',
-            'tag/itemsOnly' => 'Только список',
+            'tag/itemsDefault' => Yii::t('menst.cms', 'Default'),
+            'tag/itemsList' => Yii::t('menst.cms', 'List'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemItem' => 'По умолчанию',
+            '_itemItem' => Yii::t('menst.cms', 'Default'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 
 } 

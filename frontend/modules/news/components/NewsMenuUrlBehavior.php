@@ -125,7 +125,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                     return;
                 }
             }
-
+            //todo Добавить привязку ко всем новостям здесь и в парсере
             return;
         }
 
@@ -157,6 +157,8 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
         }
 
         if ($event->requestRoute === 'cms/tag/default/posts') {
+            //todo сделать привязку к категории новости по category_id здесь и в парсере
+
             $path = $event->menuMap->getMenuPathByRoute('cms/news/post/index');
 
             if ($path && isset($event->requestParams['tag_alias'])) {

@@ -34,13 +34,13 @@ use yii\bootstrap\ActiveForm;
                 ]
             ]) ?>
 
-            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('menst.cms', 'Not selected')] + $model->statusLabels()) ?>
-
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('menst.cms', 'Select...')]) ?>
-
             <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
 
             <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('menst.cms', 'Auto-generate')]) ?>
+
+            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('menst.cms', 'Not selected')] + $model->statusLabels()) ?>
+
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('menst.cms', 'Select...')]) ?>
 
             <?//= $form->field($model, 'path')->textInput(['maxlength' => 2048]) ?>
 

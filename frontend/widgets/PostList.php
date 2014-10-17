@@ -13,6 +13,7 @@ use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Category;
 use menst\cms\common\models\Post;
 use yii\data\ActiveDataProvider;
+use Yii;
 
 /**
  * Class PostList
@@ -37,7 +38,7 @@ class PostList extends Widget {
      * @items layouts
      * @editable
      */
-    public $layout = 'post/listBlog';
+    public $layout = 'post/listDefault';
     /**
      * @type list
      * @items itemLayouts
@@ -71,9 +72,9 @@ class PostList extends Widget {
             $this->category = null;
 
             if ($this->language && $path) {
-                $language = $this->language == 'auto' ? \Yii::$app->language : $this->language;
+                $this->language or $this->language = Yii::$app->language;
 
-                $this->category = Category::find()->andWhere(['path' => $path, 'language' => $language])->one();
+                $this->category = Category::find()->andWhere(['path' => $path, 'language' => $this->language])->one();
             }
 
             if (empty($this->category)) {
@@ -110,16 +111,16 @@ class PostList extends Widget {
     public static function layouts()
     {
         return [
-            'post/listDefault' => 'Простой список',
-            'post/listBlog' => 'Список и календарь с тегами',
+            'post/listDefault' => Yii::t('menst.cms', 'Default'),
+            'post/listBlog' => Yii::t('menst.cms', 'List with calendar and tags'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemArticle' => 'Статья',
-            '_itemNews' => 'Новость',
+            '_itemArticle' => Yii::t('menst.cms', 'Article'),
+            '_itemNews' => Yii::t('menst.cms', 'Issue'),
         ];
     }
 
@@ -127,23 +128,23 @@ class PostList extends Widget {
     public static function sortColumns()
     {
         return [
-            'published_at' => 'По дате публикации',
-            'created_at' => 'По дате создания',
-            'title' => 'По названию',
-            'ordering' => 'По порядку',
+            'published_at' => Yii::t('menst.cms', 'By publish date'),
+            'created_at' => Yii::t('menst.cms', 'By create date'),
+            'title' => Yii::t('menst.cms', 'By name'),
+            'ordering' => Yii::t('menst.cms', 'By order'),
         ];
     }
 
     public static function sortDirections()
     {
         return [
-            SORT_ASC => 'По возрастанию',
-            SORT_DESC => 'По убыванию',
+            SORT_ASC => Yii::t('menst.cms', 'Asc'),
+            SORT_DESC => Yii::t('menst.cms', 'Desc'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

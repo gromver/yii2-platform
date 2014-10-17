@@ -12,6 +12,7 @@ namespace menst\cms\frontend\widgets;
 use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Page;
 use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  * Class PageView
@@ -49,10 +50,10 @@ class PageView extends Widget {
             @list($id, $alias) = explode(':', $this->source);
             $this->source = null;
 
-            if ($this->language && $alias) {
-                $language = $this->language == 'auto' ? \Yii::$app->language : $this->language;
+            if ($alias) {
+                $this->language or $this->language = Yii::$app->language;
 
-                $this->source = Page::find()->andWhere(['alias' => $alias, 'language' => $language])->one();
+                $this->source = Page::find()->andWhere(['alias' => $alias, 'language' => $this->language])->one();
             }
 
             if (empty($this->source)) {
@@ -61,7 +62,7 @@ class PageView extends Widget {
         }
 
         if (empty($this->source)) {
-            throw new InvalidConfigException('Страница не найдена.');
+            throw new InvalidConfigException(Yii::t('menst.cms', 'Page not found.'));
         }
     }
 
@@ -77,13 +78,13 @@ class PageView extends Widget {
     public static function layouts()
     {
         return [
-            'page/article' => 'Статья',
-            'page/content' => 'Текст',
+            'page/article' => Yii::t('menst.cms', 'Article'),
+            'page/content' => Yii::t('menst.cms', 'Content'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

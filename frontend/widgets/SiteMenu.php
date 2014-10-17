@@ -9,10 +9,10 @@
 
 namespace menst\cms\frontend\widgets;
 
-use Yii;
 use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\MenuItem;
 use menst\cms\common\models\Table;
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -67,7 +67,7 @@ class SiteMenu extends Widget {
         parent::init();
 
         if (empty($this->source)) {
-            throw new InvalidConfigException('Не указан тип меню.');
+            throw new InvalidConfigException(Yii::t('menst.cms', 'Menu type must be set.'));
         }
 
         $this->language or $this->language = Yii::$app->language;
@@ -134,6 +134,6 @@ class SiteMenu extends Widget {
 
     public static function languages()
     {
-        return ['' => 'Не задано'/*, 'auto' => \Yii::t('menst.cms', 'Автоопределение')*/] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 }

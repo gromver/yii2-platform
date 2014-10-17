@@ -12,6 +12,7 @@ namespace menst\cms\frontend\widgets;
 use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Category;
 use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  * Class CategoryView
@@ -45,10 +46,10 @@ class CategoryView extends Widget {
             @list($id, $path) = explode(':', $this->source);
             $this->source = null;
 
-            if ($this->language && $path) {
-                $language = $this->language == 'auto' ? \Yii::$app->language : $this->language;
+            if ($path) {
+                $this->language or $this->language = Yii::$app->language;
 
-                $this->source = Category::find()->andWhere(['path' => $path, 'language' => $language])->one();
+                $this->source = Category::find()->andWhere(['path' => $path, 'language' => $this->language])->one();
             }
 
             if (empty($this->source))  {
@@ -57,7 +58,7 @@ class CategoryView extends Widget {
         }
 
         if (empty($this->source)) {
-            throw new InvalidConfigException('Категория не найдена.');
+            throw new InvalidConfigException(Yii::t('menst.cms', 'Category not found.'));
         }
     }
 
@@ -73,15 +74,15 @@ class CategoryView extends Widget {
     public static function layouts()
     {
         return [
-            'category/viewDefault' => 'По умолчанию',
-            'category/viewVerbose' => 'Подробный',
-            'category/viewOnlyCategories' => 'Только подкатегории',
-            'category/viewOnlyPosts' => 'Только статьи',
+            'category/viewDefault' => Yii::t('menst.cms', 'Default'),
+            'category/viewVerbose' => Yii::t('menst.cms', 'Verbose'),
+            'category/viewOnlyCategories' => Yii::t('menst.cms', 'Only categories list'),
+            'category/viewOnlyPosts' => Yii::t('menst.cms', 'Only posts list'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 
