@@ -31,7 +31,7 @@ AppAsset::register($this);
                 'type' => $type,
                 'body' => $body
             ]) ?>
-        <div class="container-fluid">
+        <div class="row">
             <div class="col-sm-3">
                 <?= \menst\cms\frontend\widgets\SiteMenu::widget([
                     'id' => 'top-menu',

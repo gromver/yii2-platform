@@ -35,7 +35,7 @@ use yii\helpers\Html;
             <td <?php if($daysStarted && $day == $widget->day) echo 'class="selected-day"'; ?>>
                 <?php if($daysStarted && $day <= $widget->daysInCurrentMonth) {
                     if ($count = $widget->getDayPostsCount($day)) {
-                        echo Html::a($day, $widget->getDayLink($day), ['title' => $count, 'data-pjax' => 0]);
+                        echo Html::a($day, $widget->getDayLink($day), ['title' => Yii::t('menst.cms', 'There {0, plural, =0{are no posts} =1{is one post} other{are # posts}}', $count), 'data-pjax' => 0]);
                     } else {
                         echo $day;
                     }
@@ -112,5 +112,4 @@ use yii\helpers\Html;
         border-right: none;
         margin: 0 0 0 8px;
     }
-
 </style>
