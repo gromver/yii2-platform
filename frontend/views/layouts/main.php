@@ -33,11 +33,18 @@ AppAsset::register($this);
             ]) ?>
         <div class="container-fluid">
             <div class="col-sm-3">
-                <? echo \menst\cms\frontend\widgets\SiteMenu::widget([
+                <?= \menst\cms\frontend\widgets\SiteMenu::widget([
                     'id' => 'top-menu',
-                    /*'menuOptions' => [
-                        'class' => '\yii\jui\Menu'
-                    ]*/
+                    'widgetConfig' => [
+                        'heading' => 'Navigation',
+                        'class' => \kartik\widgets\SideNav::className(),//'\yii\jui\Menu'
+                        'activeCssClass' => 'active',
+                        'firstItemCssClass' => 'first',
+                        'lastItemCssClass' => 'last',
+                        //'activateItems'=>true,
+                        'activateParents' => true,
+                        'options' => ['class' => 'level-1']
+                    ]
                 ]) ?>
             </div>
             <div class="col-sm-9">

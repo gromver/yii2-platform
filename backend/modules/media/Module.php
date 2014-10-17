@@ -44,6 +44,8 @@ class Module extends \yii\base\Module implements DesktopInterface
                     ],
                     [
                         'class' => 'mihaildev\elfinder\UserPath',
+                        'baseUrl' => '',
+                        'basePath' => '@frontend/web',
                         'path' => 'files/user_{id}',
                         'name' => Yii::t('menst.cms', 'My Documents'),
                         'access' => ['read' => 'read', 'write' => 'update']

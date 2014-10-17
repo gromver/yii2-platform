@@ -62,6 +62,13 @@ class Application extends \yii\web\Application {
                 ],
                 'cache' => ['class' => 'yii\caching\FileCache'],
                 'elasticsearch' => ['class' => 'yii\elasticsearch\Connection'],
+                'i18n' => [
+                    'translations' => [
+                        '*' => [
+                            'class' => 'yii\i18n\PhpMessageSource'
+                        ],
+                    ],
+                ],
             ],
             'modules' => [
                 'cms' => [

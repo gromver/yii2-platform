@@ -86,6 +86,7 @@ class CategoryController extends Controller
     {
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);
+        $dataProvider->query->noRoots();
 
         Yii::$app->getModule('cms')->layout = 'modal';
 

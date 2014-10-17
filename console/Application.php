@@ -38,7 +38,14 @@ class Application extends \yii\console\Application {
                     'ruleTable' => '{{%cms_auth_rule}}'
                 ],
                 'cache' => ['class' => 'yii\caching\FileCache'],
-                'elasticsearch' => ['class' => 'yii\elasticsearch\Connection']
+                'elasticsearch' => ['class' => 'yii\elasticsearch\Connection'],
+                'i18n' => [
+                    'translations' => [
+                        '*' => [
+                            'class' => 'yii\i18n\PhpMessageSource'
+                        ],
+                    ],
+                ],
             ]
         ], $config);
 

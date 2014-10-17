@@ -12,6 +12,7 @@ namespace menst\cms\common\models;
 use Yii;
 use yii\base\ModelEvent;
 use yii\base\NotSupportedException;
+use yii\console\Application;
 use yii\helpers\Json;
 use yii\web\IdentityInterface;
 
@@ -92,7 +93,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'string', 'max' => 64],
             ['username', 'required'],
-            ['username', 'unique', 'message' => Yii::t('auth.user', 'This username has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
+            ['username', 'unique', 'message' => Yii::t('menst.cms', 'This username has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
@@ -101,7 +102,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['email', 'unique', 'filter' => function($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
-                }, 'message' => Yii::t('auth.user', 'This email address has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
+                }, 'message' => Yii::t('menst.cms', 'This email address has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
             ['email', 'unique', 'filter' => function($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
@@ -110,8 +111,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
                         /** @var $query static */
                         return $this->status != self::STATUS_DELETED;
                     },
-                'message' => Yii::t('auth.user', 'This email address has already been taken.'), 'on' => 'default'],
-            ['email', 'exist', 'message' => Yii::t('auth.user', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
+                'message' => Yii::t('menst.cms', 'This email address has already been taken.'), 'on' => 'default'],
+            ['email', 'exist', 'message' => Yii::t('menst.cms', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
             ['password', 'required', 'on' => ['create', 'signup', 'resetPassword', 'signupWithCaptcha']],
             ['password', 'string', 'min' => 6],
@@ -328,7 +329,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function beforeDelete()
     {
         if (parent::beforeDelete()) {
-            return !$this->getIsSuperAdmin();
+            return Yii::$app instanceof Application ? true : !$this->getIsSuperAdmin();
         } else {
             return false;
         }

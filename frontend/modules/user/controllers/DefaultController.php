@@ -57,7 +57,8 @@ class DefaultController extends Controller
             $user->setParamsArray($model->toArray());
 
             if ($user->save()) {
-                $this->redirect(['index']);
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', "Profile saved."));
+                return $this->redirect('');
             } else {
                 Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('menst.cms', "It wasn't succeeded to keep the user's parameters. Error:\n{error}", ['error' => implode("\n", $user->getFirstErrors())]));
             }

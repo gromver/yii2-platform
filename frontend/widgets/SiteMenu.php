@@ -70,8 +70,10 @@ class SiteMenu extends Widget {
             throw new InvalidConfigException('Не указан тип меню.');
         }
 
+        $this->language or $this->language = Yii::$app->language;
+
         $this->_rawItems = Yii::$app->db->cache(function($db){
-            return MenuItem::find()->type($this->source)->published()->asArray()->all($db);
+            return MenuItem::find()->type($this->source)->published()->language($this->language)->asArray()->orderBy('lft')->all($db);
         }, $this->cacheDuration, Table::dependency(MenuItem::tableName()));
 
         $i = 0;
@@ -132,6 +134,6 @@ class SiteMenu extends Widget {
 
     public static function languages()
     {
-        return ['' => 'Не задано', 'auto' => \Yii::t('menst.cms', 'Автоопределение')] + \Yii::$app->getLanguagesList();
+        return ['' => 'Не задано'/*, 'auto' => \Yii::t('menst.cms', 'Автоопределение')*/] + \Yii::$app->getLanguagesList();
     }
 }

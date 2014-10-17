@@ -26,7 +26,7 @@ class User extends BaseUser
     /**
 	 * @inheritdoc
 	 */
-	public $identityClass = '\menst\cms\common\models\User';
+	public $identityClass = 'menst\cms\common\models\User';
 
 	/**
 	 * @inheritdoc

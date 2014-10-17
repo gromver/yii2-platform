@@ -44,7 +44,7 @@ class Application extends \yii\web\Application {
                     'class' => 'menst\cms\common\components\User',
                     'idParam' => '__idBackend',
                     'authTimeoutParam' => '__expireBackend',
-                    'absoluteAuthTimeoutParam' => '__absolute_expireBackend',
+                    'absoluteAuthTimeoutParam' => '__absoluteExpireBackend',
                     'returnUrlParam' => '__returnUrlBackend',
                     'identityCookie' => ['name' => '_identityBackend', 'httpOnly' => true]
                 ],
@@ -61,6 +61,13 @@ class Application extends \yii\web\Application {
                 ],
                 'cache' => ['class' => 'yii\caching\FileCache'],
                 'elasticsearch' => ['class' => 'yii\elasticsearch\Connection'],
+                'i18n' => [
+                    'translations' => [
+                        '*' => [
+                            'class' => 'yii\i18n\PhpMessageSource'
+                        ],
+                    ],
+                ],
             ],
             'modules' => [
                 'cms' => [
