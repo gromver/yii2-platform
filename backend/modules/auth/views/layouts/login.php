@@ -62,12 +62,13 @@ AppAsset::register($this);
 		?>
 
 		<div class="container">
-        <? foreach(Yii::$app->session->getAllFlashes() as $type=>$body)
+        <?php foreach(Yii::$app->session->getAllFlashes() as $type=>$body) {
             echo \kartik\widgets\Alert::widget([
                 'type' => $type,
                 'body' => $body
-            ]) ?>
-		<?= $content ?>
+            ]);
+        }
+		echo $content ?>
 		</div>
 	</div>
 

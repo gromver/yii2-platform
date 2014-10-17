@@ -26,7 +26,7 @@ class FileInput extends InputWidget {
 
     public function run()
     {
-        if($imageUrl = $this->model->getFileUrl($this->attribute)):?>
+        if ($imageUrl = $this->model->getFileUrl($this->attribute)) { ?>
             <div class="file-input">
                 <div class="file-preview">
                     <div class="file-preview-thumbnails">
@@ -37,7 +37,7 @@ class FileInput extends InputWidget {
                     <div class="clearfix"></div>
                 </div>
             </div>
-        <? endif;
+        <?php }
 
         if ($imageUrl == null) { // to show FileInput only for new upload
             echo KartikFileInput::widget([

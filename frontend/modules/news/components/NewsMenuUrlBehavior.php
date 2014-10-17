@@ -16,8 +16,6 @@ use menst\cms\common\models\Tag;
 use menst\cms\frontend\behaviors\MenuUrlRuleBehavior;
 
 /**
- * Заморочки с определением языка сущности разрешать на етапе маршрутизации запроса, тоесть тут
- * Контролеры должны работать с айдишниками конкретных сущностей
  * Class NewsMenuUrlBehavior
  * @package yii2-cms
  * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
@@ -73,6 +71,19 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                         $event->resolve(['cms/news/post/view', ['id' => $postId]]);
                     }
                 }
+            } elseif (preg_match("#((.*)/)?(([^/]+)\.{$this->tagSuffix})$#", $event->requestRoute, $matches)) {
+                //ищем тэг
+                if ($menuCategory = Category::findOne($event->menuParams['id'])) {
+                    $categoryPath = $matches[2];
+                    $tagAlias = $matches[4];
+                    $category = empty($categoryPath) ? $menuCategory : Category::findOne([
+                        'path' => $menuCategory->path . '/' . $categoryPath,
+                        'language' => $menuCategory->language
+                    ]);
+                    if ($category && $tagId = Tag::find()->select('id')->where(['alias' => $tagAlias])->scalar()) {
+                        $event->resolve(['cms/tag/default/posts', ['id' => $tagId, 'category_id' => $category->id]]);
+                    }
+                }
             } else {
                 //ищем категорию
                 if ($menuCategory = Category::findOne($event->menuParams['id'])) {
@@ -93,6 +104,17 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
             } elseif (preg_match("#^(\d{4})/(\d{1,2})/(\d{1,2})$#", $event->requestRoute, $matches)) {
                 //новости за определенную дату
                 $event->resolve(['cms/news/post/day', ['year' => $matches[1], 'month' => $matches[2], 'day' => $matches[3]]]);
+            } elseif (preg_match("#^((.*)/)(([^/]+)\.{$this->postSuffix})$#", $event->requestRoute, $matches)) {
+                //ищем пост
+                $categoryPath = $matches[2];    //путь категории поста
+                $postAlias = $matches[4];       //алиас поста
+                $category = Category::findOne([
+                    'path' => $categoryPath,
+                    'language' => $event->menuMap->language
+                ]);
+                if ($category && $postId = Post::find()->select('id')->where(['alias' => $postAlias, 'category_id' => $category->id])->scalar()) {
+                    $event->resolve(['cms/news/post/view', ['id' => $postId]]);
+                }
             } elseif (preg_match("#^(([^/]+)\.{$this->tagSuffix})$#", $event->requestRoute, $matches)) {
                 //ищем тег
                 $tagAlias = $matches[2];
@@ -115,7 +137,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                 $event->resolve(MenuItem::toRoute($path, $event->requestParams));
                 return;
             }
-
+            //ищем пункт меню ссылающийся на категорию данного поста либо ее предков
             if (isset($event->requestParams['category_id']) && isset($event->requestParams['alias'])) {
                 //можем привязаться к пункту меню ссылающемуся на категорию новостей к которой принадлежит данный пост(напрямую либо косвенно)
                 if ($path = $this->findCategoryMenuPath($event->requestParams['category_id'], $event->menuMap)) {
@@ -125,7 +147,14 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                     return;
                 }
             }
-            //todo Добавить привязку ко всем новостям здесь и в парсере
+            //привязываем ко всем новостям, если пукнт меню существует
+            if ($path = $event->menuMap->getMenuPathByRoute('cms/news/post/index')) {
+                $path .= '/' . Post::findOne($event->requestParams['id'])->category->path . '/' . $event->requestParams['alias'] . '.' . $this->postSuffix;
+                unset($event->requestParams['id'], $event->requestParams['category_id'], $event->requestParams['alias']);
+                $event->resolve(MenuItem::toRoute($path, $event->requestParams));
+                return;
+            }
+
             return;
         }
 
@@ -158,15 +187,18 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
 
         if ($event->requestRoute === 'cms/tag/default/posts') {
             //todo сделать привязку к категории новости по category_id здесь и в парсере
-
-            $path = $event->menuMap->getMenuPathByRoute('cms/news/post/index');
-
-            if ($path && isset($event->requestParams['tag_alias'])) {
+            //строим ссылку на основе пункта меню на категорию
+            if (isset($event->requestParams['category_id']) && isset($event->requestParams['tag_alias']) && $path = $event->menuMap->getMenuPathByRoute(MenuItem::toRoute('cms/news/category/view', ['id' => $event->requestParams['category_id']]))) {
                 $path .= '/' . $event->requestParams['tag_alias'] . '.' . $this->tagSuffix;
-                unset($event->requestParams['tag_alias'], $event->requestParams['tag_id']);
+                unset($event->requestParams['tag_alias'], $event->requestParams['category_id'], $event->requestParams['tag_id']);
+            }
+            //строим ссылку на основе пункта меню на все новости
+            if (isset($event->requestParams['tag_alias']) && $path = $event->menuMap->getMenuPathByRoute('cms/news/post/index')) {
+                $path .= '/' . $event->requestParams['tag_alias'] . '.' . $this->tagSuffix;
+                unset($event->requestParams['tag_alias'], $event->requestParams['category_id'], $event->requestParams['tag_id']);
             }
 
-            if ($path) {
+            if (isset($path)) {
                 $event->resolve(MenuItem::toRoute($path, $event->requestParams));
             }
         }

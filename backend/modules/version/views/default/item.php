@@ -95,7 +95,7 @@ JS
     ) ?>
 
     <br/>
-    <? $itemVersionHash = $item->version ? $item->version->version_hash : null ?>
+    <?php $itemVersionHash = $item->version ? $item->version->version_hash : null ?>
 
 	<?= GridView::widget([
         'id'=>'table-grid',

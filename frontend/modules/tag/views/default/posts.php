@@ -2,6 +2,7 @@
 /**
  * @var $this yii\web\View
  * @var $model \menst\cms\common\models\Tag
+ * @var $categoryId string
  */
 
 /** @var \menst\cms\common\models\MenuItem $menu */
@@ -25,5 +26,6 @@ if ($model->metadesc) {
 echo \menst\cms\frontend\widgets\TagPosts::widget([
     'id' => 'tag-posts',
     'source' => $model,
+    'categoryId' => $categoryId,
     'context' =>  Yii::$app->menuManager->activeMenu ? Yii::$app->menuManager->activeMenu->path : null,
-]) ?>
+]);

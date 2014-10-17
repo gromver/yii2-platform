@@ -13,6 +13,7 @@ use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Post;
 use menst\cms\common\models\Tag;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -28,6 +29,13 @@ class TagPosts extends Widget {
      * @url /cms/default/select-tag
      */
     public $source;
+    /**
+     * CategoryId
+     * @var string
+     * @type modal
+     * @url /cms/default/select-category
+     */
+    public $categoryId;
     /**
      * @type list
      * @items languages
@@ -81,6 +89,10 @@ class TagPosts extends Widget {
                 $this->source = Tag::findOne($id);
             }
         }
+
+        if (empty($this->source)) {
+            throw new InvalidConfigException(Yii::t('menst.cms', 'Tag must be set.'));
+        }
     }
 
     protected function launch()
@@ -104,7 +116,7 @@ class TagPosts extends Widget {
 
     protected function getQuery()
     {
-        return Post::find()->published()->innerJoinWith('tags', false)->andWhere(['{{%cms_tag}}.id' => $this->source->id]);
+        return Post::find()->published()->category($this->categoryId)->innerJoinWith('tags', false)->andWhere(['{{%cms_tag}}.id' => $this->source->id]);
     }
 
     public static function layouts()

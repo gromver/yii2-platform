@@ -15,9 +15,11 @@ if ($menu) {
     if ($menu->isApplicableContext()) {
         //меню ссылается на категорию
         list($route, $params) = $menu->parseUrl();
-        $_breadcrumbs = $model->category->getBreadcrumbs(true);
-        while (($crumb = array_pop($_breadcrumbs)) && $crumb['url']['id'] != $params['id']) {
-            $this->params['breadcrumbs'][] = $crumb;
+        if ($route == 'cms/news/category/view') {
+            $_breadcrumbs = $model->category->getBreadcrumbs(true);
+            while (($crumb = array_pop($_breadcrumbs)) && $crumb['url']['id'] != $params['id']) {
+                $this->params['breadcrumbs'][] = $crumb;
+            }
         }
     }
 } else {
@@ -38,4 +40,4 @@ echo \menst\cms\frontend\widgets\PostView::widget([
     'id' => 'post-view',
     'source' => $model,
     'context' =>  Yii::$app->menuManager->activeMenu ? Yii::$app->menuManager->activeMenu->path : null
-]) ?>
+]);

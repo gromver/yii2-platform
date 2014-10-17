@@ -43,7 +43,7 @@ use menst\cms\common\models\WidgetConfig;
     <div class="controls-bar">
         <div class="pull-right">
             <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-save"></span> ' . Yii::t('menst.cms', 'Save'), ['class' => 'btn btn-success', 'name'=>'task', 'value'=>'save']) ?>
-            <? if (WidgetConfig::find()->where(['widget_id' => $widget_id, 'context' => $selected_context])->exists()) {
+            <?php if (WidgetConfig::find()->where(['widget_id' => $widget_id, 'context' => $selected_context])->exists()) {
                 echo Html::submitButton('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('menst.cms', 'Delete'), ['class' => 'btn btn-danger', 'name'=>'task', 'value'=>'delete']);
             } ?>
         </div>
