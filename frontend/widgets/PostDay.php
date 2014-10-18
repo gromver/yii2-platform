@@ -44,7 +44,7 @@ class PostDay extends Widget {
      * @type list
      * @items itemLayouts
      */
-    public $itemLayout = '_itemArticle';
+    public $itemLayout = '_itemIssue';
 
     /**
      * @type list
@@ -119,7 +119,7 @@ class PostDay extends Widget {
     {
         return [
             '_itemArticle' => Yii::t('menst.cms', 'Article'),
-            '_itemNews' => Yii::t('menst.cms', 'Issue'),
+            '_itemIssue' => Yii::t('menst.cms', 'Issue'),
         ];
     }
 

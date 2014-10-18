@@ -46,6 +46,7 @@ use yii\helpers\Inflector;
  *
  * @property Category $category
  * @property User[] $viewers
+ * @property Tag[] $tags
  */
 class Post extends \yii\db\ActiveRecord implements TranslatableInterface, ViewableInterface
 {

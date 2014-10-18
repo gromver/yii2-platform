@@ -37,7 +37,7 @@ class PostView extends Widget {
      * @items layouts
      * @editable
      */
-    public $layout = 'post/viewArticle';
+    public $layout = 'post/viewIssue';
     /**
      * @type yesno
      */
@@ -83,7 +83,7 @@ class PostView extends Widget {
     {
         return [
             'post/viewArticle' => Yii::t('menst.cms', 'Article'),
-            'post/viewNews' => Yii::t('menst.cms', 'Issue'),
+            'post/viewIssue' => Yii::t('menst.cms', 'Issue'),
         ];
     }
 

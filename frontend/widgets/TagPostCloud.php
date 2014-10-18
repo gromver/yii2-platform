@@ -24,7 +24,6 @@ class TagPostCloud extends Widget {
     public $categoryId;
     public $fontBase = 14;
     public $fontSpace = 6;
-    public $route = '/cms/tag/default/posts';
 
     protected function launch()
     {
@@ -45,7 +44,6 @@ class TagPostCloud extends Widget {
             'fontBase' => $this->fontBase,
             'fontSpace' => $this->fontSpace,
             'maxWeight' => $maxWeight,
-            'route' => $this->route,
             'categoryId' => $this->categoryId
         ]);
     }

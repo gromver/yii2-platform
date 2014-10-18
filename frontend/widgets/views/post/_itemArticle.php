@@ -5,6 +5,7 @@
  * @var $key string
  * @var $index integer
  * @var $widget \yii\widgets\ListView
+ * @var $postListWidget \menst\cms\frontend\widgets\PostList
  */
 
 use yii\helpers\Html;

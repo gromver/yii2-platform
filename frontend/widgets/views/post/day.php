@@ -35,7 +35,10 @@ use yii\helpers\Html; ?>
         <?= \yii\widgets\ListView::widget(array_merge([
             'dataProvider' => $dataProvider,
             'itemView' => $itemLayout,
-            'summary' => ''
+            'summary' => '',
+            'viewParams' => [
+                'postListWidget' => $this->context
+            ]
         ], $listViewOptions)) ?>
 
         <div class="pagination">

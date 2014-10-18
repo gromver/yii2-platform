@@ -13,5 +13,8 @@ echo \yii\helpers\Html::a(Icon::show('rss', [], Icon::EL), ['/cms/news/post/rss'
 echo \yii\widgets\ListView::widget(array_merge([
     'dataProvider' => $dataProvider,
     'itemView' => $itemLayout,
-    'summary' => ''
+    'summary' => '',
+    'viewParams' => [
+        'postListWidget' => $this->context
+    ]
 ], $this->context->listViewOptions));

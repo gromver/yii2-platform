@@ -44,7 +44,7 @@ class PostList extends Widget {
      * @items itemLayouts
      * @editable
      */
-    public $itemLayout = '_itemArticle';
+    public $itemLayout = '_itemIssue';
     public $pageSize = 20;
     /**
      * @type list
@@ -105,7 +105,7 @@ class PostList extends Widget {
 
     protected function getQuery()
     {
-        return Post::find()->published()->category($this->category ? $this->category->id : null);
+        return Post::find()->published()->category($this->category ? $this->category->id : null)->with('tags');
     }
 
     public static function layouts()
@@ -120,7 +120,7 @@ class PostList extends Widget {
     {
         return [
             '_itemArticle' => Yii::t('menst.cms', 'Article'),
-            '_itemNews' => Yii::t('menst.cms', 'Issue'),
+            '_itemIssue' => Yii::t('menst.cms', 'Issue'),
         ];
     }
 

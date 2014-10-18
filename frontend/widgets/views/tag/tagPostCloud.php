@@ -5,7 +5,6 @@
  * @var $fontBase integer
  * @var $fontSpace integer
  * @var $maxWeight integer
- * @var $route string
  * @var $categoryId string
  */
 
@@ -15,7 +14,7 @@ use menst\cms\common\models\Tag;
 echo Html::beginTag('div', ['class'=>'tag-cloud']);
 
 foreach ($tags as $tag) {
-    echo Html::a(Html::encode($tag['title']), [$route, 'tag_alias' => $tag['alias'], 'category_id' => $categoryId], ['style' => 'font-size: ' . ($fontBase + $fontSpace / $maxWeight * $tag['weight']).'px', 'class'=>'tag']);
+    echo Html::a(Html::encode($tag['title']), ['/cms/tag/default/posts', 'tag_id' => $tag['id'], 'tag_alias' => $tag['alias'], 'category_id' => $categoryId], ['style' => 'font-size: ' . ($fontBase + $fontSpace / $maxWeight * $tag['weight']).'px', 'class'=>'tag']);
 }
 
 echo Html::endTag('div');

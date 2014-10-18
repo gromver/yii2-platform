@@ -34,7 +34,10 @@ Icon::map($this, Icon::EL);
         <?= \yii\widgets\ListView::widget(array_merge([
             'dataProvider' => $dataProvider,
             'itemView' => $itemLayout,
-            'summary' => ''
+            'summary' => '',
+            'viewParams' => [
+                'postListWidget' => $this->context
+            ]
         ], $listViewOptions)) ?>
     </div>
 </div>
