@@ -5,7 +5,8 @@
 
 ?>
 <div class="search-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
+    <h1><?= Yii::t('menst.cms', 'Search') ?></h1>
+
     <?php echo \menst\cms\common\widgets\SearchForm::widget([
         'id' => 'bSearchForm',
         'query' => $query,
@@ -15,5 +16,6 @@
     echo \menst\cms\common\widgets\SearchResults::widget([
         'id' => 'bSearchResult',
         'query' => $query,
+        'filters' => []
     ]); ?>
 </div>

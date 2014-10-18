@@ -40,22 +40,22 @@ class Category extends ActiveDocument {
                 'not' => [
                     'and' => [
                         [
-                            'exists' => ['field' => 'published']
+                            'type' => ['value' => 'category']
                         ],
                         [
                             'term' => ['published' => false]
                         ]
                     ]
                 ]
-            ],
+            ]
         ];
 
         if ($unpublishedCategories = \menst\cms\common\models\Category::find()->unpublished()->select('{{%cms_category}}.id')->column()) {
-            $filters[] =             [
+            $filters[] = [
                 'not' => [
                     'and' => [
                         [
-                            'exists' => ['field' => 'parent_id']
+                            'type' => ['value' => 'category']
                         ],
                         [
                             'term' => ['parent_id' => $unpublishedCategories]

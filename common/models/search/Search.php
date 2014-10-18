@@ -35,6 +35,16 @@ class Search extends ActiveDocument {
 
     public function attributes()
     {
-        return [];
+        return ['title', 'text', 'date'];
+    }
+    //fallback
+    public function getViewLink()
+    {
+        return [''];
+    }
+
+    public static function viewLink($model)
+    {
+        return [''];
     }
 }

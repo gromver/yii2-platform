@@ -43,7 +43,7 @@ class Post extends ActiveDocument {
                 'not' => [
                     'and' => [
                         [
-                            'exists' => ['field' => 'published']
+                            'type' => ['value' => 'post']
                         ],
                         [
                             'term' => ['published' => false]
@@ -58,7 +58,7 @@ class Post extends ActiveDocument {
                 'not' => [
                     'and' => [
                         [
-                            'exists' => ['field' => 'category_id']
+                            'type' => ['value' => 'post']
                         ],
                         [
                             'term' => ['category_id' => $unpublishedCategories]

@@ -87,6 +87,12 @@ class SearchResults extends Widget {
     public $itemLayout = '_itemDefault';
     public $pageSize = 10;
 
+    /**
+     * Массив с фильтрами для поиска, к данным фильтрам применяется условие AND
+     * если фильтры не заданы то виджет мерджит фильтры по умолчанию от каждого ActiveDocument известного cms
+     * @ignore
+     * @var null|array
+     */
     private $_filters;
 
 
@@ -154,6 +160,13 @@ class SearchResults extends Widget {
     }
 
     /**
+     * @param $value
+     */
+    public function setFilters($value)
+    {
+        $this->_filters = $value;
+    }
+    /**
      * @return array|mixed
      */
     protected function getFilters()
@@ -164,7 +177,6 @@ class SearchResults extends Widget {
                 $cache = Instance::ensure($this->cache, Cache::className());
                 $this->_filters = $cache->get([self::CACHE_KEY, $this->types]);
                 if ($this->_filters === false) {
-                    //echo 'CACHING SEARCH!';
                     $this->_filters = $this->collectFilters();
                     $cache->set([self::CACHE_KEY, $this->types], $this->_filters, $this->cacheDuration);
                 }

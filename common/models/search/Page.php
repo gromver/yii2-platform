@@ -40,7 +40,7 @@ class Page extends ActiveDocument {
                 'not' => [
                     'and' => [
                         [
-                            'exists' => ['field' => 'published']
+                            'type' => ['value' => 'page']
                         ],
                         [
                             'term' => ['published' => false]

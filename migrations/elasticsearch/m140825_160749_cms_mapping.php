@@ -195,7 +195,12 @@ class m140825_160749_cms_mapping extends Migration
         $modelClass = $documentClass::model();
         /** @var \menst\cms\common\models\search\ActiveDocument $document */
         $document = new $documentClass;
-        foreach ($modelClass::find()->each() as $model) {
+        $query = $modelClass::find();
+        //древовидные модели, не должны индексировать рутовый элемент
+        if ($query->hasMethod('noRoots')) {
+            $query->noRoots();
+        }
+        foreach ($query->each() as $model) {
             /** @var \yii\db\ActiveRecord $model */
             $action = Json::encode([
                 "index" => [

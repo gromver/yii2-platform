@@ -101,7 +101,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
     public function run()
     {
-        echo Html::beginTag('div', ['class' => 'widget-wrapper' . ($this->canEdit() && Yii::$app->cms->getIsEditMode() ? ' edit-mode' : '')]);
+        echo Html::beginTag('div', ['class' => 'widget-wrapper' . ($this->canEdit() && Yii::$app->cms->getIsEditMode() && $this->getShowPanel() ? ' edit-mode' : '')]);
         if ($this->_exception === null) {
             try {
                 $this->launch();

@@ -34,6 +34,7 @@ class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements Viewable
     {
         return 'cms';
     }
+
     /**
      * @return string
      */
@@ -63,8 +64,12 @@ class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements Viewable
 
         return $modelClass::viewLink($model);
     }
-
-    public static function filter()
+    /**
+     * Поисковый фильтр по умолчанию, применим для поиска во фронтенде, например фильтрация опубликованных постов
+     * @return array
+     * @see \menst\cms\common\widgets\SearchResults
+     */
+    public static function searchDefaultFilter()
     {
         return [];
     }
