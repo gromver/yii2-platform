@@ -15,7 +15,7 @@ CMS для Yii2.
 Сперва устанавливаем [advanced application template](http://www.yiiframework.com/doc-2.0/guide-tutorial-advanced-app.html).
 
 ### Настройка Nginx
-```json
+```nginx
 server {
     charset utf-8;
     client_max_body_size 128M;
@@ -85,13 +85,13 @@ server {
 
  * /yii.php
 
-```json
+```php
   $application = new \menst\cms\console\Application($config); // yii\console\Application($config);
 ```
 
 Нужно отредактировать стандартный конфиг: /frontend/config/main.php, /backend/config/main.php
 
-```json    
+```php   
   'components' => [
       'user' => [
           //'identityClass' => 'common\models\User',  //закоментировать или удалить эту строку
@@ -114,7 +114,7 @@ server {
 
  * Добавляем в бутстрап фронтенда и бэкенда модуль 'cms/search'. Правим файлы /frontend/config/main.php и /backend/config/main.php
 
-```
+```php
   'bootstrap' => ['log', 'cms/search'],
 ```
   
