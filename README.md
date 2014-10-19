@@ -24,11 +24,11 @@ server {
     #listen [::]:80 default_server ipv6only=on; ## listen for ipv6
 
     server_name yiicms.proj;
-    root        /home/roman/www/yiicms/frontend/web;
+    root        /path/to/app/frontend/web;
     index       index.php;
 
-    access_log  /home/roman/www/yiicms/log/access.log;
-    error_log   /home/roman/www/yiicms/log/error.log;
+    access_log  /path/to/app/log/access.log;
+    error_log   /path/to/app/log/error.log;
 
     #необходимо добавить в папку frontend/web симлинк на backend/web под названием admin
 	  location /admin/ {
