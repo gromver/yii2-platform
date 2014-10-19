@@ -73,13 +73,13 @@ server {
 Заменяем фронтенд, бэкенд и консольное приложения на соответсвующие из данного расширения. Для этого правим файлы:
  * /backend/web/index.php
 
-```json
+```php
   $application = new \menst\cms\frontend\Application($config); // yii\web\Application($config);
 ```
 
  * /frontend/web/index.php   
 
-```json
+```php
   $application = new \menst\cms\backend\Application($config); // yii\web\Application($config);
 ```
 
