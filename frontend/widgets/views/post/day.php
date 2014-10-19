@@ -43,11 +43,11 @@ use yii\helpers\Html; ?>
 
         <div class="pagination">
             <?php if ($prevDayPost) {
-                echo Html::tag('li', Html::a('&laquo; ' . Yii::$app->formatter->asDate($prevDayPost->published_at, 'd MMM'), $prevDayPost->getDayLink()));
+                echo Html::tag('li', Html::a('&laquo; ' . Yii::$app->formatter->asDate($prevDayPost->published_at, 'd MMM'), ['/cms/news/post/day', 'category_id' => $category ? $category->id : null, 'year' => date('Y', $prevDayPost->published_at), 'month' => date('m', $prevDayPost->published_at), 'day' => date('j', $prevDayPost->published_at)]));
             }
 
             if ($nextDayPost) {
-                echo Html::tag('li', Html::a(Yii::$app->formatter->asDate($nextDayPost->published_at, 'd MMM') . ' &raquo;', $nextDayPost->getDayLink()));
+                echo Html::tag('li', Html::a(Yii::$app->formatter->asDate($nextDayPost->published_at, 'd MMM') . ' &raquo;', ['/cms/news/post/day', 'category_id' => $category ? $category->id : null, 'year' => date('Y', $nextDayPost->published_at), 'month' => date('m', $nextDayPost->published_at), 'day' => date('j', $nextDayPost->published_at)]));
             } ?>
         </div>
     </div>
