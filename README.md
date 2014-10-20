@@ -92,12 +92,14 @@ server {
 Нужно отредактировать стандартный конфиг: /frontend/config/main.php, /backend/config/main.php
 
 ```php   
+[
   'components' => [
       'user' => [
           //'identityClass' => 'common\models\User',  //закоментировать или удалить эту строку
           'enableAutoLogin' => true,
       ],
     ]
+]
 ```
 ### Миграция
 Добавляем таблицы в БД.
@@ -115,6 +117,8 @@ server {
  * Добавляем в бутстрап фронтенда и бэкенда модуль 'cms/search'. Правим файлы /frontend/config/main.php и /backend/config/main.php
 
 ```php
+[
   'bootstrap' => ['log', 'cms/search'],
+]
 ```
   
