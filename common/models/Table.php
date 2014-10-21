@@ -73,6 +73,8 @@ class Table extends \yii\db\ActiveRecord
     }
 
     /**
+     * Возвращает время последненго изменения в таблице $table
+     * todo зделать возможность указывать множество таблиц
      * @param $table string table name
      * @return mixed
      */
@@ -108,6 +110,9 @@ class Table extends \yii\db\ActiveRecord
         self::$data = null;
     }
 
+    /**
+     * Вешаем на глобальные события изменения БД прослушку.
+     */
     public static function bootstrap()
     {
         static $initialized;
