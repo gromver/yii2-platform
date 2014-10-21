@@ -1,20 +1,27 @@
-#yii2-cms#
+# yii2-cms
 
-CMS для Yii2.
+CMS для Yii2. Данное расширение представляет собою легкую, но в тоже время, функциональную систему управления сайтом. При разработке данной cms ставилось 2 цели:
 
-#Возможности#
+1. Сделать cms максимально удобной и простой для веб-разработчика. Тоесть по сути сделать cmf, при этом процесс разработки в среднем должен занимать меньше времени чем аналогичный процесс в традиционных cms.
+2. Cms должна быть максимально удобной и функциональной для администратора и контент менеджера.
 
- * Модули: авторизация, пользователи, меню, страницы, новости, теги, поиск, медиа менеджер и т.д.
- * Древовидные категории новостей.
- * Встроенная система контроля версий документов.
- * Поиск на основе Elastic Search.
- * SEO-friendly адреса страниц (ЧПУ)
 
-#Установка#
+* Сайт: будет...
+* Демо сайт: будет...
 
-Сперва устанавливаем [advanced application template](http://www.yiiframework.com/doc-2.0/guide-tutorial-advanced-app.html).
+## Возможности
 
-### Настройка Nginx
+* Модули: авторизация, пользователи, меню, страницы, новости, теги, поиск, медиа менеджер и т.д.
+* Древовидные категории новостей.
+* Встроенная система контроля версий документов.
+* Поиск на основе Elastic Search.
+* SEO-friendly адреса страниц (ЧПУ)
+
+## Установка##
+
+Cms работает на базе [advanced application template](http://www.yiiframework.com/doc-2.0/guide-tutorial-advanced-app.html). Устанавливаем данный шаблон приложения.
+
+#### Настройка Nginx
 ```nginx
 server {
     charset utf-8;
@@ -58,7 +65,7 @@ server {
 }
 ```
 
-### Установка yii2-cms
+#### Установка yii2-cms
 Запускаем через composer
 
     php composer.phar require --prefer-dist menst/yii2-cms "*"
@@ -69,29 +76,25 @@ server {
     
 в require секцию composer.json файла.
 
-### Настройка расширения
+#### Настройка yii2-cms
 Заменяем фронтенд, бэкенд и консольное приложения на соответсвующие из данного расширения. Для этого правим файлы:
- * /backend/web/index.php
 
-```php
+* /backend/web/index.php
+```
   $application = new \menst\cms\frontend\Application($config); // yii\web\Application($config);
 ```
-
- * /frontend/web/index.php   
-
-```php
+* /frontend/web/index.php   
+```
   $application = new \menst\cms\backend\Application($config); // yii\web\Application($config);
 ```
-
- * /yii.php
-
-```php
+* /yii.php
+```
   $application = new \menst\cms\console\Application($config); // yii\console\Application($config);
 ```
 
 Нужно отредактировать стандартный конфиг: /frontend/config/main.php, /backend/config/main.php
 
-```php   
+``` 
 [
   'components' => [
       'user' => [
@@ -101,22 +104,18 @@ server {
     ]
 ]
 ```
-### Миграция
-Добавляем таблицы в БД.
+#### Добавляем таблицы в БД
 
     php yii migrate --migrationPath=@menst/cms/migrations
 
-### Поиск(опционально)
- * Установить [Elasticsearch](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_installation.html)
- * Применяем миграцию для Elasticsearch
-
+#### Подключение поиска(опционально)
+* Установить [Elasticsearch](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_installation.html)
+* Применяем миграцию для Elasticsearch
 ```
   php yii migrate --migrationPath=@menst/cms/migrations/elasticsearch
 ```
-
- * Добавляем в бутстрап фронтенда и бэкенда модуль 'cms/search'. Правим файлы /frontend/config/main.php и /backend/config/main.php
-
-```php
+* Добавляем в бутстрап фронтенда и бэкенда модуль 'cms/search'. Правим файлы /frontend/config/main.php и /backend/config/main.php
+```
 [
   'bootstrap' => ['log', 'cms/search'],
 ]
