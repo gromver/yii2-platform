@@ -82,25 +82,13 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
                     return is_string($this->published_at);
                 }],
             [['published_at'], 'integer', 'enableClientValidation'=>false],
-            /*[['language'], 'required', 'when' => function($model){
-                    return !$this->parent_id;
-                }, 'whenClient' => 'function(attribute, value) {
-                    return $("#' . Html::getInputId($this, 'parent_id') . '").val() == "";
-                }'],*/
             [['language'], 'required'],
             [['language'], 'string', 'max' => 7],
             [['language'], function($attribute, $params) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
-                    $this->addError($attribute, Yii::t('menst.cms', 'Язык должен совпадать с родительским.'));
+                    $this->addError($attribute, Yii::t('menst.cms', 'Language has to match with the parental.'));
                 }
             }],
-
-            /*[['language'], 'filter', 'filter'=>function($value) {
-                    return ($parent = self::findOne($this->parent_id)) ? $parent->language : null;
-                }, 'when' => function(){
-                    return $this->parent_id;
-                }],*/
-
             [['parent_id'], 'exist', 'targetAttribute'=>'id'],
             [['parent_id'], 'compare', 'compareAttribute'=>'id', 'operator'=>'!='],
 
@@ -121,9 +109,7 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
                                 'level' => $parent->level + 1,
                                 'language' => $this->language
                             ]);
-                        //$path = $parent->path . '/' . $this->alias;
-                        //$query->andWhere(['path'=>$path]);
-                    }// else $query->andWhere(['language'=>$this->language])->andWhere('root=id');
+                    }
                 }],
             [['alias'], 'string', 'max' => 250],
             [['alias'], 'required', 'enableClientValidation' => false],

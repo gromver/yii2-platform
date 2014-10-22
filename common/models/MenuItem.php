@@ -57,8 +57,9 @@ use yii\helpers\Json;
  */
 class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
 {
+    const STATUS_UNPUBLISHED = 0;
     const STATUS_PUBLISHED = 1;
-    const STATUS_UNPUBLISHED = 2;
+    const STATUS_MAIN_PAGE = 2;
 
     const LINK_ROUTE = 1;   //MenuItem::link используется в качестве роута, MenuItem::path в качестве ссылки
     const LINK_HREF = 2;    //MenuItem::link используется в качестве ссылки, MenuItem::path не используется
@@ -87,7 +88,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             [['language'], 'string', 'max' => 7],
             [['language'], function($attribute, $params) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
-                    $this->addError($attribute, Yii::t('menst.cms', 'Язык должен совпадать с родительским.'));
+                    $this->addError($attribute, Yii::t('menst.cms', 'Language has to match with the parental.'));
                 }
             }],
             [['title', 'link', 'layout_path'], 'string', 'max' => 1024],
@@ -99,7 +100,12 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             [['parent_id'], 'compare', 'compareAttribute' => 'id', 'operator' => '!='],
             [['parent_id'], function($attribute, $params) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->menu_type_id != $this->menu_type_id) {
-                    $this->addError($attribute, Yii::t('menst.cms', 'Родительский пункт меню не соотвествует выбранному типу меню.'));
+                    $this->addError($attribute, Yii::t('menst.cms', 'Parental point of the menu doesn\'t correspond to the chosen menu type.'));
+                }
+            }],
+            [['status'], function($attribute, $params) {
+                if ($this->status == self::STATUS_MAIN_PAGE && $this->link_type == self::LINK_HREF) {
+                    $this->addError($attribute, Yii::t('menst.cms', 'Alias of the menu item can\'t be a main page.'));
                 }
             }],
             [['alias'], 'filter', 'filter' => 'trim'],
@@ -213,6 +219,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     private static $_statuses = [
         self::STATUS_PUBLISHED => 'Published',
         self::STATUS_UNPUBLISHED => 'Unpublished',
+        self::STATUS_MAIN_PAGE => 'Main page',
     ];
 
     public static function statusLabels()
@@ -262,12 +269,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             } else {
                 if(array_key_exists('ordering', $changedAttributes)) $newParent->reorderNode('ordering');
             }
-        }/* else {
-            if (!$this->isRoot()) {
-                $this->moveAsRoot();
-                $moved = true;
-            }
-        }*/
+        }
 
         if ($moved) {
             $this->refresh();
@@ -279,6 +281,10 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
         //Если изменен тип меню или язык, смена языка возможна только для корневых пунктов меню
         if (array_key_exists('menu_type_id', $changedAttributes) || array_key_exists('language', $changedAttributes)) {
             $this->normalizeDescendants();
+        }
+
+        if (array_key_exists('status', $changedAttributes)) {
+            $this->normalizeStatus();
         }
 
         return parent::afterSave($insert, $changedAttributes);
@@ -311,6 +317,13 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     {
         $ids = $this->descendants()->select('id')->column();
         self::updateAll(['menu_type_id' => $this->menu_type_id, 'language' => $this->language], ['id' => $ids]);
+    }
+    //для каждого языка возможен только один пукнт меню со статусом главной страницы
+    public function normalizeStatus()
+    {
+        if ($this->status == self::STATUS_MAIN_PAGE) {
+            self::updateAll(['status' => self::STATUS_PUBLISHED], 'status=:status AND language=:language AND id!=:id', [':status' => self::STATUS_MAIN_PAGE, ':id' => $this->id, ':language' => $this->language]);
+        }
     }
 
     public function getLinkParams()

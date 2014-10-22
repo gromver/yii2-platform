@@ -19,12 +19,9 @@ use yii\helpers\ArrayHelper;
  * @property $cms \menst\cms\frontend\modules\cms\Module
  */
 class Application extends \yii\web\Application {
-    public $languages = ['ru', 'en'];
-
-    public $language = 'ru';
-
+    public $language = 'en';
+    public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
-    
     public $layout = '@menst/cms/frontend/views/layouts/main';
 
     private $_modulesHash;

@@ -53,7 +53,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
         return [
             'label' => Yii::t('menst.cms', 'User'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'User Profile'), 'route' => '/cms/user/default/update'],
+                ['label' => Yii::t('menst.cms', 'User Profile'), 'route' => 'cms/user/default/update'],
             ]
         ];
     }

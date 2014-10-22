@@ -17,8 +17,8 @@ use yii\helpers\ArrayHelper;
  * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
  */
 class Application extends \yii\console\Application {
-    public $language = 'ru';
-    public $languages = ['ru', 'en'];
+    public $language = 'en';
+    public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
 
     private $_modulesHash;

@@ -39,6 +39,7 @@ class ItemController extends Controller
                     'bulk-delete' => ['post'],
                     'publish' => ['post'],
                     'unpublish' => ['post'],
+                    'status' => ['post'],
                     'type-items' => ['post'],
                 ],
             ],
@@ -47,7 +48,7 @@ class ItemController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['create', 'update', 'ordering', 'publish', 'unpublish', 'routers'],
+                        'actions' => ['create', 'update', 'ordering', 'publish', 'unpublish', 'status', 'routers'],
                         'roles' => ['update'],
                     ],
                     [
@@ -129,7 +130,11 @@ class ItemController extends Controller
     /**
      * Creates a new MenuItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @param null $menu_type_id
+     * @param null $sourceId
+     * @param null $language
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
     public function actionCreate($menu_type_id = null, $sourceId = null, $language = null)
     {
@@ -282,6 +287,18 @@ class ItemController extends Controller
 
         $model->status = MenuItem::STATUS_UNPUBLISHED;
         $model->save();
+
+        return $this->redirect(ArrayHelper::getValue(Yii::$app->request, 'referrer', ['index']));
+    }
+
+    public function actionStatus($id, $status)
+    {
+        $model = $this->findModel($id);
+
+        $model->status = $status;
+        if (!$model->save()) {
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, $model->getFirstError('status'));
+        }
 
         return $this->redirect(ArrayHelper::getValue(Yii::$app->request, 'referrer', ['index']));
     }

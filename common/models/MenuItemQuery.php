@@ -47,7 +47,7 @@ class MenuItemQuery extends ActiveQuery
             'join' => [
                 ['LEFT JOIN', '{{%cms_menu_item}} AS badcats', 'unpublished.lft <= badcats.lft AND unpublished.rgt >= badcats.rgt']
             ],
-            'where' => 'unpublished.status != ' . MenuItem::STATUS_PUBLISHED,
+            'where' => 'unpublished.status = ' . MenuItem::STATUS_UNPUBLISHED,
             'groupBy' => ['badcats.id']
         ]);
 

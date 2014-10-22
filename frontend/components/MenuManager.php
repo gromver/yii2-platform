@@ -80,15 +80,16 @@ class MenuManager extends Component implements UrlRuleInterface
 
     /**
      * Parses the given request and returns the corresponding route and parameters.
-     * @param UrlManager $manager the URL manager
+     * @param \yii\web\UrlManager $manager the URL manager
      * @param Request $request the request component
-     * @return array|boolean the parsing result. The route and the parameters are returned as an array.
-     * If false, it means this rule cannot be used to parse this path info.
+     * @return array|bool the parsing result. The route and the parameters are returned as an array.
+     * @throws ForbiddenHttpException
      */
     public function parseRequest($manager, $request)
     {
-        if (!$pathInfo = $request->getPathInfo()) return false;
-
+        if (!($pathInfo = $request->getPathInfo() or $pathInfo = $this->getMenuMap()->getMainPagePath())) {
+            return false;
+        }
         //Пункт 2
         $this->_activeMenuIds = array_keys($this->getMenuMap()->getLinks(), $request->getUrl());
 
@@ -112,7 +113,7 @@ class MenuManager extends Component implements UrlRuleInterface
             if (Yii::$app->user->getIsGuest()) {
                 Yii::$app->user->loginRequired();
             } else {
-                throw new ForbiddenHttpException(Yii::t('menst.cms', 'У вас нет прав для доступа к данному разделу сайта.'));
+                throw new ForbiddenHttpException(Yii::t('menst.cms', 'You have no rights for access to this section of the site.'));
             }
         }
 

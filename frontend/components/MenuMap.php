@@ -41,60 +41,54 @@ class MenuMap extends Object {
     private $_routes = [];
     private $_paths = [];
     private $_links = [];
+    private $_mainPagePath;
 
     public function init()
     {
-        if(!$this->language)
+        if (!$this->language) {
             throw new InvalidConfigException(get_called_class().'::language must be set.');
+        }
 
-        if($this->cache) {
+        if ($this->cache) {
             /** @var Cache $cache */
             $this->cache = Instance::ensure($this->cache, Cache::className());
             $cacheKey = $this->language . self::CACHE_KEY;
-            if ((list($paths, $routes, $links) = $this->cache->get($cacheKey)) === false) {
-                //echo 'MenuMap CACHE GEN!';
+            if ((list($paths, $routes, $links, $mainPagePath) = $this->cache->get($cacheKey)) === false) {
                 $this->createMap();
-                $this->cache->set($cacheKey, [$this->_paths, $this->_routes, $this->_links], $this->cacheDuration, $this->cacheDependency);
+                $this->cache->set($cacheKey, [$this->_paths, $this->_routes, $this->_links, $this->_mainPagePath], $this->cacheDuration, $this->cacheDependency);
             } else {
                 $this->_paths = $paths;
                 $this->_routes = $routes;
                 $this->_links = $links;
+                $this->_mainPagePath = $mainPagePath;
             }
-        } else
+        } else {
             $this->createMap();
+        }
     }
 
     private function createMap()
     {
         $items = MenuItem::find()->published()->language($this->language)->asArray()->all();
-        //$this->createPathsMap($items, $this->_paths);
 
         foreach ($items as $item) {
-            if($item['link_type'] == MenuItem::LINK_ROUTE) {
+            if ($item['link_type'] == MenuItem::LINK_ROUTE) {
                 $this->_paths[$item['id']] = $item['path'];
                 $this->_routes[$item['id']] = $item['link'];
-            } else
+                if ($item['status'] == MenuItem::STATUS_MAIN_PAGE) {
+                    $this->_mainPagePath = $item['path'];
+                }
+            } else {
                 $this->_links[$item['id']] = $item['link'];
+            }
 
         }
     }
 
-    /*private function createPathsMap(&$items, &$result, $level=0, $prefix='')
+    public function getMainPagePath()
     {
-        $path = $prefix;
-        while($item = each($items)) {
-            $row = $item[1];
-            if($row['level']>$level) {
-                prev($items);
-                $this->createPathsMap($items, $result, $row['level'], $path);
-            } else if($row['level']<$level) {
-                prev($items);
-                return;
-            } else
-                if($row['type']==MenuItem::LINK_ROUTE) $result[$row['id']] = $path = $prefix ? $prefix.'/'.$row['alias'] : $row['alias'];
-        }
-    }*/
-
+        return $this->_mainPagePath;
+    }
     /**
      * @param $path
      * @return MenuItem
@@ -135,7 +129,7 @@ class MenuMap extends Object {
     }
 
     /**
-     * @param $route
+     * @param $link
      * @return MenuItem
      */
     public function getMenuByLink($link)
