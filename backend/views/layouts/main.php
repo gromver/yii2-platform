@@ -86,13 +86,10 @@ AppAsset::register($this);
                     ]
 				];
 			}
-            $menuItems[] = [
-                'label' => 'Language',
-                'items' => array_map(function($language) {
-                    return ['label' => $language, 'active' => $language === Yii::$app->language, 'url' => Yii::$app->urlManager->createUrl([Yii::$app->request->getPathInfo()] + Yii::$app->request->getQueryParams(), $language)];
-                }, Yii::$app->languages)
-            ];
-
+            $menuItems[] = Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
+                return Html::a($language, Yii::$app->urlManager->createUrl([Yii::$app->request->getPathInfo()] + Yii::$app->request->getQueryParams(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-success' : ' btn-default')]);
+            }, Yii::$app->languages)) . Html::endTag('div');
+        
 			echo Nav::widget([
 				'options' => ['class' => 'navbar-nav navbar-right'],
 				'items' => $menuItems,

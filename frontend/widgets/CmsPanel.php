@@ -96,12 +96,9 @@ class CmsPanel extends Widget {
                         'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
                         'items' => $items,
                     ],
-                    [
-                        'label' => Yii::t('menst.cms', 'Language'),
-                        'items' => array_map(function($language){
-                            return ['label' => $language, 'active' => $language === Yii::$app->language, 'url' => Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language)];
-                        }, Yii::$app->languages)
-                    ]
+                    Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
+                        return Html::a($language, Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-success' : ' btn-default')]);
+                    }, Yii::$app->languages)) . Html::endTag('div')
                 ],
                 'encodeLabels' => false
             ]);
