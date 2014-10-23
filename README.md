@@ -81,11 +81,11 @@ server {
 
 * /backend/web/index.php
 ```
-  $application = new \menst\cms\frontend\Application($config); // yii\web\Application($config);
+  $application = new \menst\cms\backend\Application($config); // yii\web\Application($config);
 ```
 * /frontend/web/index.php   
 ```
-  $application = new \menst\cms\backend\Application($config); // yii\web\Application($config);
+  $application = new \menst\cms\frontend\Application($config); // yii\web\Application($config);
 ```
 * /yii.php
 ```
