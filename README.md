@@ -37,8 +37,8 @@ server {
     access_log  /path/to/app/log/access.log;
     error_log   /path/to/app/log/error.log;
 
-    #необходимо добавить в папку frontend/web симлинк на backend/web под названием admin
-	  location /admin/ {
+    # необходимо добавить в папку frontend/web симлинк на backend/web под названием admin
+	location /admin/ {
         try_files $uri $uri/ /admin/index.php?$args;
     }
 
