@@ -42,11 +42,11 @@ class CmsPanel extends Widget {
             echo Html::beginTag('div', ['class'=>'btn-group']);
 
             if (Yii::$app->cms->mode === Module::MODE_EDIT) {
-                echo Html::button(Yii::t('menst.cms', 'On'), ['class'=>'btn btn-success navbar-btn btn-xs']);
+                echo Html::button(Yii::t('menst.cms', 'On'), ['class'=>'btn btn-success navbar-btn btn-xs active']);
                 echo Html::a(Yii::t('menst.cms', 'Off'), ['/cms/default/mode', 'mode' => Module::MODE_VIEW, 'backUrl' => Yii::$app->request->getUrl()], ['class'=>'btn btn-default navbar-btn btn-xs']);
             } else {
                 echo Html::a(Yii::t('menst.cms', 'On'), ['/cms/default/mode', 'mode' => Module::MODE_EDIT, 'backUrl' => Yii::$app->request->getUrl()], ['class'=>'btn btn-default navbar-btn btn-xs']);
-                echo Html::button(Yii::t('menst.cms', 'Off'), ['class'=>'btn btn-success navbar-btn btn-xs']);
+                echo Html::button(Yii::t('menst.cms', 'Off'), ['class'=>'btn btn-success navbar-btn btn-xs active']);
             }
 
             echo Html::endTag('div');
@@ -96,8 +96,8 @@ class CmsPanel extends Widget {
                         'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
                         'items' => $items,
                     ],
-                    Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
-                        return Html::a($language, Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-success' : ' btn-default')]);
+                    Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
+                        return Html::a($language, Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
                     }, Yii::$app->languages)) . Html::endTag('div')
                 ],
                 'encodeLabels' => false

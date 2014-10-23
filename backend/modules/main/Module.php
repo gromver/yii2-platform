@@ -92,7 +92,8 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
         return [
             'label' => Yii::t('menst.cms', 'System'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'Sitemap'), 'route' => 'cms/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
+                ['label' => Yii::t('menst.cms', 'Sitemap'), 'route' => 'cms/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/],
+                ['label' => Yii::t('menst.cms', 'Contact Form'), 'route' => 'cms/default/contact'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
             ]
         ];
     }

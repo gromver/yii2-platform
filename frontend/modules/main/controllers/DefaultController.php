@@ -42,6 +42,7 @@ class DefaultController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'captcha' => 'yii\captcha\CaptchaAction'
         ];
     }
 
@@ -164,5 +165,10 @@ class DefaultController extends Controller
         $result = Tag::find()->select('id AS value, title AS text, group AS optgroup')->filterWhere(['like', 'title', urldecode($query)])->andFilterWhere(['language' => $language])->limit(20)->asArray()->all();
 
         echo Json::encode($result);
+    }
+
+    public function actionContact()
+    {
+        return $this->render('contact');
     }
 }

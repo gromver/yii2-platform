@@ -12,6 +12,7 @@ namespace menst\cms\backend\modules\main\controllers;
 use menst\cms\common\helpers\ModuleQuery;
 use menst\cms\common\models\CmsParams;
 use kartik\widgets\Alert;
+use menst\cms\common\models\ContactForm;
 use menst\models\ObjectModel;
 use menst\widgets\ModalIFrame;
 use Yii;
@@ -41,9 +42,9 @@ class DefaultController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'error'],
+                        'actions' => ['index', 'error', 'contact', 'captcha'],
                         'roles' => ['read'],
-                    ]
+                    ],
                 ]
             ]
         ];
@@ -54,7 +55,8 @@ class DefaultController extends Controller
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
-            ]
+            ],
+            'captcha' => 'yii\captcha\CaptchaAction'
         ];
     }
 
@@ -79,7 +81,7 @@ class DefaultController extends Controller
             if($model->validate() && Yii::$app->request->getBodyParam('task') !== 'refresh') {
 
                 FileHelper::createDirectory($paramsPath);
-                file_put_contents($paramsFile, '<?php return '.var_export($model->toArray(), true).';');
+                file_put_contents($paramsFile, '<?php return ' . var_export($model->toArray(), true) . ';');
 
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Configuration saved.'));
                 if ($modal) {
@@ -108,5 +110,31 @@ class DefaultController extends Controller
         Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Cache flushed.'));
 
         return $this->redirect(['index']);
+    }
+
+    public function actionContact()
+    {
+        $model = new ContactForm();
+
+        if (!Yii::$app->user->isGuest) {
+            /** @var \menst\cms\common\models\User $user */
+            $user = Yii::$app->user->identity;
+            $userParams = $user->getParamsArray();
+            $model->name = $userParams['name'] ? $userParams['name'] : $user->username;
+            $model->email = $user->email;
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail(Yii::$app->cms->params['adminEmail'])) {
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Email is sent.'));
+                return $this->render('contactSuccess');
+            } else {
+                throw new \HttpRuntimeException(Yii::t('menst.cms', 'Email sending is failed.'));
+            }
+        }
+
+        return $this->render('contact', [
+            'model' => $model
+        ]);
     }
 }

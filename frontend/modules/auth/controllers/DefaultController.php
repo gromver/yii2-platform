@@ -28,8 +28,6 @@ use menst\cms\common\models\User;
  */
 class DefaultController extends Controller
 {
-    public $mailer = 'mailer';
-
     private $loginAttemptsVar = '__LoginAttemptsCount';
 
     public function behaviors()
@@ -202,9 +200,7 @@ class DefaultController extends Controller
 
         $user->password_reset_token = Yii::$app->security->generateRandomString();
         if ($user->save(false)) {
-            $mailer = Instance::ensure($this->mailer, BaseMailer::className());
-
-            return $mailer->compose('@menst/cms/frontend/modules/auth/views/emails/passwordResetToken', ['user'=>$user])
+            return Yii::$app->mailer->compose('@menst/cms/frontend/modules/auth/views/emails/passwordResetToken', ['user'=>$user])
                 ->setFrom(Yii::$app->cms->params['supportEmail'], Yii::t('menst.cms', '{name} robot', ['name' => Yii::$app->cms->siteName]))
                 ->setTo($user->email)
                 ->setSubject(Yii::t('menst.cms', 'Password reset for {name}.', ['name' => Yii::$app->cms->siteName]))

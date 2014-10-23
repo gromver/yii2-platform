@@ -81,15 +81,17 @@ AppAsset::register($this);
 				$menuItems[] = [
                     'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
 					'items' => [
+                        ['label' => '<i class="glyphicon glyphicon-envelope"></i> Contact', 'url' => ['/cms/default/contact']],
+                        '<li class="divider"></li>',
                         ['label' => '<i class="glyphicon glyphicon-cog"></i> Profile', 'url' => ['/cms/user/default/update', 'id' => Yii::$app->user->id]],
                         ['label' => '<i class="glyphicon glyphicon-log-out"></i> Logout', 'url' => ['/cms/auth/default/logout']]
                     ]
 				];
 			}
-            $menuItems[] = Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
-                return Html::a($language, Yii::$app->urlManager->createUrl([Yii::$app->request->getPathInfo()] + Yii::$app->request->getQueryParams(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-success' : ' btn-default')]);
+            $menuItems[] = Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
+                return Html::a($language, Yii::$app->urlManager->createUrl([Yii::$app->request->getPathInfo()] + Yii::$app->request->getQueryParams(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
             }, Yii::$app->languages)) . Html::endTag('div');
-        
+
 			echo Nav::widget([
 				'options' => ['class' => 'navbar-nav navbar-right'],
 				'items' => $menuItems,
