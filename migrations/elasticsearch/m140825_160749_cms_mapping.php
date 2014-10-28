@@ -214,8 +214,12 @@ class m140825_160749_cms_mapping extends Migration
             $data = Json::encode($document->toArray());
             $bulk .= $action . "\n" . $data . "\n";
         }
-        //todo непонятный касяк с кодировкой, при сохранении через актив рекорд - норм, через пакетный способ - хрень
 
+        if (empty($bulk)) {
+            return 0;
+        }
+
+        //todo непонятный касяк с кодировкой, при сохранении через актив рекорд - норм, через пакетный способ - хрень
         $url = [$documentClass::index(), $documentClass::type(), '_bulk'];
         $response = \yii\elasticsearch\ActiveRecord::getDb()->post($url, [], $bulk);
         $n = 0;
