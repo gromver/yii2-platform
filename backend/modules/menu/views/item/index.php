@@ -57,6 +57,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'filter' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\MenuType::find()->all(), 'id', 'title')
             ],
+            /*[
+                'attribute' => 'parent_id',
+                'width' => '100px',
+                'value' => function ($model) {
+                    /** @var $model \menst\cms\common\models\MenuItem * /
+                    return $model->level > 2 ? $model->parent->title : '';
+                },
+                'filter' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\MenuItem::find()->noRoots()->orderBy('lft')->all(), 'id', function($model){
+                    /** @var $model \menst\cms\common\models\MenuItem * /
+                    return str_repeat(" • ", max($model->level-2, 0)) . $model->title;
+                })
+            ],*/
             [
                 'attribute' => 'title',
                 'value' => function ($model) {

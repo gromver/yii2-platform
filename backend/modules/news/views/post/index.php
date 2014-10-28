@@ -55,6 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return @$model->category->title;
                     },
                 'filter' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\Category::find()->noRoots()->orderBy('lft')->all(), 'id', function($model){
+                    /** @var $model \menst\cms\common\models\Category */
                         return str_repeat(" • ", max($model->level-2, 0)) . $model->title;
                     })
             ],

@@ -8,7 +8,10 @@ use yii\widgets\DetailView;
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Menu Types'), 'url' => ['type/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Menu Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', $model->menuType->title), 'url' => ['index', 'MenuItemSearch' => ['menu_type_id' => $model->menu_type_id]]];
+/*if (($parent = $model->parent) && !$parent->isRoot()) {
+    $this->params['breadcrumbs'][] = ['label' => $parent->title, 'url' => ['index', 'MenuItemSearch' => ['parent_id' => $parent->id]]];
+}*/
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-view">

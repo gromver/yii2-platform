@@ -10,7 +10,6 @@
 namespace menst\cms\backend\modules\menu;
 
 use menst\cms\backend\interfaces\DesktopInterface;
-use menst\cms\backend\interfaces\MenuRouterInterface;
 use Yii;
 
 /**
@@ -18,7 +17,7 @@ use Yii;
  * @package yii2-cms
  * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
  */
-class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInterface
+class Module extends \yii\base\Module implements DesktopInterface
 {
     public $controllerNamespace = 'menst\cms\backend\modules\menu\controllers';
     public $defaultRoute = 'item';
@@ -41,19 +40,6 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
             'links' => [
                 ['label' => Yii::t('menst.cms', 'Menu Types'), 'url' => ['/cms/menu/type']],
                 ['label' => Yii::t('menst.cms', 'Menu Items'), 'url' => ['/cms/menu/item']],
-            ]
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getMenuRoutes()
-    {
-        return [
-            'label' => Yii::t('menst.cms', 'Menu'),
-            'routers' => [
-                ['label' => Yii::t('menst.cms', 'Menu Alias'), 'url' => ['/cms/menu/item/select']],
             ]
         ];
     }
