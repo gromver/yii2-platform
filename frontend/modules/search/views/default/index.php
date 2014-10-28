@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     echo \menst\cms\common\widgets\SearchResults::widget([
         'id' => 'fSearchResult',
         'query' => $query,
+        'language' => Yii::$app->language,
         //'debug' => true
     ]); ?>
 </div>

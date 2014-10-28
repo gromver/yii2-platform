@@ -39,12 +39,16 @@ if ($this->context->showTranslations) {
     .issue-bar {
         border-top: 1px solid #cccccc;
         padding: 6px;
+        margin-top: 0.5em;
         margin-bottom: 1.8em;
-        background-color: #FCF4F4;
+        background-color: #f5f5f5;
         font-size: 12px;
     }
     .issue-separator {
         margin: 0 8px;
+    }
+    .issue-separator:last-child {
+        display: none;
     }
     .issue-tag {
         font-size: 10px;

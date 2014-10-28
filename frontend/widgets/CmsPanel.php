@@ -36,6 +36,18 @@ class CmsPanel extends Widget {
 
         echo Html::beginTag('div', ['class'=>'nav']);
 
+        echo Html::beginForm(['/cms/search/default/index'], 'get', ['class' => 'navbar-form navbar-left',  'role' => "search"]);
+
+        echo Html::beginTag('div', ['class' => 'form-group']);
+
+        echo Html::textInput('q', null, ['class' => 'form-control', 'placeholder' => Yii::t('menst.cms', 'Search')]);
+
+        echo Html::endTag('div') . "\n";
+
+        echo Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']);
+
+        echo Html::endForm();
+
         if (Yii::$app->user->can('edit')) {
             echo Html::tag('p', Yii::t('menst.cms', 'Editing mode'), ['class' => 'navbar-text']);
 
@@ -53,6 +65,10 @@ class CmsPanel extends Widget {
         }
 
         if (Yii::$app->user->isGuest) {
+            echo Html::beginTag('div',  ['class' => 'navbar-right']) . Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
+                    return Html::a($language, Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
+                }, Yii::$app->languages)) . Html::endTag('div') . Html::endTag('div');
+
             $loginUrl = Yii::$app->user->loginUrl;
             $loginUrl['modal'] = 1;
 
@@ -96,7 +112,7 @@ class CmsPanel extends Widget {
                         'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
                         'items' => $items,
                     ],
-                    Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
+                    Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'nav navbar-text']) . Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
                         return Html::a($language, Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
                     }, Yii::$app->languages)) . Html::endTag('div')
                 ],

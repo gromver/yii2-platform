@@ -55,6 +55,7 @@ class SearchResults extends Widget {
      */
     public $types;
     public $query;
+    public $language;
     /**
      * @var array
      * @ignore
@@ -124,6 +125,19 @@ class SearchResults extends Widget {
 
         if (!empty($this->query)) {
             $query->query['filtered']['query']['multi_match'] = ['query' => $this->query, 'fields' => ['_all']];
+        }
+
+        if (!empty($this->language)) {
+            $query->query['filtered']['filter']['and']['filters'][] = [
+                'and' => [
+                    [
+                        'exists' => ['field' => 'language']
+                    ],
+                    [
+                        'term' => ['language' => $this->language]
+                    ]
+                ]
+            ];
         }
 
         //чтоб в ActiveQuery задать фильтр по типу надо обязательно задать фильтр по индексу
