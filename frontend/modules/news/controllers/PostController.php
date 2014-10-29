@@ -78,7 +78,7 @@ class PostController extends Controller
             'channel' => [
                 'title' => Yii::$app->cms->siteName,
                 'link' => Url::toRoute(['', 'category_id' => $category_id], true),
-                'description' => 'Posts',
+                'description' => $this->loadCategoryModel($category_id)->title,
                 'language' => Yii::$app->language
             ],
             'items' => [
@@ -88,7 +88,7 @@ class PostController extends Controller
                     },
                 'description' => function ($model, $widget) {
                         /** @var $model \menst\cms\common\models\Post */
-                        return $model->preview_text ? $model->preview_text : \yii\helpers\StringHelper::truncateWords($model->detail_text, 50);
+                        return $model->preview_text ? $model->preview_text : \yii\helpers\StringHelper::truncateWords(strip_tags($model->detail_text), 40);
                     },
                 'link' => function ($model, $widget) {
                         /** @var $model \menst\cms\common\models\Post */

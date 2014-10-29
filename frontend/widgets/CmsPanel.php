@@ -48,7 +48,7 @@ class CmsPanel extends Widget {
 
         echo Html::endForm();
 
-        if (Yii::$app->user->can('edit')) {
+        if (Yii::$app->user->can('administrate')) {
             echo Html::tag('p', Yii::t('menst.cms', 'Editing mode'), ['class' => 'navbar-text']);
 
             echo Html::beginTag('div', ['class'=>'btn-group']);

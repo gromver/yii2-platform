@@ -42,7 +42,8 @@ class Contact extends Widget {
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Email is sent.'));
                 return $this->render($this->viewSuccess);
             } else {
-                throw new \HttpRuntimeException(Yii::t('menst.cms', 'Email sending is failed.'));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Error.'));
+                //throw new \HttpRuntimeException(Yii::t('menst.cms', 'Email sending is failed.'));
             }
         }
 

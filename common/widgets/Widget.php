@@ -40,7 +40,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
     private $_id;
     private $_debug = false;
     private $_showPanel = true;
-    private $_accessRule = 'admin';
+    private $_accessRule = 'administrate';
 
     public function __construct($config = [])
     {
