@@ -86,7 +86,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
             $contexts[] = $context;
         }
 
-        if ($model = WidgetConfig::find()->orderBy('context desc')->where(['widget_id' => $this->id, 'context' => $contexts])->one()) {
+        if ($model = WidgetConfig::find()->orderBy('context desc')->where(['widget_id' => $this->id, 'language' => Yii::$app->language, 'context' => $contexts])->one()) {
             /** @var $model WidgetConfig */
             if($model->widget_class!=$this->className())
                 throw new InvalidConfigException("DB's widget configuration is adjusted for a widget ". $model->widget_class . " that doesn't correspond to the current widget " . $this->className());

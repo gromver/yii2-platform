@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'widget_id',
             'widget_class',
+            'language',
             'context',
             'url:url',
             'params:ntext',

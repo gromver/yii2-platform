@@ -20,6 +20,7 @@ use yii\helpers\Json;
  * @property integer $id
  * @property string $widget_id
  * @property string $widget_class
+ * @property string $language
  * @property string $context
  * @property string $url
  * @property string $params
@@ -51,7 +52,11 @@ class WidgetConfig extends \yii\db\ActiveRecord
             [['valid', 'created_at', 'updated_at', 'created_by', 'updated_by', 'lock'], 'integer'],
             [['widget_id'], 'string', 'max' => 50],
             [['widget_class'], 'string', 'max' => 255],
-            [['context', 'url'], 'string', 'max' => 1024]
+            [['context', 'url'], 'string', 'max' => 1024],
+            [['language'], 'default', 'value' => function ($model, $attribute) {
+                return Yii::$app->language;
+            }],
+            [['language'], 'required'],
         ];
     }
 
@@ -64,6 +69,7 @@ class WidgetConfig extends \yii\db\ActiveRecord
             'id' => Yii::t('menst.cms', 'ID'),
             'widget_id' => Yii::t('menst.cms', 'Widget ID'),
             'widget_class' => Yii::t('menst.cms', 'Widget Class'),
+            'language' => Yii::t('menst.cms', 'Language'),
             'context' => Yii::t('menst.cms', 'Context'),
             'url' => Yii::t('menst.cms', 'Url'),
             'params' => Yii::t('menst.cms', 'Params'),

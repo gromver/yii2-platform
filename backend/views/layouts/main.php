@@ -88,7 +88,7 @@ AppAsset::register($this);
                     ]
 				];
 			}
-            $menuItems[] = Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
+            $menuItems[] = Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group navbar-right']) . implode('', array_map(function($language) {
                 return Html::a($language, Yii::$app->urlManager->createUrl([Yii::$app->request->getPathInfo()] + Yii::$app->request->getQueryParams(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
             }, Yii::$app->languages)) . Html::endTag('div');
 

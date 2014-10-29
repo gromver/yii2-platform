@@ -312,6 +312,7 @@ class m140811_143606_cms_create_tables extends Migration
             'id' => Schema::TYPE_PK,
             'widget_id' => Schema::TYPE_STRING . '(50) NOT NULL',
             'widget_class' => Schema::TYPE_STRING . ' NOT NULL',
+            'language' => Schema::TYPE_STRING . '(7) NOT NULL',
             'context' => Schema::TYPE_STRING . '(1024)',
             'url' => Schema::TYPE_STRING . '(1024)',
             'params' => Schema::TYPE_TEXT,
@@ -322,7 +323,8 @@ class m140811_143606_cms_create_tables extends Migration
             'updated_by' => Schema::TYPE_INTEGER,
             'lock' => Schema::TYPE_BIGINT . ' UNSIGNED DEFAULT 1',
         ]);
-        $this->createIndex('WidgetId_WidgetClass_idx', '{{%cms_widget_config}}', 'widget_id, widget_class');
+        $this->createIndex('WidgetId_Language_idx', '{{%cms_widget_config}}', 'widget_id, language');
+        $this->createIndex('WidgetContext_idx', '{{%cms_widget_config}}', 'context');
 
         //TABLE
         $this->createTable('{{%cms_table}}', [

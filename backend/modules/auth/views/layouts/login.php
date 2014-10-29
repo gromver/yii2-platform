@@ -3,7 +3,6 @@ use backend\assets\AppAsset;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 
 /**
  * @var \yii\web\View $this
@@ -47,12 +46,9 @@ AppAsset::register($this);
                     ]
                 ];
 			}
-            $menuItems[] = [
-                'label' => 'Language',
-                'items' => array_map(function($language){
-                    return ['label' => $language, 'url' => Yii::$app->urlManager->createUrl(Yii::$app->request->getPathInfo(), $language)];
-                }, Yii::$app->languages)
-            ];
+            $menuItems[] = Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group navbar-right']) . implode('', array_map(function($language) {
+                    return Html::a($language, Yii::$app->urlManager->createUrl([Yii::$app->request->getPathInfo()] + Yii::$app->request->getQueryParams(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
+                }, Yii::$app->languages)) . Html::endTag('div');
 
 			echo Nav::widget([
 				'options' => ['class' => 'navbar-nav navbar-right'],
