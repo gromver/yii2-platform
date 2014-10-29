@@ -66,6 +66,7 @@ use yii\helpers\Html;
     .calendar {
         padding: 0 10px;
         background-color: #F7F7F7;
+        overflow: hidden;
     }
     .calendar table {
         width: 100%;

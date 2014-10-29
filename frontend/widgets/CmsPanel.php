@@ -88,9 +88,9 @@ class CmsPanel extends Widget {
             ]);
         } else {
             $items = [];
-            if(Yii::$app->user->can('admin')) {
+            if(Yii::$app->user->can('administrate')) {
                 $items[] = ['label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::t('menst.cms', 'Admin Panel'), 'url' => Yii::$app->urlManagerBackend->createUrl('/')];
-                $items[] = ModalIFrame::widget([
+                /*$items[] = ModalIFrame::widget([
                     'buttonOptions' => [
                         'tag' => 'li'
                     ],
@@ -99,7 +99,7 @@ class CmsPanel extends Widget {
                         'closeButton' => false
                     ],
                     'buttonContent' => Html::a('<i class="glyphicon glyphicon-pencil"></i> ' . Yii::t('menst.cms', 'Configuration'), ['/cms/default/params', 'modal' => 1])
-                ]);
+                ]);*/
                 $items[] = ['label' => '<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('menst.cms', 'Flush Cache'), 'url' => ['/cms/default/flush-cache']];
                 $items[] = '<li class="divider"></li>';
             }

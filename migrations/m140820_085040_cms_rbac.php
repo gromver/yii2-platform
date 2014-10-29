@@ -30,9 +30,9 @@ class m140820_085040_cms_rbac extends Migration
         $auth->add($deletePermission);
 
         // add "userPermission" permission
-        $userPermission = $auth->createPermission('user');
-        $userPermission->description = 'user update';
-        $auth->add($userPermission);
+        $administratePermission = $auth->createPermission('administrate');
+        $administratePermission->description = 'administrate';
+        $auth->add($administratePermission);
 
         // add "reader" role and give this role the "readPost" permission
         $reader = $auth->createRole('Reader');
@@ -44,15 +44,15 @@ class m140820_085040_cms_rbac extends Migration
         $author = $auth->createRole('Author');
         $auth->add($author);
         $auth->addChild($author, $createPermission);
+        $auth->addChild($author, $updatePermission);
         $auth->addChild($author, $reader);
 
         // add "admin" role and give this role the "updatePost" permission
         // as well as the permissions of the "author" role
         $admin = $auth->createRole('Administrator');
         $auth->add($admin);
-        $auth->addChild($admin, $updatePermission);
         $auth->addChild($admin, $deletePermission);
-        $auth->addChild($admin, $userPermission);
+        $auth->addChild($admin, $administratePermission);
         $auth->addChild($admin, $author);
     }
 
@@ -67,6 +67,6 @@ class m140820_085040_cms_rbac extends Migration
         $auth->remove($auth->getPermission('read'));
         $auth->remove($auth->getPermission('update'));
         $auth->remove($auth->getPermission('delete'));
-        $auth->remove($auth->getPermission('user'));
+        $auth->remove($auth->getPermission('administrate'));
     }
 }
