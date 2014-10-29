@@ -40,6 +40,8 @@ class User extends BaseUser
 
     public $superAdmins = ['admin'];
 
+    public $defaultRoles = ['Authorized'];
+
 	/**
 	 * @inheritdoc
 	 */

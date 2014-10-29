@@ -34,21 +34,28 @@ class m140820_085040_cms_rbac extends Migration
         $administratePermission->description = 'administrate';
         $auth->add($administratePermission);
 
-        // add "reader" role and give this role the "readPost" permission
+        // add the rule
+        $authorizedRule = new \menst\cms\common\rules\AuthorizedRule();
+        $auth->add($authorizedRule);
+
+        //add "Authorized" role
+        $authorized = $auth->createRole('Authorized');
+        $authorized->ruleName = $authorizedRule->name;
+        $auth->add($authorized);
+
+        // add "Reader" role
         $reader = $auth->createRole('Reader');
         $auth->add($reader);
         $auth->addChild($reader, $readPermission);
 
-        // add "author" role and give this role the "createPost" permission
-        // as well as the permissions of the "reader" role
+        // add "Author" role
         $author = $auth->createRole('Author');
         $auth->add($author);
         $auth->addChild($author, $createPermission);
         $auth->addChild($author, $updatePermission);
         $auth->addChild($author, $reader);
 
-        // add "admin" role and give this role the "updatePost" permission
-        // as well as the permissions of the "author" role
+        // add "Administrator" role
         $admin = $auth->createRole('Administrator');
         $auth->add($admin);
         $auth->addChild($admin, $deletePermission);
@@ -63,10 +70,12 @@ class m140820_085040_cms_rbac extends Migration
         $auth->remove($auth->getRole('Reader'));
         $auth->remove($auth->getRole('Author'));
         $auth->remove($auth->getRole('Administrator'));
+        $auth->remove($auth->getRole('Authorized'));
         $auth->remove($auth->getPermission('create'));
         $auth->remove($auth->getPermission('read'));
         $auth->remove($auth->getPermission('update'));
         $auth->remove($auth->getPermission('delete'));
         $auth->remove($auth->getPermission('administrate'));
+        $auth->remove($auth->getRule('isAuthorized'));
     }
 }
