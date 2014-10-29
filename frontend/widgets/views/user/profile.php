@@ -18,7 +18,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= \menst\models\widgets\Fields::widget(['model' => $model]) ?>
 
-    <div class="form-group">
+    <div>
         <?= Html::submitButton(Yii::t('menst.cms', 'Update'), ['class' => 'btn btn-primary']) ?>
     </div>
 

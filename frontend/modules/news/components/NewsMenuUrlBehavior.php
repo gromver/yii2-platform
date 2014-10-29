@@ -80,7 +80,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                         'path' => $menuCategory->path . '/' . $categoryPath,
                         'language' => $menuCategory->language
                     ]);
-                    if ($category && $tagId = Tag::find()->select('id')->where(['alias' => $tagAlias])->scalar()) {
+                    if ($category && $tagId = Tag::find()->select('id')->where(['alias' => $tagAlias, 'language' => $category->language])->scalar()) {
                         $event->resolve(['cms/tag/default/posts', ['id' => $tagId, 'category_id' => $category->id]]);
                     }
                 }
