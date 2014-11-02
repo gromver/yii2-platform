@@ -4,8 +4,6 @@
  * @var $model menst\cms\common\models\Post
  */
 
-use yii\helpers\Html;
-
 /** @var \menst\cms\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {

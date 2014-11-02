@@ -9,6 +9,7 @@
 
 namespace menst\cms\frontend\widgets;
 
+use menst\cms\backend\assets\CkeditorHighlightAsset;
 use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Post;
 use yii\base\InvalidConfigException;
@@ -42,6 +43,10 @@ class PostView extends Widget {
      * @type yesno
      */
     public $showTranslations;
+    /**
+     * @type yesno
+     */
+    public $useHighlights = true;
 
 
     protected function normalizeSource()
@@ -73,6 +78,12 @@ class PostView extends Widget {
 
     protected function launch()
     {
+        $this->normalizeSource();
+
+        if ($this->useHighlights) {
+            CkeditorHighlightAsset::register($this->view);
+        }
+
         echo $this->render($this->layout, [
             'model' => $this->source
         ]);

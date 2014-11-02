@@ -31,7 +31,9 @@ use yii\bootstrap\ActiveForm;
             <?= \mihaildev\ckeditor\CKEditor::widget([
                 'model' => $model,
                 'attribute' => 'detail_text',
-                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cms/media/manager')
+                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cms/media/manager', [
+                    'extraPlugins' => 'codesnippet'
+                ])
             ]) ?>
         </div>
     </div>

@@ -9,6 +9,7 @@
 
 namespace menst\cms\frontend\widgets;
 
+use menst\cms\backend\assets\CkeditorHighlightAsset;
 use menst\cms\common\widgets\Widget;
 use menst\cms\common\models\Page;
 use yii\base\InvalidConfigException;
@@ -42,6 +43,10 @@ class PageView extends Widget {
      * @items languages
      */
     public $language;
+    /**
+     * @type yesno
+     */
+    public $useHighlights = true;
 
 
     protected function normalizeSource()
@@ -69,6 +74,10 @@ class PageView extends Widget {
     protected function launch()
     {
         $this->normalizeSource();
+
+        if ($this->useHighlights) {
+            CkeditorHighlightAsset::register($this->view);
+        }
 
         echo $this->render($this->layout, [
             'model' => $this->source

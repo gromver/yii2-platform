@@ -25,4 +25,4 @@ if ($model->metadesc) {
 echo \menst\cms\frontend\widgets\PageView::widget([
     'id' => 'page-view',
     'source' => $model,
-]) ?>
+]);

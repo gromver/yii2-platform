@@ -68,6 +68,13 @@ class Application extends \yii\web\Application {
                         ],
                     ],
                 ],
+                'assetManager' => [
+                    'bundles' => [
+                        'mihaildev\ckeditor\Assets' => [
+                            'sourcePath' => '@menst/cms/backend/assets/ckeditor',
+                        ],
+                    ],
+                ]
             ],
             'modules' => [
                 'cms' => [
