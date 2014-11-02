@@ -11,6 +11,7 @@ namespace menst\cms\frontend\modules\search;
 
 use menst\cms\common\helpers\ModuleQuery;
 use menst\cms\common\interfaces\SearchableInterface;
+use menst\cms\common\models\search\ActiveDocument;
 use menst\cms\frontend\interfaces\MenuUrlRuleInterface;
 use menst\cms\frontend\modules\search\components\SearchMenuUrlBehavior;
 use yii\base\BootstrapInterface;
@@ -24,6 +25,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
 {
     public $controllerNamespace = 'menst\cms\frontend\modules\search\controllers';
     public $documentClasses = [];
+    public $index = 'cms';
 
     /*public function init()
     {
@@ -37,7 +39,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
      */
     public function bootstrap($application)
     {
-        \menst\cms\common\models\search\ActiveDocument::watch(ModuleQuery::instance()->implement('menst\cms\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
+        ActiveDocument::watch(ModuleQuery::instance()->implement('menst\cms\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
     }
     /**
      * @inheritdoc

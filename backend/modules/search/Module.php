@@ -30,6 +30,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
     public $controllerNamespace = 'menst\cms\backend\modules\search\controllers';
     public $documentClasses = [];
     public $desktopOrder = 6;
+    public $index = 'cms';
 
     /*public function init()
     {

@@ -21,6 +21,7 @@ class Application extends \yii\web\Application {
     public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
     public $layout = '@menst/cms/backend/views/layouts/main';
+    public $elasticsearchIndex = 'cms';
 
     private $_modulesHash;
 

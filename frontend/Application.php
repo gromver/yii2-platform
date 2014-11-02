@@ -23,6 +23,7 @@ class Application extends \yii\web\Application {
     public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
     public $layout = '@menst/cms/frontend/views/layouts/main';
+    public $elasticsearchIndex = 'cms';
 
     private $_modulesHash;
 

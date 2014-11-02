@@ -13,6 +13,7 @@ namespace menst\cms\common\models\search;
 use menst\cms\common\interfaces\ViewableInterface;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
+use Yii;
 
 /**
  * Class ActiveRecord
@@ -32,7 +33,7 @@ class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements Viewable
 
     public static function index()
     {
-        return 'cms';
+        return Yii::$app->elasticsearchIndex;
     }
 
     /**
