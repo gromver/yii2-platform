@@ -188,7 +188,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
         if ($event->requestRoute === 'cms/tag/default/posts') {
             //todo сделать привязку к категории новости по category_id здесь и в парсере
             //строим ссылку на основе пункта меню на категорию
-            if (isset($event->requestParams['category_id']) && isset($event->requestParams['tag_alias']) && $path = $event->menuMap->getMenuPathByRoute(MenuItem::toRoute('cms/news/category/view', ['id' => $event->requestParams['category_id']]))) {
+            if (isset($event->requestParams['category_id']) && isset($event->requestParams['tag_alias']) && $path = $this->findCategoryMenuPath($event->requestParams['category_id'], $event->menuMap)) {
                 $path .= '/' . $event->requestParams['tag_alias'] . '.' . $this->tagSuffix;
                 unset($event->requestParams['tag_alias'], $event->requestParams['category_id'], $event->requestParams['tag_id']);
             }
@@ -220,9 +220,11 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
     private $_categoryPaths = [];
 
     /**
+     * Находит путь к пункту меню ссылающемуся на категорию $categoryId, либо ее предка
+     * Если путь ведет к предку, то достраиваем путь категории $categoryId
      * @param $categoryId
      * @param $menuMap \menst\cms\frontend\components\MenuMap
-     * @return mixed
+     * @return null|string
      */
     private function findCategoryMenuPath($categoryId, $menuMap)
     {
@@ -238,4 +240,21 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
 
         return $this->_categoryPaths[$menuMap->language][$categoryId];
     }
+
+    /**
+     * Находит путь к пункту меню ссылающемуся на категорию $categoryId, либо ее предка, путь не достраивается до $categoryId
+     * @param $categoryId
+     * @param $menuMap \menst\cms\frontend\components\MenuMap
+     * @return bool|string
+     */
+    /*private function findClosestCategoryMenuPath($categoryId, $menuMap)
+    {
+        if ($path = $menuMap->getMenuPathByRoute(MenuItem::toRoute('cms/news/category/view', ['id' => $categoryId]))) {
+            return $path;
+        } elseif (($category = Category::findOne($categoryId)) && !$category->isRoot() && $path = $this->findClosestCategoryMenuPath($category->parent_id, $menuMap)) {
+            return $path;
+        }
+
+        return false;
+    }*/
 }

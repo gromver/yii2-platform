@@ -22,7 +22,7 @@ if ($this->context->showTranslations) {
     <small class="issue-separator">|</small>
     <?php foreach ($model->tags as $tag) {
         /** @var $tag \menst\cms\common\models\Tag */
-        echo Html::a($tag->title, ['/cms/tag/default/posts', 'tag_id' => $tag->id, 'tag_alias' => $tag->alias], ['class' => 'issue-tag badge']);
+        echo Html::a($tag->title, ['/cms/tag/default/posts', 'tag_id' => $tag->id, 'tag_alias' => $tag->alias, 'category_id' => $model->category_id], ['class' => 'issue-tag badge']);
     } ?>
 </div>
 
