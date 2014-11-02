@@ -23,11 +23,6 @@ class Search extends ActiveDocument {
         return ($documentClass = ActiveDocument::findDocumentByType($row['_type'])) ? new $documentClass : new static;
     }
 
-    public static function index()
-    {
-        return 'cms';
-    }
-
     public static function type()
     {
         return '';
