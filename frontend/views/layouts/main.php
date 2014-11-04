@@ -37,7 +37,7 @@ AppAsset::register($this);
                     'id' => 'top-menu',
                     'widgetConfig' => [
                         'heading' => 'Navigation',
-                        'class' => \kartik\widgets\SideNav::className(),//'\yii\jui\Menu'
+                        'class' => \kartik\widgets\SideNav::className(),
                         'activeCssClass' => 'active',
                         'firstItemCssClass' => 'first',
                         'lastItemCssClass' => 'last',

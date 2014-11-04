@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 
     <div>
         <?= Html::submitButton('<i class="glyphicon glyphicon-save"></i> ' . Yii::t('menst.cms', 'Save'), ['class' => 'btn btn-success']) ?>
-        <?= Html::submitButton('<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('menst.cms', 'Refresh'), ['class' => 'btn btn-default', 'name' => 'task', 'value' => 'refresh']) ?>
+        <?//= Html::submitButton('<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('menst.cms', 'Refresh'), ['class' => 'btn btn-default', 'name' => 'task', 'value' => 'refresh']) ?>
     </div>
 
     <?php \yii\bootstrap\ActiveForm::end(); ?>

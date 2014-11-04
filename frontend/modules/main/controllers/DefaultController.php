@@ -21,6 +21,7 @@ use menst\widgets\ModalIFrame;
 use Yii;
 use yii\caching\Cache;
 use yii\di\Instance;
+use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -35,7 +36,31 @@ use yii\web\NotFoundHttpException;
  */
 class DefaultController extends Controller
 {
-    //todo access rules
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['params', 'flush-cache', 'mode'],
+                        'roles' => ['update'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['select-page', 'select-post', 'select-category', 'select-menu', 'tag-list'],
+                        'roles' => ['read'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'error', 'contact', 'captcha', 'page-not-found'],
+                    ],
+                ]
+            ]
+        ];
+    }
+
     public function actions()
     {
         return [

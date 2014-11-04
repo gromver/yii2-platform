@@ -28,7 +28,6 @@ class SiteMenu extends Widget {
      * @var string
      * @type modal
      * @url /cms/default/select-menu
-     * @label Ресурс
      */
     public $source;
     /**
@@ -38,11 +37,10 @@ class SiteMenu extends Widget {
     public $language;
     /**
      * @type yesno
-     * @label Отображать недоступные
      */
     public $showInaccessible = true;
     /**
-     * @label Время кеширования
+     * @type text
      */
     public $cacheDuration = 3600;
 
@@ -58,9 +56,8 @@ class SiteMenu extends Widget {
         'options' => ['class' => 'level-1']
     ];
 
-    private $_rawItems;   //выгрузка пунктов меню из БД
-
-    private $_items;   //сфорированный на основе self::_rawItems массив с пунктами меню для рендеринга в виджете Menu
+    private $_rawItems;     //выгрузка пунктов меню из БД
+    private $_items;        //сфорированный на основе self::_rawItems массив с пунктами меню для рендеринга в виджете Menu
 
     public function init()
     {

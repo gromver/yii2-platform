@@ -35,6 +35,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
 
     public $controllerNamespace = '\menst\cms\frontend\modules\main\controllers';
     public $paramsPath = '@common/config/cms';
+    public $blockModules = ['news', 'page', 'tag', 'search', 'user'];   //список модулей к которым нельзя попасть на прямую(cms/post/..., cms/page/...)
 
     private $_mode;
 
@@ -68,10 +69,12 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
 
         /** @var MenuManager $manager */
         $manager = \Yii::createObject(MenuManager::className());
-        $app->urlManager->addRules([
-            'cms/<module:(news|page|tag|search|user)><path:(/.*)?>' => 'cms/default/page-not-found',    //блокируем доступ к контент модулям напрямую
-            $manager
-        ], false); //вставляем в начало списка
+        $rules = [$manager];
+        if (is_array($this->blockModules) && count($this->blockModules)) {
+            $rules['cms/<module:(' . implode('|', $this->blockModules). ')><path:(/.*)?>'] = 'cms/default/page-not-found'; //блокируем доступ к контент модулям напрямую
+        }
+
+        $app->urlManager->addRules($rules, false); //вставляем в начало списка
 
         $app->set('menuManager', $manager);
         $app->set($this->id, $this);
