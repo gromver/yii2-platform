@@ -29,7 +29,8 @@
         "creocoder/yii2-nested-set-behavior": "*",
         "zelenin/yii2-rss": "dev-master",
         "menst/yii2-models": "*",
-        "menst/yii2-widgets": "*"
+        "menst/yii2-widgets": "*",
+        "menst/yii2-module-query": "*"
     },
     "autoload": {
         "psr-4": {
