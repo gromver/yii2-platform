@@ -10,7 +10,7 @@
 namespace menst\cms\frontend\components;
 
 use menst\cms\common\components\UrlManager;
-use menst\cms\common\helpers\ModuleQuery;
+use menst\modulequery\ModuleQuery;
 use menst\cms\common\models\MenuItem;
 use Yii;
 use yii\base\Component;

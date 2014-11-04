@@ -10,7 +10,7 @@
 namespace menst\cms\backend\modules\menu\controllers;
 
 use kartik\widgets\Alert;
-use menst\cms\common\helpers\ModuleQuery;
+use menst\modulequery\ModuleQuery;
 use Yii;
 use menst\cms\common\models\MenuItem;
 use menst\cms\backend\modules\menu\models\MenuItemSearch;

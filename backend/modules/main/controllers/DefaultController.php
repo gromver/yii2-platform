@@ -9,7 +9,7 @@
 
 namespace menst\cms\backend\modules\main\controllers;
 
-use menst\cms\common\helpers\ModuleQuery;
+use menst\modulequery\ModuleQuery;
 use menst\cms\common\models\CmsParams;
 use kartik\widgets\Alert;
 use menst\cms\common\models\ContactForm;

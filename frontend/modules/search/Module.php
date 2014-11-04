@@ -9,7 +9,7 @@
 
 namespace menst\cms\frontend\modules\search;
 
-use menst\cms\common\helpers\ModuleQuery;
+use menst\modulequery\ModuleQuery;
 use menst\cms\common\interfaces\SearchableInterface;
 use menst\cms\common\models\search\ActiveDocument;
 use menst\cms\frontend\interfaces\MenuUrlRuleInterface;

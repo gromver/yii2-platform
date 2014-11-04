@@ -58,7 +58,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
         Yii::$container->set('menst\models\fields\MediaField', [
             'controller' => $app->urlManagerBackend->createUrl(['cms/media/manager'])
         ]);
-        Yii::$container->set('menst\cms\common\helpers\ModuleQuery', [
+        Yii::$container->set('menst\modulequery\ModuleQuery', [
             'cache' => $app->cache,
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);

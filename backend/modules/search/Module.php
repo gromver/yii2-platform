@@ -11,7 +11,7 @@ namespace menst\cms\backend\modules\search;
 
 use menst\cms\backend\interfaces\DesktopInterface;
 use menst\cms\backend\interfaces\MenuRouterInterface;
-use menst\cms\common\helpers\ModuleQuery;
+use menst\modulequery\ModuleQuery;
 use menst\cms\common\interfaces\SearchableInterface;
 use yii\base\BootstrapInterface;
 use Yii;

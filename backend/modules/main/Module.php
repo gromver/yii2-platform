@@ -9,7 +9,7 @@
 
 namespace menst\cms\backend\modules\main;
 
-use menst\cms\common\helpers\ModuleQuery;
+use menst\modulequery\ModuleQuery;
 use menst\cms\common\interfaces\SearchableInterface;
 use menst\cms\common\models\Table;
 use menst\cms\backend\interfaces\DesktopInterface;
@@ -43,7 +43,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     {
         Yii::$container->set('menst\models\fields\EditorField', ['controller' => 'cms/media/manager']);
         Yii::$container->set('menst\models\fields\MediaField', ['controller' => 'cms/media/manager']);
-        Yii::$container->set('menst\cms\common\helpers\ModuleQuery', [
+        Yii::$container->set('menst\modulequery\ModuleQuery', [
             'cache' => $app->cache,
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);
