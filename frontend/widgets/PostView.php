@@ -27,12 +27,7 @@ class PostView extends Widget {
      * @type modal
      * @url /cmf/default/select-post
      */
-    public $source;
-    /**
-     * @type list
-     * @items languages
-     */
-    public $language;
+    public $post;
     /**
      * @type list
      * @items layouts
@@ -42,50 +37,24 @@ class PostView extends Widget {
     /**
      * @type yesno
      */
-    public $showTranslations;
-    /**
-     * @type yesno
-     */
     public $useHighlights = true;
-
-
-    protected function normalizeSource()
-    {
-        if ($this->source && !$this->source instanceof Post) {
-            @list($id, $postAlias, $categoryAlias) = explode(':', $this->source);
-            $this->source = null;
-
-            if ($postAlias && $categoryAlias) {
-                $this->language or $this->language = Yii::$app->language;
-
-                $this->source = Post::find()->innerJoinWith([
-                    'category' => function($query) use($categoryAlias) {
-                            /** @var $query \yii\db\ActiveQuery */
-                            $query->andOnCondition(['{{%cms_category}}.language' => $this->language, '{{%cms_category}}.path' => $categoryAlias]);
-                        }
-                ])->andWhere(['{{%cms_post}}.alias' => $postAlias])->one();
-            }
-
-            if (empty($this->source)) {
-                $this->source = Post::findOne($id);
-            }
-        }
-
-        if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Post not found.'));
-        }
-    }
 
     protected function launch()
     {
-        $this->normalizeSource();
+        if ($this->post && !$this->post instanceof Post) {
+            $this->post = Post::findOne(intval($this->post));
+        }
+
+        if (empty($this->post)) {
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Post not found.'));
+        }
 
         if ($this->useHighlights) {
             CkeditorHighlightAsset::register($this->view);
         }
 
         echo $this->render($this->layout, [
-            'model' => $this->source
+            'model' => $this->post
         ]);
     }
 
@@ -96,10 +65,5 @@ class PostView extends Widget {
             'post/viewArticle' => Yii::t('gromver.cmf', 'Article'),
             'post/viewIssue' => Yii::t('gromver.cmf', 'Issue'),
         ];
-    }
-
-    public static function languages()
-    {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

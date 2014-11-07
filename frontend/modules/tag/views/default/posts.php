@@ -25,7 +25,7 @@ if ($model->metadesc) {
 
 echo \gromver\cmf\frontend\widgets\TagPosts::widget([
     'id' => 'tag-posts',
-    'source' => $model,
+    'tag' => $model,
     'categoryId' => $categoryId,
     'context' =>  Yii::$app->menuManager->activeMenu ? Yii::$app->menuManager->activeMenu->path : null,
 ]);

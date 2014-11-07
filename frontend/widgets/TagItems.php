@@ -27,12 +27,7 @@ class TagItems extends Widget {
      * @type modal
      * @url /cmf/default/select-tag
      */
-    public $source;
-    /**
-     * @type list
-     * @items languages
-     */
-    public $language;
+    public $tag;
     public $pageSize = 20;
     /**
      * @type list
@@ -47,45 +42,28 @@ class TagItems extends Widget {
      */
     public $itemLayout = '_itemItem';
 
-
-    protected function normalizeSource()
-    {
-        if (!$this->source instanceof Tag) {
-            @list($id, $alias) = explode(':', $this->source);
-            $this->source = null;
-
-            if ($alias) {
-                $this->language or $this->language = Yii::$app->language;
-
-                $this->source = Tag::find()->andWhere(['alias' => $alias, 'language' => $this->language])->one();
-            }
-
-            if (empty($this->source)) {
-                $this->source = Tag::findOne($id);
-            }
-        }
-
-        if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Tag not found.'));
-        }
-    }
-
     protected function launch()
     {
-        $this->normalizeSource();
+        if (!$this->tag instanceof Tag) {
+            $this->tag = Tag::findOne(intval($this->tag));
+        }
+
+        if (empty($this->tag)) {
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Tag not found.'));
+        }
 
         echo $this->render($this->layout, [
             'dataProvider' => new ActiveDataProvider([
-                    'query' => $this->source->getTagToItems(),
+                    'query' => $this->tag->getTagToItems(),
                     'pagination' => [
                         'pageSize' => $this->pageSize
                     ]
                 ]),
             'itemLayout' => $this->itemLayout,
-            'model' => $this->source
+            'model' => $this->tag
         ]);
 
-        $this->source->hit();
+        $this->tag->hit();
     }
 
     public static function layouts()
@@ -102,10 +80,4 @@ class TagItems extends Widget {
             '_itemItem' => Yii::t('gromver.cmf', 'Default'),
         ];
     }
-
-    public static function languages()
-    {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
-    }
-
-} 
+}

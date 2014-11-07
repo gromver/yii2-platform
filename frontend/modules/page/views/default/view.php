@@ -24,5 +24,5 @@ if ($model->metadesc) {
 
 echo \gromver\cmf\frontend\widgets\PageView::widget([
     'id' => 'page-view',
-    'source' => $model,
+    'page' => $model,
 ]);

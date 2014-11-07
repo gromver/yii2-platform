@@ -35,5 +35,5 @@ if ($model->metadesc) {
 
 echo \gromver\cmf\frontend\widgets\PostList::widget([
     'id' => 'cat-posts',
-    'source' => $model
+    'category' => $model
 ]);

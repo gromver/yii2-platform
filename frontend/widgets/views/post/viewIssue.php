@@ -4,16 +4,7 @@
  * @var $model \gromver\cmf\common\models\Post
  */
 
-use yii\helpers\Html;
-
-if ($this->context->showTranslations) {
-    echo \gromver\cmf\frontend\widgets\Translations::widget([
-        'model' => $model,
-        'options' => [
-            'class' => 'pull-right'
-        ]
-    ]);
-} ?>
+use yii\helpers\Html; ?>
 
 <h2 class="issue-header"><?= Html::encode($model->title) ?></h2>
 

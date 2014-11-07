@@ -34,5 +34,5 @@ if ($model->metadesc) {
 
 echo \gromver\cmf\frontend\widgets\CategoryView::widget([
     'id' => 'cat-view',
-    'source' => $model,
+    'category' => $model,
 ]);

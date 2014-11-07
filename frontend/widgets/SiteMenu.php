@@ -29,7 +29,7 @@ class SiteMenu extends Widget {
      * @type modal
      * @url /cmf/default/select-menu
      */
-    public $source;
+    public $type;
     /**
      * @type list
      * @items languages
@@ -40,7 +40,7 @@ class SiteMenu extends Widget {
      */
     public $showInaccessible = true;
     /**
-     * @type text
+     * @var int
      */
     public $cacheDuration = 3600;
 
@@ -63,14 +63,14 @@ class SiteMenu extends Widget {
     {
         parent::init();
 
-        if (empty($this->source)) {
+        if (empty($this->type)) {
             throw new InvalidConfigException(Yii::t('gromver.cmf', 'Menu type must be set.'));
         }
 
         $this->language or $this->language = Yii::$app->language;
 
-        $this->_rawItems = Yii::$app->db->cache(function($db){
-            return MenuItem::find()->type($this->source)->published()->language($this->language)->asArray()->orderBy('lft')->all($db);
+        $this->_rawItems = Yii::$app->db->cache(function ($db) {
+            return MenuItem::find()->type($this->type)->published()->language($this->language)->asArray()->orderBy('lft')->all($db);
         }, $this->cacheDuration, Table::dependency(MenuItem::tableName()));
 
         $i = 0;

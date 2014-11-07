@@ -27,7 +27,8 @@ class UserProfile extends Widget {
      * @type list
      * @multiple
      * @items params
-     * @empty Все
+     * @empty All
+     * @translation gromver.cmf
      */
     public $params;
 

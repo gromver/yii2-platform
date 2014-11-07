@@ -25,5 +25,5 @@ if ($model->metadesc) {
 
 echo \gromver\cmf\frontend\widgets\TagItems::widget([
     'id' => 'tag-items',
-    'source' => $model,
+    'tag' => $model,
 ]);

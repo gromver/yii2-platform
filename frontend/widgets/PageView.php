@@ -22,65 +22,38 @@ use Yii;
  */
 class PageView extends Widget {
     /**
-     * Page or Page model or PageId or PageId:PageAlias
+     * Page model or PageId or PageId:PageAlias
      * @var Page|string
      * @type modal
      * @url /cmf/default/select-page
      */
-    public $source;
+    public $page;
     /**
      * @type list
      * @items layouts
      */
     public $layout = 'page/article';
-
-    /**
-     * @type yesno
-     */
-    public $showTranslations;
-    /**
-     * @type list
-     * @items languages
-     */
-    public $language;
     /**
      * @type yesno
      */
     public $useHighlights = true;
 
-
-    protected function normalizeSource()
-    {
-        if ($this->source && !$this->source instanceof Page) {
-            @list($id, $alias) = explode(':', $this->source);
-            $this->source = null;
-
-            if ($alias) {
-                $this->language or $this->language = Yii::$app->language;
-
-                $this->source = Page::find()->andWhere(['alias' => $alias, 'language' => $this->language])->one();
-            }
-
-            if (empty($this->source)) {
-                $this->source = Page::findOne($id);
-            }
-        }
-
-        if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Page not found.'));
-        }
-    }
-
     protected function launch()
     {
-        $this->normalizeSource();
+        if ($this->page && !$this->page instanceof Page) {
+            $this->page = Page::findOne(intval($this->page));
+        }
+
+        if (empty($this->page)) {
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Page not found.'));
+        }
 
         if ($this->useHighlights) {
             CkeditorHighlightAsset::register($this->view);
         }
 
         echo $this->render($this->layout, [
-            'model' => $this->source
+            'model' => $this->page
         ]);
     }
 
@@ -90,10 +63,5 @@ class PageView extends Widget {
             'page/article' => Yii::t('gromver.cmf', 'Article'),
             'page/content' => Yii::t('gromver.cmf', 'Content'),
         ];
-    }
-
-    public static function languages()
-    {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

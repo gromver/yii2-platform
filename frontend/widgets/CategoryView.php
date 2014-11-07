@@ -26,12 +26,7 @@ class CategoryView extends Widget {
      * @type modal
      * @url /cmf/default/select-category
      */
-    public $source;
-    /**
-     * @type list
-     * @items languages
-     */
-    public $language;
+    public $category;
     /**
      * @type list
      * @items layouts
@@ -39,35 +34,18 @@ class CategoryView extends Widget {
      */
     public $layout = 'category/viewDefault';
 
-
-    protected function normalizeSource()
-    {
-        if ($this->source && !$this->source instanceof Category) {
-            @list($id, $path) = explode(':', $this->source);
-            $this->source = null;
-
-            if ($path) {
-                $this->language or $this->language = Yii::$app->language;
-
-                $this->source = Category::find()->andWhere(['path' => $path, 'language' => $this->language])->one();
-            }
-
-            if (empty($this->source))  {
-                $this->source = Category::findOne($id);
-            }
-        }
-
-        if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Category not found.'));
-        }
-    }
-
     protected function launch()
     {
-        $this->normalizeSource();
+        if ($this->category && !$this->category instanceof Category) {
+            $this->category = Category::findOne(intval($this->category));
+        }
+
+        if (empty($this->category)) {
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Category not found.'));
+        }
 
         echo $this->render($this->layout, [
-            'model' => $this->source,
+            'model' => $this->category,
         ]);
     }
 
@@ -80,9 +58,4 @@ class CategoryView extends Widget {
             'category/viewOnlyPosts' => Yii::t('gromver.cmf', 'Only posts list'),
         ];
     }
-
-    public static function languages()
-    {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
-    }
-} 
+}

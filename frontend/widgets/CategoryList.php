@@ -29,11 +29,6 @@ class CategoryList extends Widget {
     public $category;
     /**
      * @type list
-     * @items languages
-     */
-    public $language;
-    /**
-     * @type list
      * @items layouts
      * @editable
      */
@@ -67,27 +62,11 @@ class CategoryList extends Widget {
         parent::init();
     }
 
-    protected function normalizeCategory()
-    {
-        if ($this->category && !$this->category instanceof Category) {
-            @list($id, $path) = explode(':', $this->category);
-            $this->category = null;
-
-            if ($path) {
-                $this->language or $this->language = Yii::$app->language;
-
-                $this->category = Category::find()->andWhere(['path' => $path, 'language' => $this->language])->one();
-            }
-
-            if (empty($this->category)) {
-                $this->category = Category::findOne($id);
-            }
-        }
-    }
-
     protected function launch()
     {
-        $this->normalizeCategory();
+        if ($this->category && !$this->category instanceof Category) {
+            $this->category = Category::findOne(intval($this->category));
+        }
 
         echo $this->render($this->layout, [
             'dataProvider' => new ActiveDataProvider([
@@ -113,7 +92,6 @@ class CategoryList extends Widget {
     {
         return [
             '_itemArticle' => Yii::t('gromver.cmf', 'Article'),
-            //'_itemNews' => 'Новость',
         ];
     }
 
@@ -133,10 +111,5 @@ class CategoryList extends Widget {
             SORT_ASC => Yii::t('gromver.cmf', 'Asc'),
             SORT_DESC => Yii::t('gromver.cmf', 'Desc'),
         ];
-    }
-
-    public static function languages()
-    {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

@@ -28,7 +28,7 @@ class TagPosts extends Widget {
      * @type modal
      * @url /cmf/default/select-tag
      */
-    public $source;
+    public $tag;
     /**
      * CategoryId
      * @var string
@@ -36,11 +36,6 @@ class TagPosts extends Widget {
      * @url /cmf/default/select-category
      */
     public $categoryId;
-    /**
-     * @type list
-     * @items languages
-     */
-    public $language;
     /**
      * @type list
      * @items layouts
@@ -72,32 +67,15 @@ class TagPosts extends Widget {
      */
     public $listViewOptions = [];
 
-
-    protected function normalizeSource()
-    {
-        if ($this->source && !$this->source instanceof Tag) {
-            @list($id, $alias) = explode(':', $this->source);
-            $this->source = null;
-
-            if ($alias) {
-                $this->language or $this->language = Yii::$app->language;
-
-                $this->source = Tag::find()->andWhere(['alias' => $alias, 'language' => $this->language])->one();
-            }
-
-            if (empty($this->source)) {
-                $this->source = Tag::findOne($id);
-            }
-        }
-
-        if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Tag must be set.'));
-        }
-    }
-
     protected function launch()
     {
-        $this->normalizeSource();
+        if (!$this->tag instanceof Tag) {
+            $this->tag = Tag::findOne(intval($this->tag));
+        }
+
+        if (empty($this->tag)) {
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Tag must be set.'));
+        }
 
         echo $this->render($this->layout, [
             'dataProvider' => new ActiveDataProvider([
@@ -110,13 +88,13 @@ class TagPosts extends Widget {
                     ]
                 ]),
             'itemLayout' => $this->itemLayout,
-            'model' => $this->source
+            'model' => $this->tag
         ]);
     }
 
     protected function getQuery()
     {
-        return Post::find()->published()->category($this->categoryId)->innerJoinWith('tags', false)->andWhere(['{{%cms_tag}}.id' => $this->source->id]);
+        return Post::find()->published()->category($this->categoryId)->innerJoinWith('tags', false)->andWhere(['{{%cms_tag}}.id' => $this->tag->id]);
     }
 
     public static function layouts()
@@ -151,10 +129,5 @@ class TagPosts extends Widget {
             SORT_ASC => Yii::t('gromver.cmf', 'Asc'),
             SORT_DESC => Yii::t('gromver.cmf', 'Desc'),
         ];
-    }
-
-    public static function languages()
-    {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

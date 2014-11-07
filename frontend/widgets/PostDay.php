@@ -32,11 +32,6 @@ class PostDay extends Widget {
     public $day;
     /**
      * @type list
-     * @items languages
-     */
-    public $language;
-    /**
-     * @type list
      * @items layouts
      */
     public $layout = 'post/day';
@@ -66,27 +61,12 @@ class PostDay extends Widget {
      */
     public $listViewOptions = [];
 
-    protected function normalizeCategory()
-    {
-        if ($this->category && !$this->category instanceof Category) {
-            @list($id, $path) = explode(':', $this->category);
-            $this->category = null;
-
-            if ($path) {
-                $this->language or $this->language = Yii::$app->language;
-
-                $this->category = Category::find()->andWhere(['path' => $path, 'language' => $this->language])->one();
-            }
-
-            if (empty($this->category)) {
-                $this->category = Category::findOne($id);
-            }
-        }
-    }
-
     protected function launch()
     {
-        $this->normalizeCategory();
+        if ($this->category && !$this->category instanceof Category) {
+            $this->category = Category::findOne(intval($this->category));
+        }
+
         $categoryId = $this->category ? $this->category->id : null;
 
         echo $this->render($this->layout, [
@@ -140,9 +120,4 @@ class PostDay extends Widget {
             SORT_DESC => Yii::t('gromver.cmf', 'Desc'),
         ];
     }
-
-    public static function languages()
-    {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
-    }
-} 
+}
