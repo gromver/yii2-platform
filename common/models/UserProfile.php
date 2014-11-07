@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -13,7 +13,7 @@ use Yii;
 
 /**
  * This is the model class for table "cms_user_profile".
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
@@ -61,16 +61,16 @@ class UserProfile extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.cms', 'ID'),
-            'user_id' => Yii::t('menst.cms', 'User ID'),
-            'name' => Yii::t('menst.cms', 'Name'),
-            'surname' => Yii::t('menst.cms', 'Surname'),
-            'patronymic' => Yii::t('menst.cms', 'Patronymic'),
-            'phone' => Yii::t('menst.cms', 'Phone'),
-            'work_phone' => Yii::t('menst.cms', 'Work Phone'),
-            'email' => Yii::t('menst.cms', 'Email'),
-            'work_email' => Yii::t('menst.cms', 'Work Email'),
-            'address' => Yii::t('menst.cms', 'Address'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'user_id' => Yii::t('gromver.cmf', 'User ID'),
+            'name' => Yii::t('gromver.cmf', 'Name'),
+            'surname' => Yii::t('gromver.cmf', 'Surname'),
+            'patronymic' => Yii::t('gromver.cmf', 'Patronymic'),
+            'phone' => Yii::t('gromver.cmf', 'Phone'),
+            'work_phone' => Yii::t('gromver.cmf', 'Work Phone'),
+            'email' => Yii::t('gromver.cmf', 'Email'),
+            'work_email' => Yii::t('gromver.cmf', 'Work Email'),
+            'address' => Yii::t('gromver.cmf', 'Address'),
         ];
     }
 

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -17,7 +17,7 @@ use yii\data\ActiveDataProvider;
 
 /**
  * Class TagItems
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class TagItems extends Widget {
@@ -66,7 +66,7 @@ class TagItems extends Widget {
         }
 
         if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('menst.cms', 'Tag not found.'));
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Tag not found.'));
         }
     }
 
@@ -91,21 +91,21 @@ class TagItems extends Widget {
     public static function layouts()
     {
         return [
-            'tag/itemsDefault' => Yii::t('menst.cms', 'Default'),
-            'tag/itemsList' => Yii::t('menst.cms', 'List'),
+            'tag/itemsDefault' => Yii::t('gromver.cmf', 'Default'),
+            'tag/itemsList' => Yii::t('gromver.cmf', 'List'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemItem' => Yii::t('menst.cms', 'Default'),
+            '_itemItem' => Yii::t('gromver.cmf', 'Default'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 
 } 

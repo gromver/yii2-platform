@@ -7,8 +7,8 @@ use kartik\grid\GridView;
 /* @var $searchModel gromver\cmf\backend\modules\menu\models\MenuItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('menst.cms', 'Menu Items');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Menu Types'), 'url' => ['type/index']];
+$this->title = Yii::t('gromver.cmf', 'Menu Items');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Menu Types'), 'url' => ['type/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php /*<p>
-        <?= Html::a(Yii::t('menst.cms', 'Create {modelClass}', [
+        <?= Html::a(Yii::t('gromver.cmf', 'Create {modelClass}', [
     'modelClass' => 'Menu',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>*/?>
@@ -125,11 +125,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> ' . Html::encode($this->title) . ' </h3>',
             'type' => 'info',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('menst.cms', 'Add'), ['create', 'menu_type_id' => $searchModel->menu_type_id], ['class' => 'btn btn-success', 'data-pjax' => '0']),
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('gromver.cmf', 'Add'), ['create', 'menu_type_id' => $searchModel->menu_type_id], ['class' => 'btn btn-success', 'data-pjax' => '0']),
             'after' =>
-                Html::a('<i class="glyphicon glyphicon-sort-by-attributes"></i> ' . Yii::t('menst.cms', 'Ordering'), ['ordering'], ['class' => 'btn btn-default', 'data-pjax' => '0', 'onclick' => 'processOrdering(this); return false']).' '.
-                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('menst.cms', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax' => '0', 'onclick' => 'processAction(this); return false']) . ' ' .
-                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('menst.cms', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
+                Html::a('<i class="glyphicon glyphicon-sort-by-attributes"></i> ' . Yii::t('gromver.cmf', 'Ordering'), ['ordering'], ['class' => 'btn btn-default', 'data-pjax' => '0', 'onclick' => 'processOrdering(this); return false']).' '.
+                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.cmf', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax' => '0', 'onclick' => 'processAction(this); return false']) . ' ' .
+                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
             'showFooter' => false
         ],
     ]); ?>
@@ -143,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
             selection = $grid.yiiGridView('getSelectedRows'),
             data = {}
         if(!selection.length) {
-            alert(<?= json_encode(Yii::t('menst.cms', 'Select items.')) ?>)
+            alert(<?= json_encode(Yii::t('gromver.cmf', 'Select items.')) ?>)
             return
         }
         $.each(selection, function(index, value){
@@ -159,7 +159,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $grid = $('#table-grid'),
             selection = $grid.yiiGridView('getSelectedRows')
         if(!selection.length) {
-            alert(<?= json_encode(Yii::t('menst.cms', 'Select items.')) ?>)
+            alert(<?= json_encode(Yii::t('gromver.cmf', 'Select items.')) ?>)
             return
         }
 

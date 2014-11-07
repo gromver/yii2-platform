@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -16,7 +16,7 @@ use Yii;
 
 /**
  * Class CategoryView
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class CategoryView extends Widget {
@@ -58,7 +58,7 @@ class CategoryView extends Widget {
         }
 
         if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('menst.cms', 'Category not found.'));
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Category not found.'));
         }
     }
 
@@ -74,15 +74,15 @@ class CategoryView extends Widget {
     public static function layouts()
     {
         return [
-            'category/viewDefault' => Yii::t('menst.cms', 'Default'),
-            'category/viewVerbose' => Yii::t('menst.cms', 'Verbose'),
-            'category/viewOnlyCategories' => Yii::t('menst.cms', 'Only categories list'),
-            'category/viewOnlyPosts' => Yii::t('menst.cms', 'Only posts list'),
+            'category/viewDefault' => Yii::t('gromver.cmf', 'Default'),
+            'category/viewVerbose' => Yii::t('gromver.cmf', 'Verbose'),
+            'category/viewOnlyCategories' => Yii::t('gromver.cmf', 'Only categories list'),
+            'category/viewOnlyPosts' => Yii::t('gromver.cmf', 'Only posts list'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

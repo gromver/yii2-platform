@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -20,7 +20,7 @@ use yii\filters\VerbFilter;
 
 /**
  * Class DefaultController implements the CRUD actions for Page model.
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
@@ -85,7 +85,7 @@ class DefaultController extends Controller
         $searchModel = new PageSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
-        Yii::$app->getModule('cms')->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         return $this->render('select', [
             'dataProvider' => $dataProvider,
@@ -220,7 +220,7 @@ class DefaultController extends Controller
         if (($model = Page::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
         }
     }
 }

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -17,7 +17,7 @@ use Yii;
 
 /**
  * Class PostList
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class PostList extends Widget {
@@ -111,16 +111,16 @@ class PostList extends Widget {
     public static function layouts()
     {
         return [
-            'post/listDefault' => Yii::t('menst.cms', 'Default'),
-            'post/listBlog' => Yii::t('menst.cms', 'List with calendar and tags'),
+            'post/listDefault' => Yii::t('gromver.cmf', 'Default'),
+            'post/listBlog' => Yii::t('gromver.cmf', 'List with calendar and tags'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemArticle' => Yii::t('menst.cms', 'Article'),
-            '_itemIssue' => Yii::t('menst.cms', 'Issue'),
+            '_itemArticle' => Yii::t('gromver.cmf', 'Article'),
+            '_itemIssue' => Yii::t('gromver.cmf', 'Issue'),
         ];
     }
 
@@ -128,23 +128,23 @@ class PostList extends Widget {
     public static function sortColumns()
     {
         return [
-            'published_at' => Yii::t('menst.cms', 'By publish date'),
-            'created_at' => Yii::t('menst.cms', 'By create date'),
-            'title' => Yii::t('menst.cms', 'By name'),
-            'ordering' => Yii::t('menst.cms', 'By order'),
+            'published_at' => Yii::t('gromver.cmf', 'By publish date'),
+            'created_at' => Yii::t('gromver.cmf', 'By create date'),
+            'title' => Yii::t('gromver.cmf', 'By name'),
+            'ordering' => Yii::t('gromver.cmf', 'By order'),
         ];
     }
 
     public static function sortDirections()
     {
         return [
-            SORT_ASC => Yii::t('menst.cms', 'Asc'),
-            SORT_DESC => Yii::t('menst.cms', 'Desc'),
+            SORT_ASC => Yii::t('gromver.cmf', 'Asc'),
+            SORT_DESC => Yii::t('gromver.cmf', 'Desc'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

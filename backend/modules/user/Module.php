@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -15,7 +15,7 @@ use Yii;
 
 /**
  * Class Module
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInterface
@@ -38,9 +38,9 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('menst.cms', 'User'),
+            'label' => Yii::t('gromver.cmf', 'User'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Users'), 'url' => ['/cmf/user/default/index']]
+                ['label' => Yii::t('gromver.cmf', 'Users'), 'url' => ['/cmf/user/default/index']]
             ]
         ];
     }
@@ -51,9 +51,9 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('menst.cms', 'User'),
+            'label' => Yii::t('gromver.cmf', 'User'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'User Profile'), 'route' => 'cmf/user/default/update'],
+                ['label' => Yii::t('gromver.cmf', 'User Profile'), 'route' => 'cmf/user/default/update'],
             ]
         ];
     }

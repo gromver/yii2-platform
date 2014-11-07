@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -19,7 +19,7 @@ use yii\helpers\Json;
 
 /**
  * This is the model class for table "cms_menu_item".
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
@@ -88,7 +88,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             [['language'], 'string', 'max' => 7],
             [['language'], function($attribute, $params) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
-                    $this->addError($attribute, Yii::t('menst.cms', 'Language has to match with the parental.'));
+                    $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
                 }
             }],
             [['title', 'link', 'layout_path'], 'string', 'max' => 1024],
@@ -100,12 +100,12 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             [['parent_id'], 'compare', 'compareAttribute' => 'id', 'operator' => '!='],
             [['parent_id'], function($attribute, $params) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->menu_type_id != $this->menu_type_id) {
-                    $this->addError($attribute, Yii::t('menst.cms', 'Parental point of the menu doesn\'t correspond to the chosen menu type.'));
+                    $this->addError($attribute, Yii::t('gromver.cmf', 'Parental point of the menu doesn\'t correspond to the chosen menu type.'));
                 }
             }],
             [['status'], function($attribute, $params) {
                 if ($this->status == self::STATUS_MAIN_PAGE && $this->link_type == self::LINK_HREF) {
-                    $this->addError($attribute, Yii::t('menst.cms', 'Alias of the menu item can\'t be a main page.'));
+                    $this->addError($attribute, Yii::t('gromver.cmf', 'Alias of the menu item can\'t be a main page.'));
                 }
             }],
             [['alias'], 'filter', 'filter' => 'trim'],
@@ -139,34 +139,34 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.cms', 'ID'),
-            'menu_type_id' => Yii::t('menst.cms', 'Menu Type ID'),
-            'parent_id' => Yii::t('menst.cms', 'Parent ID'),
-            'status' => Yii::t('menst.cms', 'Status'),
-            'language' => Yii::t('menst.cms', 'Language'),
-            'title' => Yii::t('menst.cms', 'Title'),
-            'alias' => Yii::t('menst.cms', 'Alias'),
-            'path' => Yii::t('menst.cms', 'Path'),
-            'note' => Yii::t('menst.cms', 'Note'),
-            'link' => Yii::t('menst.cms', 'Link'),
-            'link_type' => Yii::t('menst.cms', 'Link Type'),
-            'link_params' => Yii::t('menst.cms', 'Link Params'),
-            'layout_path' => Yii::t('menst.cms', 'Layout Path'),
-            'access_rule' => Yii::t('menst.cms', 'Access Rule'),
-            'metakey' => Yii::t('menst.cms', 'Metakey'),
-            'metadesc' => Yii::t('menst.cms', 'Metadesc'),
-            'robots' => Yii::t('menst.cms', 'Robots'),
-            'secure' => Yii::t('menst.cms', 'Secure'),
-            'created_at' => Yii::t('menst.cms', 'Created At'),
-            'updated_at' => Yii::t('menst.cms', 'Updated At'),
-            'created_by' => Yii::t('menst.cms', 'Created By'),
-            'updated_by' => Yii::t('menst.cms', 'Updated By'),
-            'lft' => Yii::t('menst.cms', 'Lft'),
-            'rgt' => Yii::t('menst.cms', 'Rgt'),
-            'level' => Yii::t('menst.cms', 'Level'),
-            'ordering' => Yii::t('menst.cms', 'Ordering'),
-            'hits' => Yii::t('menst.cms', 'Hits'),
-            'lock' => Yii::t('menst.cms', 'Lock'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'menu_type_id' => Yii::t('gromver.cmf', 'Menu Type ID'),
+            'parent_id' => Yii::t('gromver.cmf', 'Parent ID'),
+            'status' => Yii::t('gromver.cmf', 'Status'),
+            'language' => Yii::t('gromver.cmf', 'Language'),
+            'title' => Yii::t('gromver.cmf', 'Title'),
+            'alias' => Yii::t('gromver.cmf', 'Alias'),
+            'path' => Yii::t('gromver.cmf', 'Path'),
+            'note' => Yii::t('gromver.cmf', 'Note'),
+            'link' => Yii::t('gromver.cmf', 'Link'),
+            'link_type' => Yii::t('gromver.cmf', 'Link Type'),
+            'link_params' => Yii::t('gromver.cmf', 'Link Params'),
+            'layout_path' => Yii::t('gromver.cmf', 'Layout Path'),
+            'access_rule' => Yii::t('gromver.cmf', 'Access Rule'),
+            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
+            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
+            'robots' => Yii::t('gromver.cmf', 'Robots'),
+            'secure' => Yii::t('gromver.cmf', 'Secure'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
+            'lft' => Yii::t('gromver.cmf', 'Lft'),
+            'rgt' => Yii::t('gromver.cmf', 'Rgt'),
+            'level' => Yii::t('gromver.cmf', 'Level'),
+            'ordering' => Yii::t('gromver.cmf', 'Ordering'),
+            'hits' => Yii::t('gromver.cmf', 'Hits'),
+            'lock' => Yii::t('gromver.cmf', 'Lock'),
         ];
     }
 
@@ -225,16 +225,16 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('menst.cms', $label);
+                return Yii::t('gromver.cmf', $label);
             }, self::$_statuses);
     }
 
     public function getStatusLabel($status=null)
     {
         if ($status === null) {
-            return Yii::t('menst.cms', self::$_statuses[$this->status]);
+            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
         }
-        return Yii::t('menst.cms', self::$_statuses[$status]);
+        return Yii::t('gromver.cmf', self::$_statuses[$status]);
     }
 
     public function getTranslations()
@@ -371,9 +371,9 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     public function getLinkTypeLabel($type=null)
     {
         if ($type === null) {
-            return Yii::t('menst.cms', self::$_linkTypes[$this->link_type]);
+            return Yii::t('gromver.cmf', self::$_linkTypes[$this->link_type]);
         }
-        return Yii::t('menst.cms', self::$_linkTypes[$type]);
+        return Yii::t('gromver.cmf', self::$_linkTypes[$type]);
     }
 
 

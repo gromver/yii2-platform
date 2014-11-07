@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -20,7 +20,7 @@ use gromver\cmf\common\models\User;
 
 /**
  * Class DefaultController
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property \gromver\cmf\backend\modules\auth\Module Module
@@ -133,10 +133,10 @@ class DefaultController extends Controller
         $model->scenario = 'requestPasswordResetToken';
         if ($model->load($_POST) && $model->validate()) {
             if ($this->sendPasswordResetEmail($model->email)) {
-                Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Check your email for further instructions.'));
+                Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Check your email for further instructions.'));
                 return $this->goHome();
             } else {
-                Yii::$app->getSession()->setFlash(Alert::TYPE_DANGER, Yii::t('menst.cms', 'There was an error sending email.'));
+                Yii::$app->getSession()->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', 'There was an error sending email.'));
             }
         }
         return $this->render('requestPasswordResetToken', [
@@ -152,12 +152,12 @@ class DefaultController extends Controller
         ]);
 
         if (!$model) {
-            throw new BadRequestHttpException(Yii::t('menst.cms', 'Wrong password reset token.'));
+            throw new BadRequestHttpException(Yii::t('gromver.cmf', 'Wrong password reset token.'));
         }
 
         $model->scenario = 'resetPassword';
         if ($model->load($_POST) && $model->save()) {
-            Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'New password was saved.'));
+            Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'New password was saved.'));
             return $this->goHome();
         }
 
@@ -182,9 +182,9 @@ class DefaultController extends Controller
             $mailer = Instance::ensure($this->mailer, BaseMailer::className());
 
             return $mailer->compose('@gromver/cmf/backend/modules/auth/views/emails/passwordResetToken', ['user' => $user])
-                ->setFrom(Yii::$app->cmf->params['supportEmail'], Yii::t('menst.cms', '{name} robot', ['name' => Yii::$app->cmf->siteName]))
+                ->setFrom(Yii::$app->cmf->params['supportEmail'], Yii::t('gromver.cmf', '{name} robot', ['name' => Yii::$app->cmf->siteName]))
                 ->setTo($user->email)
-                ->setSubject(Yii::t('menst.cms', 'Password reset for {name}.', ['name' => Yii::$app->cmf->siteName]))
+                ->setSubject(Yii::t('gromver.cmf', 'Password reset for {name}.', ['name' => Yii::$app->cmf->siteName]))
                 ->send();
         }
 

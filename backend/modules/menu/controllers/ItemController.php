@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -23,7 +23,7 @@ use yii\filters\VerbFilter;
 
 /**
  * Class ItemController implements the CRUD actions for Menu model.
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 
@@ -92,7 +92,7 @@ class ItemController extends Controller
         $params['MenuItemSearch']['link_type'] = MenuItem::LINK_ROUTE;
         $dataProvider = $searchModel->search($params);
 
-        Yii::$app->getModule('cms')->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         return $this->render('select', [
             'dataProvider' => $dataProvider,
@@ -106,7 +106,7 @@ class ItemController extends Controller
      */
     public function actionRouters()
     {
-        Yii::$app->getModule('cms')->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         $items = ModuleQuery::instance()->implement('\gromver\cmf\backend\interfaces\MenuRouterInterface')->orderBy('desktopOrder')->execute('getMenuRoutes');
 
@@ -148,11 +148,11 @@ class ItemController extends Controller
         if (isset($sourceId) && $language) {
             /** @var MenuItem $sourceModel */
             if (!$sourceModel = MenuItem::findOne($sourceId)) {
-                throw new NotFoundHttpException(Yii::t('menst.cms', "Menu item for localization under the specified language isn't found."));
+                throw new NotFoundHttpException(Yii::t('gromver.cmf', "Menu item for localization under the specified language isn't found."));
             }
             /** @var MenuItem $targetCategory */
             if (!$targetCategory = $sourceModel->level > 2 ? MenuItem::find()->where(['path' => $sourceModel->parent->path, 'language' => $language])->one() : MenuItem::find()->roots()->one()) {
-                throw new NotFoundHttpException(Yii::t('menst.cms', "Parent menu item for the localized version isn't found."));
+                throw new NotFoundHttpException(Yii::t('gromver.cmf', "Parent menu item for the localized version isn't found."));
             }
 
             $model->language = $language;
@@ -221,7 +221,7 @@ class ItemController extends Controller
         $model = $this->findModel($id);
 
         if ($model->descendants()->count()) {
-            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('menst.cms', "It's impossible to remove menu item ID:{id} so far it contains descendants.", ['id' => $model->id]));
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It's impossible to remove menu item ID:{id} so far it contains descendants.", ['id' => $model->id]));
          } else {
             $model->deleteNode();
         }
@@ -333,7 +333,7 @@ class ItemController extends Controller
                 $root = MenuItem::find()->roots()->one();
                 array_unshift($out, [
                     'id' => $root->id,
-                    'name' => Yii::t('menst.cms', 'Root')
+                    'name' => Yii::t('gromver.cmf', 'Root')
                 ]);
 
                 echo Json::encode(['output' => $out, 'selected' => $selected ? $selected : $root->id]);
@@ -355,7 +355,7 @@ class ItemController extends Controller
         if (($model = MenuItem::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
         }
     }
 }

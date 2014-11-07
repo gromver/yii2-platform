@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -19,7 +19,7 @@ use yii\helpers\Json;
 
 /**
  * Class SiteMenu
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class SiteMenu extends Widget {
@@ -64,7 +64,7 @@ class SiteMenu extends Widget {
         parent::init();
 
         if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('menst.cms', 'Menu type must be set.'));
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Menu type must be set.'));
         }
 
         $this->language or $this->language = Yii::$app->language;
@@ -131,6 +131,6 @@ class SiteMenu extends Widget {
 
     public static function languages()
     {
-        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 }

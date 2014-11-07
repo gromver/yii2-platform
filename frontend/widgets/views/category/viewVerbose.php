@@ -11,14 +11,14 @@
     <?=$model->detail_text ?>
 </div>
 
-<h3><?= Yii::t('menst.cms', 'Категории') ?></h3>
+<h3><?= Yii::t('gromver.cmf', 'Категории') ?></h3>
 
 <?= \gromver\cmf\frontend\widgets\CategoryList::widget([
 'id' => 'cat-cats',
 'category' => $model,
 ]) ?>
 
-<h3><?= Yii::t('menst.cms', 'Статьи') ?></h3>
+<h3><?= Yii::t('gromver.cmf', 'Статьи') ?></h3>
 
 <?= \gromver\cmf\frontend\widgets\PostList::widget([
 'id' => 'cat-posts',

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -16,7 +16,7 @@ use Yii;
 
 /**
  * Class DefaultController
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
@@ -44,7 +44,7 @@ class DefaultController extends Controller
     public function loadModel($id)
     {
         if(!($model = Tag::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested tag does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested tag does not exist..'));
         }
 
         return $model;

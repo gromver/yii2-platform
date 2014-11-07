@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\Version */
 
-$this->title = Yii::t('menst.cms', 'Create Version');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Versions'), 'url' => ['index']];
+$this->title = Yii::t('gromver.cmf', 'Create Version');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Versions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-create">

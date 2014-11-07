@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -14,7 +14,7 @@ use Yii;
 
 /**
  * Class Module
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements DesktopInterface
@@ -35,9 +35,9 @@ class Module extends \yii\base\Module implements DesktopInterface
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('menst.cms', 'Widget'),
+            'label' => Yii::t('gromver.cmf', 'Widget'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Configurations'), 'url' => ['/cmf/widget/default/index']]
+                ['label' => Yii::t('gromver.cmf', 'Configurations'), 'url' => ['/cmf/widget/default/index']]
             ]
         ];
     }

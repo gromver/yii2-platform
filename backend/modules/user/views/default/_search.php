@@ -38,8 +38,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'last_visit_at') ?>
 
     <div>
-        <?= Html::submitButton(Yii::t('menst.cms', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('menst.cms', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('gromver.cmf', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('gromver.cmf', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

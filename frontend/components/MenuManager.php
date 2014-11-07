@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -29,7 +29,7 @@ use yii\web\View;
  * такой пункт меню не может использоватся в качестве поставщика роута (MenuItem::route), но тем не менее считается активным,
  * данный запрос необходимо обработать с учетом роута и параметров найденного пункта меню и оставшейся части \yii\web\Request::getPathInfo() и \yii\web\Request::getQueryParams()
  * 2. Независимо от пунктов 1 и 1.2 для пунктов меню с типом MenuItem::LINK_HREF ищем все пункты у которых MenuItem::link совпадает c Request::getUrl()
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuManager extends Component implements UrlRuleInterface
@@ -113,7 +113,7 @@ class MenuManager extends Component implements UrlRuleInterface
             if (Yii::$app->user->getIsGuest()) {
                 Yii::$app->user->loginRequired();
             } else {
-                throw new ForbiddenHttpException(Yii::t('menst.cms', 'You have no rights for access to this section of the site.'));
+                throw new ForbiddenHttpException(Yii::t('gromver.cmf', 'You have no rights for access to this section of the site.'));
             }
         }
 

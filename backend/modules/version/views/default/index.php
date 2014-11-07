@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel gromver\cmf\backend\modules\version\models\VersionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('menst.cms', 'Versions');
+$this->title = Yii::t('gromver.cmf', 'Versions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-index">
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php /*// echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('menst.cms', 'Create {modelClass}', [
+        <?= Html::a(Yii::t('gromver.cmf', 'Create {modelClass}', [
     'modelClass' => 'Version',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>*/?>
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'keep_forever',
                 'value'=>function($model) {
                         /** $model \gromver\cmf\common\models\Version */
-                        return Html::a($model->keep_forever ? Yii::t('menst.cms', 'Yes') . ' <small class="glyphicon glyphicon-lock"></small>' : Yii::t('menst.cms', 'No'), ['keep-forever', 'id' => $model->id], [
+                        return Html::a($model->keep_forever ? Yii::t('gromver.cmf', 'Yes') . ' <small class="glyphicon glyphicon-lock"></small>' : Yii::t('gromver.cmf', 'No'), ['keep-forever', 'id' => $model->id], [
                             'class'=>'btn btn-xs btn-default active btn-keep-forever',
                             'data-method' => 'post',
                             'data-pjax' => 0
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'buttons' => [
                     'restore' => function($url, $model) {
                             return Html::a('<span class="glyphicon glyphicon-open"></span>', $url, [
-                                'title' => Yii::t('menst.cms', 'Restore'),
+                                'title' => Yii::t('gromver.cmf', 'Restore'),
                                 'data-method' => 'post',
                                 'data-pjax' => 0
                             ]);
@@ -100,8 +100,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'type' => 'info',
             'before' => ' ',
             'after' =>
-                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('menst.cms', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax' => '0', 'onclick' => 'processAction(this); return false']) . ' ' .
-                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('menst.cms', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
+                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.cmf', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax' => '0', 'onclick' => 'processAction(this); return false']) . ' ' .
+                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
             'showFooter' => false
         ],
     ]) ?>
@@ -113,7 +113,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $grid = $('#table-grid'),
             selection = $grid.yiiGridView('getSelectedRows')
         if(!selection.length) {
-            alert(<?= json_encode(Yii::t('menst.cms', 'Select items.')) ?>)
+            alert(<?= json_encode(Yii::t('gromver.cmf', 'Select items.')) ?>)
             return
         }
 

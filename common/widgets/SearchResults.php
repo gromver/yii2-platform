@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -42,7 +42,7 @@ use yii\di\Instance;
 
 /**
  * Class SearchResults
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property array $filters
@@ -141,7 +141,7 @@ class SearchResults extends Widget {
         }
 
         //чтоб в ActiveQuery задать фильтр по типу надо обязательно задать фильтр по индексу
-        //$query->index = 'cms';
+        //$query->index = 'cmf';
         //$query->type = 'page';
 
         $query->highlight = $this->highlight;
@@ -212,14 +212,14 @@ class SearchResults extends Widget {
     public static function layouts()
     {
         return [
-            'search/results' => Yii::t('menst.cms', 'Default'),
+            'search/results' => Yii::t('gromver.cmf', 'Default'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemDefault' => Yii::t('menst.cms', 'Default'),
+            '_itemDefault' => Yii::t('gromver.cmf', 'Default'),
         ];
     }
 }

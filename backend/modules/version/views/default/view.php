@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model gromver\cmf\common\models\Version */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Versions'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Versions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-view">
@@ -15,11 +15,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('menst.cms', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('menst.cms', 'Delete'), ['delete', 'id' => $model->id], [
+        <?= Html::a(Yii::t('gromver.cmf', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('gromver.cmf', 'Delete'), ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger pull-right',
             'data' => [
-                'confirm' => Yii::t('menst.cms', 'Are you sure you want to delete this item?'),
+                'confirm' => Yii::t('gromver.cmf', 'Are you sure you want to delete this item?'),
                 'method' => 'post',
             ],
         ]) ?>

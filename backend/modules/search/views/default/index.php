@@ -5,7 +5,7 @@
 
 ?>
 <div class="search-default-index">
-    <h1><?= Yii::t('menst.cms', 'Search') ?></h1>
+    <h1><?= Yii::t('gromver.cmf', 'Search') ?></h1>
 
     <?php echo \gromver\cmf\common\widgets\SearchForm::widget([
         'id' => 'bSearchForm',

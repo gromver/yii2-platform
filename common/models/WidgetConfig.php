@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -14,7 +14,7 @@ use yii\helpers\Json;
 
 /**
  * This is the model class for table "cms_widget_config".
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
@@ -66,19 +66,19 @@ class WidgetConfig extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.cms', 'ID'),
-            'widget_id' => Yii::t('menst.cms', 'Widget ID'),
-            'widget_class' => Yii::t('menst.cms', 'Widget Class'),
-            'language' => Yii::t('menst.cms', 'Language'),
-            'context' => Yii::t('menst.cms', 'Context'),
-            'url' => Yii::t('menst.cms', 'Url'),
-            'params' => Yii::t('menst.cms', 'Params'),
-            'valid' => Yii::t('menst.cms', 'Valid'),
-            'created_at' => Yii::t('menst.cms', 'Created At'),
-            'updated_at' => Yii::t('menst.cms', 'Updated At'),
-            'created_by' => Yii::t('menst.cms', 'Created By'),
-            'updated_by' => Yii::t('menst.cms', 'Updated By'),
-            'lock' => Yii::t('menst.cms', 'Lock'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'widget_id' => Yii::t('gromver.cmf', 'Widget ID'),
+            'widget_class' => Yii::t('gromver.cmf', 'Widget Class'),
+            'language' => Yii::t('gromver.cmf', 'Language'),
+            'context' => Yii::t('gromver.cmf', 'Context'),
+            'url' => Yii::t('gromver.cmf', 'Url'),
+            'params' => Yii::t('gromver.cmf', 'Params'),
+            'valid' => Yii::t('gromver.cmf', 'Valid'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
+            'lock' => Yii::t('gromver.cmf', 'Lock'),
         ];
     }
 

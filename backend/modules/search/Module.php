@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -19,7 +19,7 @@ use Yii;
 /**
  * Class Module
  * В этом модуле можно кастомизировать дополнительные кдассы ActiveDocument поддерживаемые цмской
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property string[] $documents
@@ -30,7 +30,6 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
     public $controllerNamespace = 'gromver\cmf\backend\modules\search\controllers';
     public $documentClasses = [];
     public $desktopOrder = 6;
-    public $index = 'cms';
 
     /*public function init()
     {
@@ -53,9 +52,9 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('menst.cms', 'Search'),
+            'label' => Yii::t('gromver.cmf', 'Search'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Searching'), 'url' => ['/cmf/search/default/index']],
+                ['label' => Yii::t('gromver.cmf', 'Searching'), 'url' => ['/cmf/search/default/index']],
             ]
         ];
     }
@@ -66,9 +65,9 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('menst.cms', 'Search'),
+            'label' => Yii::t('gromver.cmf', 'Search'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'Searching'), 'route' => 'cmf/search/default/index'],
+                ['label' => Yii::t('gromver.cmf', 'Searching'), 'route' => 'cmf/search/default/index'],
             ]
         ];
     }

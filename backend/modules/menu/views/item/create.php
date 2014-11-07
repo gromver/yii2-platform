@@ -8,9 +8,9 @@ use yii\helpers\Html;
 /* @var $sourceModel gromver\cmf\common\models\Menu */
 /* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
 
-$this->title = Yii::t('menst.cms', 'Add Menu Item');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Menu Types'), 'url' => ['type/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Menu Items'), 'url' => ['index']];
+$this->title = Yii::t('gromver.cmf', 'Add Menu Item');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Menu Types'), 'url' => ['type/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Menu Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-create">

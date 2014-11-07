@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -29,7 +29,7 @@ use yii\web\NotFoundHttpException;
 
 /**
  * Class DefaultController
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property $module \gromver\cmf\frontend\modules\main\Module
@@ -98,7 +98,7 @@ class DefaultController extends Controller
                 FileHelper::createDirectory($paramsPath);
                 file_put_contents($paramsFile, '<?php return '.var_export($model->toArray(), true).';');
 
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Configuration saved.'));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Configuration saved.'));
                 if ($modal) {
                     ModalIFrame::refreshPage();
                 }
@@ -124,7 +124,7 @@ class DefaultController extends Controller
 
         $cache->flush();
 
-        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Cache flushed.'));
+        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Cache flushed.'));
 
         return $this->redirect(['index']);
     }

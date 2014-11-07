@@ -10,7 +10,7 @@ use yii\grid\GridView;
  * @var \yii\db\ActiveRecord $item
  */
 
-$this->title = Yii::t('menst.cms', 'Item Versions');
+$this->title = Yii::t('gromver.cmf', 'Item Versions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php /*<h1><?= Html::encode($this->title) ?></h1>*/?>
 
     <div class="btn-group pull-right">
-        <?=Html::label('<i class="glyphicon glyphicon-open"></i> ' . Yii::t('menst.cms', 'Restore'), null, ['id' => 'restore-button', 'class' => 'btn btn-default', 'data' => ['toggle'=>"tooltip", 'url' => Url::toRoute(['restore'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon glyphicon-eye-open"></i> ' . Yii::t('menst.cms', 'Preview'), null, ['id' => 'preview-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['preview'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon"></i> ' . Yii::t('menst.cms', 'Compare'), null, ['id' => 'compare-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['compare'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon glyphicon-lock"></i> ' . Yii::t('menst.cms', 'Keep On/Off'), null, ['id' => 'keep-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-keep-forever'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('menst.cms', 'Delete'), null, ['id' => 'delete-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-delete'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-open"></i> ' . Yii::t('gromver.cmf', 'Restore'), null, ['id' => 'restore-button', 'class' => 'btn btn-default', 'data' => ['toggle'=>"tooltip", 'url' => Url::toRoute(['restore'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-eye-open"></i> ' . Yii::t('gromver.cmf', 'Preview'), null, ['id' => 'preview-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['preview'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon"></i> ' . Yii::t('gromver.cmf', 'Compare'), null, ['id' => 'compare-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['compare'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-lock"></i> ' . Yii::t('gromver.cmf', 'Keep On/Off'), null, ['id' => 'keep-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-keep-forever'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.cmf', 'Delete'), null, ['id' => 'delete-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-delete'])], 'title' => 'tooltip']) ?>
     </div>
 
     <?php \yii\bootstrap\BootstrapPluginAsset::register($this);
@@ -117,7 +117,7 @@ JS
                 'attribute' => 'keep_forever',
                 'value' => function($model) {
                         /** $model \gromver\cmf\common\models\Version */
-                        return Html::a($model->keep_forever ? Yii::t('menst.cms', 'Yes') . ' <small class="glyphicon glyphicon-lock"></small>' : Yii::t('menst.cms', 'No'), ['keep-forever', 'id' => $model->id], ['class' => 'btn btn-xs btn-default active btn-keep-forever', 'data-method' => 'post']);
+                        return Html::a($model->keep_forever ? Yii::t('gromver.cmf', 'Yes') . ' <small class="glyphicon glyphicon-lock"></small>' : Yii::t('gromver.cmf', 'No'), ['keep-forever', 'id' => $model->id], ['class' => 'btn btn-xs btn-default active btn-keep-forever', 'data-method' => 'post']);
                     },
                 'format' => 'raw'
             ],
@@ -135,28 +135,28 @@ JS
                     'restore' => function($url, $model) {
                             /** $model \gromver\cmf\common\models\Version */
                             return Html::a('<i class="glyphicon glyphicon-open"></i>', ['restore', 'id' => $model->id, 'modal' => 1], [
-                                'title' => Yii::t('menst.cms', 'Restore'),
+                                'title' => Yii::t('gromver.cmf', 'Restore'),
                                 'data-method' => 'post',
                                 'class' => 'btn-restore'
                             ]);
                         },
                     'preview' => function ($url, $model) {
                             return Html::a('<i class="glyphicon glyphicon-eye-open"></i>', $url, [
-                                'title' => Yii::t('menst.cms', 'Preview'),
+                                'title' => Yii::t('gromver.cmf', 'Preview'),
                                 'class' => 'btn-preview'
                             ]);
                         },
                     'delete' => function ($url, $model) {
                             return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
-                                'title' => Yii::t('menst.cms', 'Delete'),
-                                'data-confirm' => Yii::t('menst.cms', 'Are you sure to delete this item?'),
+                                'title' => Yii::t('gromver.cmf', 'Delete'),
+                                'data-confirm' => Yii::t('gromver.cmf', 'Are you sure to delete this item?'),
                                 'data-method' => 'delete',
                                 'class' => 'btn-delete'
                             ]);
                         },
                     'update' => function ($url, $model) {
                             return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['update', 'id' => $model->id, 'modal' => 1], [
-                                'title' => Yii::t('menst.cms', 'Update'),
+                                'title' => Yii::t('gromver.cmf', 'Update'),
                             ]);
                         }
                 ],

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -22,7 +22,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Class Module
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property string $siteName
@@ -75,11 +75,11 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('menst.cms', 'System'),
+            'label' => Yii::t('gromver.cmf', 'System'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Site Map'), 'url' => ['/cmf/default/index']],
-                ['label' => Yii::t('menst.cms', 'Settings'), 'url' => ['/cmf/default/params']],
-                ['label' => Yii::t('menst.cms', 'Flush Cache'), 'url' => ['/cmf/default/flush-cache']],
+                ['label' => Yii::t('gromver.cmf', 'Site Map'), 'url' => ['/cmf/default/index']],
+                ['label' => Yii::t('gromver.cmf', 'Settings'), 'url' => ['/cmf/default/params']],
+                ['label' => Yii::t('gromver.cmf', 'Flush Cache'), 'url' => ['/cmf/default/flush-cache']],
             ]
         ];
     }
@@ -90,10 +90,10 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('menst.cms', 'System'),
+            'label' => Yii::t('gromver.cmf', 'System'),
             'routers' => [
-                //['label' => Yii::t('menst.cms', 'Sitemap'), 'route' => 'cmf/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/],
-                ['label' => Yii::t('menst.cms', 'Contact Form'), 'route' => 'cmf/default/contact'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
+                //['label' => Yii::t('gromver.cmf', 'Sitemap'), 'route' => 'cmf/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/],
+                ['label' => Yii::t('gromver.cmf', 'Contact Form'), 'route' => 'cmf/default/contact'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
             ]
         ];
     }

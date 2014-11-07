@@ -25,7 +25,7 @@ use yii\bootstrap\ActiveForm;
     <?= $form->field($model, 'password_confirm')->passwordInput(['autocomplete'=>'off']) ?>
 
     <?php if ($model->getIsSuperAdmin()) {
-        echo $form->field($model, 'roles')->textInput(['value' => Yii::t('menst.cms', 'Super Administrator'), 'disabled' => true]);
+        echo $form->field($model, 'roles')->textInput(['value' => Yii::t('gromver.cmf', 'Super Administrator'), 'disabled' => true]);
     } else {
         echo $form->field($model, 'roles')->listBox(\yii\helpers\ArrayHelper::map(Yii::$app->authManager->getRoles(), 'name', 'name'), [
             'multiple' => 'multiple'
@@ -33,9 +33,9 @@ use yii\bootstrap\ActiveForm;
     } ?>
 
     <div>
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('menst.cms', 'Create') : Yii::t('menst.cms', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.cmf', 'Create') : Yii::t('gromver.cmf', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?php if (!$model->isNewRecord) {
-            echo Html::a(Yii::t('menst.cms', 'Params'), ['params', 'id' => $model->id], ['class' => 'btn btn-default']);
+            echo Html::a(Yii::t('gromver.cmf', 'Params'), ['params', 'id' => $model->id], ['class' => 'btn btn-default']);
         } ?>
     </div>
 

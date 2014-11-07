@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -18,7 +18,7 @@ use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "cms_user".
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
@@ -93,7 +93,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'string', 'max' => 64],
             ['username', 'required'],
-            ['username', 'unique', 'message' => Yii::t('menst.cms', 'This username has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
+            ['username', 'unique', 'message' => Yii::t('gromver.cmf', 'This username has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
@@ -102,7 +102,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['email', 'unique', 'filter' => function($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
-                }, 'message' => Yii::t('menst.cms', 'This email address has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
+                }, 'message' => Yii::t('gromver.cmf', 'This email address has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
             ['email', 'unique', 'filter' => function($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
@@ -111,8 +111,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
                         /** @var $query static */
                         return $this->status != self::STATUS_DELETED;
                     },
-                'message' => Yii::t('menst.cms', 'This email address has already been taken.'), 'on' => 'default'],
-            ['email', 'exist', 'message' => Yii::t('menst.cms', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
+                'message' => Yii::t('gromver.cmf', 'This email address has already been taken.'), 'on' => 'default'],
+            ['email', 'exist', 'message' => Yii::t('gromver.cmf', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
             ['password', 'required', 'on' => ['create', 'signup', 'resetPassword', 'signupWithCaptcha']],
             ['password', 'string', 'min' => 6],
@@ -128,20 +128,20 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.cms', 'ID'),
-            'username' => Yii::t('menst.cms', 'Username'),
-            'email' => Yii::t('menst.cms', 'Email'),
-            'password_hash' => Yii::t('menst.cms', 'Password Hash'),
-            'password_reset_token' => Yii::t('menst.cms', 'Password Reset Token'),
-            'password_new' => Yii::t('menst.cms', 'New Password'),
-            'password_confirm' => Yii::t('menst.cms', 'Confirm Password'),
-            'auth_key' => Yii::t('menst.cms', 'Auth Key'),
-            'params' => Yii::t('menst.cms', 'Params Hash'),
-            'status' => Yii::t('menst.cms', 'Status'),
-            'created_at' => Yii::t('menst.cms', 'Created At'),
-            'updated_at' => Yii::t('menst.cms', 'Updated At'),
-            'deleted_at' => Yii::t('menst.cms', 'Deleted At'),
-            'last_visit_at' => Yii::t('menst.cms', 'Last Visit At'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'username' => Yii::t('gromver.cmf', 'Username'),
+            'email' => Yii::t('gromver.cmf', 'Email'),
+            'password_hash' => Yii::t('gromver.cmf', 'Password Hash'),
+            'password_reset_token' => Yii::t('gromver.cmf', 'Password Reset Token'),
+            'password_new' => Yii::t('gromver.cmf', 'New Password'),
+            'password_confirm' => Yii::t('gromver.cmf', 'Confirm Password'),
+            'auth_key' => Yii::t('gromver.cmf', 'Auth Key'),
+            'params' => Yii::t('gromver.cmf', 'Params Hash'),
+            'status' => Yii::t('gromver.cmf', 'Status'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'deleted_at' => Yii::t('gromver.cmf', 'Deleted At'),
+            'last_visit_at' => Yii::t('gromver.cmf', 'Last Visit At'),
         ];
     }
 
@@ -187,15 +187,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getStatusLabel($status = null)
     {
         if ($status === null) {
-            return Yii::t('menst.cms', self::$_statuses[$this->status]);
+            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
         }
-        return Yii::t('menst.cms', self::$_statuses[$status]);
+        return Yii::t('gromver.cmf', self::$_statuses[$status]);
     }
 
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('menst.cms', $label);
+                return Yii::t('gromver.cmf', $label);
             }, self::$_statuses);
     }
 

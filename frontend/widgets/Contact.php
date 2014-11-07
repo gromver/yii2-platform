@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -18,7 +18,7 @@ use Yii;
 
 /**
  * Class Contact
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Contact extends Widget {
@@ -46,11 +46,11 @@ class Contact extends Widget {
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->cmf->params['adminEmail'])) {
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Email is sent.'));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Email is sent.'));
                 return $this->render($this->viewSuccess);
             } else {
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Error.'));
-                //throw new \HttpRuntimeException(Yii::t('menst.cms', 'Email sending is failed.'));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Error.'));
+                //throw new \HttpRuntimeException(Yii::t('gromver.cmf', 'Email sending is failed.'));
             }
         }
 

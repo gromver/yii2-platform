@@ -23,7 +23,7 @@ foreach ($contexts as $i=>$part) {
     if ($selected_context == $context) {
         $class .= ' selected';
     }
-    $description = empty($part) ? Yii::t('menst.cms', 'Default') : $part;
+    $description = empty($part) ? Yii::t('gromver.cmf', 'Default') : $part;
 
 
     if ($i) {

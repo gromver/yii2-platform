@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -21,7 +21,7 @@ use yii\filters\VerbFilter;
 
 /**
  * Class PostController implements the CRUD actions for Post model.
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class PostController extends Controller
@@ -87,7 +87,7 @@ class PostController extends Controller
         $searchModel = new PostSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
-        Yii::$app->getModule('cms')->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         return $this->render('select', [
                 'dataProvider' => $dataProvider,
@@ -123,7 +123,7 @@ class PostController extends Controller
         if($sourceId && $language) {
             $sourceModel = $this->findModel($sourceId);
             if(!$targetCategory = Category::findOne(['path' => $sourceModel->category->path, 'language' => $language]))
-                throw new NotFoundHttpException(Yii::t('menst.cms', "The category for the specified localization isn't found."));
+                throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
             $model->category_id = $targetCategory->id;
             $model->alias = $sourceModel->alias;
             $model->published_at = $sourceModel->published_at;
@@ -242,7 +242,7 @@ class PostController extends Controller
         if (($model = Post::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
         }
     }
 }

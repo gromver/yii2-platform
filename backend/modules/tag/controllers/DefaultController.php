@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -21,7 +21,7 @@ use yii\filters\VerbFilter;
 
 /**
  * Class DefaultController implements the CRUD actions for Tag model.
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
@@ -213,7 +213,7 @@ class DefaultController extends Controller
         if (($model = Tag::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
         }
     }
 }

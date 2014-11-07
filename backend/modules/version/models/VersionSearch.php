@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 namespace gromver\cmf\backend\modules\version\models;
@@ -15,7 +15,7 @@ use gromver\cmf\common\models\Version;
 
 /**
  * Class VersionSearch represents the model behind the search form about `gromver\cmf\common\models\Version`.
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class VersionSearch extends Version

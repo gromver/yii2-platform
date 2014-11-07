@@ -170,6 +170,8 @@ class m140825_160749_cms_mapping extends Migration
             ]
         ]);
 
+        echo "Index $index created.\n";
+
         $documents = [
             'gromver\cmf\common\models\search\Page',
             'gromver\cmf\common\models\search\Post',
@@ -240,8 +242,11 @@ class m140825_160749_cms_mapping extends Migration
 
     public function down()
     {
-        \yii\elasticsearch\ActiveRecord::getDb()->createCommand()->deleteIndex('cms');//->deleteAllIndexes();//
+        $index = \gromver\cmf\common\models\search\ActiveDocument::index();
 
-        echo 'All indexes are deleted successfully.';
+        \yii\elasticsearch\ActiveRecord::getDb()->createCommand()->deleteIndex($index);//->deleteAllIndexes();//
+
+        echo "Index $index are deleted successfully.";
+        //echo 'All indexes are deleted successfully.';
     }
 }

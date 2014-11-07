@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -18,7 +18,7 @@ use Yii;
  * Этот модуль используется админкой для авторизации пользователя, можно настроить период запоминания пользователя в куках,
  * количесвто безуспешных попыток авторизации с последущим подключением капчи
  *
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInterface
@@ -46,12 +46,12 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('menst.cms', 'Auth'),
+            'label' => Yii::t('gromver.cmf', 'Auth'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'Login'), 'route' => 'cmf/auth/default/login'],
-                ['label' => Yii::t('menst.cms', 'Signup'), 'route' => 'cmf/auth/default/signup'],
-                ['label' => Yii::t('menst.cms', 'Request password reset token'), 'route' => 'cmf/auth/default/request-password-reset-token'],
-                ['label' => Yii::t('menst.cms', 'Reset password'), 'route' => 'cmf/auth/default/reset-password'],
+                ['label' => Yii::t('gromver.cmf', 'Login'), 'route' => 'cmf/auth/default/login'],
+                ['label' => Yii::t('gromver.cmf', 'Signup'), 'route' => 'cmf/auth/default/signup'],
+                ['label' => Yii::t('gromver.cmf', 'Request password reset token'), 'route' => 'cmf/auth/default/request-password-reset-token'],
+                ['label' => Yii::t('gromver.cmf', 'Reset password'), 'route' => 'cmf/auth/default/reset-password'],
             ]
         ];
     }
@@ -62,10 +62,10 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('menst.cms', 'Auth'),
+            'label' => Yii::t('gromver.cmf', 'Auth'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Login'), 'url' => ['/cmf/auth/default/login']],
-                ['label' => Yii::t('menst.cms', 'Password Reset'), 'url' => ['/cmf/auth/default/request-password-reset']],
+                ['label' => Yii::t('gromver.cmf', 'Login'), 'url' => ['/cmf/auth/default/login']],
+                ['label' => Yii::t('gromver.cmf', 'Password Reset'), 'url' => ['/cmf/auth/default/request-password-reset']],
             ]
         ];
     }

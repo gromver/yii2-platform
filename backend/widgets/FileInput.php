@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -17,7 +17,7 @@ use yii\widgets\InputWidget;
 /**
  * Class FileInput
  * Обертка для KartikFileInput, отображает кнопку удалить пикчу, а также саму пикчу, используя UploadBehavior
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class FileInput extends InputWidget {
@@ -31,7 +31,7 @@ class FileInput extends InputWidget {
                 <div class="file-preview">
                     <div class="file-preview-thumbnails">
                         <div class="file-preview-frame">
-                            <?=Html::img($imageUrl, ['class' => 'file-preview-image', 'alt' => \Yii::t('menst.cms', 'File not found.')])?>
+                            <?=Html::img($imageUrl, ['class' => 'file-preview-image', 'alt' => \Yii::t('gromver.cmf', 'File not found.')])?>
                         </div>
                     </div>
                     <div class="clearfix"></div>

@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -17,7 +17,7 @@ use Yii;
 
 /**
  * Class PageView
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class PageView extends Widget {
@@ -67,7 +67,7 @@ class PageView extends Widget {
         }
 
         if (empty($this->source)) {
-            throw new InvalidConfigException(Yii::t('menst.cms', 'Page not found.'));
+            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Page not found.'));
         }
     }
 
@@ -87,13 +87,13 @@ class PageView extends Widget {
     public static function layouts()
     {
         return [
-            'page/article' => Yii::t('menst.cms', 'Article'),
-            'page/content' => Yii::t('menst.cms', 'Content'),
+            'page/article' => Yii::t('gromver.cmf', 'Article'),
+            'page/content' => Yii::t('gromver.cmf', 'Content'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => Yii::t('menst.cms', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

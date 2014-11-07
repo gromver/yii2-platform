@@ -32,15 +32,15 @@ use gromver\cmf\common\models\Category;
         }));
     } ?>
 
-    <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('menst.cms', 'Select...')]) ?>
+    <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 1000, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
 
-    <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('menst.cms', 'Auto-generate')]) ?>
+    <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
     <?//= $form->field($model, 'path')->textInput(['maxlength' => 2000]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('menst.cms', 'Not selected')] + $model->statusLabels()) ?>
+    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + $model->statusLabels()) ?>
 
     <?= $form->field($model, 'published_at')->widget(\kartik\widgets\DateTimePicker::className(), [
         'options' => ['value' => date('d.m.Y H:i', is_int($model->published_at) ? $model->published_at : time())],
@@ -95,7 +95,7 @@ use gromver\cmf\common\models\Category;
     <?= Html::activeHiddenInput($model, 'lock') ?>
 
     <div>
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('menst.cms', 'Create') : Yii::t('menst.cms', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.cmf', 'Create') : Yii::t('gromver.cmf', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

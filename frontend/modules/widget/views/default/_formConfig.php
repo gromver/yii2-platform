@@ -42,13 +42,13 @@ use gromver\cmf\common\models\WidgetConfig;
 
     <div class="controls-bar">
         <div class="pull-right">
-            <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-save"></span> ' . Yii::t('menst.cms', 'Save'), ['class' => 'btn btn-success', 'name'=>'task', 'value'=>'save']) ?>
+            <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-save"></span> ' . Yii::t('gromver.cmf', 'Save'), ['class' => 'btn btn-success', 'name'=>'task', 'value'=>'save']) ?>
             <?php if(WidgetConfig::find()->where(['widget_id' => $widget_id, 'context' => $selected_context])->exists()) {
-                echo Html::submitButton('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('menst.cms', 'Delete'), ['class' => 'btn btn-danger', 'name'=>'task', 'value'=>'delete']);
+                echo Html::submitButton('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('gromver.cmf', 'Delete'), ['class' => 'btn btn-danger', 'name'=>'task', 'value'=>'delete']);
             } ?>
         </div>
         <div class="method pull-left">
-            <?= Html::checkbox('bulk-method', false, ['label' => Yii::t('menst.cms', 'Apply action to the subordinated contexts')])?>
+            <?= Html::checkbox('bulk-method', false, ['label' => Yii::t('gromver.cmf', 'Apply action to the subordinated contexts')])?>
         </div>
     </div>
 

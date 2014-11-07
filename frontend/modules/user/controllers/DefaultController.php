@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -20,7 +20,7 @@ use yii\web\Controller;
 
 /**
  * Class DefaultController
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
@@ -57,10 +57,10 @@ class DefaultController extends Controller
             $user->setParamsArray($model->toArray());
 
             if ($user->save()) {
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', "Profile saved."));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', "Profile saved."));
                 return $this->redirect('');
             } else {
-                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('menst.cms', "It wasn't succeeded to keep the user's parameters. Error:\n{error}", ['error' => implode("\n", $user->getFirstErrors())]));
+                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It wasn't succeeded to keep the user's parameters. Error:\n{error}", ['error' => implode("\n", $user->getFirstErrors())]));
             }
         }
 

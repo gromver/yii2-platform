@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
  * @var \gromver\cmf\common\models\Version $b
  */
 
-$this->title = Yii::t('menst.cms', 'Comparison of objects');
+$this->title = Yii::t('gromver.cmf', 'Comparison of objects');
 $this->params['breadcrumbs'][] = ['label' => 'Versions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -26,10 +26,10 @@ $bData = $b->getVersionData();
     <table id="compare-table" class="table table-striped">
         <thead>
             <tr>
-                <th><?= Yii::t('menst.cms', 'Field') ?></th>
-                <th><?= Yii::t('menst.cms', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($a->created_at, 'd MMM Y HH:mm')]) ?></th>
-                <th><?= Yii::t('menst.cms', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($b->created_at, 'd MMM Y HH:mm')]) ?></th>
-                <th><?= Yii::t('menst.cms', 'Changes') ?></th>
+                <th><?= Yii::t('gromver.cmf', 'Field') ?></th>
+                <th><?= Yii::t('gromver.cmf', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($a->created_at, 'd MMM Y HH:mm')]) ?></th>
+                <th><?= Yii::t('gromver.cmf', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($b->created_at, 'd MMM Y HH:mm')]) ?></th>
+                <th><?= Yii::t('gromver.cmf', 'Changes') ?></th>
             </tr>
         </thead>
         <tbody>

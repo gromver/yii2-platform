@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -16,14 +16,14 @@ use Yii;
 
 /**
  * Class DefaultController
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested page does not exist..'));
+        throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist..'));
     }
 
     public function actionView($id)
@@ -36,7 +36,7 @@ class DefaultController extends Controller
     public function loadModel($id)
     {
         if(!($model = Page::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested category does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested category does not exist..'));
         }
 
         return $model;

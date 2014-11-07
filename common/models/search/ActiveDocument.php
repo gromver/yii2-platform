@@ -2,8 +2,8 @@
 /**
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @link https://github.com/gromver/yii2-cms.git#readme
- * @package yii2-cms
+ * @link https://github.com/gromver/yii2-cmf.git#readme
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -20,7 +20,7 @@ use Yii;
  * Данный класс отслеживает состояние стандартных ActiveRecord объектов, в случае изменения, создания или удаления,
  * заносит соответсвующие изменения в ElasticSearch бд, тоесть служит своеобразным клеем для ActiveRecord и ElasticSearch
  * Связь с ActiveRecord определяется в статическом методе [[self::model()]]
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements ViewableInterface {

@@ -5,12 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\Tag */
 
-$this->title = Yii::t('menst.cms', 'Update Tag: {title}', [
+$this->title = Yii::t('gromver.cmf', 'Update Tag: {title}', [
     'title' => $model->title
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Tags'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Tags'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('menst.cms', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
 ?>
 <div class="tag-update">
 

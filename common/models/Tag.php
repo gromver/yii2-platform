@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -20,7 +20,7 @@ use yii\helpers\Inflector;
 
 /**
  * This is the model class for table "cms_tag".
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
@@ -96,20 +96,20 @@ class Tag extends \yii\db\ActiveRecord implements ViewableInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.cms', 'ID'),
-            'language' => Yii::t('menst.cms', 'Language'),
-            'title' => Yii::t('menst.cms', 'Title'),
-            'alias' => Yii::t('menst.cms', 'Alias'),
-            'status' => Yii::t('menst.cms', 'Status'),
-            'group' => Yii::t('menst.cms', 'Group'),
-            'metakey' => Yii::t('menst.cms', 'Metakey'),
-            'metadesc' => Yii::t('menst.cms', 'Metadesc'),
-            'created_at' => Yii::t('menst.cms', 'Created At'),
-            'updated_at' => Yii::t('menst.cms', 'Updated At'),
-            'created_by' => Yii::t('menst.cms', 'Created By'),
-            'updated_by' => Yii::t('menst.cms', 'Updated By'),
-            'hits' => Yii::t('menst.cms', 'Hits'),
-            'lock' => Yii::t('menst.cms', 'Lock'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'language' => Yii::t('gromver.cmf', 'Language'),
+            'title' => Yii::t('gromver.cmf', 'Title'),
+            'alias' => Yii::t('gromver.cmf', 'Alias'),
+            'status' => Yii::t('gromver.cmf', 'Status'),
+            'group' => Yii::t('gromver.cmf', 'Group'),
+            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
+            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
+            'hits' => Yii::t('gromver.cmf', 'Hits'),
+            'lock' => Yii::t('gromver.cmf', 'Lock'),
         ];
     }
 
@@ -129,13 +129,13 @@ class Tag extends \yii\db\ActiveRecord implements ViewableInterface
     public static function statusLabels()
     {
         return array_map(function($label) {
-            return Yii::t('menst.cms', $label);
+            return Yii::t('gromver.cmf', $label);
         }, self::$_statuses);
     }
 
     public function getStatusLabel($status = null)
     {
-        return Yii::t('menst.cms', self::$_statuses[$status === null ? $this->status : $status]);
+        return Yii::t('gromver.cmf', self::$_statuses[$status === null ? $this->status : $status]);
     }
 
     public function afterDelete()

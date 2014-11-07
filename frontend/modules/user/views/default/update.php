@@ -9,10 +9,10 @@
 /** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
-    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'My profile');
+    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('gromver.cmf', 'My profile');
     $this->params['breadcrumbs'] = $menu->getBreadcrumbs($menu->isApplicableContext());
 } else {
-    $this->title = Yii::t('menst.cms', 'My profile');
+    $this->title = Yii::t('gromver.cmf', 'My profile');
 }
 //$this->params['breadcrumbs'][] = $this->title;
 

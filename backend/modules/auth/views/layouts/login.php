@@ -33,20 +33,20 @@ AppAsset::register($this);
 			]);
 
 			$menuItems = [
-				['label' => Yii::t('menst.cms', 'Home'), 'url' => ['/site/index']],
+				['label' => Yii::t('gromver.cmf', 'Home'), 'url' => ['/site/index']],
 			];
 			if (Yii::$app->user->isGuest) {
-				$menuItems[] = ['label' => Yii::t('menst.cms', 'Login'), 'url' => Yii::$app->user->loginUrl];
+				$menuItems[] = ['label' => Yii::t('gromver.cmf', 'Login'), 'url' => Yii::$app->user->loginUrl];
 			} else {
                 $menuItems[] = [
                     'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
                     'items' => [
-                        ['label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::t('menst.cms', 'Profile'), 'url' => ['/cmf/user/default/update', 'id' => Yii::$app->user->id]],
-                        ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('menst.cms', 'Logout'), 'url' => ['/cmf/auth/default/logout']]
+                        ['label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::t('gromver.cmf', 'Profile'), 'url' => ['/cmf/user/default/update', 'id' => Yii::$app->user->id]],
+                        ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('gromver.cmf', 'Logout'), 'url' => ['/cmf/auth/default/logout']]
                     ]
                 ];
 			}
-            $menuItems[] = Html::tag('div', Yii::t('menst.cms', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group navbar-right']) . implode('', array_map(function($language) {
+            $menuItems[] = Html::tag('div', Yii::t('gromver.cmf', 'Language'), ['class' => 'navbar-text']) . Html::beginTag('div', ['class' => 'btn-group navbar-right']) . implode('', array_map(function($language) {
                     return Html::a($language, Yii::$app->urlManager->createUrl([Yii::$app->request->getPathInfo()] + Yii::$app->request->getQueryParams(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
                 }, Yii::$app->languages)) . Html::endTag('div');
 

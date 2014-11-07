@@ -5,13 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\Post */
 
-$this->title = Yii::t('menst.cms', 'Update Post: {title}', [
+$this->title = Yii::t('gromver.cmf', 'Update Post: {title}', [
     'title' => $model->title
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Posts'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->category->title, 'url' => ['index', 'PostSearch' => ['category_id' => $model->category_id]]];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('menst.cms', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
 ?>
 
 <div class="post-update">
@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = Yii::t('menst.cms', 'Update');
     <p class="btn-toolbar">
         <?= \gromver\widgets\ModalIFrame::widget([
             'modalOptions' => [
-                'header' => Yii::t('menst.cms', 'Item Versions Manager - "{title}" (ID:{id})', ['title' => $model->title, 'id' => $model->id]),
+                'header' => Yii::t('gromver.cmf', 'Item Versions Manager - "{title}" (ID:{id})', ['title' => $model->title, 'id' => $model->id]),
                 'size' => \yii\bootstrap\Modal::SIZE_LARGE,
             ],
-            'buttonContent' => Html::a('<i class="glyphicon glyphicon-hdd"></i> ' . Yii::t('menst.cms', 'Versions'),
+            'buttonContent' => Html::a('<i class="glyphicon glyphicon-hdd"></i> ' . Yii::t('gromver.cmf', 'Versions'),
                     ['/cmf/version/default/item', 'item_id' => $model->id, 'item_class' => $model->className()], [
                         'class'=>'btn btn-default btn-sm',
                     ]),

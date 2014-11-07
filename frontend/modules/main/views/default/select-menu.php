@@ -9,7 +9,7 @@ use kartik\grid\GridView;
  * @var gromver\cmf\backend\modules\menu\models\MenuTypeSearch $searchModel
  */
 
-$this->title = Yii::t('menst.cms', 'Select Menu');
+$this->title = Yii::t('gromver.cmf', 'Select Menu');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
@@ -42,11 +42,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'value' => function($model) {
-                    return Html::a(Yii::t('menst.cms', 'Select'), '#', [
+                    return Html::a(Yii::t('gromver.cmf', 'Select'), '#', [
                         'class' => 'btn btn-primary btn-xs',
                         'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                 'id' => $model->id,
-                                'description' => Yii::t('menst.cms', 'Menu Type: {title}', ['title' => $model->title]),
+                                'description' => Yii::t('gromver.cmf', 'Menu Type: {title}', ['title' => $model->title]),
                                 'value' => $model->id . ':' . $model->alias
                             ]),
                     ]);
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> ' . Html::encode($this->title) . ' </h3>',
             'type' => 'info',
-            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('menst.cms', 'Reset List'), [null], ['class' => 'btn btn-info']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), [null], ['class' => 'btn btn-info']),
             'showFooter' => false,
         ],
 	]) ?>

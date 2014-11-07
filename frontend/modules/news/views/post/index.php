@@ -8,10 +8,10 @@ use yii\helpers\Html;
 /** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
-    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'News');
+    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('gromver.cmf', 'News');
     $this->params['breadcrumbs'] = $menu->getBreadcrumbs($menu->isApplicableContext());
 } else {
-    $this->title = Yii::t('menst.cms', 'News');
+    $this->title = Yii::t('gromver.cmf', 'News');
 }
 //$this->params['breadcrumbs'][] = $this->title;
 

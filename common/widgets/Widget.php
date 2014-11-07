@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -21,7 +21,7 @@ use yii\helpers\Json;
 
 /**
  * Class Widget
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @package gromver/cms
@@ -140,7 +140,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
     public function renderException()
     {
-        echo Html::tag('p', Yii::t('menst.cms', 'Widget error: {error}', ['error' => $this->_exception->getMessage()]), ['class' => 'text-danger widget-error']);
+        echo Html::tag('p', Yii::t('gromver.cmf', 'Widget error: {error}', ['error' => $this->_exception->getMessage()]), ['class' => 'text-danger widget-error']);
     }
 
     public function canEdit()
@@ -228,7 +228,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
     {
         ModalIFrame::begin([
             'modalOptions' => [
-                'header' => Yii::t('menst.cms', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]),
+                'header' => Yii::t('gromver.cmf', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]),
                 'size' => Modal::SIZE_LARGE
             ],
             'buttonOptions' => [
@@ -257,6 +257,6 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
         ModalIFrame::end();
 
-        echo Html::tag('div', Yii::t('menst.cms', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]), ['class' => 'widget-description']);
+        echo Html::tag('div', Yii::t('gromver.cmf', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]), ['class' => 'widget-description']);
     }
 }

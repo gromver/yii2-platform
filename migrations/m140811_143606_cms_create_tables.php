@@ -159,7 +159,6 @@ class m140811_143606_cms_create_tables extends Migration
 
         $this->addForeignKey('CmsPost_CategoryId_fk', '{{%cms_post}}', 'category_id', '{{%cms_category}}', 'id', 'CASCADE', 'CASCADE');
         /* Post Viewed */
-        /* Post */
         $this->createTable('{{%cms_post_viewed}}', [
             'post_id' => Schema::TYPE_INTEGER . ' NOT NULL',
             'user_id' => Schema::TYPE_INTEGER . ' NOT NULL',

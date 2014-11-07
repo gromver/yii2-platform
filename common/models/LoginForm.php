@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -14,7 +14,7 @@ use yii\base\Model;
 
 /**
  * Class LoginForm
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class LoginForm extends Model
@@ -62,10 +62,10 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('menst.cms', 'Username or Email'),
-            'password' => Yii::t('menst.cms', 'Password'),
-            'rememberMe' => Yii::t('menst.cms', 'Remember Me'),
-            'verifyCode' => Yii::t('menst.cms', 'Verify Code'),
+            'username' => Yii::t('gromver.cmf', 'Username or Email'),
+            'password' => Yii::t('gromver.cmf', 'Password'),
+            'rememberMe' => Yii::t('gromver.cmf', 'Remember Me'),
+            'verifyCode' => Yii::t('gromver.cmf', 'Verify Code'),
         ];
     }
     /**

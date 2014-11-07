@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\MenuType */
 
-$this->title = Yii::t('menst.cms', 'Добавить пункт меню');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Типы меню'), 'url' => ['index']];
+$this->title = Yii::t('gromver.cmf', 'Добавить пункт меню');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Типы меню'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-create">

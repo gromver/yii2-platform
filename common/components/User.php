@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -17,7 +17,7 @@ use yii\web\User as BaseUser;
  * @property \gromver\cmf\common\models\User $identity The identity object associated with the currently logged user. Null
  * is returned if the user is not logged in (not authenticated).
  *
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Ricardo Obregón <robregonm@gmail.com>
  * @author Gayazov Roman <gromver5@gmail.com>
  */

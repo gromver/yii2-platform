@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -21,7 +21,7 @@ use gromver\cmf\common\models\WidgetConfig;
 
 /**
  * Class DefaultController implements the CRUD actions for Config model.
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
@@ -41,20 +41,20 @@ class DefaultController extends Controller
     public function actionConfigure($modal=null)
     {
         if(!($widget_id = Yii::$app->request->getBodyParam('widget_id')))
-            throw new BadRequestHttpException(Yii::t('menst.cms', "Widget ID isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget ID isn't specified"));
 
         if(!($widget_class = Yii::$app->request->getBodyParam('widget_class')))
-            throw new BadRequestHttpException(Yii::t('menst.cms', "Widget Class isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget Class isn't specified"));
 
         if(($widget_context = Yii::$app->request->getBodyParam('widget_context'))===null)
-            throw new BadRequestHttpException(Yii::t('menst.cms', "Widget Context isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget Context isn't specified"));
 
         $selected_context = Yii::$app->request->getBodyParam('selected_context', $widget_context);
 
         $task = Yii::$app->request->getBodyParam('task');
 
         if(($url = Yii::$app->request->getBodyParam('url'))===null)
-            throw new BadRequestHttpException(Yii::t('menst.cms', "Widget page url isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget page url isn't specified"));
         //$url = Yii::$app->request->getBodyParam('url', Yii::$app->request->getReferrer());
 
         if ($task=='delete') {

@@ -7,10 +7,10 @@
 /** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
-    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'Tag: {tag}', ['tag' => $model->title]);
+    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('gromver.cmf', 'Tag: {tag}', ['tag' => $model->title]);
     $this->params['breadcrumbs'] = $menu->getBreadcrumbs($menu->isApplicableContext());
 } else {
-    $this->title = Yii::t('menst.cms', 'Tag: {tag}', ['tag' => $model->title]);
+    $this->title = Yii::t('gromver.cmf', 'Tag: {tag}', ['tag' => $model->title]);
     $this->params['breadcrumbs'][] = ['label' => 'Tag cloud', 'url' => ['/cmf/tag/default/index']];
 }
 //$this->params['breadcrumbs'][] = $this->title;

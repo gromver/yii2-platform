@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -14,7 +14,7 @@ use Yii;
 
 /**
  * Class Module
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements DesktopInterface
@@ -39,7 +39,7 @@ class Module extends \yii\base\Module implements DesktopInterface
                         'path' => 'files/global',
                         'baseUrl' => '',
                         'basePath' => '@frontend/web',
-                        'name' => Yii::t('menst.cms', 'Global'),
+                        'name' => Yii::t('gromver.cmf', 'Global'),
                         'access' => ['write' => 'update']
                     ],
                     [
@@ -47,7 +47,7 @@ class Module extends \yii\base\Module implements DesktopInterface
                         'baseUrl' => '',
                         'basePath' => '@frontend/web',
                         'path' => 'files/user_{id}',
-                        'name' => Yii::t('menst.cms', 'My Documents'),
+                        'name' => Yii::t('gromver.cmf', 'My Documents'),
                         'access' => ['read' => 'read', 'write' => 'update']
                     ]
                 ]
@@ -66,9 +66,9 @@ class Module extends \yii\base\Module implements DesktopInterface
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('menst.cms', 'Media'),
+            'label' => Yii::t('gromver.cmf', 'Media'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Media Manager'), 'url' => ['/cmf/media/default/index']]
+                ['label' => Yii::t('gromver.cmf', 'Media Manager'), 'url' => ['/cmf/media/default/index']]
             ]
         ];
     }

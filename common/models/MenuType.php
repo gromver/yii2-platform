@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -15,7 +15,7 @@ use yii\helpers\Inflector;
 
 /**
  * This is the model class for table "cms_menu_type".
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
@@ -68,16 +68,16 @@ class MenuType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.cms', 'ID'),
-            'status' => Yii::t('menst.cms', 'Status'),
-            'title' => Yii::t('menst.cms', 'Title'),
-            'alias' => Yii::t('menst.cms', 'Alias'),
-            'note' => Yii::t('menst.cms', 'Note'),
-            'created_at' => Yii::t('menst.cms', 'Created At'),
-            'updated_at' => Yii::t('menst.cms', 'Updated At'),
-            'created_by' => Yii::t('menst.cms', 'Created By'),
-            'updated_by' => Yii::t('menst.cms', 'Updated By'),
-            'lock' => Yii::t('menst.cms', 'Lock'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'status' => Yii::t('gromver.cmf', 'Status'),
+            'title' => Yii::t('gromver.cmf', 'Title'),
+            'alias' => Yii::t('gromver.cmf', 'Alias'),
+            'note' => Yii::t('gromver.cmf', 'Note'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
+            'lock' => Yii::t('gromver.cmf', 'Lock'),
         ];
     }
 

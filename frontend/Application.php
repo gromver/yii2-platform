@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -13,7 +13,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * Class Application
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property $cms \gromver\cmf\frontend\modules\cmf\Module
@@ -23,7 +23,7 @@ class Application extends \yii\web\Application {
     public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
     public $layout = '@gromver/cmf/frontend/views/layouts/main';
-    public $elasticsearchIndex = 'cms';
+    public $elasticsearchIndex = 'cmf';
 
     private $_modulesHash;
 
@@ -69,7 +69,7 @@ class Application extends \yii\web\Application {
                 ],
             ],
             'modules' => [
-                'cms' => [
+                'cmf' => [
                     'class' => 'gromver\cmf\frontend\modules\main\Module',
                     'modules' => [
                         'news'      => ['class' => 'gromver\cmf\frontend\modules\news\Module'],
@@ -96,7 +96,7 @@ class Application extends \yii\web\Application {
      */
     public function init()
     {
-        $this->bootstrap = array_merge($this->bootstrap, ['cms']);
+        $this->bootstrap = array_merge($this->bootstrap, ['cmf']);
 
         parent::init();
     }

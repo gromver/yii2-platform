@@ -17,30 +17,30 @@ use yii\bootstrap\ActiveForm;
         ]); ?>
 
     <ul class="nav nav-tabs">
-        <li class="active"><a href="#main" data-toggle="tab"><?= Yii::t('menst.cms', 'Main') ?></a></li>
-        <li><a href="#link-options" data-toggle="tab"><?= Yii::t('menst.cms', 'Link') ?></a></li>
-        <li><a href="#meta-options" data-toggle="tab"><?= Yii::t('menst.cms', 'Metadata') ?></a></li>
+        <li class="active"><a href="#main" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Main') ?></a></li>
+        <li><a href="#link-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Link') ?></a></li>
+        <li><a href="#meta-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Metadata') ?></a></li>
     </ul>
     <br/>
     <div class="tab-content">
         <div id="main" class="tab-pane active">
-            <?= isset($sourceModel) ? $form->field($model, 'menu_type_id')->dropDownList([$model->menu_type_id => \gromver\cmf\common\models\MenuType::findOne($model->menu_type_id)->title], ['disabled' => true]) : $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('menst.cms', 'Not selected')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
+            <?= isset($sourceModel) ? $form->field($model, 'menu_type_id')->dropDownList([$model->menu_type_id => \gromver\cmf\common\models\MenuType::findOne($model->menu_type_id)->title], ['disabled' => true]) : $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
 
             <?= isset($sourceModel) ? $form->field($model, 'parent_id')->dropDownList([$model->parent_id => \gromver\cmf\common\models\MenuItem::findOne($model->parent_id)->title], ['disabled' => true]) : $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
                 'pluginOptions'=>[
                     'depends' => ['menu_type_id'],
-                    'placeholder' => Yii::t('menst.cms', 'Select...'),
+                    'placeholder' => Yii::t('gromver.cmf', 'Select...'),
                     'url' => \yii\helpers\Url::to(['type-items', 'update_item_id' => $model->isNewRecord ? null : $model->id]),
                 ]
             ]) ?>
 
             <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
 
-            <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('menst.cms', 'Auto-generate')]) ?>
+            <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
-            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('menst.cms', 'Not selected')] + $model->statusLabels()) ?>
+            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + $model->statusLabels()) ?>
 
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('menst.cms', 'Select...')]) ?>
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
 
             <?//= $form->field($model, 'path')->textInput(['maxlength' => 2048]) ?>
 
@@ -133,7 +133,7 @@ use yii\bootstrap\ActiveForm;
     <?= Html::activeHiddenInput($model, 'lock') ?>
 
     <div>
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('menst.cms', 'Create') : Yii::t('menst.cms', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.cmf', 'Create') : Yii::t('gromver.cmf', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

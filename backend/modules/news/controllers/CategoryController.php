@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -21,7 +21,7 @@ use yii\filters\VerbFilter;
 
 /**
  * Class CategoryController implements the CRUD actions for Category model.
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class CategoryController extends Controller
@@ -88,7 +88,7 @@ class CategoryController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);
         $dataProvider->query->noRoots();
 
-        Yii::$app->getModule('cms')->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         return $this->render('select', [
                 'dataProvider' => $dataProvider,
@@ -125,7 +125,7 @@ class CategoryController extends Controller
             $sourceModel = $this->findModel($sourceId);
             if (!$sourceModel->isRoot()) {
                 if (!$targetCategory = $sourceModel->level > 2 ? Category::findOne(['path' => $sourceModel->parent->path, 'language' => $language]) : Category::find()->roots()->one()) {
-                    throw new NotFoundHttpException(Yii::t('menst.cms', "The category for the specified localization isn't found."));
+                    throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
                 }
 
                 $model->parent_id = $targetCategory->id;
@@ -182,9 +182,9 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->descendants()->count()) {
-            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('menst.cms', "It's impossible to remove category ID:{id} to contain in it subcategories so far.", ['id' => $model->id]));
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It's impossible to remove category ID:{id} to contain in it subcategories so far.", ['id' => $model->id]));
         } elseif ($model->getPosts()->count() > 0) {
-            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('menst.cms', "It's impossible to remove category ID:{id} to contain in it posts so far.", ['id' => $model->id]));
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It's impossible to remove category ID:{id} to contain in it posts so far.", ['id' => $model->id]));
         } else {
             $model->deleteNode();
         }
@@ -268,7 +268,7 @@ class CategoryController extends Controller
         if (($model = Category::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('menst.cms', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
         }
     }
 }

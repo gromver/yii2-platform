@@ -17,7 +17,7 @@ use yii\bootstrap\ActiveForm;
     <?= \gromver\models\widgets\Fields::widget(['model' => $model]) ?>
 
     <div>
-        <?= Html::submitButton(Yii::t('menst.cms', 'Update'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton(Yii::t('gromver.cmf', 'Update'), ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

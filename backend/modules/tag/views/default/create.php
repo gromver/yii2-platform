@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $model gromver\cmf\common\models\Tag */
 /* @var $sourceModel gromver\cmf\common\models\Tag */
 
-$this->title = Yii::t('menst.cms', 'Create Tag');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Tags'), 'url' => ['index']];
+$this->title = Yii::t('gromver.cmf', 'Create Tag');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Tags'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tag-create">

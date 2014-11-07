@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 } ?>
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('menst.cms', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton(Yii::t('gromver.cmf', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
         </div>

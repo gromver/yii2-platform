@@ -1,9 +1,9 @@
 <?php
 /**
- * @link https://github.com/gromver/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
  * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
- * @package yii2-cms
+ * @package yii2-cmf
  * @version 1.0.0
  */
 
@@ -23,7 +23,7 @@ use yii\helpers\Inflector;
 
 /**
  * This is the model class for table "cms_category".
- * @package yii2-cms
+ * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
@@ -86,7 +86,7 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
             [['language'], 'string', 'max' => 7],
             [['language'], function($attribute, $params) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
-                    $this->addError($attribute, Yii::t('menst.cms', 'Language has to match with the parental.'));
+                    $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
                 }
             }],
             [['parent_id'], 'exist', 'targetAttribute'=>'id'],
@@ -125,32 +125,32 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.cms', 'ID'),
-            'parent_id' => Yii::t('menst.cms', 'Parent ID'),
-            'language' => Yii::t('menst.cms', 'Language'),
-            'title' => Yii::t('menst.cms', 'Title'),
-            'alias' => Yii::t('menst.cms', 'Alias'),
-            'path' => Yii::t('menst.cms', 'Path'),
-            'preview_text' => Yii::t('menst.cms', 'Preview Text'),
-            'preview_image' => Yii::t('menst.cms', 'Preview Image'),
-            'detail_text' => Yii::t('menst.cms', 'Detail Text'),
-            'detail_image' => Yii::t('menst.cms', 'Detail Image'),
-            'metakey' => Yii::t('menst.cms', 'Metakey'),
-            'metadesc' => Yii::t('menst.cms', 'Metadesc'),
-            'created_at' => Yii::t('menst.cms', 'Created At'),
-            'updated_at' => Yii::t('menst.cms', 'Updated At'),
-            'published_at' => Yii::t('menst.cms', 'Published At'),
-            'status' => Yii::t('menst.cms', 'Status'),
-            'created_by' => Yii::t('menst.cms', 'Created By'),
-            'updated_by' => Yii::t('menst.cms', 'Updated By'),
-            'lft' => Yii::t('menst.cms', 'Lft'),
-            'rgt' => Yii::t('menst.cms', 'Rgt'),
-            'level' => Yii::t('menst.cms', 'Level'),
-            'ordering' => Yii::t('menst.cms', 'Ordering'),
-            'hits' => Yii::t('menst.cms', 'Hits'),
-            'lock' => Yii::t('menst.cms', 'Lock'),
-            'tags' => Yii::t('menst.cms', 'Tags'),
-            'versionNote' => Yii::t('menst.cms', 'Version Note')
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'parent_id' => Yii::t('gromver.cmf', 'Parent ID'),
+            'language' => Yii::t('gromver.cmf', 'Language'),
+            'title' => Yii::t('gromver.cmf', 'Title'),
+            'alias' => Yii::t('gromver.cmf', 'Alias'),
+            'path' => Yii::t('gromver.cmf', 'Path'),
+            'preview_text' => Yii::t('gromver.cmf', 'Preview Text'),
+            'preview_image' => Yii::t('gromver.cmf', 'Preview Image'),
+            'detail_text' => Yii::t('gromver.cmf', 'Detail Text'),
+            'detail_image' => Yii::t('gromver.cmf', 'Detail Image'),
+            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
+            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'published_at' => Yii::t('gromver.cmf', 'Published At'),
+            'status' => Yii::t('gromver.cmf', 'Status'),
+            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
+            'lft' => Yii::t('gromver.cmf', 'Lft'),
+            'rgt' => Yii::t('gromver.cmf', 'Rgt'),
+            'level' => Yii::t('gromver.cmf', 'Level'),
+            'ordering' => Yii::t('gromver.cmf', 'Ordering'),
+            'hits' => Yii::t('gromver.cmf', 'Hits'),
+            'lock' => Yii::t('gromver.cmf', 'Lock'),
+            'tags' => Yii::t('gromver.cmf', 'Tags'),
+            'versionNote' => Yii::t('gromver.cmf', 'Version Note')
         ];
     }
 
@@ -212,16 +212,16 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('menst.cms', $label);
+                return Yii::t('gromver.cmf', $label);
             }, self::$_statuses);
     }
 
     public function getStatusLabel($status=null)
     {
         if ($status === null) {
-            return Yii::t('menst.cms', self::$_statuses[$this->status]);
+            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
         }
-        return Yii::t('menst.cms', self::$_statuses[$status]);
+        return Yii::t('gromver.cmf', self::$_statuses[$status]);
     }
 
     public function optimisticLock()

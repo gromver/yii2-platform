@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $model gromver\cmf\common\models\Category */
 /* @var $sourceModel gromver\cmf\common\models\Category */
 
-$this->title = Yii::t('menst.cms', 'Add Category');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Categories'), 'url' => ['index']];
+$this->title = Yii::t('gromver.cmf', 'Add Category');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Categories'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -5,12 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\User */
 
-$this->title = Yii::t('menst.cms', 'Update User: ', [
+$this->title = Yii::t('gromver.cmf', 'Update User: ', [
     'id' => $model->id
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Users'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('menst.cms', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
 ?>
 <div class="user-update">
 
