@@ -17,6 +17,9 @@ use gromver\cmf\backend\behaviors\VersioningBehavior;
 use gromver\cmf\common\interfaces\TranslatableInterface;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 
 /**
@@ -48,7 +51,7 @@ use yii\helpers\Inflector;
  * @property User[] $viewers
  * @property Tag[] $tags
  */
-class Post extends \yii\db\ActiveRecord implements TranslatableInterface, ViewableInterface
+class Post extends ActiveRecord implements TranslatableInterface, ViewableInterface
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
@@ -74,20 +77,21 @@ class Post extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
             [['alias', 'metakey'], 'string', 'max' => 255],
             [['metadesc'], 'string', 'max' => 2048],
 
-            [['published_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'published_at', 'when' => function($model) {
+            [['published_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'published_at', 'when' => function () {
                     return is_string($this->published_at);
                 }],
             [['published_at'], 'integer', 'enableClientValidation'=>false],
-            [['alias'], 'filter', 'filter'=>'trim'],
-            [['alias'], 'filter', 'filter'=>function($value){
-                    if(empty($value))
+            [['alias'], 'filter', 'filter' => 'trim'],
+            [['alias'], 'filter', 'filter' => function ($value) {
+                    if (empty($value)) {
                         return Inflector::slug(TransliteratorHelper::process($this->title));
-                    else
+                    } else {
                         return Inflector::slug($value);
+                    }
                 }],
-            [['alias'], 'unique', 'filter'=>function($query){
+            [['alias'], 'unique', 'filter' => function ($query) {
                     /** @var $query \yii\db\ActiveQuery */
-                    $query->andWhere(['category_id'=>$this->category_id]);
+                    $query->andWhere(['category_id' => $this->category_id]);
                 }, 'message' => '{attribute} - Another article from this category has the same alias'],
             [['tags', 'versionNote'], 'safe']
         ];
@@ -99,25 +103,25 @@ class Post extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.news', 'ID'),
-            'category_id' => Yii::t('menst.news', 'Category ID'),
-            'title' => Yii::t('menst.news', 'Title'),
-            'alias' => Yii::t('menst.news', 'Alias'),
-            'preview_text' => Yii::t('menst.news', 'Preview Text'),
-            'preview_image' => Yii::t('menst.news', 'Preview Image'),
-            'detail_text' => Yii::t('menst.news', 'Detail Text'),
-            'detail_image' => Yii::t('menst.news', 'Detail Image'),
-            'metakey' => Yii::t('menst.news', 'Metakey'),
-            'metadesc' => Yii::t('menst.news', 'Metadesc'),
-            'created_at' => Yii::t('menst.news', 'Created At'),
-            'updated_at' => Yii::t('menst.news', 'Updated At'),
-            'published_at' => Yii::t('menst.news', 'Published At'),
-            'status' => Yii::t('menst.news', 'Status'),
-            'created_by' => Yii::t('menst.news', 'Created By'),
-            'updated_by' => Yii::t('menst.news', 'Updated By'),
-            'ordering' => Yii::t('menst.news', 'Ordering'),
-            'hits' => Yii::t('menst.news', 'Hits'),
-            'lock' => Yii::t('menst.news', 'Lock'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'category_id' => Yii::t('gromver.cmf', 'Category ID'),
+            'title' => Yii::t('gromver.cmf', 'Title'),
+            'alias' => Yii::t('gromver.cmf', 'Alias'),
+            'preview_text' => Yii::t('gromver.cmf', 'Preview Text'),
+            'preview_image' => Yii::t('gromver.cmf', 'Preview Image'),
+            'detail_text' => Yii::t('gromver.cmf', 'Detail Text'),
+            'detail_image' => Yii::t('gromver.cmf', 'Detail Image'),
+            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
+            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'published_at' => Yii::t('gromver.cmf', 'Published At'),
+            'status' => Yii::t('gromver.cmf', 'Status'),
+            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
+            'ordering' => Yii::t('gromver.cmf', 'Ordering'),
+            'hits' => Yii::t('gromver.cmf', 'Hits'),
+            'lock' => Yii::t('gromver.cmf', 'Lock'),
         ];
     }
 
@@ -127,8 +131,8 @@ class Post extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
-            \yii\behaviors\BlameableBehavior::className(),
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
             TaggableBehavior::className(),
             [
                 'class' => VersioningBehavior::className(),
@@ -187,16 +191,16 @@ class Post extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('menst.news', $label);
+                return Yii::t('gromver.cmf', $label);
             }, self::$_statuses);
     }
 
     public function getStatusLabel($status=null)
     {
         if ($status === null) {
-            return Yii::t('menst.news', self::$_statuses[$this->status]);
+            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
         }
-        return Yii::t('menst.news', self::$_statuses[$status]);
+        return Yii::t('gromver.cmf', self::$_statuses[$status]);
     }
 
 
@@ -256,16 +260,16 @@ class Post extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
         return [
             'language',
             'published',
-            'tags' => function($model, $field) {
-                    return array_values(array_map(function($tag) {
+            'tags' => function($model) {
+                    return array_values(array_map(function ($tag) {
                         return $tag->title;
                     }, $model->tags));
                 },
-            'text' => function($model, $field) {
+            'text' => function($model) {
                     /** @var self $model */
                     return strip_tags($model->preview_text . "\n" . $model->detail_text);
                 },
-            'date' => function($model, $field) {
+            'date' => function($model) {
                     /** @var self $model */
                     return date(DATE_ISO8601, $model->published_at);
                 },

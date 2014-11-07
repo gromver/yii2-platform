@@ -23,13 +23,6 @@ class Module extends \yii\base\Module implements DesktopInterface
     public $defaultRoute = 'item';
     public $desktopOrder = 4;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */

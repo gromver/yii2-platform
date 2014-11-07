@@ -11,6 +11,8 @@ namespace gromver\cmf\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\Inflector;
 
 /**
@@ -87,8 +89,8 @@ class MenuType extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
-            \yii\behaviors\BlameableBehavior::className(),
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
         ];
     }
 

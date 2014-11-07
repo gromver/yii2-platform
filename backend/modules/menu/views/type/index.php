@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'header' => 'Items',
                 'value' => function($model) {
                         /** @var $model \gromver\cmf\common\models\MenuType */
-                        return Html::a('('.$model->getItems()->count().')', ['item/index', 'MenuItemSearch[root]' => $model->id], ['data-pjax' => 0]);
+                        return Html::a('('.$model->getItems()->count().')', ['item/index', 'MenuItemSearch[menu_type_id]' => $model->id], ['data-pjax' => 0]);
                     },
                 'format' => 'raw'
             ],

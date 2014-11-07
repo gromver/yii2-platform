@@ -5,7 +5,6 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\Post */
-/* @var $sourceModel gromver\cmf\common\models\Post */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -20,11 +19,11 @@ use yii\bootstrap\ActiveForm;
         return str_repeat(" • ", $model->level-1) . $model->title;
     }), ['prompt'=>'Не указано']) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => 1024]) ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + $model->statusLabels()) ?>
+    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
 
     <?= $form->field($model, 'published_at')->widget(\kartik\widgets\DateTimePicker::className(), [
         'options' => ['value' => date('d.m.Y H:i', is_int($model->published_at) ? $model->published_at : time())],

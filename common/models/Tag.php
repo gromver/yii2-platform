@@ -15,6 +15,7 @@ use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\db\Query;
 use yii\helpers\Inflector;
 
@@ -41,7 +42,7 @@ use yii\helpers\Inflector;
  * @property \gromver\cmf\common\models\TagToItem[] $tagToItems
  * @property Tag[] $translations
  */
-class Tag extends \yii\db\ActiveRecord implements ViewableInterface
+class Tag extends ActiveRecord implements ViewableInterface
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
@@ -76,16 +77,14 @@ class Tag extends \yii\db\ActiveRecord implements ViewableInterface
             [['metadesc'], 'string', 'max' => 2048],
 
             [['alias'], 'filter', 'filter' => 'trim'],
-            [['alias'], 'filter', 'filter' => function($value){
-                    if(empty($value))
+            [['alias'], 'filter', 'filter' => function ($value){
+                    if (empty($value)) {
                         return Inflector::slug(TransliteratorHelper::process($this->title));
-                    else
+                    } else {
                         return Inflector::slug($value);
+                    }
                 }],
-            [['alias'], 'unique', 'filter' => function($query){
-                    /** @var $query \yii\db\ActiveQuery */
-                    $query->andWhere(['language' => $this->language]);
-                }],
+            [['alias'], 'unique'],
             [['alias'], 'required', 'enableClientValidation' => false],
         ];
     }

@@ -7,7 +7,6 @@ use gromver\cmf\common\models\Category;
 /**
  * @var yii\web\View $this
  * @var gromver\cmf\common\models\Category $model
- * @var gromver\cmf\common\models\Category $sourceModel
  * @var yii\bootstrap\ActiveForm $form
  */
 ?>
@@ -16,31 +15,27 @@ use gromver\cmf\common\models\Category;
 
     <?php $form = ActiveForm::begin([
         'layout' => 'horizontal',
-        'options' => ['enctype'=>'multipart/form-data']
+        'options' => ['enctype' => 'multipart/form-data']
     ]); ?>
 
     <?= $form->errorSummary($model) ?>
 
-    <?php if (isset($sourceModel)) {
-        echo $form->field($model, 'parent_id')->dropDownList([$model->parent_id => Category::findOne($model->parent_id)->title], ['disabled' => true]);
-    } else {
-        echo $form->field($model, 'parent_id')->dropDownList(\yii\helpers\ArrayHelper::map(Category::find()->orderBy('lft')
+    <?= $form->field($model, 'parent_id')->dropDownList(\yii\helpers\ArrayHelper::map(Category::find()->orderBy('lft')
             ->andWhere(['not in', 'id', $model->isNewRecord ? [] : $model->descendants()->select('id')])
             ->andWhere('id!=:id', ['id' => intval($model->id)])
             ->all(),'id', function($model){
             return str_repeat(" • ", $model->level-1) . $model->title;
-        }));
-    } ?>
+        })) ?>
 
     <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => 1000, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => 1000]) ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
     <?//= $form->field($model, 'path')->textInput(['maxlength' => 2000]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + $model->statusLabels()) ?>
+    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
 
     <?= $form->field($model, 'published_at')->widget(\kartik\widgets\DateTimePicker::className(), [
         'options' => ['value' => date('d.m.Y H:i', is_int($model->published_at) ? $model->published_at : time())],

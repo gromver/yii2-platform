@@ -33,13 +33,6 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public $loginLayout = 'login';
     public $desktopOrder = 2;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */

@@ -5,7 +5,6 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\Page */
-/* @var $sourceModel gromver\cmf\common\models\Page */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -17,7 +16,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => 1024]) ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
@@ -54,16 +53,6 @@ use yii\bootstrap\ActiveForm;
         ],
         'url' => ['/cmf/tag/default/tag-list']
     ]) ?>
-
-    <?/*= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
-
-    <?= $form->field($model, 'created_by')->textInput() ?>
-
-    <?= $form->field($model, 'updated_by')->textInput() ?>
-
-    <?= $form->field($model, 'hits')->textInput(['maxlength' => 20])*/ ?>
 
     <?= Html::activeHiddenInput($model, 'lock') ?>
 

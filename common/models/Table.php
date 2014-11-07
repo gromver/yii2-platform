@@ -11,6 +11,7 @@ namespace gromver\cmf\common\models;
 
 use Yii;
 use yii\base\Event;
+use yii\behaviors\TimestampBehavior;
 use yii\caching\ExpressionDependency;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
@@ -63,7 +64,7 @@ class Table extends \yii\db\ActiveRecord
     {
         return [
             'timestamp' => [
-                'class' => 'yii\behaviors\TimestampBehavior',
+                'class' => TimestampBehavior::className(),
                 'attributes' => [
                     self::EVENT_BEFORE_INSERT => 'timestamp',
                     self::EVENT_BEFORE_UPDATE => 'timestamp',
@@ -116,7 +117,7 @@ class Table extends \yii\db\ActiveRecord
     public static function bootstrap()
     {
         static $initialized;
-        if(!isset($initialized)) {
+        if (!isset($initialized)) {
             $initialized = true;
             Event::on(ActiveRecord::className(), ActiveRecord::EVENT_AFTER_DELETE, [self::className(), 'updateState']);
             Event::on(ActiveRecord::className(), ActiveRecord::EVENT_AFTER_INSERT, [self::className(), 'updateState']);

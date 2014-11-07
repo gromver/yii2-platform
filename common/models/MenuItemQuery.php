@@ -22,9 +22,7 @@ class MenuItemQuery extends ActiveQuery
 {
     public function behaviors() {
         return [
-            [
-                'class' => NestedSetQuery::className(),
-            ],
+            NestedSetQuery::className(),
         ];
     }
 
@@ -55,6 +53,7 @@ class MenuItemQuery extends ActiveQuery
     }
 
     /**
+     * @param $language
      * @return static
      */
     public function language($language)

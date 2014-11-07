@@ -5,7 +5,6 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\Menu */
-/* @var $sourceModel gromver\cmf\common\models\Menu */
 /* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
 
 $this->title = Yii::t('gromver.cmf', 'Add Menu Item');
@@ -19,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
             'model' => $model,
-            'sourceModel' => $sourceModel,
             'linkParamsModel' => $linkParamsModel,
         ]) ?>
 

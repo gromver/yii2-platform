@@ -10,6 +10,9 @@
 namespace gromver\cmf\common\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
@@ -31,7 +34,7 @@ use yii\helpers\Json;
  * @property integer $updated_by
  * @property string $lock
  */
-class WidgetConfig extends \yii\db\ActiveRecord
+class WidgetConfig extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -53,7 +56,7 @@ class WidgetConfig extends \yii\db\ActiveRecord
             [['widget_id'], 'string', 'max' => 50],
             [['widget_class'], 'string', 'max' => 255],
             [['context', 'url'], 'string', 'max' => 1024],
-            [['language'], 'default', 'value' => function ($model, $attribute) {
+            [['language'], 'default', 'value' => function () {
                 return Yii::$app->language;
             }],
             [['language'], 'required'],
@@ -85,8 +88,8 @@ class WidgetConfig extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
-            \yii\behaviors\BlameableBehavior::className(),
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
         ];
     }
 

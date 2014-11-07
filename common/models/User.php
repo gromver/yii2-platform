@@ -12,7 +12,9 @@ namespace gromver\cmf\common\models;
 use Yii;
 use yii\base\ModelEvent;
 use yii\base\NotSupportedException;
+use yii\behaviors\TimestampBehavior;
 use yii\console\Application;
+use yii\db\ActiveRecord;
 use yii\helpers\Json;
 use yii\web\IdentityInterface;
 
@@ -37,7 +39,7 @@ use yii\web\IdentityInterface;
  * @property \gromver\cmf\common\models\Post[] $viewedPosts
  * @property \gromver\cmf\common\models\UserProfile $profile
  */
-class User extends \yii\db\ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 1;
@@ -99,15 +101,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'filter' => function($query) {
+            ['email', 'unique', 'filter' => function ($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
                 }, 'message' => Yii::t('gromver.cmf', 'This email address has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
-            ['email', 'unique', 'filter' => function($query) {
+            ['email', 'unique', 'filter' => function ($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
                 },
-                'when' => function($model){
+                'when' => function () {
                         /** @var $query static */
                         return $this->status != self::STATUS_DELETED;
                     },
@@ -163,6 +165,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     }
 
     /**
+     * todo
      * @return \yii\db\ActiveQuery
      */
     public function getViewedPosts()
@@ -174,7 +177,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'timestamp' => [
-                'class' => 'yii\behaviors\TimestampBehavior',
+                'class' => TimestampBehavior::className(),
                 'attributes' => [
                     self::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     self::EVENT_BEFORE_UPDATE => 'updated_at',
@@ -194,7 +197,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public static function statusLabels()
     {
-        return array_map(function($label) {
+        return array_map(function ($label) {
                 return Yii::t('gromver.cmf', $label);
             }, self::$_statuses);
     }

@@ -40,13 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'language',
-                'value' => function ($model) {
-                    /** @var $model \gromver\cmf\common\models\MenuItem */
-                    return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
-                },
-                'format' => 'raw',
+                'width' => '50px',
                 'filter' => Yii::$app->getLanguagesList()
-
             ],
             [
                 'attribute' => 'menu_type_id',
@@ -82,17 +77,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'value' => function ($model){
                     /** @var $model \gromver\cmf\common\models\MenuItem */
-                    //return $model->status === \gromver\cmf\common\models\MenuItem::STATUS_PUBLISHED ? Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['unpublish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post']) : Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['publish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post'])
-                    /*switch ($model->status) {
-                        case $model::STATUS_UNPUBLISHED:
-                            return Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_UNPUBLISHED]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post']);
-                        case $model::STATUS_PUBLISHED:
-                            return Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_PUBLISHED]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post']);
-                        case $model::STATUS_PUBLISHED:
-                            return Html::a('<i class="glyphicon glyphicon-star"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_PUBLISHED]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post']);
-                        default:
-                            return $model->status;
-                    }*/
                     return Html::beginTag('div', ['class' => 'btn-group']) .
                     Html::a('<i class="glyphicon glyphicon-star"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_MAIN_PAGE]), ['class' => 'btn btn-xs' . ($model::STATUS_MAIN_PAGE == $model->status ? ' btn-success active' : ' btn-default'), 'data-pjax' => 0, 'data-method' => 'post']) .
                     Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_PUBLISHED]), ['class' => 'btn btn-xs' . ($model::STATUS_PUBLISHED == $model->status ? ' btn-primary active' : ' btn-default'), 'data-pjax' => 0, 'data-method' => 'post']) .

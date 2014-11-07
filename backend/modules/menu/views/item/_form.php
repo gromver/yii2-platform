@@ -5,7 +5,6 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\MenuItem */
-/* @var $sourceModel gromver\cmf\common\models\MenuItem */
 /* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
@@ -24,9 +23,9 @@ use yii\bootstrap\ActiveForm;
     <br/>
     <div class="tab-content">
         <div id="main" class="tab-pane active">
-            <?= isset($sourceModel) ? $form->field($model, 'menu_type_id')->dropDownList([$model->menu_type_id => \gromver\cmf\common\models\MenuType::findOne($model->menu_type_id)->title], ['disabled' => true]) : $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
+            <?= $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
 
-            <?= isset($sourceModel) ? $form->field($model, 'parent_id')->dropDownList([$model->parent_id => \gromver\cmf\common\models\MenuItem::findOne($model->parent_id)->title], ['disabled' => true]) : $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
+            <?= $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
                 'pluginOptions'=>[
                     'depends' => ['menu_type_id'],
                     'placeholder' => Yii::t('gromver.cmf', 'Select...'),
@@ -34,11 +33,11 @@ use yii\bootstrap\ActiveForm;
                 ]
             ]) ?>
 
-            <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
+            <?= $form->field($model, 'title')->textInput(['maxlength' => 1024]) ?>
 
             <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
-            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + $model->statusLabels()) ?>
+            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
 
             <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
 
@@ -46,10 +45,6 @@ use yii\bootstrap\ActiveForm;
 
             <?= $form->field($model, 'link_type')->dropDownList($model->getLinkTypes()) ?>
 
-            <?/*php $this->registerJs("$('#" . Html::getInputId($model, 'link_type') . "').change(function (event){
-                if($(this).val() === '" . \gromver\cmf\common\models\MenuItem::LINK_ROUTE . "') $('#router-button').attr('data-toggle', 'modal').find('a').attr('disabled', false)
-                else $('#router-button').attr('data-toggle', '').find('a').attr('disabled', 'disabled')
-            }).change()") */?>
             <?php $this->registerJs("$('#" . Html::getInputId($model, 'link_type') . "').change(function (event){
                 if($(this).val() === '" . \gromver\cmf\common\models\MenuItem::LINK_ROUTE . "') {
                     $('#router-button a').attr('href', " . \yii\helpers\Json::encode(\yii\helpers\Url::toRoute(['routers'])) . ")

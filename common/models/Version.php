@@ -14,6 +14,7 @@ use Yii;
 use yii\behaviors\AttributeBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\helpers\Json;
 use yii\helpers\StringHelper;
 
@@ -33,7 +34,7 @@ use yii\helpers\StringHelper;
  * @property integer $created_at
  * @property integer $created_by
  */
-class Version extends \yii\db\ActiveRecord
+class Version extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -49,13 +50,13 @@ class Version extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['version_data'], 'filter', 'filter' => function($value){
+            [['version_data'], 'filter', 'filter' => function ($value) {
                     return is_string($value) ? $value : Json::encode($value);
                 }],
-            [['version_hash'], 'filter', 'filter' => function($value){
+            [['version_hash'], 'filter', 'filter' => function ($value) {
                     return $value === null ? self::hashData($this->version_data) : $value;
                 }],
-            [['created_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'created_at', 'when' => function($model) {
+            [['created_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'created_at', 'when' => function () {
                     return is_string($this->created_at);
                 }],
             [['created_at'], 'integer', 'enableClientValidation' => false],
@@ -112,7 +113,7 @@ class Version extends \yii\db\ActiveRecord
                     self::EVENT_BEFORE_INSERT => 'character_count',
                     self::EVENT_BEFORE_UPDATE => 'character_count'
                 ],
-                'value' => function($event) {
+                'value' => function() {
                         return StringHelper::byteLength($this->version_data);
                     }
             ]

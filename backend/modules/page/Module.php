@@ -23,13 +23,6 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public $controllerNamespace = 'gromver\cmf\backend\modules\page\controllers';
     public $desktopOrder = 5;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */

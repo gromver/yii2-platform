@@ -24,16 +24,10 @@ class MenuLinkParams extends Model
     public $target;
     public $onclick;
     public $rel;
-    /*public $page_title;
-    public $show_page_heading = 1;
-    public $page_heading;
-    public $page_class;*/
 
     public function rules()
     {
         return [
-            //[['show_page_heading'], 'integer'],
-            //[['title', 'class', 'style', 'target', 'onclick', 'rel', 'page_title', 'page_heading', 'page_class'], 'string']
             [['title', 'class', 'style', 'target', 'onclick', 'rel'], 'string']
         ];
     }

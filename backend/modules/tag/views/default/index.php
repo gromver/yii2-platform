@@ -37,11 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['attribute'=>'id', 'width'=>'50px'],
             [
                 'attribute' => 'language',
-                'value' => function($model) {
-                        /** @var $model \gromver\cmf\common\models\Tag */
-                        return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
-                    },
-                'format' => 'html',
+                'width' => '50px',
                 'filter' => Yii::$app->getLanguagesList()
             ],
             'title',

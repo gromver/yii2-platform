@@ -18,7 +18,9 @@ use gromver\cmf\backend\behaviors\VersioningBehavior;
 use gromver\cmf\common\interfaces\TranslatableInterface;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
-use yii\helpers\Html;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 
 /**
@@ -53,7 +55,7 @@ use yii\helpers\Inflector;
  *
  * @property Post[] $posts
  */
-class Category extends \yii\db\ActiveRecord implements TranslatableInterface, ViewableInterface
+class Category extends ActiveRecord implements TranslatableInterface, ViewableInterface
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
@@ -103,11 +105,10 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
             [['alias'], 'unique', 'filter'=>function($query){
                     /** @var $query \yii\db\ActiveQuery */
                     if($parent = self::findOne($this->parent_id)){
-                        $query->andWhere('lft>=:lft AND rgt<=:rgt AND level=:level AND language=:language', [
+                        $query->andWhere('lft>=:lft AND rgt<=:rgt AND level=:level', [
                                 'lft' => $parent->lft,
                                 'rgt' => $parent->rgt,
                                 'level' => $parent->level + 1,
-                                'language' => $this->language
                             ]);
                     }
                 }],
@@ -157,15 +158,13 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
-            \yii\behaviors\BlameableBehavior::className(),
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
             TaggableBehavior::className(),
+            NestedSetBehavior::className(),
             [
                 'class' => VersioningBehavior::className(),
                 'attributes' => ['title', 'alias', 'preview_text', 'detail_text', 'metakey', 'metadesc']
-            ],
-            [
-                'class' => NestedSetBehavior::className(),
             ],
             [
                 'class' => UploadBehavior::className(),
@@ -255,11 +254,7 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
             } else {
                 if(array_key_exists('ordering', $changedAttributes)) $newParent->reorderNode('ordering');
             }
-        }/* else
-            if(!$this->isRoot()) {
-                $this->moveAsRoot();
-                $moved = true;
-            }*/
+        }
 
         if ($moved) {
             $this->refresh();

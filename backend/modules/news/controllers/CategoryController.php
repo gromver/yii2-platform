@@ -13,6 +13,7 @@ use kartik\widgets\Alert;
 use Yii;
 use gromver\cmf\common\models\Category;
 use gromver\cmf\backend\modules\news\models\CategorySearch;
+use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -79,8 +80,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Post models.
-     * @return mixed
+     * @param string $route
+     * @return string
      */
     public function actionSelect($route = 'cmf/news/category/view')
     {
@@ -112,42 +113,21 @@ class CategoryController extends Controller
     /**
      * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
-    public function actionCreate($language = null, $sourceId = null)
+    public function actionCreate()
     {
         $model = new Category();
         $model->loadDefaultValues();
         $model->status = Category::STATUS_PUBLISHED;
         $model->language = Yii::$app->language;
 
-        if ($sourceId && $language) {
-            $sourceModel = $this->findModel($sourceId);
-            if (!$sourceModel->isRoot()) {
-                if (!$targetCategory = $sourceModel->level > 2 ? Category::findOne(['path' => $sourceModel->parent->path, 'language' => $language]) : Category::find()->roots()->one()) {
-                    throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
-                }
-
-                $model->parent_id = $targetCategory->id;
-            }
-            $model->language = $language;
-            $model->alias = $sourceModel->alias;
-            $model->published_at = $sourceModel->published_at;
-            $model->status = $sourceModel->status;
-            $model->preview_text = $sourceModel->preview_text;
-            $model->detail_text = $sourceModel->detail_text;
-            $model->metakey = $sourceModel->metakey;
-            $model->metadesc = $sourceModel->metadesc;
-        } else {
-            $sourceModel = null;
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'sourceModel' => $sourceModel
             ]);
         }
     }
@@ -243,6 +223,7 @@ class CategoryController extends Controller
         }
 
         Category::find()->roots()->one()->reorderNode('ordering');
+        (new Category())->trigger(ActiveRecord::EVENT_AFTER_UPDATE);    //фиксируем изменение таблицы в \gromver\cmf\common\models\Table
 
         return $this->redirect(ArrayHelper::getValue(Yii::$app->request, 'referrer', ['index']));
     }

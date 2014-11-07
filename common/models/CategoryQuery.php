@@ -64,6 +64,7 @@ class CategoryQuery extends ActiveQuery
     }
 
     /**
+     * @param $language
      * @return static
      */
     public function language($language)
@@ -78,23 +79,4 @@ class CategoryQuery extends ActiveQuery
     {
         return $this->andWhere('{{%cms_category}}.lft!=1');
     }
-
-    /**
-     * @return static
-     */
-    /*public function roots()
-    {
-        return $this->andWhere(['{{%cms_category}}.lft' => 1]);
-    }
-
-    /*public function tree($depth = null)
-    {
-        $this->addOrderBy(['{{%cms_category}}.root' => SORT_ASC, '{{%cms_category}}.lft' => SORT_ASC]);
-
-        if ($depth !== null) {
-            $this->andWhere("{{%cms_category}}.[[level]] <= :depth", [':depth' => $depth]);
-        }
-
-        return $this;
-    }*/
 } 

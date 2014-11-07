@@ -76,9 +76,10 @@ class DefaultController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
     /**
-     * Lists all Page models.
-     * @return mixed
+     * @param string $route
+     * @return string
      */
     public function actionSelect($route = 'cmf/page/default/view')
     {
@@ -111,32 +112,18 @@ class DefaultController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($language = null, $sourceId = null)
+    public function actionCreate()
     {
         $model = new Page();
         $model->loadDefaultValues();
         $model->status = Page::STATUS_PUBLISHED;
         $model->language = Yii::$app->language;
 
-        if($sourceId && $language) {
-            $sourceModel = $this->findModel($sourceId);
-            $model->language = $language;
-            $model->alias = $sourceModel->alias;
-            $model->status = $sourceModel->status;
-            $model->preview_text = $sourceModel->preview_text;
-            $model->detail_text = $sourceModel->detail_text;
-            $model->metakey = $sourceModel->metakey;
-            $model->metadesc = $sourceModel->metadesc;
-        } else {
-            $sourceModel = null;
-        }
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'sourceModel' => $sourceModel
             ]);
         }
     }

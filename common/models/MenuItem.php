@@ -13,6 +13,8 @@ use dosamigos\transliterator\TransliteratorHelper;
 use gromver\cmf\backend\behaviors\NestedSetBehavior;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\helpers\Json;
@@ -86,7 +88,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             [['menu_type_id'], 'exist', 'targetAttribute' => 'id', 'targetClass' => MenuType::className()],
             [['language'], 'required'],
             [['language'], 'string', 'max' => 7],
-            [['language'], function($attribute, $params) {
+            [['language'], function($attribute) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
                     $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
                 }
@@ -98,12 +100,12 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
 
             [['parent_id'], 'exist', 'targetAttribute' => 'id'],
             [['parent_id'], 'compare', 'compareAttribute' => 'id', 'operator' => '!='],
-            [['parent_id'], function($attribute, $params) {
+            [['parent_id'], function($attribute) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->menu_type_id != $this->menu_type_id) {
                     $this->addError($attribute, Yii::t('gromver.cmf', 'Parental point of the menu doesn\'t correspond to the chosen menu type.'));
                 }
             }],
-            [['status'], function($attribute, $params) {
+            [['status'], function($attribute) {
                 if ($this->status == self::STATUS_MAIN_PAGE && $this->link_type == self::LINK_HREF) {
                     $this->addError($attribute, Yii::t('gromver.cmf', 'Alias of the menu item can\'t be a main page.'));
                 }
@@ -176,12 +178,9 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
-            \yii\behaviors\BlameableBehavior::className(),
-            [
-                'class' => NestedSetBehavior::className(),
-            ]
-
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
+            NestedSetBehavior::className()
         ];
     }
 
@@ -248,7 +247,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     }
 
     public function save($runValidation=true, $attributes=null) {
-        if($this->getIsNewRecord() && $this->parent_id) {
+        if ($this->getIsNewRecord() && $this->parent_id) {
             return $this->appendTo(self::findOne($this->parent_id), $runValidation, $attributes);
         }
 

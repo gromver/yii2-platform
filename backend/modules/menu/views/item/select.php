@@ -31,8 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'id',
                 'width' => '50px'
             ],
-			[
+            [
                 'attribute' => 'language',
+                'width' => '50px',
                 'filter' => Yii::$app->getLanguagesList()
             ],
             [

@@ -10,6 +10,7 @@
 namespace gromver\cmf\common\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "cms_user_profile".
@@ -29,7 +30,7 @@ use Yii;
  *
  * @property User $user
  */
-class UserProfile extends \yii\db\ActiveRecord
+class UserProfile extends ActiveRecord
 {
     /**
      * @inheritdoc

@@ -14,6 +14,7 @@ use gromver\cmf\common\interfaces\ViewableInterface;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 use Yii;
+use yii\elasticsearch\ActiveRecord;
 
 /**
  * Class ActiveRecord
@@ -23,7 +24,7 @@ use Yii;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements ViewableInterface {
+class ActiveDocument extends ActiveRecord implements ViewableInterface {
     public function rules()
     {
         return [
@@ -37,6 +38,7 @@ class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements Viewable
     }
 
     /**
+     * @throws InvalidConfigException
      * @return string
      */
     public static function model()

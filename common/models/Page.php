@@ -15,6 +15,9 @@ use gromver\cmf\backend\behaviors\VersioningBehavior;
 use gromver\cmf\common\interfaces\TranslatableInterface;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 
 /**
@@ -38,7 +41,7 @@ use yii\helpers\Inflector;
  * @property string $hits
  * @property string $lock
  */
-class Page extends \yii\db\ActiveRecord implements TranslatableInterface, ViewableInterface
+class Page extends ActiveRecord implements TranslatableInterface, ViewableInterface
 {
     const STATUS_PUBLISHED = 1;
     const STATUS_UNPUBLISHED = 2;
@@ -67,15 +70,13 @@ class Page extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
 
             [['alias'], 'filter', 'filter'=>'trim'],
             [['alias'], 'filter', 'filter'=>function($value){
-                    if(empty($value))
+                    if (empty($value)) {
                         return Inflector::slug(TransliteratorHelper::process($this->title));
-                    else
+                    } else {
                         return Inflector::slug($value);
+                    }
                 }],
-            [['alias'], 'unique', 'filter'=>function($query){
-                    /** @var $query \yii\db\ActiveQuery */
-                    $query->andWhere(['language'=>$this->language]);
-                }],
+            [['alias'], 'unique'],
             [['alias'], 'string', 'max' => 250],
             [['alias'], 'required', 'enableClientValidation'=>false],
             [['tags', 'versionNote', 'lock'], 'safe']
@@ -88,29 +89,29 @@ class Page extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('menst.page', 'ID'),
-            'language' => Yii::t('menst.page', 'Language'),
-            'title' => Yii::t('menst.page', 'Title'),
-            'alias' => Yii::t('menst.page', 'Alias'),
-            'preview_text' => Yii::t('menst.page', 'Preview Text'),
-            'detail_text' => Yii::t('menst.page', 'Detail Text'),
-            'metakey' => Yii::t('menst.page', 'Metakey'),
-            'metadesc' => Yii::t('menst.page', 'Metadesc'),
-            'created_at' => Yii::t('menst.page', 'Created At'),
-            'updated_at' => Yii::t('menst.page', 'Updated At'),
-            'status' => Yii::t('menst.page', 'Status'),
-            'created_by' => Yii::t('menst.page', 'Created By'),
-            'updated_by' => Yii::t('menst.page', 'Updated By'),
-            'hits' => Yii::t('menst.page', 'Hits'),
-            'lock' => Yii::t('menst.page', 'Lock'),
+            'id' => Yii::t('gromver.cmf', 'ID'),
+            'language' => Yii::t('gromver.cmf', 'Language'),
+            'title' => Yii::t('gromver.cmf', 'Title'),
+            'alias' => Yii::t('gromver.cmf', 'Alias'),
+            'preview_text' => Yii::t('gromver.cmf', 'Preview Text'),
+            'detail_text' => Yii::t('gromver.cmf', 'Detail Text'),
+            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
+            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
+            'created_at' => Yii::t('gromver.cmf', 'Created At'),
+            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
+            'status' => Yii::t('gromver.cmf', 'Status'),
+            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
+            'hits' => Yii::t('gromver.cmf', 'Hits'),
+            'lock' => Yii::t('gromver.cmf', 'Lock'),
         ];
     }
 
     public function behaviors()
     {
         return [
-            \yii\behaviors\TimestampBehavior::className(),
-            \yii\behaviors\BlameableBehavior::className(),
+            TimestampBehavior::className(),
+            BlameableBehavior::className(),
             TaggableBehavior::className(),
             [
                 'class' => VersioningBehavior::className(),//todo затестить чекаут в версию с уже занятым алиасом
@@ -127,16 +128,16 @@ class Page extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('menst.page', $label);
+                return Yii::t('gromver.cmf', $label);
             }, self::$_statuses);
     }
 
     public function getStatusLabel($status=null)
     {
         if ($status === null) {
-            return Yii::t('menst.page', self::$_statuses[$this->status]);
+            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
         }
-        return Yii::t('menst.page', self::$_statuses[$status]);
+        return Yii::t('gromver.cmf', self::$_statuses[$status]);
     }
 
     public function optimisticLock()
@@ -175,16 +176,16 @@ class Page extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
     {
         return [
             'published',
-            'tags' => function($model, $field) {
+            'tags' => function($model) {
                     return array_values(array_map(function($tag) {
                         return $tag->title;
                     }, $model->tags));
                 },
-            'text' => function($model, $field) {
+            'text' => function($model) {
                     /** @var self $model */
                     return strip_tags($model->preview_text . ' ' . $model->detail_text);
                 },
-            'date' => function($model, $field) {
+            'date' => function($model) {
                     /** @var self $model */
                     return date(DATE_ISO8601, $model->updated_at);
                 },

@@ -9,7 +9,6 @@
 
 namespace gromver\cmf\console;
 
-use gromver\cmf\common\models\search\ActiveDocument;
 use yii\helpers\ArrayHelper;
 
 /**
