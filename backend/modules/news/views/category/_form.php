@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use menst\cms\common\models\Category;
+use gromver\cmf\common\models\Category;
 
 /**
  * @var yii\web\View $this
- * @var menst\cms\common\models\Category $model
- * @var menst\cms\common\models\Category $sourceModel
+ * @var gromver\cmf\common\models\Category $model
+ * @var gromver\cmf\common\models\Category $sourceModel
  * @var yii\bootstrap\ActiveForm $form
  */
 ?>
@@ -60,7 +60,7 @@ use menst\cms\common\models\Category;
             <?= \mihaildev\ckeditor\CKEditor::widget([
                 'model' => $model,
                 'attribute' => 'detail_text',
-                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cms/media/manager')
+                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cmf/media/manager')
             ]) ?>
         </div>
     </div>
@@ -79,15 +79,15 @@ use menst\cms\common\models\Category;
         'clientOptions' => [
             'maxItems' => 'NaN'
         ],
-        'url' => ['/cms/tag/default/tag-list']
+        'url' => ['/cmf/tag/default/tag-list']
     ]) ?>
 
-    <?= $form->field($model, 'detail_image')->widget(\menst\cms\backend\widgets\FileInput::classname(), [
+    <?= $form->field($model, 'detail_image')->widget(\gromver\cmf\backend\widgets\FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => ['showUpload' => false]
     ]) ?>
 
-    <?= $form->field($model, 'preview_image')->widget(\menst\cms\backend\widgets\FileInput::classname(), [
+    <?= $form->field($model, 'preview_image')->widget(\gromver\cmf\backend\widgets\FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => ['showUpload' => false]
     ]) ?>

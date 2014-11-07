@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\MenuItem */
-/* @var $sourceModel menst\cms\common\models\MenuItem */
-/* @var $linkParamsModel menst\cms\common\models\MenuLinkParams */
+/* @var $model gromver\cmf\common\models\MenuItem */
+/* @var $sourceModel gromver\cmf\common\models\MenuItem */
+/* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -24,9 +24,9 @@ use yii\bootstrap\ActiveForm;
     <br/>
     <div class="tab-content">
         <div id="main" class="tab-pane active">
-            <?= isset($sourceModel) ? $form->field($model, 'menu_type_id')->dropDownList([$model->menu_type_id => \menst\cms\common\models\MenuType::findOne($model->menu_type_id)->title], ['disabled' => true]) : $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('menst.cms', 'Not selected')] + \yii\helpers\ArrayHelper::map(\menst\cms\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
+            <?= isset($sourceModel) ? $form->field($model, 'menu_type_id')->dropDownList([$model->menu_type_id => \gromver\cmf\common\models\MenuType::findOne($model->menu_type_id)->title], ['disabled' => true]) : $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('menst.cms', 'Not selected')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
 
-            <?= isset($sourceModel) ? $form->field($model, 'parent_id')->dropDownList([$model->parent_id => \menst\cms\common\models\MenuItem::findOne($model->parent_id)->title], ['disabled' => true]) : $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
+            <?= isset($sourceModel) ? $form->field($model, 'parent_id')->dropDownList([$model->parent_id => \gromver\cmf\common\models\MenuItem::findOne($model->parent_id)->title], ['disabled' => true]) : $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
                 'pluginOptions'=>[
                     'depends' => ['menu_type_id'],
                     'placeholder' => Yii::t('menst.cms', 'Select...'),
@@ -47,11 +47,11 @@ use yii\bootstrap\ActiveForm;
             <?= $form->field($model, 'link_type')->dropDownList($model->getLinkTypes()) ?>
 
             <?/*php $this->registerJs("$('#" . Html::getInputId($model, 'link_type') . "').change(function (event){
-                if($(this).val() === '" . \menst\cms\common\models\MenuItem::LINK_ROUTE . "') $('#router-button').attr('data-toggle', 'modal').find('a').attr('disabled', false)
+                if($(this).val() === '" . \gromver\cmf\common\models\MenuItem::LINK_ROUTE . "') $('#router-button').attr('data-toggle', 'modal').find('a').attr('disabled', false)
                 else $('#router-button').attr('data-toggle', '').find('a').attr('disabled', 'disabled')
             }).change()") */?>
             <?php $this->registerJs("$('#" . Html::getInputId($model, 'link_type') . "').change(function (event){
-                if($(this).val() === '" . \menst\cms\common\models\MenuItem::LINK_ROUTE . "') {
+                if($(this).val() === '" . \gromver\cmf\common\models\MenuItem::LINK_ROUTE . "') {
                     $('#router-button a').attr('href', " . \yii\helpers\Json::encode(\yii\helpers\Url::toRoute(['routers'])) . ")
                 } else {
                     $('#router-button a').attr('href', " . \yii\helpers\Json::encode(\yii\helpers\Url::toRoute(['select'])) . ")
@@ -65,7 +65,7 @@ use yii\bootstrap\ActiveForm;
             echo $form->field($model, 'link', [
                     'template' => "{label}\n{beginWrapper}\n<div class=\"input-group\">{input}{controls}</div>\n{error}\n{endWrapper}\n{hint}",
                     'parts' => [
-                        '{controls}' => \menst\widgets\ModalIFrame::widget([
+                        '{controls}' => \gromver\widgets\ModalIFrame::widget([
                                 'id' => 'router',
                                 'modalOptions' => [
                                     'header' => $linkLabel,

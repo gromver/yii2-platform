@@ -5,6 +5,6 @@
  * @var array $items
  */
 
-echo \menst\cms\backend\widgets\Routers::widget([
+echo \gromver\cmf\backend\widgets\Routers::widget([
     'items' => $items
 ]);

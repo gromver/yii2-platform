@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var menst\cms\backend\modules\menu\models\MenuTypeSearch $searchModel
+ * @var gromver\cmf\backend\modules\menu\models\MenuTypeSearch $searchModel
  */
 
 $this->title = Yii::t('menst.cms', 'Select Menu');
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'title',
                 'value' => function($model) {
-                        /** @var $model \menst\cms\common\models\MenuType */
+                        /** @var $model \gromver\cmf\common\models\MenuType */
                         return $model->title . '<br/>' . Html::tag('small', $model->alias, ['class' => 'text-muted']);
                     },
                 'format' => 'html'
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     return Html::a(Yii::t('menst.cms', 'Select'), '#', [
                         'class' => 'btn btn-primary btn-xs',
-                        'onclick' => \menst\widgets\ModalIFrame::emitDataJs([
+                        'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                 'id' => $model->id,
                                 'description' => Yii::t('menst.cms', 'Menu Type: {title}', ['title' => $model->title]),
                                 'value' => $model->id . ':' . $model->alias

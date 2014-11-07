@@ -7,13 +7,13 @@
 <div class="search-default-index">
     <h1><?= Yii::t('menst.cms', 'Search') ?></h1>
 
-    <?php echo \menst\cms\common\widgets\SearchForm::widget([
+    <?php echo \gromver\cmf\common\widgets\SearchForm::widget([
         'id' => 'bSearchForm',
         'query' => $query,
         'showPanel' => false
     ]);
 
-    echo \menst\cms\common\widgets\SearchResults::widget([
+    echo \gromver\cmf\common\widgets\SearchResults::widget([
         'id' => 'bSearchResult',
         'query' => $query,
         'filters' => []

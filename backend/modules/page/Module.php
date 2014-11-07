@@ -1,26 +1,26 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\page;
+namespace gromver\cmf\backend\modules\page;
 
-use menst\cms\backend\interfaces\DesktopInterface;
-use menst\cms\backend\interfaces\MenuRouterInterface;
+use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\cmf\backend\interfaces\MenuRouterInterface;
 use Yii;
 
 /**
  * Class Module
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInterface
 {
-    public $controllerNamespace = 'menst\cms\backend\modules\page\controllers';
+    public $controllerNamespace = 'gromver\cmf\backend\modules\page\controllers';
     public $desktopOrder = 5;
 
     /*public function init()
@@ -38,7 +38,7 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
         return [
             'label' => Yii::t('menst.cms', 'Page'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Pages'), 'url' => ['/cms/page/default/index']]
+                ['label' => Yii::t('menst.cms', 'Pages'), 'url' => ['/cmf/page/default/index']]
             ]
         ];
     }
@@ -51,7 +51,7 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
         return [
             'label' => Yii::t('menst.cms', 'Page'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'Page View'), 'url' => ['/cms/page/default/select']],
+                ['label' => Yii::t('menst.cms', 'Page View'), 'url' => ['/cmf/page/default/select']],
             ]
         ];
     }

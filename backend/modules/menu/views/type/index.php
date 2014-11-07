@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel menst\cms\backend\modules\menu\models\MenuTypeSearch */
+/* @var $searchModel gromver\cmf\backend\modules\menu\models\MenuTypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('menst.cms', 'Menu Types');
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'header' => 'Items',
                 'value' => function($model) {
-                        /** @var $model \menst\cms\common\models\MenuType */
+                        /** @var $model \gromver\cmf\common\models\MenuType */
                         return Html::a('('.$model->getItems()->count().')', ['item/index', 'MenuItemSearch[root]' => $model->id], ['data-pjax' => 0]);
                     },
                 'format' => 'raw'

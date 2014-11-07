@@ -9,7 +9,7 @@ class m140825_160749_cms_mapping extends Migration
     {
         $connection = \yii\elasticsearch\ActiveRecord::getDb();
 
-        $index = \menst\cms\common\models\search\ActiveDocument::index();
+        $index = \gromver\cmf\common\models\search\ActiveDocument::index();
 
         if ($connection->createCommand()->indexExists($index)) {
             $connection->createCommand()->deleteIndex($index);
@@ -171,9 +171,9 @@ class m140825_160749_cms_mapping extends Migration
         ]);
 
         $documents = [
-            'menst\cms\common\models\search\Page',
-            'menst\cms\common\models\search\Post',
-            'menst\cms\common\models\search\Category',
+            'gromver\cmf\common\models\search\Page',
+            'gromver\cmf\common\models\search\Post',
+            'gromver\cmf\common\models\search\Category',
         ];
 
         foreach ($documents as $documentClass) {
@@ -184,7 +184,7 @@ class m140825_160749_cms_mapping extends Migration
     }
 
     /**
-     * @param $documentClass \menst\cms\common\models\search\ActiveDocument
+     * @param $documentClass \gromver\cmf\common\models\search\ActiveDocument
      * @return int
      * @throws Exception
      */
@@ -193,7 +193,7 @@ class m140825_160749_cms_mapping extends Migration
         $bulk = '';
         /** @var \yii\db\ActiveRecord $modelClass */
         $modelClass = $documentClass::model();
-        /** @var \menst\cms\common\models\search\ActiveDocument $document */
+        /** @var \gromver\cmf\common\models\search\ActiveDocument $document */
         $document = new $documentClass;
         $query = $modelClass::find();
         //древовидные модели, не должны индексировать рутовый элемент

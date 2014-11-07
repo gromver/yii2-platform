@@ -1,23 +1,23 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\modules\main\controllers;
+namespace gromver\cmf\frontend\modules\main\controllers;
 
-use menst\cms\backend\modules\menu\models\MenuTypeSearch;
-use menst\cms\backend\modules\news\models\CategorySearch;
-use menst\cms\backend\modules\news\models\PostSearch;
-use menst\cms\backend\modules\page\models\PageSearch;
-use menst\cms\common\models\Tag;
-use menst\cms\common\models\CmsParams;
+use gromver\cmf\backend\modules\menu\models\MenuTypeSearch;
+use gromver\cmf\backend\modules\news\models\CategorySearch;
+use gromver\cmf\backend\modules\news\models\PostSearch;
+use gromver\cmf\backend\modules\page\models\PageSearch;
+use gromver\cmf\common\models\Tag;
+use gromver\cmf\common\models\CmsParams;
 use kartik\widgets\Alert;
-use menst\models\ObjectModel;
-use menst\widgets\ModalIFrame;
+use gromver\models\ObjectModel;
+use gromver\widgets\ModalIFrame;
 use Yii;
 use yii\caching\Cache;
 use yii\di\Instance;
@@ -30,9 +30,9 @@ use yii\web\NotFoundHttpException;
 /**
  * Class DefaultController
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
- * @property $module \menst\cms\frontend\modules\main\Module
+ * @property $module \gromver\cmf\frontend\modules\main\Module
  */
 class DefaultController extends Controller
 {

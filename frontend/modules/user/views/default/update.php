@@ -2,11 +2,11 @@
 
 /**
  * @var $this yii\web\View
- * @var \menst\models\ObjectModel $model
- * @var \menst\cms\common\models\User $user
+ * @var \gromver\models\ObjectModel $model
+ * @var \gromver\cmf\common\models\User $user
  */
 
-/** @var \menst\cms\common\models\MenuItem $menu */
+/** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'My profile');
@@ -18,7 +18,7 @@ if ($menu) {
 
 echo \yii\helpers\Html::tag('h2', $this->title);
 
-echo \menst\cms\frontend\widgets\UserProfile::widget([
+echo \gromver\cmf\frontend\widgets\UserProfile::widget([
     'id' => 'user-profile',
     'model' => $model
 ]);

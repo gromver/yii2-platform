@@ -5,7 +5,7 @@
  */
 
 use yii\helpers\Html;
-use menst\cms\common\models\Tag;
+use gromver\cmf\common\models\Tag;
 
 echo Html::beginTag('div', ['class'=>'tag-cloud']);
 

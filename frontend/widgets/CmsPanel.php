@@ -1,16 +1,16 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\widgets;
+namespace gromver\cmf\frontend\widgets;
 
-use menst\cms\frontend\modules\main\Module;
-use menst\widgets\ModalIFrame;
+use gromver\cmf\frontend\modules\main\Module;
+use gromver\widgets\ModalIFrame;
 use Yii;
 use yii\bootstrap\Modal;
 use yii\bootstrap\Nav;
@@ -21,13 +21,13 @@ use yii\helpers\Html;
 /**
  * Class CmsPanel
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class CmsPanel extends Widget {
     public function run()
     {
         NavBar::begin([
-            'brandLabel' => Yii::$app->cms->siteName,
+            'brandLabel' => Yii::$app->cmf->siteName,
             'brandUrl' => Yii::$app->homeUrl,
             'options' => [
                 'class' => 'navbar-inverse navbar-fixed-top',
@@ -36,7 +36,7 @@ class CmsPanel extends Widget {
 
         echo Html::beginTag('div', ['class'=>'nav']);
 
-        echo Html::beginForm(['/cms/search/default/index'], 'get', ['class' => 'navbar-form navbar-left',  'role' => "search"]);
+        echo Html::beginForm(['/cmf/search/default/index'], 'get', ['class' => 'navbar-form navbar-left',  'role' => "search"]);
 
         echo Html::beginTag('div', ['class' => 'form-group']);
 
@@ -53,11 +53,11 @@ class CmsPanel extends Widget {
 
             echo Html::beginTag('div', ['class'=>'btn-group']);
 
-            if (Yii::$app->cms->mode === Module::MODE_EDIT) {
+            if (Yii::$app->cmf->mode === Module::MODE_EDIT) {
                 echo Html::button(Yii::t('menst.cms', 'On'), ['class'=>'btn btn-success navbar-btn btn-xs active']);
-                echo Html::a(Yii::t('menst.cms', 'Off'), ['/cms/default/mode', 'mode' => Module::MODE_VIEW, 'backUrl' => Yii::$app->request->getUrl()], ['class'=>'btn btn-default navbar-btn btn-xs']);
+                echo Html::a(Yii::t('menst.cms', 'Off'), ['/cmf/default/mode', 'mode' => Module::MODE_VIEW, 'backUrl' => Yii::$app->request->getUrl()], ['class'=>'btn btn-default navbar-btn btn-xs']);
             } else {
-                echo Html::a(Yii::t('menst.cms', 'On'), ['/cms/default/mode', 'mode' => Module::MODE_EDIT, 'backUrl' => Yii::$app->request->getUrl()], ['class'=>'btn btn-default navbar-btn btn-xs']);
+                echo Html::a(Yii::t('menst.cms', 'On'), ['/cmf/default/mode', 'mode' => Module::MODE_EDIT, 'backUrl' => Yii::$app->request->getUrl()], ['class'=>'btn btn-default navbar-btn btn-xs']);
                 echo Html::button(Yii::t('menst.cms', 'Off'), ['class'=>'btn btn-success navbar-btn btn-xs active']);
             }
 
@@ -98,12 +98,12 @@ class CmsPanel extends Widget {
                         'size' => Modal::SIZE_LARGE,
                         'closeButton' => false
                     ],
-                    'buttonContent' => Html::a('<i class="glyphicon glyphicon-pencil"></i> ' . Yii::t('menst.cms', 'Configuration'), ['/cms/default/params', 'modal' => 1])
+                    'buttonContent' => Html::a('<i class="glyphicon glyphicon-pencil"></i> ' . Yii::t('menst.cms', 'Configuration'), ['/cmf/default/params', 'modal' => 1])
                 ]);*/
-                $items[] = ['label' => '<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('menst.cms', 'Flush Cache'), 'url' => ['/cms/default/flush-cache']];
+                $items[] = ['label' => '<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('menst.cms', 'Flush Cache'), 'url' => ['/cmf/default/flush-cache']];
                 $items[] = '<li class="divider"></li>';
             }
-            $items[] = ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('menst.cms', 'Logout'), 'url' => ['/cms/auth/default/logout']];
+            $items[] = ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('menst.cms', 'Logout'), 'url' => ['/cmf/auth/default/logout']];
 
             echo Nav::widget([
                 'options' => ['class' => 'navbar-nav navbar-right'],

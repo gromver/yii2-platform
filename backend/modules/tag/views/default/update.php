@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Tag */
+/* @var $model gromver\cmf\common\models\Tag */
 
 $this->title = Yii::t('menst.cms', 'Update Tag: {title}', [
     'title' => $model->title

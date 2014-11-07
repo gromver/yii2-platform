@@ -1,18 +1,18 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\search;
+namespace gromver\cmf\backend\modules\search;
 
-use menst\cms\backend\interfaces\DesktopInterface;
-use menst\cms\backend\interfaces\MenuRouterInterface;
-use menst\modulequery\ModuleQuery;
-use menst\cms\common\interfaces\SearchableInterface;
+use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\cmf\backend\interfaces\MenuRouterInterface;
+use gromver\modulequery\ModuleQuery;
+use gromver\cmf\common\interfaces\SearchableInterface;
 use yii\base\BootstrapInterface;
 use Yii;
 
@@ -20,14 +20,14 @@ use Yii;
  * Class Module
  * В этом модуле можно кастомизировать дополнительные кдассы ActiveDocument поддерживаемые цмской
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property string[] $documents
  * @property string[] $models
  */
 class Module extends \yii\base\Module implements BootstrapInterface, DesktopInterface, MenuRouterInterface, SearchableInterface
 {
-    public $controllerNamespace = 'menst\cms\backend\modules\search\controllers';
+    public $controllerNamespace = 'gromver\cmf\backend\modules\search\controllers';
     public $documentClasses = [];
     public $desktopOrder = 6;
     public $index = 'cms';
@@ -44,7 +44,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
      */
     public function bootstrap($application)
     {
-        \menst\cms\common\models\search\ActiveDocument::watch(ModuleQuery::instance()->implement('menst\cms\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
+        \gromver\cmf\common\models\search\ActiveDocument::watch(ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
     }
 
     /**
@@ -55,7 +55,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
         return [
             'label' => Yii::t('menst.cms', 'Search'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Searching'), 'url' => ['/cms/search/default/index']],
+                ['label' => Yii::t('menst.cms', 'Searching'), 'url' => ['/cmf/search/default/index']],
             ]
         ];
     }
@@ -68,7 +68,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
         return [
             'label' => Yii::t('menst.cms', 'Search'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'Searching'), 'route' => 'cms/search/default/index'],
+                ['label' => Yii::t('menst.cms', 'Searching'), 'route' => 'cmf/search/default/index'],
             ]
         ];
     }

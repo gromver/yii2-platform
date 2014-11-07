@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\auth\controllers;
+namespace gromver\cmf\backend\modules\auth\controllers;
 
 use kartik\widgets\Alert;
 use Yii;
@@ -15,15 +15,15 @@ use yii\di\Instance;
 use yii\mail\BaseMailer;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use menst\cms\common\models\LoginForm;
-use menst\cms\common\models\User;
+use gromver\cmf\common\models\LoginForm;
+use gromver\cmf\common\models\User;
 
 /**
  * Class DefaultController
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
- * @property \menst\cms\backend\modules\auth\Module Module
+ * @property \gromver\cmf\backend\modules\auth\Module Module
  */
 class DefaultController extends Controller
 {
@@ -181,10 +181,10 @@ class DefaultController extends Controller
         if ($user->save(false)) {
             $mailer = Instance::ensure($this->mailer, BaseMailer::className());
 
-            return $mailer->compose('@menst/cms/backend/modules/auth/views/emails/passwordResetToken', ['user' => $user])
-                ->setFrom(Yii::$app->cms->params['supportEmail'], Yii::t('menst.cms', '{name} robot', ['name' => Yii::$app->cms->siteName]))
+            return $mailer->compose('@gromver/cmf/backend/modules/auth/views/emails/passwordResetToken', ['user' => $user])
+                ->setFrom(Yii::$app->cmf->params['supportEmail'], Yii::t('menst.cms', '{name} robot', ['name' => Yii::$app->cmf->siteName]))
                 ->setTo($user->email)
-                ->setSubject(Yii::t('menst.cms', 'Password reset for {name}.', ['name' => Yii::$app->cms->siteName]))
+                ->setSubject(Yii::t('menst.cms', 'Password reset for {name}.', ['name' => Yii::$app->cmf->siteName]))
                 ->send();
         }
 

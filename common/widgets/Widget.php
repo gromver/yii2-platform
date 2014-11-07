@@ -1,18 +1,18 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\widgets;
+namespace gromver\cmf\common\widgets;
 
-use menst\models\ObjectModel;
-use menst\models\SpecificationInterface;
-use menst\cms\common\models\WidgetConfig;
-use menst\widgets\ModalIFrame;
+use gromver\models\ObjectModel;
+use gromver\models\SpecificationInterface;
+use gromver\cmf\common\models\WidgetConfig;
+use gromver\widgets\ModalIFrame;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\bootstrap\Modal;
@@ -22,9 +22,9 @@ use yii\helpers\Json;
 /**
  * Class Widget
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
- * @package menst/cms
+ * @package gromver/cms
  * @property $context string
  * @property $realContext string
  */
@@ -101,7 +101,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
     public function run()
     {
-        echo Html::beginTag('div', ['id' => $this->id, 'class' => 'widget-wrapper' . ($this->canEdit() && Yii::$app->cms->getIsEditMode() && $this->getShowPanel() ? ' edit-mode' : '')]);
+        echo Html::beginTag('div', ['id' => $this->id, 'class' => 'widget-wrapper' . ($this->canEdit() && Yii::$app->cmf->getIsEditMode() && $this->getShowPanel() ? ' edit-mode' : '')]);
         if ($this->_exception === null) {
             try {
                 $this->launch();
@@ -115,7 +115,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
                 $this->renderException();
             }
 
-            if ($this->_showPanel && Yii::$app->cms->getIsEditMode()) {
+            if ($this->_showPanel && Yii::$app->cmf->getIsEditMode()) {
                 $this->renderEditControl();
             }
         }
@@ -236,7 +236,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
             ]
         ]);
 
-        echo Html::beginForm(['/cms/widget/default/configure', 'modal' => 1]);
+        echo Html::beginForm(['/cmf/widget/default/configure', 'modal' => 1]);
 
         echo Html::hiddenInput('url', Yii::$app->request->getAbsoluteUrl());
 

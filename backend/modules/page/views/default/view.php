@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Page */
+/* @var $model gromver\cmf\common\models\Page */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Pages'), 'url' => ['index']];

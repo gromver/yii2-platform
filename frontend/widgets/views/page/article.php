@@ -1,13 +1,13 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model \menst\cms\common\models\Page
+ * @var $model \gromver\cmf\common\models\Page
  */
 
 use yii\helpers\Html;
 
 if($this->context->showTranslations)
-    echo \menst\cms\frontend\widgets\Translations::widget([
+    echo \gromver\cmf\frontend\widgets\Translations::widget([
         'model' => $model,
         'options' => [
             'class' => 'pull-right'

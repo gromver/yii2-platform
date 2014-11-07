@@ -1,22 +1,22 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models;
+namespace gromver\cmf\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
-use menst\cms\backend\behaviors\NestedSetBehavior;
-use menst\cms\backend\behaviors\TaggableBehavior;
-use menst\cms\backend\behaviors\upload\ThumbnailProcessor;
-use menst\cms\backend\behaviors\UploadBehavior;
-use menst\cms\backend\behaviors\VersioningBehavior;
-use menst\cms\common\interfaces\TranslatableInterface;
-use menst\cms\common\interfaces\ViewableInterface;
+use gromver\cmf\backend\behaviors\NestedSetBehavior;
+use gromver\cmf\backend\behaviors\TaggableBehavior;
+use gromver\cmf\backend\behaviors\upload\ThumbnailProcessor;
+use gromver\cmf\backend\behaviors\UploadBehavior;
+use gromver\cmf\backend\behaviors\VersioningBehavior;
+use gromver\cmf\common\interfaces\TranslatableInterface;
+use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\Inflector;
@@ -24,7 +24,7 @@ use yii\helpers\Inflector;
 /**
  * This is the model class for table "cms_category".
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
  * @property integer $parent_id
@@ -318,14 +318,14 @@ class Category extends \yii\db\ActiveRecord implements TranslatableInterface, Vi
      */
     public function getViewLink()
     {
-        return ['/cms/news/category/view', 'id' => $this->id/*, 'alias'=>$this->alias*/];
+        return ['/cmf/news/category/view', 'id' => $this->id/*, 'alias'=>$this->alias*/];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cms/news/category/view', 'id' => $model['id']/*, 'alias'=>$model['alias']*/];
+        return ['/cmf/news/category/view', 'id' => $model['id']/*, 'alias'=>$model['alias']*/];
     }
 
     //translatable interface

@@ -4,8 +4,8 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Category */
-/* @var $sourceModel menst\cms\common\models\Category */
+/* @var $model gromver\cmf\common\models\Category */
+/* @var $sourceModel gromver\cmf\common\models\Category */
 
 $this->title = Yii::t('menst.cms', 'Add Category');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Categories'), 'url' => ['index']];

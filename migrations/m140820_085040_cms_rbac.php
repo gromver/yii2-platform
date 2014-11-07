@@ -35,7 +35,7 @@ class m140820_085040_cms_rbac extends Migration
         $auth->add($administratePermission);
 
         // add the rule
-        $authorizedRule = new \menst\cms\common\rules\AuthorizedRule();
+        $authorizedRule = new \gromver\cmf\common\rules\AuthorizedRule();
         $auth->add($authorizedRule);
 
         //add "Authorized" role

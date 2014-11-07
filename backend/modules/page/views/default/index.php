@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel menst\cms\backend\modules\page\models\PageSearch */
+/* @var $searchModel gromver\cmf\backend\modules\page\models\PageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('menst.cms', 'Pages');
@@ -37,8 +37,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'language',
                 'value' => function($model) {
-                        /** @var $model \menst\cms\common\models\Page */
-                        return \menst\cms\backend\widgets\Translator::widget(['model' => $model]);
+                        /** @var $model \gromver\cmf\common\models\Page */
+                        return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
                     },
                 'format' => 'raw',
                 'filter' => Yii::$app->getLanguagesList()
@@ -48,26 +48,26 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model) {
-                        /** @var $model \menst\cms\common\models\Page */
-                        return $model->status === \menst\cms\common\models\Page::STATUS_PUBLISHED ? Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['unpublish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => '0', 'data-method' => 'post']) : Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['publish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => '0', 'data-method' => 'post']);
+                        /** @var $model \gromver\cmf\common\models\Page */
+                        return $model->status === \gromver\cmf\common\models\Page::STATUS_PUBLISHED ? Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['unpublish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => '0', 'data-method' => 'post']) : Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['publish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => '0', 'data-method' => 'post']);
                     },
-                'filter' => \menst\cms\common\models\Post::statusLabels(),
+                'filter' => \gromver\cmf\common\models\Post::statusLabels(),
                 'format' => 'raw',
                 'width'=>'80px'
             ],
             [
                 'attribute' => 'tags',
                 'value' => function($model){
-                        /** @var $model \menst\cms\common\models\Page */
+                        /** @var $model \gromver\cmf\common\models\Page */
                         return implode(', ', \yii\helpers\ArrayHelper::map($model->tags, 'id', 'title'));
                     },
                 'filterType' => \dosamigos\selectize\Selectize::className(),
                 'filterWidgetOptions' => [
-                    'items' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
+                    'items' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
                     'clientOptions' => [
                         'maxItems' => 1
                     ],
-                    'url' => ['/cms/tag/default/tag-list']
+                    'url' => ['/cmf/tag/default/tag-list']
                 ]
             ],
             [

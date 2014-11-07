@@ -25,7 +25,7 @@ AppAsset::register($this);
 	<div class="wrap">
 		<?php
 			NavBar::begin([
-				'brandLabel' => Yii::$app->cms->siteName,
+				'brandLabel' => Yii::$app->cmf->siteName,
 				'brandUrl' => Yii::$app->homeUrl,
 				'options' => [
 					'class' => 'navbar-inverse navbar-fixed-top',
@@ -41,8 +41,8 @@ AppAsset::register($this);
                 $menuItems[] = [
                     'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
                     'items' => [
-                        ['label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::t('menst.cms', 'Profile'), 'url' => ['/cms/user/default/update', 'id' => Yii::$app->user->id]],
-                        ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('menst.cms', 'Logout'), 'url' => ['/cms/auth/default/logout']]
+                        ['label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::t('menst.cms', 'Profile'), 'url' => ['/cmf/user/default/update', 'id' => Yii::$app->user->id]],
+                        ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('menst.cms', 'Logout'), 'url' => ['/cmf/auth/default/logout']]
                     ]
                 ];
 			}
@@ -70,7 +70,7 @@ AppAsset::register($this);
 
 	<footer class="footer">
 		<div class="container">
-		<p class="pull-left">&copy; <?= Yii::$app->cms->siteName . ' ' . date('Y') ?></p>
+		<p class="pull-left">&copy; <?= Yii::$app->cmf->siteName . ' ' . date('Y') ?></p>
 		<p class="pull-right"><?= Yii::powered() ?></p>
 		</div>
 	</footer>

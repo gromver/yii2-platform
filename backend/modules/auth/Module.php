@@ -1,16 +1,16 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\auth;
+namespace gromver\cmf\backend\modules\auth;
 
-use menst\cms\backend\interfaces\DesktopInterface;
-use menst\cms\backend\interfaces\MenuRouterInterface;
+use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\cmf\backend\interfaces\MenuRouterInterface;
 use Yii;
 
 /**
@@ -19,11 +19,11 @@ use Yii;
  * количесвто безуспешных попыток авторизации с последущим подключением капчи
  *
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInterface
 {
-    public $controllerNamespace = 'menst\cms\backend\modules\auth\controllers';
+    public $controllerNamespace = 'gromver\cmf\backend\modules\auth\controllers';
     /**
      * @var int
      * @desc Remember Me Time (seconds), default = 2592000 (30 days)
@@ -48,10 +48,10 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
         return [
             'label' => Yii::t('menst.cms', 'Auth'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'Login'), 'route' => 'cms/auth/default/login'],
-                ['label' => Yii::t('menst.cms', 'Signup'), 'route' => 'cms/auth/default/signup'],
-                ['label' => Yii::t('menst.cms', 'Request password reset token'), 'route' => 'cms/auth/default/request-password-reset-token'],
-                ['label' => Yii::t('menst.cms', 'Reset password'), 'route' => 'cms/auth/default/reset-password'],
+                ['label' => Yii::t('menst.cms', 'Login'), 'route' => 'cmf/auth/default/login'],
+                ['label' => Yii::t('menst.cms', 'Signup'), 'route' => 'cmf/auth/default/signup'],
+                ['label' => Yii::t('menst.cms', 'Request password reset token'), 'route' => 'cmf/auth/default/request-password-reset-token'],
+                ['label' => Yii::t('menst.cms', 'Reset password'), 'route' => 'cmf/auth/default/reset-password'],
             ]
         ];
     }
@@ -64,8 +64,8 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
         return [
             'label' => Yii::t('menst.cms', 'Auth'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Login'), 'url' => ['/cms/auth/default/login']],
-                ['label' => Yii::t('menst.cms', 'Password Reset'), 'url' => ['/cms/auth/default/request-password-reset']],
+                ['label' => Yii::t('menst.cms', 'Login'), 'url' => ['/cmf/auth/default/login']],
+                ['label' => Yii::t('menst.cms', 'Password Reset'), 'url' => ['/cmf/auth/default/request-password-reset']],
             ]
         ];
     }

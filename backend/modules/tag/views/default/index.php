@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel menst\cms\backend\modules\tag\models\TagSearch */
+/* @var $searchModel gromver\cmf\backend\modules\tag\models\TagSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('menst.cms', 'Tags');
@@ -38,8 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'language',
                 'value' => function($model) {
-                        /** @var $model \menst\cms\common\models\Tag */
-                        return \menst\cms\backend\widgets\Translator::widget(['model' => $model]);
+                        /** @var $model \gromver\cmf\common\models\Tag */
+                        return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
                     },
                 'format' => 'html',
                 'filter' => Yii::$app->getLanguagesList()
@@ -48,15 +48,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'alias',
             [
                 'attribute' => 'group',
-                'filter' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\Tag::find()->groupBy('group')->andWhere('[[group]]!="" AND [[group]] IS NOT NULL')->all(), 'group', 'group')
+                'filter' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\Tag::find()->groupBy('group')->andWhere('[[group]]!="" AND [[group]] IS NOT NULL')->all(), 'group', 'group')
             ],
             [
                 'attribute' => 'status',
                 'value' => function($model) {
-                        /** @var $model \menst\cms\common\models\Tag */
-                        return $model->status === \menst\cms\common\models\Tag::STATUS_PUBLISHED ? Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['unpublish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax'=>'0', 'data-method'=>'post']) : Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['publish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => '0', 'data-method' => 'post']);
+                        /** @var $model \gromver\cmf\common\models\Tag */
+                        return $model->status === \gromver\cmf\common\models\Tag::STATUS_PUBLISHED ? Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['unpublish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax'=>'0', 'data-method'=>'post']) : Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['publish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => '0', 'data-method' => 'post']);
                     },
-                'filter' => \menst\cms\common\models\Tag::statusLabels(),
+                'filter' => \gromver\cmf\common\models\Tag::statusLabels(),
                 'format' => 'raw',
                 'width'=>'80px'
             ],

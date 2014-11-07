@@ -1,25 +1,25 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\widget;
+namespace gromver\cmf\backend\modules\widget;
 
-use menst\cms\backend\interfaces\DesktopInterface;
+use gromver\cmf\backend\interfaces\DesktopInterface;
 use Yii;
 
 /**
  * Class Module
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements DesktopInterface
 {
-    public $controllerNamespace = 'menst\cms\backend\modules\widget\controllers';
+    public $controllerNamespace = 'gromver\cmf\backend\modules\widget\controllers';
     public $desktopOrder = 10;
 
     /*public function init()
@@ -37,7 +37,7 @@ class Module extends \yii\base\Module implements DesktopInterface
         return [
             'label' => Yii::t('menst.cms', 'Widget'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Configurations'), 'url' => ['/cms/widget/default/index']]
+                ['label' => Yii::t('menst.cms', 'Configurations'), 'url' => ['/cmf/widget/default/index']]
             ]
         ];
     }

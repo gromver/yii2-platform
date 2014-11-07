@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models;
+namespace gromver\cmf\common\models;
 
 use creocoder\behaviors\NestedSetQuery;
 use yii\db\ActiveQuery;
@@ -16,7 +16,7 @@ use yii\db\Query;
 /**
  * Class CategoryQuery
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class CategoryQuery extends ActiveQuery
 {

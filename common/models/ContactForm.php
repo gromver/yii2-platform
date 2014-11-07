@@ -1,6 +1,6 @@
 <?php
 
-namespace menst\cms\common\models;
+namespace gromver\cmf\common\models;
 
 use Yii;
 use yii\base\Model;
@@ -27,7 +27,7 @@ class ContactForm extends Model
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha', 'captchaAction' => 'cms/default/captcha', 'on' => 'withCaptcha'],
+            ['verifyCode', 'captcha', 'captchaAction' => 'cmf/default/captcha', 'on' => 'withCaptcha'],
         ];
     }
 

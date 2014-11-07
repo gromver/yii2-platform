@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var menst\cms\backend\modules\page\models\MenuItemSearch $searchModel
+ * @var gromver\cmf\backend\modules\page\models\MenuItemSearch $searchModel
  */
 
 $this->title = Yii::t('menst.cms', 'Select Menu Item');
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'title',
                 'value' => function ($model) {
-                        /** @var $model \menst\cms\common\models\MenuItem */
+                        /** @var $model \gromver\cmf\common\models\MenuItem */
                         return str_repeat(" • ", max($model->level-2, 0)) . $model->title . '<br/>' . Html::tag('small', $model->path, ['class' => 'text-muted']);
                     },
                 'format' => 'html'
@@ -47,16 +47,16 @@ $this->params['breadcrumbs'][] = $this->title;
 			[
                 'attribute' => 'status',
                 'value' => function ($model, $index, $widget) {
-                    /** @var $model \menst\cms\common\models\MenuItem */
+                    /** @var $model \gromver\cmf\common\models\MenuItem */
                     return $model->getStatusLabel();
                 },
-                'filter' => \menst\cms\common\models\MenuItem::statusLabels()
+                'filter' => \gromver\cmf\common\models\MenuItem::statusLabels()
             ],
             [
                 'value' => function ($model) {
                         return Html::a(Yii::t('menst.cms', 'Select'), '#', [
                             'class' => 'btn btn-primary btn-xs',
-                            'onclick' => \menst\widgets\ModalIFrame::emitDataJs([
+                            'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                     'id' => $model->id,
                                     'description' => Yii::t('menst.cms', 'Menu Item: {title}', ['title' => $model->title]),
                                     'link' => $model->viewLink,

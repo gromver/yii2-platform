@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel menst\cms\backend\modules\menu\models\MenuItemSearch */
+/* @var $searchModel gromver\cmf\backend\modules\menu\models\MenuItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('menst.cms', 'Menu Items');
@@ -41,8 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'language',
                 'value' => function ($model) {
-                    /** @var $model \menst\cms\common\models\MenuItem */
-                    return \menst\cms\backend\widgets\Translator::widget(['model' => $model]);
+                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
                 },
                 'format' => 'raw',
                 'filter' => Yii::$app->getLanguagesList()
@@ -52,27 +52,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'menu_type_id',
                 'width' => '100px',
                 'value' => function ($model) {
-                    /** @var $model \menst\cms\common\models\MenuItem */
+                    /** @var $model \gromver\cmf\common\models\MenuItem */
                     return $model->menuType->title;
                 },
-                'filter' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\MenuType::find()->all(), 'id', 'title')
+                'filter' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(), 'id', 'title')
             ],
             /*[
                 'attribute' => 'parent_id',
                 'width' => '100px',
                 'value' => function ($model) {
-                    /** @var $model \menst\cms\common\models\MenuItem * /
+                    /** @var $model \gromver\cmf\common\models\MenuItem * /
                     return $model->level > 2 ? $model->parent->title : '';
                 },
-                'filter' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\MenuItem::find()->noRoots()->orderBy('lft')->all(), 'id', function($model){
-                    /** @var $model \menst\cms\common\models\MenuItem * /
+                'filter' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuItem::find()->noRoots()->orderBy('lft')->all(), 'id', function($model){
+                    /** @var $model \gromver\cmf\common\models\MenuItem * /
                     return str_repeat(" • ", max($model->level-2, 0)) . $model->title;
                 })
             ],*/
             [
                 'attribute' => 'title',
                 'value' => function ($model) {
-                    /** @var $model \menst\cms\common\models\MenuItem */
+                    /** @var $model \gromver\cmf\common\models\MenuItem */
                     return str_repeat(" • ", max($model->level-2, 0)) . $model->title . '<br/>'.Html::tag('small', $model->path);
                 },
                 'format' => 'html'
@@ -81,8 +81,8 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model){
-                    /** @var $model \menst\cms\common\models\MenuItem */
-                    //return $model->status === \menst\cms\common\models\MenuItem::STATUS_PUBLISHED ? Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['unpublish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post']) : Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['publish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post'])
+                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    //return $model->status === \gromver\cmf\common\models\MenuItem::STATUS_PUBLISHED ? Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['unpublish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post']) : Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['publish', 'id' => $model->id]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post'])
                     /*switch ($model->status) {
                         case $model::STATUS_UNPUBLISHED:
                             return Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_UNPUBLISHED]), ['class' => 'btn btn-default btn-xs', 'data-pjax' => 0, 'data-method' => 'post']);
@@ -99,14 +99,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_UNPUBLISHED]), ['class' => 'btn btn-xs' . ($model::STATUS_UNPUBLISHED == $model->status ? ' btn-default active' : ' btn-default'), 'data-pjax' => 0, 'data-method' => 'post']) .
                     Html::endTag('div');
                 },
-                'filter' => \menst\cms\common\models\MenuItem::statusLabels(),
+                'filter' => \gromver\cmf\common\models\MenuItem::statusLabels(),
                 'width' => '80px',
                 'format' => 'raw'
             ],
             [
                 'attribute' => 'ordering',
                 'value' => function ($model) {
-                    /** @var $model \menst\cms\common\models\MenuItem */
+                    /** @var $model \gromver\cmf\common\models\MenuItem */
                     return Html::input('text', 'order', $model->ordering, ['class' => 'form-control']);
                 },
                 'format' => 'raw',

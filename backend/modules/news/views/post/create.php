@@ -4,8 +4,8 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Post */
-/* @var $sourceModel menst\cms\common\models\Post */
+/* @var $model gromver\cmf\common\models\Post */
+/* @var $sourceModel gromver\cmf\common\models\Post */
 
 $this->title = Yii::t('menst.cms', 'Add Post');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Posts'), 'url' => ['index']];

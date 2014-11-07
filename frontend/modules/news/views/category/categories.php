@@ -1,10 +1,10 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model menst\cms\common\models\Category
+ * @var $model gromver\cmf\common\models\Category
  */
 
-/** @var \menst\cms\common\models\MenuItem $menu */
+/** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : $model->title;
@@ -32,7 +32,7 @@ if ($model->metadesc) {
 }
 
 
-echo \menst\cms\frontend\widgets\CategoryList::widget([
+echo \gromver\cmf\frontend\widgets\CategoryList::widget([
     'id' => 'cat-cats',
     'source' => $model
 ]);

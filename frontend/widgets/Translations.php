@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\widgets;
+namespace gromver\cmf\frontend\widgets;
 
 use Yii;
 use yii\bootstrap\Widget;
@@ -17,7 +17,7 @@ use yii\helpers\Html;
 /**
  * Class Translations
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Translations extends Widget {
     public $model;
@@ -37,7 +37,7 @@ class Translations extends Widget {
         $items = '';
 
         foreach($this->model->translations as $language => $item) {
-            /** @var $item \menst\cms\common\interfaces\ViewableInterface */
+            /** @var $item \gromver\cmf\common\interfaces\ViewableInterface */
             if ($this->model->language === $language) {
                 $items = strtr($this->labelTemplate, [
                         '{label}' => $language

@@ -1,13 +1,13 @@
 {
-    "name": "menst/yii2-cms",
-    "description": "CMS for Yii2.",
-    "keywords": ["yii", "application", "cms"],
+    "name": "gromver/yii2-cmf",
+    "description": "CMF for Yii2.",
+    "keywords": ["yii", "application", "cms", "cmf"],
     "type": "yii2-extension",
     "license": "GNU-GPL-v2",
     "authors": [
         {
             "name": "Roman Gayazov",
-            "email": "m.e.n.s.t@yandex.ru"
+            "email": "gromver5@gmail.com"
         }
     ],
     "minimum-stability": "dev",
@@ -28,13 +28,13 @@
         "2amigos/yii2-selectize-widget" : "*",
         "creocoder/yii2-nested-set-behavior": "*",
         "zelenin/yii2-rss": "dev-master",
-        "menst/yii2-models": "*",
-        "menst/yii2-widgets": "*",
-        "menst/yii2-module-query": "*"
+        "gromver/yii2-models": "*",
+        "gromver/yii2-widgets": "*",
+        "gromver/yii2-module-query": "*"
     },
     "autoload": {
         "psr-4": {
-            "menst\\cms\\": ""
+            "gromver\\cmf\\": ""
         }
     }
 }

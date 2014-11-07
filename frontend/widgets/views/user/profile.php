@@ -5,7 +5,7 @@ use yii\bootstrap\ActiveForm;
 
 /**
  * @var yii\web\View $this
- * @var \menst\models\ObjectModel $model
+ * @var \gromver\models\ObjectModel $model
  * @var yii\bootstrap\ActiveForm $form
  */
 ?>
@@ -16,7 +16,7 @@ use yii\bootstrap\ActiveForm;
         'layout' => 'horizontal',
     ]); ?>
 
-    <?= \menst\models\widgets\Fields::widget(['model' => $model]) ?>
+    <?= \gromver\models\widgets\Fields::widget(['model' => $model]) ?>
 
     <div>
         <?= Html::submitButton(Yii::t('menst.cms', 'Update'), ['class' => 'btn btn-primary']) ?>

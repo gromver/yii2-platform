@@ -1,7 +1,7 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model \menst\cms\common\models\Post
+ * @var $model \gromver\cmf\common\models\Post
  * @var $key string
  * @var $index integer
  * @var $widget \yii\widgets\ListView

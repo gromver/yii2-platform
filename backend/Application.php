@@ -1,26 +1,26 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend;
+namespace gromver\cmf\backend;
 
 use yii\helpers\ArrayHelper;
 
 /**
  * Class Application
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Application extends \yii\web\Application {
     public $language = 'en';
     public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
-    public $layout = '@menst/cms/backend/views/layouts/main';
+    public $layout = '@gromver/cmf/backend/views/layouts/main';
     public $elasticsearchIndex = 'cms';
 
     private $_modulesHash;
@@ -33,16 +33,16 @@ class Application extends \yii\web\Application {
         $config = ArrayHelper::merge([
             'components' => [
                 'request' => [
-                    'class' => 'menst\cms\common\components\Request',
+                    'class' => 'gromver\cmf\common\components\Request',
                     'csrfParam' => '_csrfBackend',
                 ],
                 'urlManager' => [
-                    'class' => 'menst\cms\common\components\UrlManager',
+                    'class' => 'gromver\cmf\common\components\UrlManager',
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                 ],
                 'user' => [
-                    'class' => 'menst\cms\common\components\User',
+                    'class' => 'gromver\cmf\common\components\User',
                     'idParam' => '__idBackend',
                     'authTimeoutParam' => '__expireBackend',
                     'absoluteAuthTimeoutParam' => '__absoluteExpireBackend',
@@ -51,7 +51,7 @@ class Application extends \yii\web\Application {
                 ],
                 'errorHandler' => [
                     'class' => 'yii\web\ErrorHandler',
-                    'errorAction' => 'cms/default/error'
+                    'errorAction' => 'cmf/default/error'
                 ],
                 'authManager' => [
                     'class' => 'yii\rbac\DbManager',
@@ -72,25 +72,25 @@ class Application extends \yii\web\Application {
                 'assetManager' => [
                     'bundles' => [
                         'mihaildev\ckeditor\Assets' => [
-                            'sourcePath' => '@menst/cms/backend/assets/ckeditor',
+                            'sourcePath' => '@gromver/cmf/backend/assets/ckeditor',
                         ],
                     ],
                 ]
             ],
             'modules' => [
                 'cms' => [
-                    'class' => 'menst\cms\backend\modules\main\Module',
+                    'class' => 'gromver\cmf\backend\modules\main\Module',
                     'modules' => [
-                        'user'      => ['class' => 'menst\cms\backend\modules\user\Module'],
-                        'auth'      => ['class' => 'menst\cms\backend\modules\auth\Module'],
-                        'menu'      => ['class' => 'menst\cms\backend\modules\menu\Module'],
-                        'news'      => ['class' => 'menst\cms\backend\modules\news\Module'],
-                        'page'      => ['class' => 'menst\cms\backend\modules\page\Module'],
-                        'tag'       => ['class' => 'menst\cms\backend\modules\tag\Module'],
-                        'version'   => ['class' => 'menst\cms\backend\modules\version\Module'],
-                        'widget'    => ['class' => 'menst\cms\backend\modules\widget\Module'],
-                        'media'     => ['class' => 'menst\cms\backend\modules\media\Module'],
-                        'search'    => ['class' => 'menst\cms\backend\modules\search\Module'],
+                        'user'      => ['class' => 'gromver\cmf\backend\modules\user\Module'],
+                        'auth'      => ['class' => 'gromver\cmf\backend\modules\auth\Module'],
+                        'menu'      => ['class' => 'gromver\cmf\backend\modules\menu\Module'],
+                        'news'      => ['class' => 'gromver\cmf\backend\modules\news\Module'],
+                        'page'      => ['class' => 'gromver\cmf\backend\modules\page\Module'],
+                        'tag'       => ['class' => 'gromver\cmf\backend\modules\tag\Module'],
+                        'version'   => ['class' => 'gromver\cmf\backend\modules\version\Module'],
+                        'widget'    => ['class' => 'gromver\cmf\backend\modules\widget\Module'],
+                        'media'     => ['class' => 'gromver\cmf\backend\modules\media\Module'],
+                        'search'    => ['class' => 'gromver\cmf\backend\modules\search\Module'],
                     ]
                 ],
                 'gridview' => ['class' => 'kartik\grid\Module']

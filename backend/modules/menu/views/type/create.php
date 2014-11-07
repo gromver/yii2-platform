@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\MenuType */
+/* @var $model gromver\cmf\common\models\MenuType */
 
 $this->title = Yii::t('menst.cms', 'Добавить пункт меню');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Типы меню'), 'url' => ['index']];

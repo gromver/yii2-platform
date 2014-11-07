@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\backend\modules\menu\models\MenuItemSearch */
+/* @var $model gromver\cmf\backend\modules\menu\models\MenuItemSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

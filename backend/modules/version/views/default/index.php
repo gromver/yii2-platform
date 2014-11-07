@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel menst\cms\backend\modules\version\models\VersionSearch */
+/* @var $searchModel gromver\cmf\backend\modules\version\models\VersionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('menst.cms', 'Versions');
@@ -59,14 +59,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'created_by',
                 'value' => function($model) {
-                        /** $model \menst\cms\common\models\Version */
+                        /** $model \gromver\cmf\common\models\Version */
                         return $model->user ? $model->user->username : $model->created_by;
                     }
             ],
             [
                 'attribute' => 'keep_forever',
                 'value'=>function($model) {
-                        /** $model \menst\cms\common\models\Version */
+                        /** $model \gromver\cmf\common\models\Version */
                         return Html::a($model->keep_forever ? Yii::t('menst.cms', 'Yes') . ' <small class="glyphicon glyphicon-lock"></small>' : Yii::t('menst.cms', 'No'), ['keep-forever', 'id' => $model->id], [
                             'class'=>'btn btn-xs btn-default active btn-keep-forever',
                             'data-method' => 'post',

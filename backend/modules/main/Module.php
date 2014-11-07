@@ -1,19 +1,19 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\main;
+namespace gromver\cmf\backend\modules\main;
 
-use menst\modulequery\ModuleQuery;
-use menst\cms\common\interfaces\SearchableInterface;
-use menst\cms\common\models\Table;
-use menst\cms\backend\interfaces\DesktopInterface;
-use menst\cms\backend\interfaces\MenuRouterInterface;
+use gromver\modulequery\ModuleQuery;
+use gromver\cmf\common\interfaces\SearchableInterface;
+use gromver\cmf\common\models\Table;
+use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\cmf\backend\interfaces\MenuRouterInterface;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\caching\ExpressionDependency;
@@ -23,14 +23,14 @@ use yii\helpers\ArrayHelper;
 /**
  * Class Module
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property string $siteName
  * @property bool $isEditMode
  */
 class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInterface, BootstrapInterface, SearchableInterface
 {
-    public $controllerNamespace = 'menst\cms\backend\modules\main\controllers';
+    public $controllerNamespace = 'gromver\cmf\backend\modules\main\controllers';
 
     public $paramsPath = '@common/config/cms';
 
@@ -41,14 +41,14 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
      */
     public function bootstrap($app)
     {
-        Yii::$container->set('menst\models\fields\EditorField', ['controller' => 'cms/media/manager']);
-        Yii::$container->set('menst\models\fields\MediaField', ['controller' => 'cms/media/manager']);
-        Yii::$container->set('menst\modulequery\ModuleQuery', [
+        Yii::$container->set('gromver\models\fields\EditorField', ['controller' => 'cmf/media/manager']);
+        Yii::$container->set('gromver\models\fields\MediaField', ['controller' => 'cmf/media/manager']);
+        Yii::$container->set('gromver\modulequery\ModuleQuery', [
             'cache' => $app->cache,
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);
 
-        ModuleQuery::instance()->implement('\menst\cms\common\interfaces\BootstrapInterface')/*->cache('cache')*/->invoke('bootstrap', [$app]);
+        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')/*->cache('cache')*/->invoke('bootstrap', [$app]);
 
         Table::bootstrap();
 
@@ -77,9 +77,9 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
         return [
             'label' => Yii::t('menst.cms', 'System'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Site Map'), 'url' => ['/cms/default/index']],
-                ['label' => Yii::t('menst.cms', 'Settings'), 'url' => ['/cms/default/params']],
-                ['label' => Yii::t('menst.cms', 'Flush Cache'), 'url' => ['/cms/default/flush-cache']],
+                ['label' => Yii::t('menst.cms', 'Site Map'), 'url' => ['/cmf/default/index']],
+                ['label' => Yii::t('menst.cms', 'Settings'), 'url' => ['/cmf/default/params']],
+                ['label' => Yii::t('menst.cms', 'Flush Cache'), 'url' => ['/cmf/default/flush-cache']],
             ]
         ];
     }
@@ -92,8 +92,8 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
         return [
             'label' => Yii::t('menst.cms', 'System'),
             'routers' => [
-                //['label' => Yii::t('menst.cms', 'Sitemap'), 'route' => 'cms/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/],
-                ['label' => Yii::t('menst.cms', 'Contact Form'), 'route' => 'cms/default/contact'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
+                //['label' => Yii::t('menst.cms', 'Sitemap'), 'route' => 'cmf/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/],
+                ['label' => Yii::t('menst.cms', 'Contact Form'), 'route' => 'cmf/default/contact'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
             ]
         ];
     }
@@ -106,9 +106,9 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getDocumentClasses()
     {
         return [
-            'menst\cms\common\models\search\Page',
-            'menst\cms\common\models\search\Post',
-            'menst\cms\common\models\search\Category',
+            'gromver\cmf\common\models\search\Page',
+            'gromver\cmf\common\models\search\Post',
+            'gromver\cmf\common\models\search\Category',
         ];
     }
 

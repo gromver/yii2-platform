@@ -1,25 +1,25 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\media;
+namespace gromver\cmf\backend\modules\media;
 
-use menst\cms\backend\interfaces\DesktopInterface;
+use gromver\cmf\backend\interfaces\DesktopInterface;
 use Yii;
 
 /**
  * Class Module
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements DesktopInterface
 {
-    public $controllerNamespace = 'menst\cms\backend\modules\media\controllers';
+    public $controllerNamespace = 'gromver\cmf\backend\modules\media\controllers';
     /**
      * @var array elFinder manager controller config
      * @see \mihaildev\elfinder\Controller
@@ -68,7 +68,7 @@ class Module extends \yii\base\Module implements DesktopInterface
         return [
             'label' => Yii::t('menst.cms', 'Media'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Media Manager'), 'url' => ['/cms/media/default/index']]
+                ['label' => Yii::t('menst.cms', 'Media Manager'), 'url' => ['/cmf/media/default/index']]
             ]
         ];
     }

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Menu */
+/* @var $model gromver\cmf\common\models\Menu */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 

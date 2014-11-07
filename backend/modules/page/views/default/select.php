@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var menst\cms\backend\modules\page\models\PageSearch $searchModel
+ * @var gromver\cmf\backend\modules\page\models\PageSearch $searchModel
  * @var string $route
  */
 
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'title',
                 'value' => function ($model) {
-                        /** @var $model \menst\cms\common\models\Page */
+                        /** @var $model \gromver\cmf\common\models\Page */
                         return $model->title . '<br/>' . Html::tag('small', $model->alias, ['class' => 'text-muted']);
                     },
                 'format' => 'html'
@@ -48,34 +48,34 @@ $this->params['breadcrumbs'][] = $this->title;
 			[
                 'attribute' => 'status',
                 'value' => function ($model, $index, $widget) {
-                    /** @var $model \menst\cms\common\models\Page */
+                    /** @var $model \gromver\cmf\common\models\Page */
                     return $model->getStatusLabel();
                 },
-                'filter' => \menst\cms\common\models\Page::statusLabels()
+                'filter' => \gromver\cmf\common\models\Page::statusLabels()
             ],
             [
                 'attribute' => 'tags',
                 'value' => function ($model){
-                        /** @var $model \menst\cms\common\models\Page */
+                        /** @var $model \gromver\cmf\common\models\Page */
                         return implode(', ', \yii\helpers\ArrayHelper::map($model->tags, 'id', 'title'));
                     },
                 'filterType' => \dosamigos\selectize\Selectize::className(),
                 'filterWidgetOptions' => [
-                    'items' => \yii\helpers\ArrayHelper::map(\menst\cms\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
+                    'items' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
                     'clientOptions' => [
                         'maxItems' => 1
                     ],
-                    'url' => ['/cms/default/tag-list']
+                    'url' => ['/cmf/default/tag-list']
                 ]
             ],
             [
                 'value' => function ($model) use ($route) {
                         return Html::a(Yii::t('menst.cms', 'Select'), '#', [
                             'class' => 'btn btn-primary btn-xs',
-                            'onclick' => \menst\widgets\ModalIFrame::emitDataJs([
+                            'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                     'id' => $model->id,
                                     'description' => Yii::t('menst.cms', 'Page: {title}', ['title' => $model->title]),
-                                    'link' => \menst\cms\common\models\MenuItem::toRoute($route, ['id' => $model->id]),
+                                    'link' => \gromver\cmf\common\models\MenuItem::toRoute($route, ['id' => $model->id]),
                                     'value' => $model->id . ':' . $model->alias
                                 ]),
                         ]);

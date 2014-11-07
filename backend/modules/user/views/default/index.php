@@ -2,10 +2,10 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use menst\cms\common\models\User;
+use gromver\cmf\common\models\User;
 
 /* @var $this yii\web\View */
-/* @var $searchModel menst\cms\backend\modules\user\models\UserSearch */
+/* @var $searchModel gromver\cmf\backend\modules\user\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('menst.cms', 'Users');
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'kartik\grid\ActionColumn',
-                //'class' => 'menst\cms\backend\widgets\ActionColumn',
+                //'class' => 'gromver\cmf\backend\widgets\ActionColumn',
                 'template' => '{params} {view} {update} {delete}',
                 'deleteOptions' => ['data-method'=>'delete'],
                 'buttons' => [

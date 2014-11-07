@@ -1,18 +1,18 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\news\controllers;
+namespace gromver\cmf\backend\modules\news\controllers;
 
 use kartik\widgets\Alert;
 use Yii;
-use menst\cms\common\models\Category;
-use menst\cms\backend\modules\news\models\CategorySearch;
+use gromver\cmf\common\models\Category;
+use gromver\cmf\backend\modules\news\models\CategorySearch;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -22,7 +22,7 @@ use yii\filters\VerbFilter;
 /**
  * Class CategoryController implements the CRUD actions for Category model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class CategoryController extends Controller
 {
@@ -82,7 +82,7 @@ class CategoryController extends Controller
      * Lists all Post models.
      * @return mixed
      */
-    public function actionSelect($route = 'cms/news/category/view')
+    public function actionSelect($route = 'cmf/news/category/view')
     {
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);

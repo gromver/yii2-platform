@@ -5,11 +5,11 @@
  * @var $key string
  * @var $index integer
  * @var $widget \yii\widgets\ListView
- * @var $postListWidget \menst\cms\frontend\widgets\PostList
+ * @var $postListWidget \gromver\cmf\frontend\widgets\PostList
  */
 
 use yii\helpers\Html;
-use menst\cms\common\models\Post;
+use gromver\cmf\common\models\Post;
 
 $urlManager = Yii::$app->urlManager; ?>
 <div class="issue-wrapper">
@@ -18,8 +18,8 @@ $urlManager = Yii::$app->urlManager; ?>
         <small class="issue-published"><?= Yii::$app->formatter->asDatetime($model->published_at) ?></small>
         <small class="issue-separator">|</small>
         <?php foreach ($model->tags as $tag) {
-            /** @var $tag \menst\cms\common\models\Tag */
-            echo Html::a($tag->title, ['/cms/tag/default/posts', 'tag_id' => $tag->id, 'tag_alias' => $tag->alias, 'category_id' => $postListWidget->category ? $postListWidget->category->id : null], ['class' => 'issue-tag badge']);
+            /** @var $tag \gromver\cmf\common\models\Tag */
+            echo Html::a($tag->title, ['/cmf/tag/default/posts', 'tag_id' => $tag->id, 'tag_alias' => $tag->alias, 'category_id' => $postListWidget->category ? $postListWidget->category->id : null], ['class' => 'issue-tag badge']);
         } ?>
     </div>
     <?php if($model->preview_image) {

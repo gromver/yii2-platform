@@ -1,13 +1,13 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model \menst\cms\common\models\Post
+ * @var $model \gromver\cmf\common\models\Post
  */
 
 use yii\helpers\Html;
 
 if ($this->context->showTranslations) {
-    echo \menst\cms\frontend\widgets\Translations::widget([
+    echo \gromver\cmf\frontend\widgets\Translations::widget([
         'model' => $model,
         'options' => [
             'class' => 'pull-right'
@@ -21,8 +21,8 @@ if ($this->context->showTranslations) {
     <small class="issue-published"><?= Yii::$app->formatter->asDatetime($model->published_at) ?></small>
     <small class="issue-separator">|</small>
     <?php foreach ($model->tags as $tag) {
-        /** @var $tag \menst\cms\common\models\Tag */
-        echo Html::a($tag->title, ['/cms/tag/default/posts', 'tag_id' => $tag->id, 'tag_alias' => $tag->alias, 'category_id' => $model->category_id], ['class' => 'issue-tag badge']);
+        /** @var $tag \gromver\cmf\common\models\Tag */
+        echo Html::a($tag->title, ['/cmf/tag/default/posts', 'tag_id' => $tag->id, 'tag_alias' => $tag->alias, 'category_id' => $model->category_id], ['class' => 'issue-tag badge']);
     } ?>
 </div>
 

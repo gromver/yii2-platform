@@ -1,17 +1,17 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\page\controllers;
+namespace gromver\cmf\backend\modules\page\controllers;
 
 use Yii;
-use menst\cms\common\models\Page;
-use menst\cms\backend\modules\page\models\PageSearch;
+use gromver\cmf\common\models\Page;
+use gromver\cmf\backend\modules\page\models\PageSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -21,7 +21,7 @@ use yii\filters\VerbFilter;
 /**
  * Class DefaultController implements the CRUD actions for Page model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -80,7 +80,7 @@ class DefaultController extends Controller
      * Lists all Page models.
      * @return mixed
      */
-    public function actionSelect($route = 'cms/page/default/view')
+    public function actionSelect($route = 'cmf/page/default/view')
     {
         $searchModel = new PageSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());

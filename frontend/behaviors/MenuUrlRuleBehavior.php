@@ -1,21 +1,21 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\behaviors;
+namespace gromver\cmf\frontend\behaviors;
 
-use menst\cms\frontend\components\MenuManager;
+use gromver\cmf\frontend\components\MenuManager;
 use yii\base\Behavior;
 
 /**
  * Class MenuUrlRuleBehavior
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuUrlRuleBehavior extends Behavior
 {
@@ -28,7 +28,7 @@ class MenuUrlRuleBehavior extends Behavior
     }
 
     /**
-     * @param $event \menst\cms\frontend\components\MenuUrlRuleEvent
+     * @param $event \gromver\cmf\frontend\components\MenuUrlRuleEvent
      */
     public function parseRequest($event)
     {
@@ -36,7 +36,7 @@ class MenuUrlRuleBehavior extends Behavior
     }
 
     /**
-     * @param $event \menst\cms\frontend\components\MenuUrlRuleEvent
+     * @param $event \gromver\cmf\frontend\components\MenuUrlRuleEvent
      */
     public function createUrl($event)
     {

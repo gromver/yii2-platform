@@ -1,28 +1,28 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\modules\widget\controllers;
+namespace gromver\cmf\frontend\modules\widget\controllers;
 
 
-use menst\models\ObjectModel;
-use menst\widgets\ModalIFrame;
+use gromver\models\ObjectModel;
+use gromver\widgets\ModalIFrame;
 use Yii;
 use yii\helpers\Json;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use menst\cms\common\models\WidgetConfig;
+use gromver\cmf\common\models\WidgetConfig;
 
 /**
  * Class DefaultController implements the CRUD actions for Config model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -124,7 +124,7 @@ class DefaultController extends Controller
         }
 
         if($modal) {
-            Yii::$app->cms->layout = 'modal';
+            Yii::$app->cmf->layout = 'modal';
         }
 
         return $this->render('_formConfig', [

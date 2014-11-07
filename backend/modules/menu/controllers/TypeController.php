@@ -1,18 +1,18 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\menu\controllers;
+namespace gromver\cmf\backend\modules\menu\controllers;
 
 use kartik\widgets\Alert;
 use Yii;
-use menst\cms\common\models\MenuType;
-use menst\cms\backend\modules\menu\models\MenuTypeSearch;
+use gromver\cmf\common\models\MenuType;
+use gromver\cmf\backend\modules\menu\models\MenuTypeSearch;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -22,7 +22,7 @@ use yii\filters\VerbFilter;
 /**
  * Class TypeController implements the CRUD actions for Menu model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 
 class TypeController extends Controller

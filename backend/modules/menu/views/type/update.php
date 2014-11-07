@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\MenuType */
+/* @var $model gromver\cmf\common\models\MenuType */
 
 $this->title = Yii::t('menst.cms', 'Update Menu Type: {title}', [
     'title' => $model->title

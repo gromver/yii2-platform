@@ -4,9 +4,9 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Menu */
-/* @var $sourceModel menst\cms\common\models\Menu */
-/* @var $linkParamsModel menst\cms\common\models\MenuLinkParams */
+/* @var $model gromver\cmf\common\models\Menu */
+/* @var $sourceModel gromver\cmf\common\models\Menu */
+/* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
 
 $this->title = Yii::t('menst.cms', 'Add Menu Item');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Menu Types'), 'url' => ['type/index']];

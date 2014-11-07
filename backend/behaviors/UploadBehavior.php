@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\behaviors;
+namespace gromver\cmf\backend\behaviors;
 
 use Yii;
 use yii\base\Behavior;
@@ -18,12 +18,12 @@ use yii\helpers\FileHelper;
 use yii\validators\FileValidator;
 use yii\validators\Validator;
 use yii\web\UploadedFile;
-use menst\cms\backend\behaviors\upload\BaseProcessor;
+use gromver\cmf\backend\behaviors\upload\BaseProcessor;
 
 /**
  * Class UploadBehavior
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class UploadBehavior extends Behavior {
     public $attributes;
@@ -171,7 +171,7 @@ class UploadBehavior extends Behavior {
 
     /**
      * @param $attribute
-     * @return array|null|\menst\cms\backend\behaviors\upload\BaseProcessor
+     * @return array|null|\gromver\cmf\backend\behaviors\upload\BaseProcessor
      * @throws \yii\base\InvalidConfigException
      */
     private function getProcessor($attribute)

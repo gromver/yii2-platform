@@ -1,17 +1,17 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\tag\controllers;
+namespace gromver\cmf\backend\modules\tag\controllers;
 
 use Yii;
-use menst\cms\common\models\Tag;
-use menst\cms\backend\modules\tag\models\TagSearch;
+use gromver\cmf\common\models\Tag;
+use gromver\cmf\backend\modules\tag\models\TagSearch;
 use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
@@ -22,7 +22,7 @@ use yii\filters\VerbFilter;
 /**
  * Class DefaultController implements the CRUD actions for Tag model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
 {

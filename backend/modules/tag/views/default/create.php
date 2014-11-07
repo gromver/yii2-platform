@@ -4,8 +4,8 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Tag */
-/* @var $sourceModel menst\cms\common\models\Tag */
+/* @var $model gromver\cmf\common\models\Tag */
+/* @var $sourceModel gromver\cmf\common\models\Tag */
 
 $this->title = Yii::t('menst.cms', 'Create Tag');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Tags'), 'url' => ['index']];

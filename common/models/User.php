@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models;
+namespace gromver\cmf\common\models;
 
 use Yii;
 use yii\base\ModelEvent;
@@ -19,7 +19,7 @@ use yii\web\IdentityInterface;
 /**
  * This is the model class for table "cms_user".
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
  * @property string $username
@@ -34,8 +34,8 @@ use yii\web\IdentityInterface;
  * @property integer $deleted_at
  * @property integer $last_visit_at
  *
- * @property \menst\cms\common\models\Post[] $viewedPosts
- * @property \menst\cms\common\models\UserProfile $profile
+ * @property \gromver\cmf\common\models\Post[] $viewedPosts
+ * @property \gromver\cmf\common\models\UserProfile $profile
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -118,7 +118,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             ['password', 'string', 'min' => 6],
 
             ['password_confirm', 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'on' => ['create', 'resetPassword', 'update', 'profile']],
-            ['verifyCode', 'captcha', 'captchaAction' => 'cms/auth/default/captcha', 'on' => 'signupWithCaptcha']
+            ['verifyCode', 'captcha', 'captchaAction' => 'cmf/auth/default/captcha', 'on' => 'signupWithCaptcha']
         ];
     }
 

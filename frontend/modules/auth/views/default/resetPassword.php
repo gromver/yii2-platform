@@ -2,10 +2,10 @@
 /**
  * @var yii\web\View $this
  * @var yii\bootstrap\ActiveForm $form
- * @var menst\cms\common\models\User $model
+ * @var gromver\cmf\common\models\User $model
  */
 
-/** @var \menst\cms\common\models\MenuItem $menu */
+/** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'Reset Password');
@@ -19,7 +19,7 @@ if ($menu) {
     <h1><?= \yii\helpers\Html::encode($this->title) ?></h1>
 </div>
 
-<?php echo \menst\cms\frontend\widgets\AuthResetPassword::widget([
+<?php echo \gromver\cmf\frontend\widgets\AuthResetPassword::widget([
     'id' => 'auth-pass',
     'model' => $model
 ]);

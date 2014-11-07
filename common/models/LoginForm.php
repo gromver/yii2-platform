@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models;
+namespace gromver\cmf\common\models;
 
 use Yii;
 use yii\base\Model;
@@ -15,7 +15,7 @@ use yii\base\Model;
 /**
  * Class LoginForm
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class LoginForm extends Model
 {
@@ -38,7 +38,7 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-            ['verifyCode', 'captcha', 'captchaAction' => 'cms/auth/default/captcha', 'on' => 'withCaptcha']
+            ['verifyCode', 'captcha', 'captchaAction' => 'cmf/auth/default/captcha', 'on' => 'withCaptcha']
         ];
     }
 
@@ -76,7 +76,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? Yii::$app->getModule('cms/auth')->rememberMeTime/*3600 * 24 * 30*/ : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? Yii::$app->getModule('cmf/auth')->rememberMeTime/*3600 * 24 * 30*/ : 0);
         } else {
             return false;
         }

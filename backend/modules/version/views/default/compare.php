@@ -5,8 +5,8 @@ use yii\helpers\ArrayHelper;
 
 /**
  * @var yii\web\View $this
- * @var \menst\cms\common\models\Version $a
- * @var \menst\cms\common\models\Version $b
+ * @var \gromver\cmf\common\models\Version $a
+ * @var \gromver\cmf\common\models\Version $b
  */
 
 $this->title = Yii::t('menst.cms', 'Comparison of objects');
@@ -17,7 +17,7 @@ $dummyModel = new $a->item_class;
 $aData = $a->getVersionData();
 $bData = $b->getVersionData();
 
-\menst\cms\backend\modules\version\assets\TextDiffAsset::register($this);
+\gromver\cmf\backend\modules\version\assets\TextDiffAsset::register($this);
 ?>
 <div class="history-view">
 

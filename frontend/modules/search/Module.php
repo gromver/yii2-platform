@@ -1,29 +1,29 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\modules\search;
+namespace gromver\cmf\frontend\modules\search;
 
-use menst\modulequery\ModuleQuery;
-use menst\cms\common\interfaces\SearchableInterface;
-use menst\cms\common\models\search\ActiveDocument;
-use menst\cms\frontend\interfaces\MenuUrlRuleInterface;
-use menst\cms\frontend\modules\search\components\SearchMenuUrlBehavior;
+use gromver\modulequery\ModuleQuery;
+use gromver\cmf\common\interfaces\SearchableInterface;
+use gromver\cmf\common\models\search\ActiveDocument;
+use gromver\cmf\frontend\interfaces\MenuUrlRuleInterface;
+use gromver\cmf\frontend\modules\search\components\SearchMenuUrlBehavior;
 use yii\base\BootstrapInterface;
 
 /**
  * Class Module
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements BootstrapInterface, SearchableInterface, MenuUrlRuleInterface
 {
-    public $controllerNamespace = 'menst\cms\frontend\modules\search\controllers';
+    public $controllerNamespace = 'gromver\cmf\frontend\modules\search\controllers';
     public $documentClasses = [];
     public $index = 'cms';
 
@@ -39,7 +39,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
      */
     public function bootstrap($application)
     {
-        ActiveDocument::watch(ModuleQuery::instance()->implement('menst\cms\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
+        ActiveDocument::watch(ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
     }
     /**
      * @inheritdoc

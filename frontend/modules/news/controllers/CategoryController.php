@@ -1,15 +1,15 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\modules\news\controllers;
+namespace gromver\cmf\frontend\modules\news\controllers;
 
-use menst\cms\common\models\Category;
+use gromver\cmf\common\models\Category;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use Yii;
@@ -17,7 +17,7 @@ use Yii;
 /**
  * Class CategoryController
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class CategoryController extends Controller
 {

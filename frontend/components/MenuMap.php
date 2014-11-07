@@ -1,15 +1,15 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\components;
+namespace gromver\cmf\frontend\components;
 
-use menst\cms\common\models\MenuItem;
+use gromver\cmf\common\models\MenuItem;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\base\Object;
@@ -19,7 +19,7 @@ use yii\caching\Cache;
 /**
  * Class MenuMap
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuMap extends Object {
     const CACHE_KEY = __CLASS__;

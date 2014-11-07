@@ -1,22 +1,22 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\news\models;
+namespace gromver\cmf\backend\modules\news\models;
 
-use menst\cms\common\models\Category;
+use gromver\cmf\common\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class CategorySearch represents the model behind the search form about `menst\cms\common\models\Category`.
+ * Class CategorySearch represents the model behind the search form about `gromver\cmf\common\models\Category`.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class CategorySearch extends Category
 {

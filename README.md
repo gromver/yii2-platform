@@ -67,11 +67,11 @@ server {
 #### Установка yii2-cms
 Запускаем через composer
 
-    php composer.phar require --prefer-dist menst/yii2-cms "*"
+    php composer.phar require --prefer-dist gromver/yii2-cms "*"
     
 Или добавляем  
 
-    "menst/yii2-cms": "*"
+    "gromver/yii2-cms": "*"
     
 в require секцию composer.json файла.
 
@@ -80,15 +80,15 @@ server {
 
 * /backend/web/index.php
 ```
-  $application = new \menst\cms\backend\Application($config); // yii\web\Application($config);
+  $application = new \gromver\cmf\backend\Application($config); // yii\web\Application($config);
 ```
 * /frontend/web/index.php   
 ```
-  $application = new \menst\cms\frontend\Application($config); // yii\web\Application($config);
+  $application = new \gromver\cmf\frontend\Application($config); // yii\web\Application($config);
 ```
 * /yii.php
 ```
-  $application = new \menst\cms\console\Application($config); // yii\console\Application($config);
+  $application = new \gromver\cmf\console\Application($config); // yii\console\Application($config);
 ```
 
 Нужно отредактировать стандартный конфиг: /frontend/config/main.php, /backend/config/main.php
@@ -105,18 +105,18 @@ server {
 ```
 #### Добавляем таблицы в БД
 
-    php yii migrate --migrationPath=@menst/cms/migrations
+    php yii migrate --migrationPath=@gromver/cmf/migrations
 
 #### Подключение поиска(опционально)
 * Установить [Elasticsearch](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_installation.html)
 * Применяем миграцию для Elasticsearch
 ```
-  php yii migrate --migrationPath=@menst/cms/migrations/elasticsearch
+  php yii migrate --migrationPath=@gromver/cmf/migrations/elasticsearch
 ```
-* Добавляем в бутстрап фронтенда и бэкенда модуль 'cms/search'. Правим файлы /frontend/config/main.php и /backend/config/main.php
+* Добавляем в бутстрап фронтенда и бэкенда модуль 'cmf/search'. Правим файлы /frontend/config/main.php и /backend/config/main.php
 ```
 [
-  'bootstrap' => ['log', 'cms/search'],
+  'bootstrap' => ['log', 'cmf/search'],
 ]
 ```
   

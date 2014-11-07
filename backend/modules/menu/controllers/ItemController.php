@@ -1,19 +1,19 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\menu\controllers;
+namespace gromver\cmf\backend\modules\menu\controllers;
 
 use kartik\widgets\Alert;
-use menst\modulequery\ModuleQuery;
+use gromver\modulequery\ModuleQuery;
 use Yii;
-use menst\cms\common\models\MenuItem;
-use menst\cms\backend\modules\menu\models\MenuItemSearch;
+use gromver\cmf\common\models\MenuItem;
+use gromver\cmf\backend\modules\menu\models\MenuItemSearch;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -24,7 +24,7 @@ use yii\filters\VerbFilter;
 /**
  * Class ItemController implements the CRUD actions for Menu model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 
 class ItemController extends Controller
@@ -108,7 +108,7 @@ class ItemController extends Controller
     {
         Yii::$app->getModule('cms')->layout = 'modal';
 
-        $items = ModuleQuery::instance()->implement('\menst\cms\backend\interfaces\MenuRouterInterface')->orderBy('desktopOrder')->execute('getMenuRoutes');
+        $items = ModuleQuery::instance()->implement('\gromver\cmf\backend\interfaces\MenuRouterInterface')->orderBy('desktopOrder')->execute('getMenuRoutes');
 
         return $this->render('routers', [
                 'items' => $items

@@ -1,28 +1,28 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\user;
+namespace gromver\cmf\backend\modules\user;
 
-use menst\cms\backend\interfaces\DesktopInterface;
-use menst\cms\backend\interfaces\MenuRouterInterface;
+use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\cmf\backend\interfaces\MenuRouterInterface;
 use Yii;
 
 /**
  * Class Module
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInterface
 {
-    public $controllerNamespace = 'menst\cms\backend\modules\user\controllers';
+    public $controllerNamespace = 'gromver\cmf\backend\modules\user\controllers';
     public $allowDelete = true;   //позволяет удалять пользователей из БД, при условии что они уже имеют статус User::STATUS_DELETED
-    public $userParamsClass = 'menst\cms\common\models\UserParams';
+    public $userParamsClass = 'gromver\cmf\common\models\UserParams';
     public $desktopOrder = 8;
 
     /*public function init()
@@ -40,7 +40,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
         return [
             'label' => Yii::t('menst.cms', 'User'),
             'links' => [
-                ['label' => Yii::t('menst.cms', 'Users'), 'url' => ['/cms/user/default/index']]
+                ['label' => Yii::t('menst.cms', 'Users'), 'url' => ['/cmf/user/default/index']]
             ]
         ];
     }
@@ -53,7 +53,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
         return [
             'label' => Yii::t('menst.cms', 'User'),
             'routers' => [
-                ['label' => Yii::t('menst.cms', 'User Profile'), 'route' => 'cms/user/default/update'],
+                ['label' => Yii::t('menst.cms', 'User Profile'), 'route' => 'cmf/user/default/update'],
             ]
         ];
     }

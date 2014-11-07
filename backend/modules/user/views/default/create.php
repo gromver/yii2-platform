@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\User */
+/* @var $model gromver\cmf\common\models\User */
 
 $this->title = Yii::t('menst.cms', 'Create User');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Users'), 'url' => ['index']];

@@ -1,28 +1,28 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models;
+namespace gromver\cmf\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
-use menst\cms\backend\behaviors\TaggableBehavior;
-use menst\cms\backend\behaviors\upload\ThumbnailProcessor;
-use menst\cms\backend\behaviors\UploadBehavior;
-use menst\cms\backend\behaviors\VersioningBehavior;
-use menst\cms\common\interfaces\TranslatableInterface;
-use menst\cms\common\interfaces\ViewableInterface;
+use gromver\cmf\backend\behaviors\TaggableBehavior;
+use gromver\cmf\backend\behaviors\upload\ThumbnailProcessor;
+use gromver\cmf\backend\behaviors\UploadBehavior;
+use gromver\cmf\backend\behaviors\VersioningBehavior;
+use gromver\cmf\common\interfaces\TranslatableInterface;
+use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
 use yii\helpers\Inflector;
 
 /**
  * This is the model class for table "cms_post".
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
  * @property integer $category_id
@@ -222,7 +222,7 @@ class Post extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
 
     public function getDayLink()
     {
-        return ['/cms/news/post/day', 'category_id' => $this->category_id, 'year' => date('Y', $this->published_at), 'month' => date('m', $this->published_at), 'day' => date('j', $this->published_at)];
+        return ['/cmf/news/post/day', 'category_id' => $this->category_id, 'year' => date('Y', $this->published_at), 'month' => date('m', $this->published_at), 'day' => date('j', $this->published_at)];
     }
     //ViewableInterface
     /**
@@ -230,14 +230,14 @@ class Post extends \yii\db\ActiveRecord implements TranslatableInterface, Viewab
      */
     public function getViewLink()
     {
-        return ['/cms/news/post/view', 'id' => $this->id, 'alias' => $this->alias, 'category_id' => $this->category_id];
+        return ['/cmf/news/post/view', 'id' => $this->id, 'alias' => $this->alias, 'category_id' => $this->category_id];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cms/news/post/view', 'id' => $model['id'], 'alias' => $model['alias'], 'category_id' => $model['category_id']];
+        return ['/cmf/news/post/view', 'id' => $model['id'], 'alias' => $model['alias'], 'category_id' => $model['category_id']];
     }
 
     //translatable interface

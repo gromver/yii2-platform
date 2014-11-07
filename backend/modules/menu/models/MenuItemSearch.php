@@ -1,22 +1,22 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\menu\models;
+namespace gromver\cmf\backend\modules\menu\models;
 
 use Yii;
 use yii\data\ActiveDataProvider;
-use menst\cms\common\models\MenuItem;
+use gromver\cmf\common\models\MenuItem;
 
 /**
- * Class MenuItemSearch represents the model behind the search form about `menst\cms\common\models\Menu`.
+ * Class MenuItemSearch represents the model behind the search form about `gromver\cmf\common\models\Menu`.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuItemSearch extends MenuItem
 {

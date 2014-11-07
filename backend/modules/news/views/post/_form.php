@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Post */
-/* @var $sourceModel menst\cms\common\models\Post */
+/* @var $model gromver\cmf\common\models\Post */
+/* @var $sourceModel gromver\cmf\common\models\Post */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -16,7 +16,7 @@ use yii\bootstrap\ActiveForm;
         'options' => ['enctype'=>'multipart/form-data']
     ]); ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(\menst\cms\common\models\Category::find()->noRoots()->orderBy('lft')->all(),'id', function($model){
+    <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\Category::find()->noRoots()->orderBy('lft')->all(),'id', function($model){
         return str_repeat(" • ", $model->level-1) . $model->title;
     }), ['prompt'=>'Не указано']) ?>
 
@@ -44,7 +44,7 @@ use yii\bootstrap\ActiveForm;
             <?= \mihaildev\ckeditor\CKEditor::widget([
                 'model' => $model,
                 'attribute' => 'detail_text',
-                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cms/media/manager', [
+                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cmf/media/manager', [
                     'extraPlugins' => 'codesnippet'
                 ])
             ]) ?>
@@ -65,15 +65,15 @@ use yii\bootstrap\ActiveForm;
         'clientOptions' => [
             'maxItems' => 'NaN'
         ],
-        'url' => ['/cms/tag/default/tag-list']
+        'url' => ['/cmf/tag/default/tag-list']
     ]) ?>
 
-    <?= $form->field($model, 'detail_image')->widget(\menst\cms\backend\widgets\FileInput::classname(), [
+    <?= $form->field($model, 'detail_image')->widget(\gromver\cmf\backend\widgets\FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => ['showUpload' => false]
     ]) ?>
 
-    <?= $form->field($model, 'preview_image')->widget(\menst\cms\backend\widgets\FileInput::classname(), [
+    <?= $form->field($model, 'preview_image')->widget(\gromver\cmf\backend\widgets\FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
         'pluginOptions' => ['showUpload' => false]
     ]) ?>

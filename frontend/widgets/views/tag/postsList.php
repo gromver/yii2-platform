@@ -3,7 +3,7 @@
  * @var $this yii\web\View
  * @var $dataProvider yii\data\ActiveDataProvider
  * @var $itemLayout string
- * @var $model \menst\cms\common\models\Tag
+ * @var $model \gromver\cmf\common\models\Tag
  */
 
 echo \yii\widgets\ListView::widget(array_merge([

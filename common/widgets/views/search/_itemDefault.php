@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \menst\cms\common\models\search\ActiveDocument */
+/* @var $model \gromver\cmf\common\models\search\ActiveDocument */
 
 echo Html::beginTag('div', ['class' => 'search-result-item']);
 

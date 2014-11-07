@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $user menst\cms\common\models\User */
-/* @var $model menst\models\Model */
+/* @var $user gromver\cmf\common\models\User */
+/* @var $model gromver\models\Model */
 
 $this->title = Yii::t('menst.cms', 'Update User Params: {id}', [
     'id' => $user->id,

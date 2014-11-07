@@ -1,6 +1,6 @@
 <?php
 
-use menst\cms\common\models\User;
+use gromver\cmf\common\models\User;
 use yii\db\Migration;
 
 class m140811_143627_cms_setup extends Migration

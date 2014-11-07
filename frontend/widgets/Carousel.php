@@ -1,27 +1,27 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\widgets;
+namespace gromver\cmf\frontend\widgets;
 
 
-use menst\cms\common\widgets\Widget;
+use gromver\cmf\common\widgets\Widget;
 
 /**
  * Class Carousel
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Carousel extends Widget {
     /**
      * @type multiple
      * @fieldType object
-     * @object \menst\cms\frontend\widgets\CarouselItem
+     * @object \gromver\cmf\frontend\widgets\CarouselItem
      */
     public $items;
 

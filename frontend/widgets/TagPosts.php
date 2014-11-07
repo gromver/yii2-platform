@@ -1,17 +1,17 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\widgets;
+namespace gromver\cmf\frontend\widgets;
 
-use menst\cms\common\widgets\Widget;
-use menst\cms\common\models\Post;
-use menst\cms\common\models\Tag;
+use gromver\cmf\common\widgets\Widget;
+use gromver\cmf\common\models\Post;
+use gromver\cmf\common\models\Tag;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
@@ -19,21 +19,21 @@ use yii\data\ActiveDataProvider;
 /**
  * Class TagPosts
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class TagPosts extends Widget {
     /**
      * Tag or TagId or TagId:TagAlias
      * @var Tag|string
      * @type modal
-     * @url /cms/default/select-tag
+     * @url /cmf/default/select-tag
      */
     public $source;
     /**
      * CategoryId
      * @var string
      * @type modal
-     * @url /cms/default/select-category
+     * @url /cmf/default/select-category
      */
     public $categoryId;
     /**

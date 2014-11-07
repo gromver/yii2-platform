@@ -1,24 +1,24 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\widgets;
+namespace gromver\cmf\frontend\widgets;
 
 
-use menst\cms\common\models\Post;
-use menst\cms\common\widgets\Widget;
+use gromver\cmf\common\models\Post;
+use gromver\cmf\common\widgets\Widget;
 use Yii;
 use yii\web\View;
 
 /**
  * Class Calendar
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property string $day
  * @property string $month
@@ -40,7 +40,7 @@ class Calendar extends Widget
     private $_day;
 
     public $categoryId;
-    public $route = '/cms/news/post/day';
+    public $route = '/cmf/news/post/day';
 
     private $_calendar = [];
 

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel menst\cms\backend\modules\widget\models\WidgetConfigSearch */
+/* @var $searchModel gromver\cmf\backend\modules\widget\models\WidgetConfigSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('menst.cms', 'Widget Configs');

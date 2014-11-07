@@ -1,17 +1,17 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\components;
+namespace gromver\cmf\frontend\components;
 
-use menst\cms\common\components\UrlManager;
-use menst\modulequery\ModuleQuery;
-use menst\cms\common\models\MenuItem;
+use gromver\cmf\common\components\UrlManager;
+use gromver\modulequery\ModuleQuery;
+use gromver\cmf\common\models\MenuItem;
 use Yii;
 use yii\base\Component;
 use yii\web\ForbiddenHttpException;
@@ -30,7 +30,7 @@ use yii\web\View;
  * данный запрос необходимо обработать с учетом роута и параметров найденного пункта меню и оставшейся части \yii\web\Request::getPathInfo() и \yii\web\Request::getQueryParams()
  * 2. Независимо от пунктов 1 и 1.2 для пунктов меню с типом MenuItem::LINK_HREF ищем все пункты у которых MenuItem::link совпадает c Request::getUrl()
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuManager extends Component implements UrlRuleInterface
 {
@@ -48,7 +48,7 @@ class MenuManager extends Component implements UrlRuleInterface
 
     public function behaviors()
     {
-        return ModuleQuery::instance()->implement('\menst\cms\frontend\interfaces\MenuUrlRuleInterface')->execute('getMenuUrlRuleBehavior');
+        return ModuleQuery::instance()->implement('\gromver\cmf\frontend\interfaces\MenuUrlRuleInterface')->execute('getMenuUrlRuleBehavior');
     }
 
 

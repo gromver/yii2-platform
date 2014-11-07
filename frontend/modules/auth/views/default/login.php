@@ -2,10 +2,10 @@
 /**
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
- * @var menst\cms\common\models\LoginForm $model
+ * @var gromver\cmf\common\models\LoginForm $model
  */
 
-/** @var \menst\cms\common\models\MenuItem $menu */
+/** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'Login');
@@ -19,7 +19,7 @@ if ($menu) {
     <h1><?= \yii\helpers\Html::encode($this->title) ?></h1>
 </div>
 
-<?php echo \menst\cms\frontend\widgets\AuthLogin::widget([
+<?php echo \gromver\cmf\frontend\widgets\AuthLogin::widget([
     'id' => 'auth-login',
     'model' => $model
 ]);

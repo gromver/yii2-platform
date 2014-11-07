@@ -1,19 +1,19 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\modules\main;
+namespace gromver\cmf\frontend\modules\main;
 
-use menst\cms\common\interfaces\SearchableInterface;
-use menst\cms\common\models\MenuItem;
-use menst\cms\common\models\Table;
+use gromver\cmf\common\interfaces\SearchableInterface;
+use gromver\cmf\common\models\MenuItem;
+use gromver\cmf\common\models\Table;
 use Yii;
-use menst\cms\frontend\components\MenuManager;
+use gromver\cmf\frontend\components\MenuManager;
 use yii\base\BootstrapInterface;
 use yii\caching\ExpressionDependency;
 use yii\helpers\ArrayHelper;
@@ -21,7 +21,7 @@ use yii\helpers\ArrayHelper;
 /**
  * Class Module
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property string $siteName
  * @property bool $isEditMode
@@ -33,9 +33,9 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     const MODE_EDIT = 'edit';
     const MODE_VIEW = 'view';
 
-    public $controllerNamespace = '\menst\cms\frontend\modules\main\controllers';
+    public $controllerNamespace = '\gromver\cmf\frontend\modules\main\controllers';
     public $paramsPath = '@common/config/cms';
-    public $blockModules = ['news', 'page', 'tag', 'search', 'user'];   //список модулей к которым нельзя попасть на прямую(cms/post/..., cms/page/...)
+    public $blockModules = ['news', 'page', 'tag', 'search', 'user'];   //список модулей к которым нельзя попасть на прямую(cmf/post/..., cmf/page/...)
 
     private $_mode;
 
@@ -52,17 +52,17 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
      */
     public function bootstrap($app)
     {
-        Yii::$container->set('menst\models\fields\EditorField', [
-            'controller' => $app->urlManagerBackend->createUrl(['cms/media/manager'])
+        Yii::$container->set('gromver\models\fields\EditorField', [
+            'controller' => $app->urlManagerBackend->createUrl(['cmf/media/manager'])
         ]);
-        Yii::$container->set('menst\models\fields\MediaField', [
-            'controller' => $app->urlManagerBackend->createUrl(['cms/media/manager'])
+        Yii::$container->set('gromver\models\fields\MediaField', [
+            'controller' => $app->urlManagerBackend->createUrl(['cmf/media/manager'])
         ]);
-        Yii::$container->set('menst\modulequery\ModuleQuery', [
+        Yii::$container->set('gromver\modulequery\ModuleQuery', [
             'cache' => $app->cache,
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);
-        Yii::$container->set('menst\cms\frontend\components\MenuMap', [
+        Yii::$container->set('gromver\cmf\frontend\components\MenuMap', [
             'cache' => $app->cache,
             'cacheDependency' => Table::dependency(MenuItem::tableName())
         ]);
@@ -71,7 +71,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
         $manager = \Yii::createObject(MenuManager::className());
         $rules = [$manager];
         if (is_array($this->blockModules) && count($this->blockModules)) {
-            $rules['cms/<module:(' . implode('|', $this->blockModules). ')><path:(/.*)?>'] = 'cms/default/page-not-found'; //блокируем доступ к контент модулям напрямую
+            $rules['cmf/<module:(' . implode('|', $this->blockModules). ')><path:(/.*)?>'] = 'cmf/default/page-not-found'; //блокируем доступ к контент модулям напрямую
         }
 
         $app->urlManager->addRules($rules, false); //вставляем в начало списка
@@ -132,9 +132,9 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     public function getDocumentClasses()
     {
         return [
-            'menst\cms\common\models\search\Page',
-            'menst\cms\common\models\search\Post',
-            'menst\cms\common\models\search\Category',
+            'gromver\cmf\common\models\search\Page',
+            'gromver\cmf\common\models\search\Post',
+            'gromver\cmf\common\models\search\Category',
         ];
     }
 

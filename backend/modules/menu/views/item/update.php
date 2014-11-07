@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\MenuItem */
-/* @var $linkParamsModel menst\cms\common\models\MenuLinkParams */
+/* @var $model gromver\cmf\common\models\MenuItem */
+/* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
 
 $this->title = Yii::t('menst.cms', 'Update Menu Item: {title}', [
     'title' => $model->title

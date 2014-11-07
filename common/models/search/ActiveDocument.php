@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models\search;
+namespace gromver\cmf\common\models\search;
 
 
-use menst\cms\common\interfaces\ViewableInterface;
+use gromver\cmf\common\interfaces\ViewableInterface;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 use Yii;
@@ -21,7 +21,7 @@ use Yii;
  * заносит соответсвующие изменения в ElasticSearch бд, тоесть служит своеобразным клеем для ActiveRecord и ElasticSearch
  * Связь с ActiveRecord определяется в статическом методе [[self::model()]]
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements ViewableInterface {
     public function rules()
@@ -68,7 +68,7 @@ class ActiveDocument extends \yii\elasticsearch\ActiveRecord implements Viewable
     /**
      * Поисковый фильтр по умолчанию, применим для поиска во фронтенде, например фильтрация опубликованных постов
      * @return array
-     * @see \menst\cms\common\widgets\SearchResults
+     * @see \gromver\cmf\common\widgets\SearchResults
      */
     public static function searchDefaultFilter()
     {

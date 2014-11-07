@@ -3,7 +3,7 @@
  * @var $this yii\web\View
  */
 
-/** @var \menst\cms\common\models\MenuItem $menu */
+/** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'Tag cloud');
@@ -16,7 +16,7 @@ if ($menu) {
 
 echo \yii\helpers\Html::tag('h2', \yii\helpers\Html::encode($this->title));
 
-echo \menst\cms\frontend\widgets\TagCloud::widget([
+echo \gromver\cmf\frontend\widgets\TagCloud::widget([
     'id' => 'tag-cloud',
     'language' => Yii::$app->language
 ]);

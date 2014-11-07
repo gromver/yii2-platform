@@ -1,13 +1,13 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\search\controllers;
+namespace gromver\cmf\backend\modules\search\controllers;
 
 use yii\elasticsearch\Exception;
 use yii\filters\AccessControl;
@@ -17,7 +17,7 @@ use yii\web\Controller;
 /**
  * Class DefaultController
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -47,9 +47,9 @@ class DefaultController extends Controller
     public function actionReindex()
     {
         $documents = [
-            'menst\cms\common\models\search\Page',
-            'menst\cms\common\models\search\Post',
-            'menst\cms\common\models\search\Category',
+            'gromver\cmf\common\models\search\Page',
+            'gromver\cmf\common\models\search\Post',
+            'gromver\cmf\common\models\search\Category',
         ];
 
         foreach ($documents as $documentClass) {
@@ -60,7 +60,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $documentClass \menst\cms\common\models\search\ActiveDocument
+     * @param $documentClass \gromver\cmf\common\models\search\ActiveDocument
      * @return int
      * @throws \yii\elasticsearch\Exception
      */
@@ -69,7 +69,7 @@ class DefaultController extends Controller
         $bulk = '';
         /** @var \yii\db\ActiveRecord|string $modelClass */
         $modelClass = $documentClass::model();
-        /** @var \menst\cms\common\models\search\ActiveDocument $document */
+        /** @var \gromver\cmf\common\models\search\ActiveDocument $document */
         $document = new $documentClass;
         $uploaded = 0;
         foreach ($modelClass::find()->each() as $model) {

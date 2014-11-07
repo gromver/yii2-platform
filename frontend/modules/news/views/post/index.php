@@ -5,7 +5,7 @@
 
 use yii\helpers\Html;
 
-/** @var \menst\cms\common\models\MenuItem $menu */
+/** @var \gromver\cmf\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : Yii::t('menst.cms', 'News');
@@ -17,7 +17,7 @@ if ($menu) {
 
 echo Html::tag('h2', Html::encode($this->title));
 
-echo \menst\cms\frontend\widgets\PostList::widget([
+echo \gromver\cmf\frontend\widgets\PostList::widget([
     'id' => 'post-index',
     'context' =>  Yii::$app->menuManager->activeMenu ? Yii::$app->menuManager->activeMenu->path : null,
 ]) ?>

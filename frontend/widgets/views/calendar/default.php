@@ -1,7 +1,7 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $widget \menst\cms\frontend\widgets\Calendar
+ * @var $widget \gromver\cmf\frontend\widgets\Calendar
  */
 
 use yii\helpers\Html;

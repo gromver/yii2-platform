@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\MenuItem */
+/* @var $model gromver\cmf\common\models\MenuItem */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Menu Types'), 'url' => ['type/index']];

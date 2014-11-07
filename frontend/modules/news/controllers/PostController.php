@@ -1,17 +1,17 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\modules\news\controllers;
+namespace gromver\cmf\frontend\modules\news\controllers;
 
-use menst\cms\common\models\Category;
-use menst\cms\common\models\Post;
-use menst\cms\common\models\Table;
+use gromver\cmf\common\models\Category;
+use gromver\cmf\common\models\Post;
+use gromver\cmf\common\models\Table;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -22,7 +22,7 @@ use yii\web\Response;
 /**
  * Class PostController
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class PostController extends Controller
 {
@@ -76,34 +76,34 @@ class PostController extends Controller
                     ],
                 ]),
             'channel' => [
-                'title' => Yii::$app->cms->siteName,
+                'title' => Yii::$app->cmf->siteName,
                 'link' => Url::toRoute(['', 'category_id' => $category_id], true),
                 'description' => $this->loadCategoryModel($category_id)->title,
                 'language' => Yii::$app->language
             ],
             'items' => [
                 'title' => function ($model, $widget) {
-                        /** @var $model \menst\cms\common\models\Post */
+                        /** @var $model \gromver\cmf\common\models\Post */
                         return $model->title;
                     },
                 'description' => function ($model, $widget) {
-                        /** @var $model \menst\cms\common\models\Post */
+                        /** @var $model \gromver\cmf\common\models\Post */
                         return $model->preview_text ? $model->preview_text : \yii\helpers\StringHelper::truncateWords(strip_tags($model->detail_text), 40);
                     },
                 'link' => function ($model, $widget) {
-                        /** @var $model \menst\cms\common\models\Post */
+                        /** @var $model \gromver\cmf\common\models\Post */
                         return Url::toRoute($model->getViewLink(), true);
                     },
                 'author' => function ($model, $widget) {
-                        /** @var $model \menst\cms\common\models\Post */
+                        /** @var $model \gromver\cmf\common\models\Post */
                         return $model->user->email . ' (' . $model->user->username . ')';
                     },
                 'guid' => function ($model, $widget) {
-                        /** @var $model \menst\cms\common\models\Post */
+                        /** @var $model \gromver\cmf\common\models\Post */
                         return Url::toRoute($model->getViewLink(), true) . ' ' . Yii::$app->formatter->asDatetime($model->updated_at, 'php:'.DATE_RSS);
                     },
                 'pubDate' => function ($model, $widget) {
-                        /** @var $model \menst\cms\common\models\Post */
+                        /** @var $model \gromver\cmf\common\models\Post */
                         return Yii::$app->formatter->asDatetime($model->published_at, 'php:'.DATE_RSS);
                     }
             ]

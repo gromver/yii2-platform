@@ -1,17 +1,17 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\news\controllers;
+namespace gromver\cmf\backend\modules\news\controllers;
 
-use menst\cms\common\models\Category;
-use menst\cms\common\models\Post;
-use menst\cms\backend\modules\news\models\PostSearch;
+use gromver\cmf\common\models\Category;
+use gromver\cmf\common\models\Post;
+use gromver\cmf\backend\modules\news\models\PostSearch;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -22,7 +22,7 @@ use yii\filters\VerbFilter;
 /**
  * Class PostController implements the CRUD actions for Post model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class PostController extends Controller
 {
@@ -82,7 +82,7 @@ class PostController extends Controller
      * Lists all Post models.
      * @return mixed
      */
-    public function actionSelect($route = 'cms/news/post/view')
+    public function actionSelect($route = 'cmf/news/post/view')
     {
         $searchModel = new PostSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());

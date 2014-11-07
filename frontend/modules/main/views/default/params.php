@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /**
- * @var menst\models\ObjectModel $model
+ * @var gromver\models\ObjectModel $model
  * @var yii\web\View $this
  */
 $this->title = Yii::t('menst.cms', 'Site Configuration');
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title; ?>
         'layout' => 'horizontal',
     ]); ?>
 
-    <?= \menst\models\widgets\Fields::widget(['model' => $model]) ?>
+    <?= \gromver\models\widgets\Fields::widget(['model' => $model]) ?>
 
     <div>
         <?= Html::submitButton('<i class="glyphicon glyphicon-save"></i> ' . Yii::t('menst.cms', 'Save'), ['class' => 'btn btn-success']) ?>

@@ -1,18 +1,18 @@
 <?php
 /**
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models\search;
+namespace gromver\cmf\common\models\search;
 
 /**
  * Class Category
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Category extends ActiveDocument {
     public function attributes()
@@ -22,11 +22,11 @@ class Category extends ActiveDocument {
 
     public static function model()
     {
-        return \menst\cms\common\models\Category::className();
+        return \gromver\cmf\common\models\Category::className();
     }
 
     /**
-     * @param \menst\cms\common\models\Page $model
+     * @param \gromver\cmf\common\models\Page $model
      */
     public function loadModel($model)
     {
@@ -50,7 +50,7 @@ class Category extends ActiveDocument {
             ]
         ];
 
-        if ($unpublishedCategories = \menst\cms\common\models\Category::find()->unpublished()->select('{{%cms_category}}.id')->column()) {
+        if ($unpublishedCategories = \gromver\cmf\common\models\Category::find()->unpublished()->select('{{%cms_category}}.id')->column()) {
             $filters[] = [
                 'not' => [
                     'and' => [

@@ -1,18 +1,18 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\version\controllers;
+namespace gromver\cmf\backend\modules\version\controllers;
 
-use menst\widgets\ModalIFrame;
+use gromver\widgets\ModalIFrame;
 use Yii;
-use menst\cms\common\models\Version;
-use menst\cms\backend\modules\version\models\VersionSearch;
+use gromver\cmf\common\models\Version;
+use gromver\cmf\backend\modules\version\models\VersionSearch;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -24,7 +24,7 @@ use yii\filters\VerbFilter;
 /**
  * Class DefaultController implements the CRUD actions for Version model.
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -119,7 +119,7 @@ class DefaultController extends Controller
     {
         $model = $this->findModel($id);
         if ($modal) {
-            Yii::$app->cms->layout = 'modal';
+            Yii::$app->cmf->layout = 'modal';
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -175,7 +175,7 @@ class DefaultController extends Controller
 
     public function actionPreview($id)
     {
-        Yii::$app->cms->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         return $this->render('preview', [
             'model' => $this->findModel($id),
@@ -184,7 +184,7 @@ class DefaultController extends Controller
 
     public function actionCompare($id1, $id2)
     {
-        Yii::$app->cms->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         return $this->render('compare', [
             'a' => $this->findModel($id1),
@@ -201,7 +201,7 @@ class DefaultController extends Controller
             'pagination' => false
         ]);
 
-        Yii::$app->cms->layout = 'modal';
+        Yii::$app->cmf->layout = 'modal';
 
         return $this->render('item', [
             'item' => $item,

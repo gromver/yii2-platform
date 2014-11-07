@@ -1,20 +1,20 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\backend\modules\main\controllers;
+namespace gromver\cmf\backend\modules\main\controllers;
 
-use menst\modulequery\ModuleQuery;
-use menst\cms\common\models\CmsParams;
+use gromver\modulequery\ModuleQuery;
+use gromver\cmf\common\models\CmsParams;
 use kartik\widgets\Alert;
-use menst\cms\common\models\ContactForm;
-use menst\models\ObjectModel;
-use menst\widgets\ModalIFrame;
+use gromver\cmf\common\models\ContactForm;
+use gromver\models\ObjectModel;
+use gromver\widgets\ModalIFrame;
 use Yii;
 use yii\caching\Cache;
 use yii\di\Instance;
@@ -25,7 +25,7 @@ use yii\web\Controller;
 /**
  * Class DefaultController
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class DefaultController extends Controller
 {
@@ -63,7 +63,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->render('index', [
-                'items' => ModuleQuery::instance()->implement('\menst\cms\backend\interfaces\DesktopInterface')->orderBy('desktopOrder')->execute('getDesktopItem')
+                'items' => ModuleQuery::instance()->implement('\gromver\cmf\backend\interfaces\DesktopInterface')->orderBy('desktopOrder')->execute('getDesktopItem')
             ]);
     }
 
@@ -117,7 +117,7 @@ class DefaultController extends Controller
         $model = new ContactForm();
 
         if (!Yii::$app->user->isGuest) {
-            /** @var \menst\cms\common\models\User $user */
+            /** @var \gromver\cmf\common\models\User $user */
             $user = Yii::$app->user->identity;
             $userParams = $user->getParamsArray();
             $model->name = $userParams['name'] ? $userParams['name'] : $user->username;
@@ -125,7 +125,7 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->cms->params['adminEmail'])) {
+            if ($model->sendEmail(Yii::$app->cmf->params['adminEmail'])) {
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Email is sent.'));
                 return $this->render('contactSuccess');
             } else {

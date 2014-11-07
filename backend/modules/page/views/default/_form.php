@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Page */
-/* @var $sourceModel menst\cms\common\models\Page */
+/* @var $model gromver\cmf\common\models\Page */
+/* @var $sourceModel gromver\cmf\common\models\Page */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -31,7 +31,7 @@ use yii\bootstrap\ActiveForm;
             <?= \mihaildev\ckeditor\CKEditor::widget([
                 'model' => $model,
                 'attribute' => 'detail_text',
-                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cms/media/manager', [
+                'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cmf/media/manager', [
                     'extraPlugins' => 'codesnippet'
                 ])
             ]) ?>
@@ -52,7 +52,7 @@ use yii\bootstrap\ActiveForm;
         'clientOptions' => [
             'maxItems' => 'NaN'
         ],
-        'url' => ['/cms/tag/default/tag-list']
+        'url' => ['/cmf/tag/default/tag-list']
     ]) ?>
 
     <?/*= $form->field($model, 'created_at')->textInput() ?>

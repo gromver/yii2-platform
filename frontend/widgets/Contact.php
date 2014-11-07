@@ -1,25 +1,25 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
 
-namespace menst\cms\frontend\widgets;
+namespace gromver\cmf\frontend\widgets;
 
 
 use kartik\widgets\Alert;
-use menst\cms\common\models\ContactForm;
-use menst\cms\common\widgets\Widget;
+use gromver\cmf\common\models\ContactForm;
+use gromver\cmf\common\widgets\Widget;
 use Yii;
 
 /**
  * Class Contact
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class Contact extends Widget {
     /**
@@ -37,7 +37,7 @@ class Contact extends Widget {
         }
 
         if (!Yii::$app->user->isGuest) {
-            /** @var \menst\cms\common\models\User $user */
+            /** @var \gromver\cmf\common\models\User $user */
             $user = Yii::$app->user->identity;
             $userParams = $user->getParamsArray();
             $model->name = $userParams['name'] ? $userParams['name'] : $user->username;
@@ -45,7 +45,7 @@ class Contact extends Widget {
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->cms->params['adminEmail'])) {
+            if ($model->sendEmail(Yii::$app->cmf->params['adminEmail'])) {
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('menst.cms', 'Email is sent.'));
                 return $this->render($this->viewSuccess);
             } else {

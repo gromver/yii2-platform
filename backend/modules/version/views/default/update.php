@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\Version */
+/* @var $model gromver\cmf\common\models\Version */
 
 $this->title = Yii::t('menst.cms', 'Update Version: {id}', [
     'id' => $model->id

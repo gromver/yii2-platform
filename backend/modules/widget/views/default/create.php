@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model menst\cms\common\models\WidgetConfig */
+/* @var $model gromver\cmf\common\models\WidgetConfig */
 
 $this->title = Yii::t('menst.cms', 'Create Widget Config');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('menst.cms', 'Widget Configs'), 'url' => ['index']];

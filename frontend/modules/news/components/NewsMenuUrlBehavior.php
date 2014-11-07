@@ -1,24 +1,24 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\frontend\modules\news\components;
+namespace gromver\cmf\frontend\modules\news\components;
 
-use menst\cms\common\models\Category;
-use menst\cms\common\models\MenuItem;
-use menst\cms\common\models\Post;
-use menst\cms\common\models\Tag;
-use menst\cms\frontend\behaviors\MenuUrlRuleBehavior;
+use gromver\cmf\common\models\Category;
+use gromver\cmf\common\models\MenuItem;
+use gromver\cmf\common\models\Post;
+use gromver\cmf\common\models\Tag;
+use gromver\cmf\frontend\behaviors\MenuUrlRuleBehavior;
 
 /**
  * Class NewsMenuUrlBehavior
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  */
 class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
 {
@@ -30,7 +30,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
      */
     public function parseRequest($event)
     {
-        if ($event->menuRoute=='cms/news/category/view') {
+        if ($event->menuRoute=='cmf/news/category/view') {
             if (preg_match("#((.*)/)?(rss)$#", $event->requestRoute, $matches)) {
                 //rss лента
                 if ($menuCategory = Category::findOne($event->menuParams['id'])) {
@@ -40,7 +40,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                         'language' => $menuCategory->language
                     ]);
                     if ($category) {
-                        $event->resolve(['cms/news/post/rss', ['category_id' => $category->id]]);
+                        $event->resolve(['cmf/news/post/rss', ['category_id' => $category->id]]);
                     }
                 }
             } elseif (preg_match("#((.*)/)?(\d{4})/(\d{1,2})/(\d{1,2})$#", $event->requestRoute, $matches)) {
@@ -55,7 +55,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                         'language' => $menuCategory->language
                     ]);
                     if ($category) {
-                        $event->resolve(['cms/news/post/day', ['category_id' => $category->id, 'year' => $year, 'month' => $month, 'day' => $day]]);
+                        $event->resolve(['cmf/news/post/day', ['category_id' => $category->id, 'year' => $year, 'month' => $month, 'day' => $day]]);
                     }
                 }
             } elseif (preg_match("#((.*)/)?(([^/]+)\.{$this->postSuffix})$#", $event->requestRoute, $matches)) {
@@ -68,7 +68,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                             'language' => $menuCategory->language
                         ]);
                     if ($category && $postId = Post::find()->select('id')->where(['alias' => $postAlias, 'category_id' => $category->id])->scalar()) {
-                        $event->resolve(['cms/news/post/view', ['id' => $postId]]);
+                        $event->resolve(['cmf/news/post/view', ['id' => $postId]]);
                     }
                 }
             } elseif (preg_match("#((.*)/)?(([^/]+)\.{$this->tagSuffix})$#", $event->requestRoute, $matches)) {
@@ -81,7 +81,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                         'language' => $menuCategory->language
                     ]);
                     if ($category && $tagId = Tag::find()->select('id')->where(['alias' => $tagAlias, 'language' => $category->language])->scalar()) {
-                        $event->resolve(['cms/tag/default/posts', ['id' => $tagId, 'category_id' => $category->id]]);
+                        $event->resolve(['cmf/tag/default/posts', ['id' => $tagId, 'category_id' => $category->id]]);
                     }
                 }
             } else {
@@ -91,19 +91,19 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                         'path' => $menuCategory->path . '/' . $event->requestRoute,
                         'language' => $menuCategory->language
                     ])) {
-                        $event->resolve(['cms/news/category/view', ['id' => $category->id]]);
+                        $event->resolve(['cmf/news/category/view', ['id' => $category->id]]);
                     }
                 }
             }
         }
 
-        if ($event->menuRoute=='cms/news/post/index') {
+        if ($event->menuRoute=='cmf/news/post/index') {
             //маршрутизация для всех постов
             if ($event->requestRoute == 'rss') {
-                $event->resolve(['cms/news/post/rss', []]);
+                $event->resolve(['cmf/news/post/rss', []]);
             } elseif (preg_match("#^(\d{4})/(\d{1,2})/(\d{1,2})$#", $event->requestRoute, $matches)) {
                 //новости за определенную дату
-                $event->resolve(['cms/news/post/day', ['year' => $matches[1], 'month' => $matches[2], 'day' => $matches[3]]]);
+                $event->resolve(['cmf/news/post/day', ['year' => $matches[1], 'month' => $matches[2], 'day' => $matches[3]]]);
             } elseif (preg_match("#^((.*)/)(([^/]+)\.{$this->postSuffix})$#", $event->requestRoute, $matches)) {
                 //ищем пост
                 $categoryPath = $matches[2];    //путь категории поста
@@ -113,13 +113,13 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                     'language' => $event->menuMap->language
                 ]);
                 if ($category && $postId = Post::find()->select('id')->where(['alias' => $postAlias, 'category_id' => $category->id])->scalar()) {
-                    $event->resolve(['cms/news/post/view', ['id' => $postId]]);
+                    $event->resolve(['cmf/news/post/view', ['id' => $postId]]);
                 }
             } elseif (preg_match("#^(([^/]+)\.{$this->tagSuffix})$#", $event->requestRoute, $matches)) {
                 //ищем тег
                 $tagAlias = $matches[2];
                 if ($tagId = Tag::find()->select('id')->where(['alias' => $tagAlias, 'language' => $event->menuMap->language])->scalar()) {
-                    $event->resolve(['cms/tag/default/posts', ['id' => $tagId]]);
+                    $event->resolve(['cmf/tag/default/posts', ['id' => $tagId]]);
                 }
             }
         }
@@ -130,9 +130,9 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
      */
     public function createUrl($event)
     {
-        if ($event->requestRoute === 'cms/news/post/view') {
+        if ($event->requestRoute === 'cmf/news/post/view') {
             //пытаемся найти пункт меню ссылющийся на данный пост
-            if ($path = $event->menuMap->getMenuPathByRoute(MenuItem::toRoute('cms/news/post/view', ['id' => $event->requestParams['id']]))) {
+            if ($path = $event->menuMap->getMenuPathByRoute(MenuItem::toRoute('cmf/news/post/view', ['id' => $event->requestParams['id']]))) {
                 unset($event->requestParams['id'], $event->requestParams['category_id'], $event->requestParams['alias']);
                 $event->resolve(MenuItem::toRoute($path, $event->requestParams));
                 return;
@@ -148,7 +148,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                 }
             }
             //привязываем ко всем новостям, если пукнт меню существует
-            if ($path = $event->menuMap->getMenuPathByRoute('cms/news/post/index')) {
+            if ($path = $event->menuMap->getMenuPathByRoute('cmf/news/post/index')) {
                 $path .= '/' . Post::findOne($event->requestParams['id'])->category->path . '/' . $event->requestParams['alias'] . '.' . $this->postSuffix;
                 unset($event->requestParams['id'], $event->requestParams['category_id'], $event->requestParams['alias']);
                 $event->resolve(MenuItem::toRoute($path, $event->requestParams));
@@ -158,18 +158,18 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
             return;
         }
 
-        if ($event->requestRoute === 'cms/news/category/view' && isset($event->requestParams['id'])) {
+        if ($event->requestRoute === 'cmf/news/category/view' && isset($event->requestParams['id'])) {
             if ($path = $this->findCategoryMenuPath($event->requestParams['id'], $event->menuMap)) {
                 unset($event->requestParams['id']);
                 $event->resolve(MenuItem::toRoute($path, $event->requestParams));
             }
         }
 
-        if ($event->requestRoute === 'cms/news/post/day' && isset($event->requestParams['year'], $event->requestParams['month'], $event->requestParams['day'])) {
+        if ($event->requestRoute === 'cmf/news/post/day' && isset($event->requestParams['year'], $event->requestParams['month'], $event->requestParams['day'])) {
             if ($event->requestParams['category_id']) {
                 $path = $this->findCategoryMenuPath($event->requestParams['category_id'], $event->menuMap);
             } else {
-                $path = $event->menuMap->getMenuPathByRoute('cms/news/post/index');
+                $path = $event->menuMap->getMenuPathByRoute('cmf/news/post/index');
             }
 
             if ($path) {
@@ -179,13 +179,13 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
             }
         }
 
-        if ($event->requestRoute === 'cms/news/post/index') {
-            if ($path = $event->menuMap->getMenuPathByRoute('cms/news/post/index')) {
+        if ($event->requestRoute === 'cmf/news/post/index') {
+            if ($path = $event->menuMap->getMenuPathByRoute('cmf/news/post/index')) {
                 $event->resolve(MenuItem::toRoute($path, $event->requestParams));
             }
         }
 
-        if ($event->requestRoute === 'cms/tag/default/posts') {
+        if ($event->requestRoute === 'cmf/tag/default/posts') {
             //todo сделать привязку к категории новости по category_id здесь и в парсере
             //строим ссылку на основе пункта меню на категорию
             if (isset($event->requestParams['category_id']) && isset($event->requestParams['tag_alias']) && $path = $this->findCategoryMenuPath($event->requestParams['category_id'], $event->menuMap)) {
@@ -193,7 +193,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                 unset($event->requestParams['tag_alias'], $event->requestParams['category_id'], $event->requestParams['tag_id']);
             }
             //строим ссылку на основе пункта меню на все новости
-            if (isset($event->requestParams['tag_alias']) && $path = $event->menuMap->getMenuPathByRoute('cms/news/post/index')) {
+            if (isset($event->requestParams['tag_alias']) && $path = $event->menuMap->getMenuPathByRoute('cmf/news/post/index')) {
                 $path .= '/' . $event->requestParams['tag_alias'] . '.' . $this->tagSuffix;
                 unset($event->requestParams['tag_alias'], $event->requestParams['category_id'], $event->requestParams['tag_id']);
             }
@@ -203,14 +203,14 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
             }
         }
 
-        if ($event->requestRoute == 'cms/news/post/rss') {
+        if ($event->requestRoute == 'cmf/news/post/rss') {
             if (isset($event->requestParams['category_id'])) {
                 if ($path = $this->findCategoryMenuPath($event->requestParams['category_id'], $event->menuMap)) {
                     unset($event->requestParams['category_id']);
                     $event->resolve(MenuItem::toRoute($path . '/rss', $event->requestParams));
                 }
             } else {
-                if ($path = $event->menuMap->getMenuPathByRoute('cms/news/post/index')) {
+                if ($path = $event->menuMap->getMenuPathByRoute('cmf/news/post/index')) {
                     $event->resolve(MenuItem::toRoute($path . '/rss', $event->requestParams));
                 }
             }
@@ -223,13 +223,13 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
      * Находит путь к пункту меню ссылающемуся на категорию $categoryId, либо ее предка
      * Если путь ведет к предку, то достраиваем путь категории $categoryId
      * @param $categoryId
-     * @param $menuMap \menst\cms\frontend\components\MenuMap
+     * @param $menuMap \gromver\cmf\frontend\components\MenuMap
      * @return null|string
      */
     private function findCategoryMenuPath($categoryId, $menuMap)
     {
         if (!isset($this->_categoryPaths[$menuMap->language][$categoryId])) {
-            if ($path = $menuMap->getMenuPathByRoute(MenuItem::toRoute('cms/news/category/view', ['id' => $categoryId]))) {
+            if ($path = $menuMap->getMenuPathByRoute(MenuItem::toRoute('cmf/news/category/view', ['id' => $categoryId]))) {
                 $this->_categoryPaths[$menuMap->language][$categoryId] = $path;
             } elseif (($category = Category::findOne($categoryId)) && !$category->isRoot() && $path = $this->findCategoryMenuPath($category->parent_id, $menuMap)) {
                 $this->_categoryPaths[$menuMap->language][$categoryId] = $path . '/' . $category->alias;
@@ -244,12 +244,12 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
     /**
      * Находит путь к пункту меню ссылающемуся на категорию $categoryId, либо ее предка, путь не достраивается до $categoryId
      * @param $categoryId
-     * @param $menuMap \menst\cms\frontend\components\MenuMap
+     * @param $menuMap \gromver\cmf\frontend\components\MenuMap
      * @return bool|string
      */
     /*private function findClosestCategoryMenuPath($categoryId, $menuMap)
     {
-        if ($path = $menuMap->getMenuPathByRoute(MenuItem::toRoute('cms/news/category/view', ['id' => $categoryId]))) {
+        if ($path = $menuMap->getMenuPathByRoute(MenuItem::toRoute('cmf/news/category/view', ['id' => $categoryId]))) {
             return $path;
         } elseif (($category = Category::findOne($categoryId)) && !$category->isRoot() && $path = $this->findClosestCategoryMenuPath($category->parent_id, $menuMap)) {
             return $path;

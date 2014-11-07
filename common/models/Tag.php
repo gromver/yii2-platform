@@ -1,16 +1,16 @@
 <?php
 /**
- * @link https://github.com/menst/yii2-cms.git#readme
+ * @link https://github.com/gromver/yii2-cms.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/menst/yii2-cms/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
  * @package yii2-cms
  * @version 1.0.0
  */
 
-namespace menst\cms\common\models;
+namespace gromver\cmf\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
-use menst\cms\common\interfaces\ViewableInterface;
+use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -21,7 +21,7 @@ use yii\helpers\Inflector;
 /**
  * This is the model class for table "cms_tag".
  * @package yii2-cms
- * @author Gayazov Roman <m.e.n.s.t@yandex.ru>
+ * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
  * @property string $language
@@ -38,7 +38,7 @@ use yii\helpers\Inflector;
  * @property integer $hits
  * @property integer $lock
  *
- * @property \menst\cms\common\models\TagToItem[] $tagToItems
+ * @property \gromver\cmf\common\models\TagToItem[] $tagToItems
  * @property Tag[] $translations
  */
 class Tag extends \yii\db\ActiveRecord implements ViewableInterface
@@ -253,13 +253,13 @@ class Tag extends \yii\db\ActiveRecord implements ViewableInterface
      */
     public function getViewLink()
     {
-        return ['/cms/tag/default/view', 'id' => $this->id, 'alias' => $this->alias];
+        return ['/cmf/tag/default/view', 'id' => $this->id, 'alias' => $this->alias];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cms/tag/default/view', 'id' => $model['id'], 'alias' => $model['alias']];
+        return ['/cmf/tag/default/view', 'id' => $model['id'], 'alias' => $model['alias']];
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use menst\cms\common\models\WidgetConfig;
+use gromver\cmf\common\models\WidgetConfig;
 
 /**
  * @var yii\web\View $this
- * @var menst\models\ObjectModel $model
- * @var menst\cms\common\widgets\Widget $widget
+ * @var gromver\models\ObjectModel $model
+ * @var gromver\cmf\common\widgets\Widget $widget
  * @var string $widget_id
  * @var string $widget_class
  * @var string $widget_config
@@ -61,7 +61,7 @@ use menst\cms\common\models\WidgetConfig;
             ]); ?>
     </div>
 
-    <?= \menst\models\widgets\Fields::widget(['model' => $model]) ?>
+    <?= \gromver\models\widgets\Fields::widget(['model' => $model]) ?>
 
     <?php \yii\bootstrap\ActiveForm::end(); ?>
 
