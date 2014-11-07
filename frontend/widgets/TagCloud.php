@@ -38,7 +38,7 @@ class TagCloud extends Widget {
         $this->language or $this->language = Yii::$app->language;
 
         $this->_tags = (new Query())
-            ->select('t.id, t.title, t.alias, count(t2m.item_id) AS weight')
+            ->select('t.id, t.title, t.alias, t.language, count(t2m.item_id) AS weight')
             ->from(Tag::tableName() . ' t')
             ->innerJoin(Tag::pivotTableName() . ' t2m', 't.id=t2m.tag_id')
             ->where(['t.language' => $this->language])

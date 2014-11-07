@@ -29,7 +29,7 @@ class TagMenuUrlRuleBehavior extends MenuUrlRuleBehavior
             if(preg_match('/^\d+$/', $event->requestRoute))
                 $event->resolve(['cmf/tag/default/view', ['id'=>$event->requestRoute]]);
             else
-                $event->resolve(['cmf/tag/default/view', ['id'=>Tag::find()->select('id')->where(['alias' => $event->requestRoute, 'language' => \Yii::$app->language])->scalar()]]);
+                $event->resolve(['cmf/tag/default/view', ['id'=>Tag::find()->select('id')->where(['alias' => $event->requestRoute])->scalar()]]);
         }
     }
 

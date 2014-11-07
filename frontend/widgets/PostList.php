@@ -30,6 +30,11 @@ class PostList extends Widget {
     public $category;
     /**
      * @type list
+     * @items languages
+     */
+    public $language;
+    /**
+     * @type list
      * @items layouts
      * @editable
      */
@@ -65,6 +70,12 @@ class PostList extends Widget {
             $this->category = Category::findOne(intval($this->category));
         }
 
+        if (!empty($this->category)) {
+            $this->language = null;
+        } else {
+            $this->language or $this->language = Yii::$app->language;
+        }
+
         echo $this->render($this->layout, [
             'dataProvider' => new ActiveDataProvider([
                     'query' => $this->getQuery(),
@@ -83,7 +94,7 @@ class PostList extends Widget {
 
     protected function getQuery()
     {
-        return Post::find()->published()->category($this->category ? $this->category->id : null)->with('tags');
+        return Post::find()->published()->category($this->category ? $this->category->id : null)->language($this->language)->with('tags');
     }
 
     public static function layouts()

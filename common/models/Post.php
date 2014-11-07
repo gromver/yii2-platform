@@ -14,6 +14,7 @@ use gromver\cmf\backend\behaviors\TaggableBehavior;
 use gromver\cmf\backend\behaviors\upload\ThumbnailProcessor;
 use gromver\cmf\backend\behaviors\UploadBehavior;
 use gromver\cmf\backend\behaviors\VersioningBehavior;
+use gromver\cmf\common\components\UrlManager;
 use gromver\cmf\common\interfaces\TranslatableInterface;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
@@ -234,14 +235,14 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
      */
     public function getViewLink()
     {
-        return ['/cmf/news/post/view', 'id' => $this->id, 'alias' => $this->alias, 'category_id' => $this->category_id];
+        return ['/cmf/news/post/view', 'id' => $this->id, 'alias' => $this->alias, 'category_id' => $this->category_id, UrlManager::LANGUAGE_PARAM => $this->getLanguage()];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/news/post/view', 'id' => $model['id'], 'alias' => $model['alias'], 'category_id' => $model['category_id']];
+        return ['/cmf/news/post/view', 'id' => $model['id'], 'alias' => $model['alias'], 'category_id' => $model['category_id'], UrlManager::LANGUAGE_PARAM => $model['language']];
     }
 
     //translatable interface

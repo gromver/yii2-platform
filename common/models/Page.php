@@ -12,6 +12,7 @@ namespace gromver\cmf\common\models;
 use dosamigos\transliterator\TransliteratorHelper;
 use gromver\cmf\backend\behaviors\TaggableBehavior;
 use gromver\cmf\backend\behaviors\VersioningBehavior;
+use gromver\cmf\common\components\UrlManager;
 use gromver\cmf\common\interfaces\TranslatableInterface;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
@@ -162,14 +163,14 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
      */
     public function getViewLink()
     {
-        return ['/cmf/page/default/view', 'id'=>$this->id/*, 'alias'=>$this->alias*/];
+        return ['/cmf/page/default/view', 'id'=>$this->id, UrlManager::LANGUAGE_PARAM => $this->language/*, 'alias'=>$this->alias*/];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/page/default/view', 'id'=>$model['id']/*, 'alias'=>$model['alias']*/];
+        return ['/cmf/page/default/view', 'id'=>$model['id'], UrlManager::LANGUAGE_PARAM => $model['language']/*, 'alias'=>$model['alias']*/];
     }
 
     public function extraFields()

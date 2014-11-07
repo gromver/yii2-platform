@@ -10,6 +10,7 @@
 namespace gromver\cmf\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
+use gromver\cmf\common\components\UrlManager;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -252,13 +253,13 @@ class Tag extends ActiveRecord implements ViewableInterface
      */
     public function getViewLink()
     {
-        return ['/cmf/tag/default/view', 'id' => $this->id, 'alias' => $this->alias];
+        return ['/cmf/tag/default/view', 'id' => $this->id, 'alias' => $this->alias, UrlManager::LANGUAGE_PARAM => $this->language];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/tag/default/view', 'id' => $model['id'], 'alias' => $model['alias']];
+        return ['/cmf/tag/default/view', 'id' => $model['id'], 'alias' => $model['alias'], UrlManager::LANGUAGE_PARAM => $model['language']];
     }
 }

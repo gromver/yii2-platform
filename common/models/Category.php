@@ -15,6 +15,7 @@ use gromver\cmf\backend\behaviors\TaggableBehavior;
 use gromver\cmf\backend\behaviors\upload\ThumbnailProcessor;
 use gromver\cmf\backend\behaviors\UploadBehavior;
 use gromver\cmf\backend\behaviors\VersioningBehavior;
+use gromver\cmf\common\components\UrlManager;
 use gromver\cmf\common\interfaces\TranslatableInterface;
 use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
@@ -80,13 +81,13 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             [['alias', 'metakey'], 'string', 'max' => 255],
             [['path', 'metadesc'], 'string', 'max' => 2048],
 
-            [['published_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'published_at', 'when' => function($model) {
+            [['published_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'published_at', 'when' => function() {
                     return is_string($this->published_at);
                 }],
             [['published_at'], 'integer', 'enableClientValidation'=>false],
             [['language'], 'required'],
             [['language'], 'string', 'max' => 7],
-            [['language'], function($attribute, $params) {
+            [['language'], function($attribute) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
                     $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
                 }
@@ -95,14 +96,14 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             [['parent_id'], 'compare', 'compareAttribute'=>'id', 'operator'=>'!='],
 
             [['alias'], 'filter', 'filter'=>'trim'],
-            [['alias'], 'filter', 'filter'=>function($value){
+            [['alias'], 'filter', 'filter'=>function($value) {
                     if (empty($value)) {
                         return Inflector::slug(TransliteratorHelper::process($this->title));                        
                     } else {
                         return Inflector::slug($value);                        
                     }
                 }],
-            [['alias'], 'unique', 'filter'=>function($query){
+            [['alias'], 'unique', 'filter' => function($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     if($parent = self::findOne($this->parent_id)){
                         $query->andWhere('lft>=:lft AND rgt<=:rgt AND level=:level', [
@@ -313,14 +314,14 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
      */
     public function getViewLink()
     {
-        return ['/cmf/news/category/view', 'id' => $this->id/*, 'alias'=>$this->alias*/];
+        return ['/cmf/news/category/view', 'id' => $this->id, UrlManager::LANGUAGE_PARAM => $this->language/*, 'alias'=>$this->alias*/];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/news/category/view', 'id' => $model['id']/*, 'alias'=>$model['alias']*/];
+        return ['/cmf/news/category/view', 'id' => $model['id'], UrlManager::LANGUAGE_PARAM => $model['language']/*, 'alias'=>$model['alias']*/];
     }
 
     //translatable interface
@@ -338,16 +339,16 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
     {
         return [
             'published',
-            'tags' => function($model, $field) {
+            'tags' => function($model) {
                 return array_values(array_map(function($tag) {
                     return $tag->title;
                 }, $model->tags));
             },
-            'text' => function($model, $field) {
+            'text' => function($model) {
                     /** @var self $model */
                     return strip_tags($model->preview_text . "\n" . $model->detail_text);
                 },
-            'date' => function($model, $field) {
+            'date' => function($model) {
                     /** @var self $model */
                     return date(DATE_ISO8601, $model->published_at);
                 },

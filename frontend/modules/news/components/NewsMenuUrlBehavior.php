@@ -23,7 +23,6 @@ use gromver\cmf\frontend\behaviors\MenuUrlRuleBehavior;
 class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
 {
     public $postSuffix = 'html';
-    public $tagSuffix = 'tag';
 
     /**
      * @inheritdoc
@@ -71,7 +70,7 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                         $event->resolve(['cmf/news/post/view', ['id' => $postId]]);
                     }
                 }
-            } elseif (preg_match("#((.*)/)?(([^/]+)\.{$this->tagSuffix})$#", $event->requestRoute, $matches)) {
+            } elseif (preg_match("#((.*)/)?(tag/([^/]+))$#", $event->requestRoute, $matches)) {
                 //ищем тэг
                 if ($menuCategory = Category::findOne($event->menuParams['id'])) {
                     $categoryPath = $matches[2];
@@ -115,10 +114,10 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
                 if ($category && $postId = Post::find()->select('id')->where(['alias' => $postAlias, 'category_id' => $category->id])->scalar()) {
                     $event->resolve(['cmf/news/post/view', ['id' => $postId]]);
                 }
-            } elseif (preg_match("#^(([^/]+)\.{$this->tagSuffix})$#", $event->requestRoute, $matches)) {
+            } elseif (preg_match("#^(tag/([^/]+))$#", $event->requestRoute, $matches)) {
                 //ищем тег
                 $tagAlias = $matches[2];
-                if ($tagId = Tag::find()->select('id')->where(['alias' => $tagAlias, 'language' => $event->menuMap->language])->scalar()) {
+                if ($tagId = Tag::find()->select('id')->where(['alias' => $tagAlias])->scalar()) {
                     $event->resolve(['cmf/tag/default/posts', ['id' => $tagId]]);
                 }
             }
@@ -189,12 +188,12 @@ class NewsMenuUrlBehavior extends MenuUrlRuleBehavior
             //todo сделать привязку к категории новости по category_id здесь и в парсере
             //строим ссылку на основе пункта меню на категорию
             if (isset($event->requestParams['category_id']) && isset($event->requestParams['tag_alias']) && $path = $this->findCategoryMenuPath($event->requestParams['category_id'], $event->menuMap)) {
-                $path .= '/' . $event->requestParams['tag_alias'] . '.' . $this->tagSuffix;
+                $path .= '/tag/' . $event->requestParams['tag_alias'];
                 unset($event->requestParams['tag_alias'], $event->requestParams['category_id'], $event->requestParams['tag_id']);
             }
             //строим ссылку на основе пункта меню на все новости
             if (isset($event->requestParams['tag_alias']) && $path = $event->menuMap->getMenuPathByRoute('cmf/news/post/index')) {
-                $path .= '/' . $event->requestParams['tag_alias'] . '.' . $this->tagSuffix;
+                $path .= '/tag/' . $event->requestParams['tag_alias'];
                 unset($event->requestParams['tag_alias'], $event->requestParams['category_id'], $event->requestParams['tag_id']);
             }
 
