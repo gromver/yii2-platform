@@ -133,10 +133,12 @@ class ItemController extends Controller
      * Creates a new MenuItem model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @param null $menu_type_id
+     * @param null $sourceId
+     * @param null $language
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      */
-    public function actionCreate($menu_type_id = null)
+    public function actionCreate($menu_type_id = null, $sourceId = null, $language = null)
     {
         $model = new MenuItem();
         $model->loadDefaultValues();
@@ -144,6 +146,31 @@ class ItemController extends Controller
         $model->language = Yii::$app->language;
 
         if (isset($menu_type_id)) $model->menu_type_id = $menu_type_id;
+
+        if (isset($sourceId) && $language) {
+            /** @var MenuItem $sourceModel */
+            if (!$sourceModel = MenuItem::findOne($sourceId)) {
+                throw new NotFoundHttpException(Yii::t('gromver.cmf', "Menu item for localization under the specified language isn't found."));
+            }
+            /** @var MenuItem $targetCategory */
+            if (!$targetCategory = $sourceModel->level > 2 ? MenuItem::find()->where(['path' => $sourceModel->parent->path, 'language' => $language])->one() : MenuItem::find()->roots()->one()) {
+                throw new NotFoundHttpException(Yii::t('gromver.cmf', "Parent menu item for the localized version isn't found."));
+            }
+
+            $model->language = $language;
+            $model->parent_id = $targetCategory->id;
+            $model->menu_type_id = $sourceModel->menu_type_id;
+            $model->alias = $sourceModel->alias;
+            $model->status = $sourceModel->status;
+            $model->link = $sourceModel->link;
+            $model->link_type = $sourceModel->link_type;
+            $model->ordering = $sourceModel->ordering;
+            $model->layout_path = $sourceModel->layout_path;
+            $model->access_rule = $sourceModel->access_rule;
+            $model->link_params = $sourceModel->link_params;
+        } else {
+            $sourceModel = null;
+        }
 
         $linkParamsModel = $model->getLinkParamsModel();
 
@@ -156,6 +183,7 @@ class ItemController extends Controller
             return $this->render('create', [
                     'model' => $model,
                     'linkParamsModel' => $linkParamsModel,
+                    'sourceModel' => $sourceModel
                 ]);
         }
     }

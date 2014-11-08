@@ -113,21 +113,45 @@ class CategoryController extends Controller
     /**
      * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
+     * @param string|null $language
+     * @param string|null $sourceId
+     * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionCreate()
+    public function actionCreate($language = null, $sourceId = null)
     {
         $model = new Category();
         $model->loadDefaultValues();
         $model->status = Category::STATUS_PUBLISHED;
         $model->language = Yii::$app->language;
 
+        if ($sourceId && $language) {
+            $sourceModel = $this->findModel($sourceId);
+            if (!$sourceModel->isRoot()) {
+                if (!$targetCategory = $sourceModel->level > 2 ? Category::findOne(['path' => $sourceModel->parent->path, 'language' => $language]) : Category::find()->roots()->one()) {
+                    throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
+                }
+
+                $model->parent_id = $targetCategory->id;
+            }
+            $model->language = $language;
+            $model->alias = $sourceModel->alias;
+            $model->published_at = $sourceModel->published_at;
+            $model->status = $sourceModel->status;
+            $model->preview_text = $sourceModel->preview_text;
+            $model->detail_text = $sourceModel->detail_text;
+            $model->metakey = $sourceModel->metakey;
+            $model->metadesc = $sourceModel->metadesc;
+        } else {
+            $sourceModel = null;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'sourceModel' => $sourceModel
             ]);
         }
     }

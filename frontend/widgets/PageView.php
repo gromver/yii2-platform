@@ -36,6 +36,10 @@ class PageView extends Widget {
     /**
      * @type yesno
      */
+    public $showTranslations;
+    /**
+     * @type yesno
+     */
     public $useHighlights = true;
 
     protected function launch()

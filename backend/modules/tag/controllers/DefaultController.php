@@ -96,20 +96,39 @@ class DefaultController extends Controller
     /**
      * Creates a new Tag model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param string|null $language
+     * @param string|null $sourceId
      * @return mixed
+     * @throws NotFoundHttpException
      */
-    public function actionCreate()
+    public function actionCreate($language = null, $sourceId = null)
     {
         $model = new Tag();
         $model->loadDefaultValues();
         $model->language = Yii::$app->language;
         $model->status = Tag::STATUS_PUBLISHED;
 
+        if ($language) {
+            $model->language = $language;
+        }
+
+        if ($sourceId) {
+            $sourceModel = $this->findModel($sourceId);
+            $model->alias = $sourceModel->alias;
+            $model->status = $sourceModel->status;
+            $model->metakey = $sourceModel->metakey;
+            $model->metadesc = $sourceModel->metadesc;
+        } else {
+            $sourceModel = null;
+        }
+
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'sourceModel' => $sourceModel
             ]);
         }
     }

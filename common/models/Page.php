@@ -149,7 +149,7 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
     //translatable interface
     public function getTranslations()
     {
-        return self::hasMany(self::className(), ['alias'=>'alias'])->indexBy('language');
+        return self::hasMany(self::className(), ['alias' => 'alias'])->indexBy('language');
     }
 
     public function getLanguage()
@@ -163,14 +163,14 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
      */
     public function getViewLink()
     {
-        return ['/cmf/page/default/view', 'id'=>$this->id, UrlManager::LANGUAGE_PARAM => $this->language/*, 'alias'=>$this->alias*/];
+        return ['/cmf/page/default/view', 'id'=>$this->id, UrlManager::LANGUAGE_PARAM => $this->language];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/page/default/view', 'id'=>$model['id'], UrlManager::LANGUAGE_PARAM => $model['language']/*, 'alias'=>$model['alias']*/];
+        return ['/cmf/page/default/view', 'id'=>$model['id'], UrlManager::LANGUAGE_PARAM => $model['language']];
     }
 
     public function extraFields()

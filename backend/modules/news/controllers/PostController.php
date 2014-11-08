@@ -79,7 +79,7 @@ class PostController extends Controller
     }
 
     /**
-     * Lists all Post models.
+     * @param string $route
      * @return mixed
      */
     public function actionSelect($route = 'cmf/news/post/view')
@@ -111,21 +111,42 @@ class PostController extends Controller
     /**
      * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @param null $category_id
-     * @return string|\yii\web\Response
+     * @param string|null $language
+     * @param string|null $sourceId
+     * @param string|null $category_id
+     * @return mixed
+     * @throws NotFoundHttpException
      */
-    public function actionCreate($category_id = null)
+    public function actionCreate($language = null, $sourceId = null, $category_id = null)
     {
         $model = new Post();
         $model->loadDefaultValues();
         $model->status = Category::STATUS_PUBLISHED;
         $model->category_id = $category_id;
 
+        if ($sourceId && $language) {
+            $sourceModel = $this->findModel($sourceId);
+            if (!$targetCategory = Category::findOne(['path' => $sourceModel->category->path, 'language' => $language])) {
+                throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
+            }
+            $model->category_id = $targetCategory->id;
+            $model->alias = $sourceModel->alias;
+            $model->published_at = $sourceModel->published_at;
+            $model->status = $sourceModel->status;
+            $model->preview_text = $sourceModel->preview_text;
+            $model->detail_text = $sourceModel->detail_text;
+            $model->metakey = $sourceModel->metakey;
+            $model->metadesc = $sourceModel->metadesc;
+        } else {
+            $sourceModel = null;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'sourceModel' => $sourceModel
             ]);
         }
     }

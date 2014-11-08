@@ -6,6 +6,7 @@ use yii\bootstrap\ActiveForm;
 /**
  * @var yii\web\View $this
  * @var gromver\cmf\common\models\Tag $model
+ * @var gromver\cmf\common\models\Tag $sourceModel
  * @var yii\bootstrap\ActiveForm $form
  */
 ?>
@@ -18,7 +19,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->errorSummary($model) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => 100]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => 100, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
@@ -26,7 +27,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
 
-    <?= $form->field($model, 'group')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'group')->textInput(['maxlength' => 255, 'placeholder' => isset($sourceModel) ? $sourceModel->group : null]) ?>
 
     <?= $form->field($model, 'metakey')->textInput(['maxlength' => 255]) ?>
 

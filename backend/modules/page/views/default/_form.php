@@ -5,6 +5,7 @@ use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\Page */
+/* @var $sourceModel gromver\cmf\common\models\Page */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -16,7 +17,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
 
-    <?= $form->field($model, 'title')->textInput(['maxlength' => 1024]) ?>
+    <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 

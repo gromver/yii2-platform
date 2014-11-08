@@ -110,20 +110,37 @@ class DefaultController extends Controller
     /**
      * Creates a new Page model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param string|null $language
+     * @param string|null $sourceId
      * @return mixed
+     * @throws NotFoundHttpException
      */
-    public function actionCreate()
+    public function actionCreate($language = null, $sourceId = null)
     {
         $model = new Page();
         $model->loadDefaultValues();
         $model->status = Page::STATUS_PUBLISHED;
         $model->language = Yii::$app->language;
 
+        if($sourceId && $language) {
+            $sourceModel = $this->findModel($sourceId);
+            $model->language = $language;
+            $model->alias = $sourceModel->alias;
+            $model->status = $sourceModel->status;
+            $model->preview_text = $sourceModel->preview_text;
+            $model->detail_text = $sourceModel->detail_text;
+            $model->metakey = $sourceModel->metakey;
+            $model->metadesc = $sourceModel->metadesc;
+        } else {
+            $sourceModel = null;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'sourceModel' => $sourceModel
             ]);
         }
     }

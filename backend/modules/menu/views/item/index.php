@@ -40,7 +40,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'language',
-                'width' => '50px',
+                'value' => function ($model) {
+                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
+                },
+                'format' => 'raw',
                 'filter' => Yii::$app->getLanguagesList()
             ],
             [
