@@ -90,6 +90,7 @@ class m140811_143606_cms_create_tables extends Migration
         $this->createTable('{{%cms_category}}', [
             'id' => Schema::TYPE_PK,
             'parent_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
+            'translation_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
             'language' => Schema::TYPE_STRING . '(7) NOT NULL',
             'title' => Schema::TYPE_STRING . '(1024)',
             'alias' => Schema::TYPE_STRING,
@@ -114,6 +115,7 @@ class m140811_143606_cms_create_tables extends Migration
             'lock' => Schema::TYPE_BIGINT . ' UNSIGNED DEFAULT 1',
         ]);
         $this->createIndex('ParentId_idx', '{{%cms_category}}', 'parent_id');
+        $this->createIndex('TranslationId_idx', '{{%cms_category}}', 'translation_id');
         $this->createIndex('Lft_Rgt_idx', '{{%cms_category}}', 'lft, rgt');
         $this->createIndex('Language_idx', '{{%cms_category}}', 'language');
         $this->createIndex('Path_idx', '{{%cms_category}}', 'path');
@@ -135,6 +137,7 @@ class m140811_143606_cms_create_tables extends Migration
         $this->createTable('{{%cms_post}}', [
             'id' => Schema::TYPE_PK,
             'category_id' => Schema::TYPE_INTEGER . ' NOT NULL',
+            'translation_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
             'title' => Schema::TYPE_STRING . '(1024)',
             'alias' => Schema::TYPE_STRING,
             'preview_text' => Schema::TYPE_TEXT,
@@ -154,6 +157,7 @@ class m140811_143606_cms_create_tables extends Migration
             'lock' => Schema::TYPE_BIGINT . ' UNSIGNED DEFAULT 1',
         ]);
         $this->createIndex('CategoryId_idx', '{{%cms_post}}', 'category_id');
+        $this->createIndex('TranslationId_idx', '{{%cms_post}}', 'translation_id');
         $this->createIndex('Alias_idx', '{{%cms_post}}', 'alias');
         $this->createIndex('Status_idx', '{{%cms_post}}', 'status');
 
@@ -174,6 +178,7 @@ class m140811_143606_cms_create_tables extends Migration
         //PAGE
         $this->createTable('{{%cms_page}}', [
             'id' => Schema::TYPE_PK,
+            'translation_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
             'language' => Schema::TYPE_STRING . '(7) NOT NULL',
             'title' => Schema::TYPE_STRING . '(1024)',
             'alias' => Schema::TYPE_STRING,
@@ -189,6 +194,7 @@ class m140811_143606_cms_create_tables extends Migration
             'hits' => Schema::TYPE_BIGINT . ' UNSIGNED',
             'lock' => Schema::TYPE_BIGINT . ' UNSIGNED DEFAULT 1',
         ]);
+        $this->createIndex('TranslationId_idx', '{{%cms_page}}', 'translation_id');
         $this->createIndex('Language_idx', '{{%cms_page}}', 'language');
         $this->createIndex('Alias_idx', '{{%cms_page}}', 'alias');
         $this->createIndex('Status_idx', '{{%cms_page}}', 'status');
@@ -197,6 +203,7 @@ class m140811_143606_cms_create_tables extends Migration
         /* tag */
         $this->createTable('{{%cms_tag}}', [
             'id' => Schema::TYPE_PK,
+            'translation_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
             'language' => Schema::TYPE_STRING . '(7) NOT NULL',
             'title' => Schema::TYPE_STRING . '(100)',
             'alias' => Schema::TYPE_STRING,
@@ -211,6 +218,7 @@ class m140811_143606_cms_create_tables extends Migration
             'hits' => Schema::TYPE_BIGINT . ' UNSIGNED',
             'lock' => Schema::TYPE_BIGINT . ' UNSIGNED DEFAULT 1',
         ]);
+        $this->createIndex('TranslationId_idx', '{{%cms_tag}}', 'translation_id');
         $this->createIndex('Language_idx', '{{%cms_tag}}', 'language');
         $this->createIndex('Alias_idx', '{{%cms_tag}}', 'alias');
         $this->createIndex('Status_idx', '{{%cms_tag}}', 'status');
@@ -259,6 +267,7 @@ class m140811_143606_cms_create_tables extends Migration
             'id' => Schema::TYPE_PK,
             'menu_type_id' => Schema::TYPE_INTEGER . ' NOT NULL',
             'parent_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
+            'translation_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
             'status' => Schema::TYPE_SMALLINT,
             'language' => Schema::TYPE_STRING . '(7) NOT NULL',
             'title' => Schema::TYPE_STRING . '(1024)',
@@ -287,6 +296,7 @@ class m140811_143606_cms_create_tables extends Migration
         ]);
         $this->createIndex('MenuTypeId_idx', '{{%cms_menu_item}}', 'menu_type_id');
         $this->createIndex('ParentId_idx', '{{%cms_menu_item}}', 'parent_id');
+        $this->createIndex('TranslationId_idx', '{{%cms_menu_item}}', 'translation_id');
         $this->createIndex('Lft_Rgt_idx', '{{%cms_menu_item}}', 'lft, rgt');
         $this->createIndex('Language_idx', '{{%cms_menu_item}}', 'language');
         $this->createIndex('Path_idx', '{{%cms_menu_item}}', 'path');
