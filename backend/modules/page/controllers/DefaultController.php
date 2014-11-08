@@ -124,8 +124,8 @@ class DefaultController extends Controller
 
         if($sourceId && $language) {
             $sourceModel = $this->findModel($sourceId);
+            $model->translation_id = $sourceModel->translation_id;
             $model->language = $language;
-            $model->alias = $sourceModel->alias;
             $model->status = $sourceModel->status;
             $model->preview_text = $sourceModel->preview_text;
             $model->detail_text = $sourceModel->detail_text;

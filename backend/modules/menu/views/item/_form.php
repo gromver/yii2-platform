@@ -16,6 +16,8 @@ use yii\bootstrap\ActiveForm;
             'layout' => 'horizontal',
         ]); ?>
 
+    <?= $form->errorSummary([$model, $linkParamsModel]) ?>
+
     <ul class="nav nav-tabs">
         <li class="active"><a href="#main" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Main') ?></a></li>
         <li><a href="#link-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Link') ?></a></li>
@@ -24,13 +26,15 @@ use yii\bootstrap\ActiveForm;
     <br/>
     <div class="tab-content">
         <div id="main" class="tab-pane active">
-            <?= isset($sourceModel) ? $form->field($model, 'menu_type_id')->dropDownList([$model->menu_type_id => \gromver\cmf\common\models\MenuType::findOne($model->menu_type_id)->title], ['disabled' => true]) : $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
+            <?= $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
 
-            <?= isset($sourceModel) ? $form->field($model, 'parent_id')->dropDownList([$model->parent_id => \gromver\cmf\common\models\MenuItem::findOne($model->parent_id)->title], ['disabled' => true]) : $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...'), 'id' => 'language']) ?>
+
+            <?= $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
                 'pluginOptions'=>[
-                    'depends' => ['menu_type_id'],
+                    'depends' => ['menu_type_id', 'language'],
                     'placeholder' => Yii::t('gromver.cmf', 'Select...'),
-                    'url' => \yii\helpers\Url::to(['type-items', 'update_item_id' => $model->isNewRecord ? null : $model->id]),
+                    'url' => \yii\helpers\Url::to(['type-items', 'update_item_id' => $model->isNewRecord ? null : $model->id, 'selected' => $model->parent_id]),
                 ]
             ]) ?>
 
@@ -38,9 +42,7 @@ use yii\bootstrap\ActiveForm;
 
             <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
-            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + $model->statusLabels()) ?>
-
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
+            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
 
             <?//= $form->field($model, 'path')->textInput(['maxlength' => 2048]) ?>
 

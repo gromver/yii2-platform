@@ -114,6 +114,7 @@ class DefaultController extends Controller
 
         if ($sourceId) {
             $sourceModel = $this->findModel($sourceId);
+            $model->translation_id = $sourceModel->translation_id;
             $model->alias = $sourceModel->alias;
             $model->status = $sourceModel->status;
             $model->metakey = $sourceModel->metakey;

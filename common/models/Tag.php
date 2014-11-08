@@ -26,6 +26,7 @@ use yii\helpers\Inflector;
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
+ * @property integer $translation_id
  * @property string $language
  * @property string $title
  * @property string $alias
@@ -87,6 +88,10 @@ class Tag extends ActiveRecord implements ViewableInterface
                 }],
             [['alias'], 'unique'],
             [['alias'], 'required', 'enableClientValidation' => false],
+            [['translation_id'], 'unique', 'filter' => function($query) {
+                /** @var $query \yii\db\ActiveQuery */
+                $query->andWhere(['language' => $this->language]);
+            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
         ];
     }
 
@@ -97,6 +102,7 @@ class Tag extends ActiveRecord implements ViewableInterface
     {
         return [
             'id' => Yii::t('gromver.cmf', 'ID'),
+            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
             'language' => Yii::t('gromver.cmf', 'Language'),
             'title' => Yii::t('gromver.cmf', 'Title'),
             'alias' => Yii::t('gromver.cmf', 'Alias'),
@@ -119,6 +125,20 @@ class Tag extends ActiveRecord implements ViewableInterface
             TimestampBehavior::className(),
             BlameableBehavior::className()
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert && $this->translation_id === null) {
+            $this->updateAttributes([
+                'translation_id' => $this->id
+            ]);
+        }
+
+        parent::afterSave($insert, $changedAttributes);
     }
 
     private static $_statuses = [
@@ -158,7 +178,7 @@ class Tag extends ActiveRecord implements ViewableInterface
      */
     public function getTranslations()
     {
-        return self::hasMany(self::className(), ['alias' => 'alias'])->indexBy('language');
+        return self::hasMany(self::className(), ['translation_id' => 'translation_id'])->indexBy('language');
     }
 
 

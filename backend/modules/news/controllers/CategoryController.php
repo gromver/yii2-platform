@@ -16,6 +16,7 @@ use gromver\cmf\backend\modules\news\models\CategorySearch;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -39,6 +40,7 @@ class CategoryController extends Controller
                     'publish' => ['post'],
                     'unpublish' => ['post'],
                     'ordering' => ['post'],
+                    'categories' => ['post'],
                 ],
             ],
             'access' => [
@@ -56,7 +58,7 @@ class CategoryController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'select'],
+                        'actions' => ['index', 'view', 'select', 'categories'],
                         'roles' => ['read'],
                     ],
                 ]
@@ -127,14 +129,22 @@ class CategoryController extends Controller
 
         if ($sourceId && $language) {
             $sourceModel = $this->findModel($sourceId);
-            if (!$sourceModel->isRoot()) {
+            /*if (!$sourceModel->isRoot()) {
                 if (!$targetCategory = $sourceModel->level > 2 ? Category::findOne(['path' => $sourceModel->parent->path, 'language' => $language]) : Category::find()->roots()->one()) {
                     throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
                 }
 
                 $model->parent_id = $targetCategory->id;
+            }*/
+            /** @var Category $parentItem */
+            // если локализуемая категория имеет родителя, то пытаемся найти релевантную локализацию для родителя создаваемой категории
+            if (!($sourceModel->level > 2 && $parentItem = @$sourceModel->parent->translations[$language])) {
+                $parentItem = Category::find()->roots()->one();
             }
+
+            $model->parent_id = $parentItem->id;
             $model->language = $language;
+            $model->translation_id = $sourceModel->translation_id;
             $model->alias = $sourceModel->alias;
             $model->published_at = $sourceModel->published_at;
             $model->status = $sourceModel->status;
@@ -259,6 +269,44 @@ class CategoryController extends Controller
         $model->deleteFile($attribute);
 
         $this->redirect(['update', 'id'=>$pk]);
+    }
+
+    public function actionCategories($update_item_id = null, $selected = '')
+    {
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $language = $parents[0];
+                //исключаем редактируемый пункт и его подпункты из списка
+                if (!empty($update_item_id) && $updateItem = Category::findOne($update_item_id)) {
+                    $excludeIds = array_merge([$update_item_id], $updateItem->descendants()->select('id')->column());
+                } else {
+                    $excludeIds = [];
+                }
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+                $out = array_map(function($value) {
+                    return [
+                        'id' => $value['id'],
+                        'name' => str_repeat(" • ", $value['level'] - 1) . $value['title']
+                    ];
+                }, Category::find()->noRoots()->language($language)->orderBy('lft')->andWhere(['not in', 'id', $excludeIds])->asArray()->all());
+                /** @var Category $root */
+                $root = Category::find()->roots()->one();
+                array_unshift($out, [
+                    'id' => $root->id,
+                    'name' => Yii::t('gromver.cmf', 'Root')
+                ]);
+
+                echo Json::encode(['output' => $out, 'selected' => $selected ? $selected : $root->id]);
+                return;
+            }
+        }
+        echo Json::encode(['output' => '', 'selected' => $selected]);
     }
 
     /**

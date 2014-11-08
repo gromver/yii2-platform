@@ -55,6 +55,10 @@ class SearchResults extends Widget {
      */
     public $types;
     public $query;
+    /**
+     * @type list
+     * @items languages
+     */
     public $language;
     /**
      * @var array
@@ -221,5 +225,10 @@ class SearchResults extends Widget {
         return [
             '_itemDefault' => Yii::t('gromver.cmf', 'Default'),
         ];
+    }
+
+    public static function languages()
+    {
+        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 }

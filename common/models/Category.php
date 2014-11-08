@@ -31,6 +31,7 @@ use yii\helpers\Inflector;
  *
  * @property integer $id
  * @property integer $parent_id
+ * @property integer $translation_id
  * @property string $language
  * @property string $title
  * @property string $alias
@@ -55,6 +56,8 @@ use yii\helpers\Inflector;
  * @property integer $lock
  *
  * @property Post[] $posts
+ * @property Category $parent
+ * @property Category[] $translations
  */
 class Category extends ActiveRecord implements TranslatableInterface, ViewableInterface
 {
@@ -82,8 +85,8 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             [['path', 'metadesc'], 'string', 'max' => 2048],
 
             [['published_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'published_at', 'when' => function() {
-                    return is_string($this->published_at);
-                }],
+                return is_string($this->published_at);
+            }],
             [['published_at'], 'integer', 'enableClientValidation'=>false],
             [['language'], 'required'],
             [['language'], 'string', 'max' => 7],
@@ -92,29 +95,34 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
                     $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
                 }
             }],
-            [['parent_id'], 'exist', 'targetAttribute'=>'id'],
-            [['parent_id'], 'compare', 'compareAttribute'=>'id', 'operator'=>'!='],
+            [['parent_id'], 'exist', 'targetAttribute' => 'id'],
+            [['parent_id'], 'compare', 'compareAttribute' => 'id', 'operator'=>'!='],
 
             [['alias'], 'filter', 'filter'=>'trim'],
             [['alias'], 'filter', 'filter'=>function($value) {
-                    if (empty($value)) {
-                        return Inflector::slug(TransliteratorHelper::process($this->title));                        
-                    } else {
-                        return Inflector::slug($value);                        
-                    }
-                }],
+                if (empty($value)) {
+                    return Inflector::slug(TransliteratorHelper::process($this->title));
+                } else {
+                    return Inflector::slug($value);
+                }
+            }],
             [['alias'], 'unique', 'filter' => function($query) {
-                    /** @var $query \yii\db\ActiveQuery */
-                    if($parent = self::findOne($this->parent_id)){
-                        $query->andWhere('lft>=:lft AND rgt<=:rgt AND level=:level', [
-                                'lft' => $parent->lft,
-                                'rgt' => $parent->rgt,
-                                'level' => $parent->level + 1,
-                            ]);
-                    }
-                }],
+                /** @var $query \yii\db\ActiveQuery */
+                if($parent = self::findOne($this->parent_id)){
+                    $query->andWhere('lft>=:lft AND rgt<=:rgt AND level=:level AND language=:language', [
+                        'lft' => $parent->lft,
+                        'rgt' => $parent->rgt,
+                        'level' => $parent->level + 1,
+                        'language' => $this->language
+                    ]);
+                }
+            }],
             [['alias'], 'string', 'max' => 250],
             [['alias'], 'required', 'enableClientValidation' => false],
+            [['translation_id'], 'unique', 'filter' => function($query) {
+                /** @var $query \yii\db\ActiveQuery */
+                $query->andWhere(['language' => $this->language]);
+            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
 
             [['title', 'detail_text', 'status'], 'required'],
             [['tags', 'versionNote'], 'safe']
@@ -129,6 +137,7 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
         return [
             'id' => Yii::t('gromver.cmf', 'ID'),
             'parent_id' => Yii::t('gromver.cmf', 'Parent ID'),
+            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
             'language' => Yii::t('gromver.cmf', 'Language'),
             'title' => Yii::t('gromver.cmf', 'Title'),
             'alias' => Yii::t('gromver.cmf', 'Alias'),
@@ -242,6 +251,9 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
         return $this->saveNode($runValidation,$attributes);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterSave($insert, $changedAttributes)
     {
         $newParent = self::findOne($this->parent_id);
@@ -269,7 +281,13 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             $this->normalizeDescendants();
         }
 
-        return parent::afterSave($insert, $changedAttributes);
+        if ($insert && $this->translation_id === null) {
+            $this->updateAttributes([
+                'translation_id' => $this->id
+            ]);
+        }
+
+        parent::afterSave($insert, $changedAttributes);
     }
 
     private function calculatePath()
@@ -327,7 +345,7 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
     //translatable interface
     public function getTranslations()
     {
-        return self::hasMany(self::className(), ['path'=>'path'])->indexBy('language');
+        return self::hasMany(self::className(), ['translation_id' => 'translation_id'])->indexBy('language');
     }
 
     public function getLanguage()

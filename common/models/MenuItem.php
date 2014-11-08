@@ -15,6 +15,7 @@ use gromver\cmf\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Inflector;
 use yii\helpers\Json;
@@ -27,6 +28,7 @@ use yii\helpers\Json;
  * @property integer $id
  * @property integer $menu_type_id
  * @property integer $parent_id
+ * @property integer $translation_id
  * @property integer $status
  * @property string $language
  * @property string $title
@@ -56,8 +58,9 @@ use yii\helpers\Json;
  * @property string $linkTitle
  * @property MenuType $menuType
  * @property MenuItem $parent
+ * @property MenuItem[] $translations
  */
-class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
+class MenuItem extends ActiveRecord implements ViewableInterface
 {
     const STATUS_UNPUBLISHED = 0;
     const STATUS_PUBLISHED = 1;
@@ -131,6 +134,10 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
                 }],
             [['alias'], 'string', 'max' => 255],
             [['alias'], 'required', 'enableClientValidation' => false],
+            [['translation_id'], 'unique', 'filter' => function($query) {
+                /** @var $query \yii\db\ActiveQuery */
+                $query->andWhere(['language' => $this->language]);
+            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
             [['title',  'link', 'status'], 'required'],
         ];
     }
@@ -144,6 +151,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             'id' => Yii::t('gromver.cmf', 'ID'),
             'menu_type_id' => Yii::t('gromver.cmf', 'Menu Type ID'),
             'parent_id' => Yii::t('gromver.cmf', 'Parent ID'),
+            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
             'status' => Yii::t('gromver.cmf', 'Status'),
             'language' => Yii::t('gromver.cmf', 'Language'),
             'title' => Yii::t('gromver.cmf', 'Title'),
@@ -238,7 +246,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
 
     public function getTranslations()
     {
-        return self::hasMany(self::className(), ['path' => 'path'])->noRoots()->indexBy('language');
+        return self::hasMany(self::className(), ['translation_id' => 'translation_id'])->indexBy('language');
     }
 
     public function optimisticLock()
@@ -246,7 +254,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
         return 'lock';
     }
 
-    public function save($runValidation=true, $attributes=null) {
+    public function save($runValidation = true, $attributes = null) {
         if ($this->getIsNewRecord() && $this->parent_id) {
             return $this->appendTo(self::findOne($this->parent_id), $runValidation, $attributes);
         }
@@ -254,6 +262,9 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
         return $this->saveNode($runValidation,$attributes);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterSave($insert, $changedAttributes)
     {
         $newParent = self::findOne($this->parent_id);
@@ -286,7 +297,13 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
             $this->normalizeStatus();
         }
 
-        return parent::afterSave($insert, $changedAttributes);
+        if ($insert && $this->translation_id === null) {
+            $this->updateAttributes([
+                'translation_id' => $this->id
+            ]);
+        }
+
+        parent::afterSave($insert, $changedAttributes);
     }
 
     private function calculatePath()
@@ -363,7 +380,7 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
     public static function linkTypeLabels()
     {
         return array_map(function($label) {
-                return Yii::t('menst.news', $label);
+                return Yii::t('gromver.cmf', $label);
             }, self::$_statuses);
     }
 
@@ -424,19 +441,21 @@ class MenuItem extends \yii\db\ActiveRecord implements ViewableInterface
      */
     public function getViewLink()
     {
-        if($this->link_type==self::LINK_ROUTE)
+        if ($this->link_type == self::LINK_ROUTE) {
             return '/' . $this->path;
-        else
+        } else {
             return $this->link;
+        }
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model) {
-        if($model['link_type']==self::LINK_ROUTE)
+        if ($model['link_type']==self::LINK_ROUTE) {
             return '/' . $model['path'];
-        else
+        } else {
             return $model['link'];
+        }
     }
 
     public function getBreadcrumbs($includeSelf = false)

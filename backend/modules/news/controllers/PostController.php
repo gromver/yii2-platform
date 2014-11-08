@@ -130,6 +130,7 @@ class PostController extends Controller
                 throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
             }
             $model->category_id = $targetCategory->id;
+            $model->translation_id = $sourceModel->translation_id;
             $model->alias = $sourceModel->alias;
             $model->published_at = $sourceModel->published_at;
             $model->status = $sourceModel->status;

@@ -24,7 +24,7 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Not selected')] + $model->statusLabels()) ?>
+    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
 
     <?= $form->field($model, 'published_at')->widget(\kartik\widgets\DateTimePicker::className(), [
         'options' => ['value' => date('d.m.Y H:i', is_int($model->published_at) ? $model->published_at : time())],

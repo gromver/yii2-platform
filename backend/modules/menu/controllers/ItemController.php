@@ -152,14 +152,16 @@ class ItemController extends Controller
             if (!$sourceModel = MenuItem::findOne($sourceId)) {
                 throw new NotFoundHttpException(Yii::t('gromver.cmf', "Menu item for localization under the specified language isn't found."));
             }
-            /** @var MenuItem $targetCategory */
-            if (!$targetCategory = $sourceModel->level > 2 ? MenuItem::find()->where(['path' => $sourceModel->parent->path, 'language' => $language])->one() : MenuItem::find()->roots()->one()) {
-                throw new NotFoundHttpException(Yii::t('gromver.cmf', "Parent menu item for the localized version isn't found."));
+            /** @var MenuItem $parentItem */
+            // если локализуемый пункт меню имеет родителя, то пытаемся найти релевантную локализацию для родителя создаваемого пункта меню
+            if (!($sourceModel->level > 2 && $parentItem = @$sourceModel->parent->translations[$language])) {
+                $parentItem = MenuItem::find()->roots()->one();
             }
 
             $model->language = $language;
-            $model->parent_id = $targetCategory->id;
+            $model->parent_id = $parentItem->id;
             $model->menu_type_id = $sourceModel->menu_type_id;
+            $model->translation_id = $sourceModel->translation_id;
             $model->alias = $sourceModel->alias;
             $model->status = $sourceModel->status;
             $model->link = $sourceModel->link;
@@ -259,7 +261,6 @@ class ItemController extends Controller
 
         foreach ($data as $id => $order) {
             if ($target = MenuItem::findOne($id)) {
-                //$roots[] = $target->root;
                 $target->updateAttributes(['ordering' => intval($order)]);
             }
         }
@@ -308,6 +309,7 @@ class ItemController extends Controller
             $parents = $_POST['depdrop_parents'];
             if ($parents != null) {
                 $typeId = $parents[0];
+                $language = $parents[1];
                 //исключаем редактируемый пункт и его подпункты из списка
                 if (!empty($update_item_id) && $updateItem = MenuItem::findOne($update_item_id)) {
                     $excludeIds = array_merge([$update_item_id], $updateItem->descendants()->select('id')->column());
@@ -327,7 +329,7 @@ class ItemController extends Controller
                         'id' => $value['id'],
                         'name' => str_repeat(" • ", $value['level'] - 1) . $value['title']
                     ];
-                }, MenuItem::find()->noRoots()->type($typeId)->orderBy('lft')->andWhere(['not in', 'id', $excludeIds])->asArray()->all());
+                }, MenuItem::find()->noRoots()->type($typeId)->language($language)->orderBy('lft')->andWhere(['not in', 'id', $excludeIds])->asArray()->all());
                 /** @var MenuItem $root */
                 $root = MenuItem::find()->roots()->one();
                 array_unshift($out, [

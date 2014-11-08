@@ -27,6 +27,7 @@ use yii\helpers\Inflector;
  * @author Gayazov Roman <gromver5@gmail.com>
  *
  * @property integer $id
+ * @property integer $translation_id
  * @property string $language
  * @property string $title
  * @property string $alias
@@ -41,6 +42,8 @@ use yii\helpers\Inflector;
  * @property integer $updated_by
  * @property string $hits
  * @property string $lock
+ *
+ * @property Page[] $translations
  */
 class Page extends ActiveRecord implements TranslatableInterface, ViewableInterface
 {
@@ -69,8 +72,8 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
             [['alias', 'metakey'], 'string', 'max' => 255],
             [['metadesc'], 'string', 'max' => 2048],
 
-            [['alias'], 'filter', 'filter'=>'trim'],
-            [['alias'], 'filter', 'filter'=>function($value){
+            [['alias'], 'filter', 'filter' => 'trim'],
+            [['alias'], 'filter', 'filter' => function($value){
                     if (empty($value)) {
                         return Inflector::slug(TransliteratorHelper::process($this->title));
                     } else {
@@ -79,7 +82,11 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
                 }],
             [['alias'], 'unique'],
             [['alias'], 'string', 'max' => 250],
-            [['alias'], 'required', 'enableClientValidation'=>false],
+            [['alias'], 'required', 'enableClientValidation' => false],
+            [['translation_id'], 'unique', 'filter' => function($query) {
+                /** @var $query \yii\db\ActiveQuery */
+                $query->andWhere(['language' => $this->language]);
+            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
             [['tags', 'versionNote', 'lock'], 'safe']
         ];
     }
@@ -91,6 +98,7 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
     {
         return [
             'id' => Yii::t('gromver.cmf', 'ID'),
+            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
             'language' => Yii::t('gromver.cmf', 'Language'),
             'title' => Yii::t('gromver.cmf', 'Title'),
             'alias' => Yii::t('gromver.cmf', 'Alias'),
@@ -121,6 +129,21 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert && $this->translation_id === null) {
+            $this->updateAttributes([
+                'translation_id' => $this->id
+            ]);
+        }
+
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+
     private static $_statuses = [
         self::STATUS_PUBLISHED => 'Published',
         self::STATUS_UNPUBLISHED => 'Unpublished',
@@ -149,7 +172,7 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
     //translatable interface
     public function getTranslations()
     {
-        return self::hasMany(self::className(), ['alias' => 'alias'])->indexBy('language');
+        return self::hasMany(self::className(), ['translation_id' => 'translation_id'])->indexBy('language');
     }
 
     public function getLanguage()
@@ -163,14 +186,14 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
      */
     public function getViewLink()
     {
-        return ['/cmf/page/default/view', 'id'=>$this->id, UrlManager::LANGUAGE_PARAM => $this->language];
+        return ['/cmf/page/default/view', 'id' => $this->id, UrlManager::LANGUAGE_PARAM => $this->language];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/page/default/view', 'id'=>$model['id'], UrlManager::LANGUAGE_PARAM => $model['language']];
+        return ['/cmf/page/default/view', 'id' => $model['id'], UrlManager::LANGUAGE_PARAM => $model['language']];
     }
 
     public function extraFields()

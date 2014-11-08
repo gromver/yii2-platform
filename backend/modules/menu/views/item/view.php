@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'menu_type_id',
             'parent_id',
+            'translation_id',
             'status',
             'language',
             'title',

@@ -30,6 +30,7 @@ use yii\helpers\Inflector;
  *
  * @property integer $id
  * @property integer $category_id
+ * @property integer $translation_id
  * @property string $title
  * @property string $alias
  * @property string $preview_text
@@ -51,6 +52,8 @@ use yii\helpers\Inflector;
  * @property Category $category
  * @property User[] $viewers
  * @property Tag[] $tags
+ * @property string $language
+ * @property Post[] $translations
  */
 class Post extends ActiveRecord implements TranslatableInterface, ViewableInterface
 {
@@ -94,6 +97,10 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere(['category_id' => $this->category_id]);
                 }, 'message' => '{attribute} - Another article from this category has the same alias'],
+            [['translation_id'], 'unique', 'filter' => function($query) {
+                /** @var $query \yii\db\ActiveQuery */
+                $query->andWhere(['language' => $this->language]);
+            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
             [['tags', 'versionNote'], 'safe']
         ];
     }
@@ -106,6 +113,7 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
         return [
             'id' => Yii::t('gromver.cmf', 'ID'),
             'category_id' => Yii::t('gromver.cmf', 'Category ID'),
+            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
             'title' => Yii::t('gromver.cmf', 'Title'),
             'alias' => Yii::t('gromver.cmf', 'Alias'),
             'preview_text' => Yii::t('gromver.cmf', 'Preview Text'),
@@ -159,6 +167,19 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($insert && $this->translation_id === null) {
+            $this->updateAttributes([
+                'translation_id' => $this->id
+            ]);
+        }
+
+        parent::afterSave($insert, $changedAttributes);
+    }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -222,7 +243,7 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
 
     public function hit()
     {
-        return $this->updateAttributes(['hits'=>$this->hits + 1]);
+        return $this->updateAttributes(['hits' => $this->hits + 1]);
     }
 
     public function getDayLink()
@@ -248,12 +269,12 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
     //translatable interface
     public function getTranslations()
     {
-        return self::hasMany(self::className(), ['alias'=>'alias'])->innerJoinWith('category', false)->andWhere(['path'=>$this->category->path])->indexBy('language');
+        return self::hasMany(self::className(), ['translation_id' => 'translation_id'])->indexBy('language');
     }
 
     public function getLanguage()
     {
-        return $this->category->language;
+        return $this->category ? $this->category->language : '';
     }
 
     public function extraFields()
