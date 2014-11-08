@@ -79,14 +79,17 @@ class Tag extends ActiveRecord implements ViewableInterface
             [['metadesc'], 'string', 'max' => 2048],
 
             [['alias'], 'filter', 'filter' => 'trim'],
-            [['alias'], 'filter', 'filter' => function ($value){
+            [['alias'], 'filter', 'filter' => function($value){
                     if (empty($value)) {
                         return Inflector::slug(TransliteratorHelper::process($this->title));
                     } else {
                         return Inflector::slug($value);
                     }
                 }],
-            [['alias'], 'unique'],
+            [['alias'], 'unique', 'filter' => function($query){
+                /** @var $query \yii\db\ActiveQuery */
+                $query->andWhere(['language' => $this->language]);
+            }],
             [['alias'], 'required', 'enableClientValidation' => false],
             [['translation_id'], 'unique', 'filter' => function($query) {
                 /** @var $query \yii\db\ActiveQuery */

@@ -80,7 +80,10 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
                         return Inflector::slug($value);
                     }
                 }],
-            [['alias'], 'unique'],
+            [['alias'], 'unique', 'filter' => function($query){
+                /** @var $query \yii\db\ActiveQuery */
+                $query->andWhere(['language' => $this->language]);
+            }],
             [['alias'], 'string', 'max' => 250],
             [['alias'], 'required', 'enableClientValidation' => false],
             [['translation_id'], 'unique', 'filter' => function($query) {

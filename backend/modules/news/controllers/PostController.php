@@ -14,6 +14,7 @@ use gromver\cmf\common\models\Post;
 use gromver\cmf\backend\modules\news\models\PostSearch;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
@@ -38,6 +39,7 @@ class PostController extends Controller
                     'publish' => ['post'],
                     'unpublish' => ['post'],
                     'ordering' => ['post'],
+                    'categories' => ['post'],
                 ],
             ],
             'access' => [
@@ -55,7 +57,7 @@ class PostController extends Controller
                     ],
                     [
                         'allow' => true,
-                        'actions' => ['index', 'view', 'select'],
+                        'actions' => ['index', 'view', 'select', 'categories'],
                         'roles' => ['read'],
                     ],
                 ]
@@ -121,15 +123,18 @@ class PostController extends Controller
     {
         $model = new Post();
         $model->loadDefaultValues();
-        $model->status = Category::STATUS_PUBLISHED;
-        $model->category_id = $category_id;
+        $model->status = Post::STATUS_PUBLISHED;
+        if (isset($category_id) && $category = Category::findOne($category_id)) {
+            $model->category_id = $category->id;
+            $model->language = $category->language;
+        }
 
         if ($sourceId && $language) {
             $sourceModel = $this->findModel($sourceId);
-            if (!$targetCategory = Category::findOne(['path' => $sourceModel->category->path, 'language' => $language])) {
-                throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
-            }
-            $model->category_id = $targetCategory->id;
+            $relevantCategory = Category::findOne(['path' => $sourceModel->category->path, 'language' => $language]);
+
+            $model->category_id = $relevantCategory ? $relevantCategory->id : null;
+            $model->language = $language;
             $model->translation_id = $sourceModel->translation_id;
             $model->alias = $sourceModel->alias;
             $model->published_at = $sourceModel->published_at;
@@ -235,6 +240,28 @@ class PostController extends Controller
         $model->deleteFile($attribute);
 
         $this->redirect(['update', 'id'=>$pk]);
+    }
+
+
+    public function actionCategories($selected = '')
+    {
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $language = $parents[0];
+
+                $out = array_map(function($value) {
+                    return [
+                        'id' => $value['id'],
+                        'name' => str_repeat(" • ", $value['level'] - 1) . $value['title']
+                    ];
+                }, Category::find()->noRoots()->language($language)->orderBy('lft')->asArray()->all());
+
+                echo Json::encode(['output' => $out, 'selected' => $selected ? $selected : '']);
+                return;
+            }
+        }
+        echo Json::encode(['output' => '', 'selected' => $selected]);
     }
 
     /**

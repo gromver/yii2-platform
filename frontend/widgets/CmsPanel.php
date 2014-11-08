@@ -42,9 +42,9 @@ class CmsPanel extends Widget {
 
         echo Html::textInput('q', null, ['class' => 'form-control', 'placeholder' => Yii::t('gromver.cmf', 'Search')]);
 
-        echo Html::endTag('div') . "\n";
+        echo Html::endTag('div');// . "\n";
 
-        echo Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']);
+        //echo Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']);
 
         echo Html::endForm();
 

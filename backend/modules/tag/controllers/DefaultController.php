@@ -108,12 +108,9 @@ class DefaultController extends Controller
         $model->language = Yii::$app->language;
         $model->status = Tag::STATUS_PUBLISHED;
 
-        if ($language) {
-            $model->language = $language;
-        }
-
-        if ($sourceId) {
+        if ($sourceId && $language) {
             $sourceModel = $this->findModel($sourceId);
+            $model->language = $language;
             $model->translation_id = $sourceModel->translation_id;
             $model->alias = $sourceModel->alias;
             $model->status = $sourceModel->status;

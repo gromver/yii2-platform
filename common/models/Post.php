@@ -31,6 +31,7 @@ use yii\helpers\Inflector;
  * @property integer $id
  * @property integer $category_id
  * @property integer $translation_id
+ * @property string $language
  * @property string $title
  * @property string $alias
  * @property string $preview_text
@@ -52,7 +53,6 @@ use yii\helpers\Inflector;
  * @property Category $category
  * @property User[] $viewers
  * @property Tag[] $tags
- * @property string $language
  * @property Post[] $translations
  */
 class Post extends ActiveRecord implements TranslatableInterface, ViewableInterface
@@ -74,9 +74,10 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
     public function rules()
     {
         return [
-            [['status', 'category_id', 'title', 'detail_text'], 'required'],
+            [['status', 'category_id', 'title', 'detail_text', 'language'], 'required'],
             [['category_id', 'created_at', 'updated_at', 'status', 'created_by', 'updated_by', 'ordering', 'hits', 'lock'], 'integer'],
             [['preview_text', 'detail_text'], 'string'],
+            [['language'], 'string', 'max' => 7],
             [['title', 'preview_image', 'detail_image'], 'string', 'max' => 1024],
             [['alias', 'metakey'], 'string', 'max' => 255],
             [['metadesc'], 'string', 'max' => 2048],
@@ -84,7 +85,11 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
             [['published_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'published_at', 'when' => function () {
                     return is_string($this->published_at);
                 }],
-            [['published_at'], 'integer', 'enableClientValidation'=>false],
+            [['published_at'], 'integer', 'enableClientValidation' => false],
+            [['category_id'], 'exist', 'targetClass' => Category::className(), 'targetAttribute' => 'id', 'filter' => function($query) {
+                /** @var $query \gromver\cmf\common\models\CategoryQuery */
+                $query->noRoots();
+            }],
             [['alias'], 'filter', 'filter' => 'trim'],
             [['alias'], 'filter', 'filter' => function ($value) {
                     if (empty($value)) {
@@ -95,7 +100,7 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
                 }],
             [['alias'], 'unique', 'filter' => function ($query) {
                     /** @var $query \yii\db\ActiveQuery */
-                    $query->andWhere(['category_id' => $this->category_id]);
+                    $query->andWhere(['category_id' => $this->category_id, 'language' => $this->language]);
                 }, 'message' => '{attribute} - Another article from this category has the same alias'],
             [['translation_id'], 'unique', 'filter' => function($query) {
                 /** @var $query \yii\db\ActiveQuery */
@@ -274,13 +279,14 @@ class Post extends ActiveRecord implements TranslatableInterface, ViewableInterf
 
     public function getLanguage()
     {
-        return $this->category ? $this->category->language : '';
+        //return $this->category ? $this->category->language : '';
+        return $this->language;
     }
 
     public function extraFields()
     {
         return [
-            'language',
+            //'language',
             'published',
             'tags' => function($model) {
                     return array_values(array_map(function ($tag) {

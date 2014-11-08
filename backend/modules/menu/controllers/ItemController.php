@@ -14,7 +14,6 @@ use gromver\modulequery\ModuleQuery;
 use Yii;
 use gromver\cmf\common\models\MenuItem;
 use gromver\cmf\backend\modules\menu\models\MenuItemSearch;
-use yii\base\Event;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -148,10 +147,7 @@ class ItemController extends Controller
         if (isset($menu_type_id)) $model->menu_type_id = $menu_type_id;
 
         if (isset($sourceId) && $language) {
-            /** @var MenuItem $sourceModel */
-            if (!$sourceModel = MenuItem::findOne($sourceId)) {
-                throw new NotFoundHttpException(Yii::t('gromver.cmf', "Menu item for localization under the specified language isn't found."));
-            }
+            $sourceModel = $this->findModel($sourceId);
             /** @var MenuItem $parentItem */
             // если локализуемый пункт меню имеет родителя, то пытаемся найти релевантную локализацию для родителя создаваемого пункта меню
             if (!($sourceModel->level > 2 && $parentItem = @$sourceModel->parent->translations[$language])) {
@@ -318,12 +314,7 @@ class ItemController extends Controller
                 } else {
                     $excludeIds = [];
                 }
-                // the getSubCatList function will query the database based on the
-                // cat_id and return an array like below:
-                // [
-                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-                // ]
+
                 $out = array_map(function($value) {
                     return [
                         'id' => $value['id'],

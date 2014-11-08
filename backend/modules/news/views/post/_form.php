@@ -16,9 +16,18 @@ use yii\bootstrap\ActiveForm;
         'options' => ['enctype'=>'multipart/form-data']
     ]); ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList(\yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\Category::find()->noRoots()->orderBy('lft')->all(),'id', function($model){
-        return str_repeat(" • ", $model->level-1) . $model->title;
-    }), ['prompt'=>'Не указано']) ?>
+    <?= $form->errorSummary($model) ?>
+
+    <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...'), 'id' => 'language']) ?>
+
+    <?= $form->field($model, 'category_id')->widget(\kartik\widgets\DepDrop::className(), [
+        'pluginOptions' => [
+            //'initialize' => true,
+            'depends' => ['language'],
+            'placeholder' => Yii::t('gromver.cmf', 'Select...'),
+            'url' => \yii\helpers\Url::to(['categories', 'selected' => $model->category_id]),
+        ]
+    ]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
 
@@ -87,3 +96,4 @@ use yii\bootstrap\ActiveForm;
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php $this->registerJs('$("#language").change()', \yii\web\View::POS_READY);

@@ -129,13 +129,6 @@ class CategoryController extends Controller
 
         if ($sourceId && $language) {
             $sourceModel = $this->findModel($sourceId);
-            /*if (!$sourceModel->isRoot()) {
-                if (!$targetCategory = $sourceModel->level > 2 ? Category::findOne(['path' => $sourceModel->parent->path, 'language' => $language]) : Category::find()->roots()->one()) {
-                    throw new NotFoundHttpException(Yii::t('gromver.cmf', "The category for the specified localization isn't found."));
-                }
-
-                $model->parent_id = $targetCategory->id;
-            }*/
             /** @var Category $parentItem */
             // если локализуемая категория имеет родителя, то пытаемся найти релевантную локализацию для родителя создаваемой категории
             if (!($sourceModel->level > 2 && $parentItem = @$sourceModel->parent->translations[$language])) {
@@ -283,12 +276,7 @@ class CategoryController extends Controller
                 } else {
                     $excludeIds = [];
                 }
-                // the getSubCatList function will query the database based on the
-                // cat_id and return an array like below:
-                // [
-                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
-                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
-                // ]
+
                 $out = array_map(function($value) {
                     return [
                         'id' => $value['id'],

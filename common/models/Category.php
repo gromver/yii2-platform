@@ -87,19 +87,19 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             [['published_at'], 'date', 'format' => 'dd.MM.yyyy HH:mm', 'timestampAttribute' => 'published_at', 'when' => function() {
                 return is_string($this->published_at);
             }],
-            [['published_at'], 'integer', 'enableClientValidation'=>false],
+            [['published_at'], 'integer', 'enableClientValidation' => false],
             [['language'], 'required'],
             [['language'], 'string', 'max' => 7],
-            [['language'], function($attribute) {
+            /*[['language'], function($attribute) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
                     $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
                 }
-            }],
+            }],*/
             [['parent_id'], 'exist', 'targetAttribute' => 'id'],
             [['parent_id'], 'compare', 'compareAttribute' => 'id', 'operator'=>'!='],
 
-            [['alias'], 'filter', 'filter'=>'trim'],
-            [['alias'], 'filter', 'filter'=>function($value) {
+            [['alias'], 'filter', 'filter' => 'trim'],
+            [['alias'], 'filter', 'filter' => function($value) {
                 if (empty($value)) {
                     return Inflector::slug(TransliteratorHelper::process($this->title));
                 } else {

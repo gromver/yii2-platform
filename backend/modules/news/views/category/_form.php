@@ -25,6 +25,7 @@ use gromver\cmf\common\models\Category;
 
     <?= $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
         'pluginOptions' => [
+            //'initialize' => true,
             'depends' => ['language'],
             'placeholder' => Yii::t('gromver.cmf', 'Select...'),
             'url' => \yii\helpers\Url::to(['categories', 'update_item_id' => $model->isNewRecord ? null : $model->id, 'selected' => $model->parent_id]),

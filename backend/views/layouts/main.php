@@ -37,7 +37,7 @@ AppAsset::register($this);
 
             echo Html::textInput('q', null, ['class' => 'form-control', 'placeholder' => Yii::t('gromver.cmf', 'Search')]);
 
-            echo '&nbsp;' . Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']);
+            //echo '&nbsp;' . Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']);
 
             echo Html::endForm();
 

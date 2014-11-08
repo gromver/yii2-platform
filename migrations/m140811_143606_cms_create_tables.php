@@ -138,6 +138,7 @@ class m140811_143606_cms_create_tables extends Migration
             'id' => Schema::TYPE_PK,
             'category_id' => Schema::TYPE_INTEGER . ' NOT NULL',
             'translation_id' => Schema::TYPE_INTEGER . ' DEFAULT NULL',
+            'language' => Schema::TYPE_STRING . '(7) NOT NULL',
             'title' => Schema::TYPE_STRING . '(1024)',
             'alias' => Schema::TYPE_STRING,
             'preview_text' => Schema::TYPE_TEXT,
@@ -158,6 +159,7 @@ class m140811_143606_cms_create_tables extends Migration
         ]);
         $this->createIndex('CategoryId_idx', '{{%cms_post}}', 'category_id');
         $this->createIndex('TranslationId_idx', '{{%cms_post}}', 'translation_id');
+        $this->createIndex('Language_idx', '{{%cms_post}}', 'language');
         $this->createIndex('Alias_idx', '{{%cms_post}}', 'alias');
         $this->createIndex('Status_idx', '{{%cms_post}}', 'status');
 
