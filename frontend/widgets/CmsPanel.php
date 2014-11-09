@@ -38,20 +38,26 @@ class CmsPanel extends Widget {
 
         echo Html::beginForm(['/cmf/search/default/index'], 'get', ['class' => 'navbar-form navbar-left',  'role' => "search"]);
 
-        echo Html::beginTag('div', ['class' => 'form-group']);
+        echo Html::beginTag('div', ['class' => 'input-group']);
 
-        echo Html::textInput('q', null, ['class' => 'form-control', 'placeholder' => Yii::t('gromver.cmf', 'Search')]);
+        echo Html::textInput('q', null, ['class' => 'form-control', 'placeholder' => Yii::t('gromver.cmf', 'Search ...')]);
 
-        echo Html::endTag('div');// . "\n";
+        echo Html::beginTag('span', ['class' => 'input-group-btn']);
+        echo Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']);
+        echo Html::endTag('span');
 
-        //echo Html::submitButton('<i class="glyphicon glyphicon-search"></i>', ['class' => 'btn btn-default']);
+        echo Html::endTag('div');
 
         echo Html::endForm();
 
         if (Yii::$app->user->can('administrate')) {
-            echo Html::tag('p', Yii::t('gromver.cmf', 'Editing mode'), ['class' => 'navbar-text']);
+            echo Html::beginTag('div', ['class' => 'input-group navbar-left']);
 
-            echo Html::beginTag('div', ['class'=>'btn-group']);
+            echo Html::label(Yii::t('gromver.cmf', 'Editing mode'), null, ['class' => 'navbar-text']);
+
+            echo '&nbsp;';
+
+            echo Html::beginTag('div', ['class' => 'btn-group']);
 
             if (Yii::$app->cmf->mode === Module::MODE_EDIT) {
                 echo Html::button(Yii::t('gromver.cmf', 'On'), ['class'=>'btn btn-success navbar-btn btn-xs active']);
@@ -61,6 +67,7 @@ class CmsPanel extends Widget {
                 echo Html::button(Yii::t('gromver.cmf', 'Off'), ['class'=>'btn btn-success navbar-btn btn-xs active']);
             }
 
+            echo Html::endTag('div');
             echo Html::endTag('div');
         }
 
@@ -105,19 +112,24 @@ class CmsPanel extends Widget {
             }
             $items[] = ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . Yii::t('gromver.cmf', 'Logout'), 'url' => ['/cmf/auth/default/logout']];
 
+            echo '<div class="navbar-right">';
+
             echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
+                'options' => ['class' => 'navbar-nav navbar-left'],
                 'items' => [
                     [
                         'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
                         'items' => $items,
                     ],
-                    Html::tag('div', Yii::t('gromver.cmf', 'Language'), ['class' => 'nav navbar-text']) . Html::beginTag('div', ['class' => 'btn-group']) . implode('', array_map(function($language) {
-                        return Html::a($language, Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
-                    }, Yii::$app->languages)) . Html::endTag('div')
                 ],
                 'encodeLabels' => false
             ]);
+
+            echo '<div class="input-group navbar-left"><label class="navbar-text">' . Yii::t('gromver.cmf', 'Language') . '</label>&nbsp;<div class="btn-group">' . implode('', array_map(function($language) {
+                    return Html::a($language, Yii::$app->urlManager->createUrl(Yii::$app->getHomeUrl(), $language), ['class' => 'btn navbar-btn btn-xs' . ($language === Yii::$app->language ? ' btn-primary active' : ' btn-default')]);
+                }, Yii::$app->languages)) . '</div>';
+
+            echo '</div>';
         }
 
         echo Html::endTag('div');
