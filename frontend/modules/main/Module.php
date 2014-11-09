@@ -35,7 +35,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
 
     public $controllerNamespace = '\gromver\cmf\frontend\modules\main\controllers';
     public $paramsPath = '@common/config/cms';
-    public $blockModules = ['news', 'page', 'tag', 'search', 'user'];   //список модулей к которым нельзя попасть на прямую(cmf/post/..., cmf/page/...)
+    public $blockModules = ['news', 'page', 'tag', 'user'];   //список модулей к которым нельзя попасть на прямую(cmf/post/..., cmf/page/...)
 
     private $_mode;
 

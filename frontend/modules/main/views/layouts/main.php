@@ -20,7 +20,7 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= \gromver\cmf\frontend\widgets\CmsPanel::widget() ?>
+<?= \gromver\cmf\frontend\widgets\CmfPanel::widget() ?>
 <div class="wrap">
     <div class="container">
         <?= \yii\widgets\Breadcrumbs::widget([
