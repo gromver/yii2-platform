@@ -144,8 +144,9 @@ class MenuManager extends Component implements UrlRuleInterface
     {
         $language = $manager->getLanguageContext();
 
-        if($path = $this->getMenuMap($language)->getMenuPathByRoute(MenuItem::toRoute($route, $params)))
+        if ($path = $this->getMenuMap($language)->getMenuPathByRoute(MenuItem::toRoute($route, $params))) {
             return $path;
+        }
 
         $event = new MenuUrlRuleEvent([
             'menuMap' => $this->getMenuMap($language),

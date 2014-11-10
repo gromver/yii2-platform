@@ -49,6 +49,7 @@ class UrlManager extends \yii\web\UrlManager
     }
 
     /**
+     * Возвращает языковой контекст для создаваемой ссылке
      * @return string
      */
     public function getLanguageContext()
