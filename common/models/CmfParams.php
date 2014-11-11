@@ -17,17 +17,17 @@ use yii\base\Object;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class CmsParams extends  Object
+class CmfParams extends  Object
 {
-    public $siteName = 'My Application';
+    public $siteName;
     /**
      * @type multiple
      * @fieldType text
      */
-    public $adminEmail = 'admin@email.com';
+    public $adminEmail;
     /**
      * @type multiple
      * @fieldType text
      */
-    public $supportEmail = 'support@email.com';
+    public $supportEmail;
 }

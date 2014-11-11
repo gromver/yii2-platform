@@ -10,7 +10,7 @@
 namespace gromver\cmf\backend\modules\main\controllers;
 
 use gromver\modulequery\ModuleQuery;
-use gromver\cmf\common\models\CmsParams;
+use gromver\cmf\common\models\CmfParams;
 use kartik\widgets\Alert;
 use gromver\cmf\common\models\ContactForm;
 use gromver\models\ObjectModel;
@@ -20,6 +20,7 @@ use yii\caching\Cache;
 use yii\di\Instance;
 use yii\filters\AccessControl;
 use yii\helpers\FileHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
 
 /**
@@ -74,20 +75,20 @@ class DefaultController extends Controller
 
         $params = $this->module->params;
 
-        $model = new ObjectModel(CmsParams::className());
+        $model = new ObjectModel(CmfParams::className());
         $model->setAttributes($params);
 
-        if($model->load(Yii::$app->request->post())) {
-            if($model->validate() && Yii::$app->request->getBodyParam('task') !== 'refresh') {
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate() && Yii::$app->request->getBodyParam('task') !== 'refresh') {
 
                 FileHelper::createDirectory($paramsPath);
                 file_put_contents($paramsFile, '<?php return ' . var_export($model->toArray(), true) . ';');
 
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Configuration saved.'));
+
                 if ($modal) {
                     ModalIFrame::refreshPage();
                 }
-                return $this->redirect(['params']);
             }
         }
 

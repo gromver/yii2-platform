@@ -23,15 +23,13 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 
     <div>
         <?= Html::submitButton('<i class="glyphicon glyphicon-save"></i> ' . Yii::t('gromver.cmf', 'Save'), ['class' => 'btn btn-success']) ?>
-        <?= Html::submitButton('<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('gromver.cmf', 'Refresh'), ['class' => 'btn btn-default', 'name' => 'task', 'value' => 'refresh']) ?>
+        <?//= Html::submitButton('<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('gromver.cmf', 'Refresh'), ['class' => 'btn btn-default', 'name' => 'task', 'value' => 'refresh']) ?>
     </div>
 
     <?php \yii\bootstrap\ActiveForm::end(); ?>
 
 </div>
 
-<?
-$this->registerJs('$("#'.$form->getId().'").on("refresh.form", function(){
+<?php /*$this->registerJs('$("#'.$form->getId().'").on("refresh.form", function(){
     $(this).find("button[value=\'refresh\']").click()
-})');
-?>
+})'); */?>

@@ -30,8 +30,6 @@ $this->params['breadcrumbs'][] = $this->title; ?>
 
 </div>
 
-<?
-$this->registerJs('$("#'.$form->getId().'").on("refresh.form", function(){
+<?php /*$this->registerJs('$("#'.$form->getId().'").on("refresh.form", function(){
     $(this).find("button[value=\'refresh\']").click()
-})');
-?>
+})') */?>

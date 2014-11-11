@@ -14,7 +14,7 @@ use gromver\cmf\backend\modules\news\models\CategorySearch;
 use gromver\cmf\backend\modules\news\models\PostSearch;
 use gromver\cmf\backend\modules\page\models\PageSearch;
 use gromver\cmf\common\models\Tag;
-use gromver\cmf\common\models\CmsParams;
+use gromver\cmf\common\models\CmfParams;
 use kartik\widgets\Alert;
 use gromver\models\ObjectModel;
 use gromver\widgets\ModalIFrame;
@@ -89,7 +89,7 @@ class DefaultController extends Controller
 
         $params = $this->module->params;
 
-        $model = new ObjectModel(CmsParams::className());
+        $model = new ObjectModel(CmfParams::className());
         $model->setAttributes($params);
 
         if($model->load(Yii::$app->request->post())) {
@@ -99,10 +99,10 @@ class DefaultController extends Controller
                 file_put_contents($paramsFile, '<?php return '.var_export($model->toArray(), true).';');
 
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Configuration saved.'));
+
                 if ($modal) {
                     ModalIFrame::refreshPage();
                 }
-                return $this->redirect(['params']);
             }
         }
 

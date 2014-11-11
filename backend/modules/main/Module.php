@@ -32,7 +32,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
 {
     public $controllerNamespace = 'gromver\cmf\backend\modules\main\controllers';
 
-    public $paramsPath = '@common/config/cms';
+    public $paramsPath = '@common/config/cmf';
 
     public $desktopOrder = 1;
 
@@ -48,7 +48,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);
 
-        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')/*->cache('cache')*/->invoke('bootstrap', [$app]);
+        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
 
         Table::bootstrap();
 
@@ -65,8 +65,9 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
 
         $params = @include Yii::getAlias($this->paramsPath . '/params.php');
 
-        if(is_array($params))
+        if (is_array($params)) {
             $this->params = ArrayHelper::merge($params, $this->params);
+        }
     }
 
     /**
