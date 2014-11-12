@@ -97,6 +97,22 @@ class PostList extends Widget {
         return Post::find()->published()->category($this->category ? $this->category->id : null)->language($this->language)->with('tags');
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/create', 'category_id' => $this->category ? $this->category->id : null]),
+                'label' => '<i class="glyphicon glyphicon-plus"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Create Post')]
+            ],
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/index', 'PostSearch[category_id]' => $this->category ? $this->category->id : null]),
+                'label' => '<i class="glyphicon glyphicon-th-list"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Posts list')]
+            ],
+        ];
+    }
+
     public static function layouts()
     {
         return [

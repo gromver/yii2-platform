@@ -61,6 +61,27 @@ class PageView extends Widget {
         ]);
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/update', 'id' => $this->page->id]),
+                'label' => '<i class="glyphicon glyphicon-pencil"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Update Page')]
+            ],
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/create']),
+                'label' => '<i class="glyphicon glyphicon-plus"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Create Page')]
+            ],
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/index']),
+                'label' => '<i class="glyphicon glyphicon-th-list"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Pages list')]
+            ],
+        ];
+    }
+
     public static function layouts()
     {
         return [

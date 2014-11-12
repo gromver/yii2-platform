@@ -72,6 +72,22 @@ class TagCloud extends Widget {
         ]);
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/create']),
+                'label' => '<i class="glyphicon glyphicon-plus"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Create Tag')]
+            ],
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/index']),
+                'label' => '<i class="glyphicon glyphicon-th-list"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Tags list')]
+            ],
+        ];
+    }
+
     public static function languages()
     {
         return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();

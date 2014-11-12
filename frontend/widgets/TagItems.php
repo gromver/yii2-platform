@@ -66,6 +66,17 @@ class TagItems extends Widget {
         $this->tag->hit();
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/update', 'id' => $this->tag->id]),
+                'label' => '<i class="glyphicon glyphicon-pencil"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Update Tag')]
+            ],
+        ];
+    }
+
     public static function layouts()
     {
         return [

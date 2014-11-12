@@ -49,6 +49,17 @@ class CategoryView extends Widget {
         ]);
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/update', 'id' => $this->category->id]),
+                'label' => '<i class="glyphicon glyphicon-pencil"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Update Category')]
+            ],
+        ];
+    }
+
     public static function layouts()
     {
         return [

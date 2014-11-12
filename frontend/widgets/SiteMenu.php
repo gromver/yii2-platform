@@ -129,6 +129,22 @@ class SiteMenu extends Widget {
         echo $widgetClass::widget($this->widgetConfig);
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/create', 'menu_type_id' => (int)$this->type]),
+                'label' => '<i class="glyphicon glyphicon-plus"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Create Menu Item')]
+            ],
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/index']),
+                'label' => '<i class="glyphicon glyphicon-th-list"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Menu Items list')]
+            ],
+        ];
+    }
+
     public static function languages()
     {
         return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();

@@ -62,6 +62,16 @@ class PostView extends Widget {
         ]);
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/update', 'id' => $this->post->id]),
+                'label' => '<i class="glyphicon glyphicon-pencil"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Update Post')]
+            ],
+        ];
+    }
 
     public static function layouts()
     {

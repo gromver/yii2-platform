@@ -117,15 +117,22 @@ class CategoryController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @param string|null $language
      * @param string|null $sourceId
+     * @param string|null $parentId
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionCreate($language = null, $sourceId = null)
+    public function actionCreate($language = null, $sourceId = null, $parentId = null)
     {
         $model = new Category();
         $model->loadDefaultValues();
         $model->status = Category::STATUS_PUBLISHED;
         $model->language = Yii::$app->language;
+
+        if (isset($parentId)) {
+            $parentCategory = $this->findModel($parentId);
+            $model->parent_id = $parentCategory->id;
+            $model->language = $parentCategory->language;
+        }
 
         if ($sourceId && $language) {
             $sourceModel = $this->findModel($sourceId);

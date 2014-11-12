@@ -80,6 +80,22 @@ class CategoryList extends Widget {
         ]);
     }
 
+    public function customControls()
+    {
+        return [
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/create', 'parentId' => $this->category ? $this->category->id : null]),
+                'label' => '<i class="glyphicon glyphicon-plus"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Create Category')]
+            ],
+            [
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/index', 'CategorySearch[parent_id]' => $this->category ? $this->category->id : null]),
+                'label' => '<i class="glyphicon glyphicon-th-list"></i>',
+                'options' => ['title' => Yii::t('gromver.cmf', 'Categories list')]
+            ],
+        ];
+    }
+
     public static function layouts()
     {
         return [

@@ -13,8 +13,8 @@
     text-align: center;
     color: #ffffff;
 }
-.widget-button-edit {
-    position: absolute;
+.widget-controls {
+    position: absolute!important;
     right: 0;
     top: 0;
     z-index: 10;
@@ -22,7 +22,7 @@
 .widget-wrapper.edit-mode {
     min-height: 80px;
 }
-.widget-wrapper .widget-button-edit:hover ~ .widget-description {
+.widget-wrapper .widget-controls:hover ~ .widget-description {
     display: block;
     vertical-align: middle;
     background-color: #000000;
