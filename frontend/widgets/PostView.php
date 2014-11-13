@@ -66,7 +66,7 @@ class PostView extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/update', 'id' => $this->post->id]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/update', 'id' => $this->post->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Update Post')]
             ],

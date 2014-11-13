@@ -237,6 +237,15 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
     {
         return $this->_accessRule;
     }
+
+    public function getBackUrl()
+    {
+        $backUrl = Yii::$app->getRequest()->getUrl();
+        $backUrl .= '#' . $this->getId();
+
+        return $backUrl;
+    }
+
     /**
      * Returns the list of attribute names.
      * By default, this method returns all public non-static properties of the class.

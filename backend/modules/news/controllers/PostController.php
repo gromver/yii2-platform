@@ -116,10 +116,11 @@ class PostController extends Controller
      * @param string|null $language
      * @param string|null $sourceId
      * @param string|null $category_id
+     * @param string|null $backUrl
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionCreate($language = null, $sourceId = null, $category_id = null)
+    public function actionCreate($language = null, $sourceId = null, $category_id = null, $backUrl = null)
     {
         $model = new Post();
         $model->loadDefaultValues();
@@ -148,7 +149,7 @@ class PostController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($backUrl ? $backUrl : ['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -161,14 +162,15 @@ class PostController extends Controller
      * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @param string|null $backUrl
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $backUrl = null)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($backUrl ? $backUrl : ['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

@@ -118,10 +118,11 @@ class CategoryController extends Controller
      * @param string|null $language
      * @param string|null $sourceId
      * @param string|null $parentId
+     * @param string|null $backUrl
      * @return mixed
      * @throws NotFoundHttpException
      */
-    public function actionCreate($language = null, $sourceId = null, $parentId = null)
+    public function actionCreate($language = null, $sourceId = null, $parentId = null, $backUrl = null)
     {
         $model = new Category();
         $model->loadDefaultValues();
@@ -157,7 +158,7 @@ class CategoryController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($backUrl ? $backUrl : ['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -170,14 +171,15 @@ class CategoryController extends Controller
      * Updates an existing Category model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @param string|null $backUrl
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $backUrl = null)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($backUrl ? $backUrl : ['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,

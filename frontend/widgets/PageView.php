@@ -65,19 +65,14 @@ class PageView extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/update', 'id' => $this->page->id]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/update', 'id' => $this->page->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Update Page')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/create']),
-                'label' => '<i class="glyphicon glyphicon-plus"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Create Page')]
-            ],
-            [
                 'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/index']),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Pages list')]
+                'options' => ['title' => Yii::t('gromver.cmf', 'Pages list'), 'target' => '_blank']
             ],
         ];
     }

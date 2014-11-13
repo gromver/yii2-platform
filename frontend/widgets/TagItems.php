@@ -70,7 +70,7 @@ class TagItems extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/update', 'id' => $this->tag->id]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/update', 'id' => $this->tag->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Update Tag')]
             ],

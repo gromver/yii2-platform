@@ -134,10 +134,11 @@ class ItemController extends Controller
      * @param null $menu_type_id
      * @param null $sourceId
      * @param null $language
+     * @param string|null $backUrl
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException
      */
-    public function actionCreate($menu_type_id = null, $sourceId = null, $language = null)
+    public function actionCreate($menu_type_id = null, $sourceId = null, $language = null, $backUrl = null)
     {
         $model = new MenuItem();
         $model->loadDefaultValues();
@@ -176,7 +177,7 @@ class ItemController extends Controller
             $model->setLinkParams($linkParamsModel->toArray());
             $model->save(false);
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($backUrl ? $backUrl : ['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                     'model' => $model,
@@ -190,9 +191,10 @@ class ItemController extends Controller
      * Updates an existing MenuItem model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @param string|null $backUrl
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $backUrl = null)
     {
         $model = $this->findModel($id);
         $linkParamsModel = $model->getLinkParamsModel();
@@ -201,7 +203,7 @@ class ItemController extends Controller
             $model->setLinkParams($linkParamsModel->toArray());
             $model->save(false);
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect($backUrl ? $backUrl : ['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                     'model' => $model,

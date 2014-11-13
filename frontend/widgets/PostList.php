@@ -101,14 +101,14 @@ class PostList extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/create', 'category_id' => $this->category ? $this->category->id : null]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/create', 'category_id' => $this->category ? $this->category->id : null, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-plus"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Create Post')]
             ],
             [
                 'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/index', 'PostSearch[category_id]' => $this->category ? $this->category->id : null]),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Posts list')]
+                'options' => ['title' => Yii::t('gromver.cmf', 'Posts list'), 'target' => '_blank']
             ],
         ];
     }

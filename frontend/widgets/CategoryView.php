@@ -53,7 +53,7 @@ class CategoryView extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/update', 'id' => $this->category->id]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/update', 'id' => $this->category->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Update Category')]
             ],

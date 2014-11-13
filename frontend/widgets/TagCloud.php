@@ -76,14 +76,14 @@ class TagCloud extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/create']),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/create', 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-plus"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Create Tag')]
             ],
             [
                 'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/index']),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Tags list')]
+                'options' => ['title' => Yii::t('gromver.cmf', 'Tags list'), 'target' => '_blank']
             ],
         ];
     }

@@ -13,6 +13,7 @@ use gromver\cmf\common\widgets\Widget;
 use gromver\cmf\common\models\Category;
 use yii\data\ActiveDataProvider;
 use Yii;
+use yii\helpers\Url;
 
 /**
  * Class CategoryList
@@ -84,14 +85,14 @@ class CategoryList extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/create', 'parentId' => $this->category ? $this->category->id : null]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/create', 'parentId' => $this->category ? $this->category->id : null, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-plus"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Create Category')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/index', 'CategorySearch[parent_id]' => $this->category ? $this->category->id : null]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/index', 'CategorySearch[parent_id]' => $this->category ? $this->category->id : null, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Categories list')]
+                'options' => ['title' => Yii::t('gromver.cmf', 'Categories list'), 'target' => '_blank']
             ],
         ];
     }
