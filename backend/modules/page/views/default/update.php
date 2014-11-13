@@ -17,16 +17,16 @@ $this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p class="btn-toolbar">
+    <p>
         <?= \gromver\widgets\ModalIFrame::widget([
             'modalOptions' => [
                 'header' => Yii::t('gromver.cmf', 'Item Versions Manager - "{title}" (ID:{id})', ['title' => $model->title, 'id' => $model->id]),
                 'size' => \yii\bootstrap\Modal::SIZE_LARGE,
             ],
             'buttonContent' => Html::a('<i class="glyphicon glyphicon-hdd"></i> ' . Yii::t('gromver.cmf', 'Versions'),
-                    ['/cmf/version/default/item', 'item_id' => $model->id, 'item_class' => $model->className()], [
-                        'class'=>'btn btn-default btn-sm',
-                    ]),
+                ['/cmf/version/default/item', 'item_id' => $model->id, 'item_class' => $model->className()], [
+                    'class'=>'btn btn-default btn-sm',
+                ]),
         ]) ?>
     </p>
 

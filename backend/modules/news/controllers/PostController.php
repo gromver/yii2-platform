@@ -125,6 +125,8 @@ class PostController extends Controller
         $model = new Post();
         $model->loadDefaultValues();
         $model->status = Post::STATUS_PUBLISHED;
+        $model->language = Yii::$app->language;
+
         if (isset($category_id) && $category = Category::findOne($category_id)) {
             $model->category_id = $category->id;
             $model->language = $category->language;

@@ -14,8 +14,8 @@ use yii\bootstrap\ActiveForm;
 <div class="tag-form">
 
     <?php $form = ActiveForm::begin([
-            'layout' => 'horizontal'
-        ]); ?>
+        'layout' => 'horizontal'
+    ]); ?>
 
     <?= $form->errorSummary($model) ?>
 
@@ -23,15 +23,25 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
-    <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#main-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Main') ?></a></li>
+        <li><a href="#meta-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Metadata') ?></a></li>
+    </ul>
+    <br/>
+    <div class="tab-content">
+        <div id="main-options" class="tab-pane active">
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
 
-    <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
+            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
 
-    <?= $form->field($model, 'group')->textInput(['maxlength' => 255, 'placeholder' => isset($sourceModel) ? $sourceModel->group : null]) ?>
+            <?= $form->field($model, 'group')->textInput(['maxlength' => 255, 'placeholder' => isset($sourceModel) ? $sourceModel->group : null]) ?>
+        </div>
+        <div id="meta-options" class="tab-pane">
+            <?= $form->field($model, 'metakey')->textInput(['maxlength' => 255]) ?>
 
-    <?= $form->field($model, 'metakey')->textInput(['maxlength' => 255]) ?>
-
-    <?= $form->field($model, 'metadesc')->textInput(['maxlength' => 2048]) ?>
+            <?= $form->field($model, 'metadesc')->textarea(['maxlength' => 2048]) ?>
+        </div>
+    </div>
 
     <?= Html::activeHiddenInput($model, 'lock') ?>
 

@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p class="btn-toolbar">
+    <p>
         <?= \gromver\widgets\ModalIFrame::widget([
             'modalOptions' => [
                 'header' => Yii::t('gromver.cmf', 'Item Versions Manager - "{title}" (ID:{id})', ['title' => $model->title, 'id' => $model->id]),
