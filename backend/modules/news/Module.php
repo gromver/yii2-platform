@@ -24,13 +24,6 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public $defaultRoute = 'category';
     public $desktopOrder = 4;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */

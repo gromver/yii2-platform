@@ -26,13 +26,6 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     public $controllerNamespace = 'gromver\cmf\frontend\modules\search\controllers';
     public $documentClasses = [];
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */
@@ -40,6 +33,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     {
         ActiveDocument::watch(ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
     }
+
     /**
      * @inheritdoc
      */
@@ -47,6 +41,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     {
         return $this->documentClasses;
     }
+
     /**
      * @inheritdoc
      */

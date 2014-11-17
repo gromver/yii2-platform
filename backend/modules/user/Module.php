@@ -25,13 +25,6 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public $userParamsClass = 'gromver\cmf\common\models\UserParams';
     public $desktopOrder = 8;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */

@@ -27,11 +27,4 @@ class Module extends \yii\base\Module
     public $attemptsBeforeCaptcha = 3; // Unsuccessful Login Attempts before Captcha
 
     public $loginLayout = 'login';
-
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
 }

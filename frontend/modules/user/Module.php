@@ -21,11 +21,4 @@ class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'gromver\cmf\frontend\modules\user\controllers';
     public $userParamsClass = 'gromver\cmf\common\models\UserParams';
-
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
 }

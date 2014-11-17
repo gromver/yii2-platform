@@ -47,6 +47,16 @@ class Application extends \yii\console\Application {
                         ],
                     ],
                 ],
+                // фэйк для обхода BlamableBehavior
+                // todo сделать фэйк компонент
+                'user' => [
+                    'class' => 'StdClass',
+                    'isGuest' => false,
+                    'id' => 1
+                ]
+            ],
+            'modules' => [
+                'search' => 'gromver\cmf\console\modules\search\Module'
             ]
         ], $config);
 

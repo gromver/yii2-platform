@@ -22,13 +22,6 @@ class Module extends \yii\base\Module implements DesktopInterface
     public $controllerNamespace = 'gromver\cmf\backend\modules\widget\controllers';
     public $desktopOrder = 10;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */

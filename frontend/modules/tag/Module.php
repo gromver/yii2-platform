@@ -31,6 +31,9 @@ class Module extends \yii\base\Module implements MenuUrlRuleInterface, MenuRoute
         return TagMenuUrlRuleBehavior::className();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getMenuRouter()
     {
         return MenuRouterTag::className();

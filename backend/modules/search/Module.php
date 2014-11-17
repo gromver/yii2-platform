@@ -11,6 +11,7 @@ namespace gromver\cmf\backend\modules\search;
 
 use gromver\cmf\backend\interfaces\DesktopInterface;
 use gromver\cmf\backend\interfaces\MenuRouterInterface;
+use gromver\cmf\common\models\search\ActiveDocument;
 use gromver\modulequery\ModuleQuery;
 use gromver\cmf\common\interfaces\SearchableInterface;
 use yii\base\BootstrapInterface;
@@ -31,19 +32,12 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
     public $documentClasses = [];
     public $desktopOrder = 6;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * @inheritdoc
      */
     public function bootstrap($application)
     {
-        \gromver\cmf\common\models\search\ActiveDocument::watch(ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
+        ActiveDocument::watch(ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
     }
 
     /**

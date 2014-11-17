@@ -17,11 +17,4 @@ namespace gromver\cmf\frontend\modules\page;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'gromver\cmf\frontend\modules\page\controllers';
-
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
 }
