@@ -6,7 +6,10 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model gromver\cmf\common\models\User */
 
-$this->title = $model->id;
+$this->title = Yii::t('gromver.cmf', 'User: {name} (ID: {id})', [
+    'name' => $model->username,
+    'id' => $model->id
+]);
 $this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
