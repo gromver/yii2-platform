@@ -9,7 +9,9 @@
 
 namespace gromver\cmf\frontend\modules\news;
 
+use gromver\cmf\frontend\interfaces\MenuRouterInterface;
 use gromver\cmf\frontend\interfaces\MenuUrlRuleInterface;
+use gromver\cmf\frontend\modules\news\components\MenuRouterNews;
 use gromver\cmf\frontend\modules\news\components\NewsMenuUrlBehavior;
 
 /**
@@ -17,17 +19,10 @@ use gromver\cmf\frontend\modules\news\components\NewsMenuUrlBehavior;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class Module extends \yii\base\Module implements MenuUrlRuleInterface
+class Module extends \yii\base\Module implements MenuUrlRuleInterface, MenuRouterInterface
 {
     public $controllerNamespace = 'gromver\cmf\frontend\modules\news\controllers';
     public $defaultRoute = 'post';
-
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
 
     /**
      * @inheritdoc
@@ -35,5 +30,10 @@ class Module extends \yii\base\Module implements MenuUrlRuleInterface
     public function getMenuUrlRuleBehavior()
     {
         return NewsMenuUrlBehavior::className();
+    }
+
+    public function getMenuRouter()
+    {
+        return MenuRouterNews::className();
     }
 }

@@ -7,17 +7,30 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\interfaces;
+namespace gromver\cmf\frontend\components;
+
+
+use yii\base\Object;
 
 /**
- * Interface MenuUrlRuleInterface
+ * Class MenuRouter
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-interface MenuUrlRuleInterface
-{
+class MenuRouter extends Object {
     /**
-     * @return \gromver\cmf\frontend\behaviors\MenuUrlRuleBehavior
+     * @return array
      */
-    public function getMenuUrlRuleBehavior();
-}
+    public function createUrlRules()
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function parseUrlRules()
+    {
+        return [];
+    }
+} 

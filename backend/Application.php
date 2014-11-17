@@ -20,6 +20,7 @@ class Application extends \yii\web\Application {
     public $language = 'en';
     public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
+    public $defaultRoute = 'cmf/default/index';
     public $layout = '@gromver/cmf/backend/views/layouts/main';
     public $elasticsearchIndex = 'cmf';
 

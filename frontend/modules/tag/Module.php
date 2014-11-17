@@ -9,7 +9,9 @@
 
 namespace gromver\cmf\frontend\modules\tag;
 
+use gromver\cmf\frontend\interfaces\MenuRouterInterface;
 use gromver\cmf\frontend\interfaces\MenuUrlRuleInterface;
+use gromver\cmf\frontend\modules\tag\components\MenuRouterTag;
 use gromver\cmf\frontend\modules\tag\components\TagMenuUrlRuleBehavior;
 
 /**
@@ -17,21 +19,20 @@ use gromver\cmf\frontend\modules\tag\components\TagMenuUrlRuleBehavior;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class Module extends \yii\base\Module implements MenuUrlRuleInterface
+class Module extends \yii\base\Module implements MenuUrlRuleInterface, MenuRouterInterface
 {
     public $controllerNamespace = 'gromver\cmf\frontend\modules\tag\controllers';
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
     /**
      * @inheritdoc
      */
     public function getMenuUrlRuleBehavior()
     {
         return TagMenuUrlRuleBehavior::className();
+    }
+
+    public function getMenuRouter()
+    {
+        return MenuRouterTag::className();
     }
 }

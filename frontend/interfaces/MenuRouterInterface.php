@@ -10,14 +10,13 @@
 namespace gromver\cmf\frontend\interfaces;
 
 /**
- * Interface MenuUrlRuleInterface
+ * Interface MenuRouterInterface
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-interface MenuUrlRuleInterface
-{
+interface MenuRouterInterface {
     /**
-     * @return \gromver\cmf\frontend\behaviors\MenuUrlRuleBehavior
+     * @return string | \gromver\cmf\frontend\components\MenuRouter
      */
-    public function getMenuUrlRuleBehavior();
-}
+    public function getMenuRouter();
+} 

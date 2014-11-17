@@ -14,6 +14,7 @@ use gromver\cmf\common\models\MenuItem;
 use gromver\cmf\common\models\Table;
 use Yii;
 use gromver\cmf\frontend\components\MenuManager;
+use gromver\cmf\frontend\components\MenuManager2;
 use yii\base\BootstrapInterface;
 use yii\caching\ExpressionDependency;
 use yii\helpers\ArrayHelper;
@@ -39,13 +40,6 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
 
     private $_mode;
 
-    /*public function init()
-    {
-        parent::init();
-
-        // custom initialization code goes here
-    }*/
-
     /**
      * Bootstrap method to be called during application bootstrap stage.
      * @param \yii\web\Application $app the application currently running
@@ -68,7 +62,7 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
         ]);
 
         /** @var MenuManager $manager */
-        $manager = \Yii::createObject(MenuManager::className());
+        $manager = \Yii::createObject(MenuManager2::className());
         $rules = [$manager];
         if (is_array($this->blockModules) && count($this->blockModules)) {
             $rules['cmf/<module:(' . implode('|', $this->blockModules). ')><path:(/.*)?>'] = 'cmf/default/page-not-found'; //блокируем доступ к контент модулям напрямую
