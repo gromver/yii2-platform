@@ -122,7 +122,7 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             [['translation_id'], 'unique', 'filter' => function($query) {
                 /** @var $query \yii\db\ActiveQuery */
                 $query->andWhere(['language' => $this->language]);
-            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
+            }, 'message' => Yii::t('gromver.cmf', 'Localization ({language}) for item (ID: {id}) already exists.', ['language' => $this->language, 'id' => $this->translation_id])],
 
             [['title', 'detail_text', 'status'], 'required'],
             [['tags', 'versionNote'], 'safe']
@@ -265,7 +265,9 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
                 $newParent->reorderNode('lft');
                 $moved = true;
             } else {
-                if(array_key_exists('ordering', $changedAttributes)) $newParent->reorderNode('ordering');
+                if (array_key_exists('ordering', $changedAttributes)) {
+                    $this->ordering ? $newParent->reorderNode('ordering') : $newParent->reorderNode('lft');
+                }
             }
         }
 
