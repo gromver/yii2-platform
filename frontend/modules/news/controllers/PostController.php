@@ -13,11 +13,12 @@ use gromver\cmf\common\models\Category;
 use gromver\cmf\common\models\Post;
 use gromver\cmf\common\models\Table;
 use yii\data\ActiveDataProvider;
+use yii\helpers\StringHelper;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use Yii;
-use yii\web\Response;
+use Zelenin\yii\extensions\Rss\RssView;
 
 /**
  * Class PostController
@@ -68,17 +69,17 @@ class PostController extends Controller
 
     public function actionRss($category_id = null)
     {
-        return \Zelenin\yii\extensions\Rss\RssView::widget([
+        return RssView::widget([
             'dataProvider' => new ActiveDataProvider([
-                    'query' => Post::find()->published()->category($category_id)->orderBy(['published_at' => SORT_DESC]),
+                    'query' => Post::find()->published()->category($category_id)->language(Yii::$app->language)->orderBy(['published_at' => SORT_DESC]),
                     'pagination' => [
-                        'pageSize' => 20
+                        'pageSize' => $this->module->rssPageSize
                     ],
                 ]),
             'channel' => [
                 'title' => Yii::$app->cmf->siteName,
                 'link' => Url::toRoute(['', 'category_id' => $category_id], true),
-                'description' => $this->loadCategoryModel($category_id)->title,
+                'description' => $category_id ? $this->loadCategoryModel($category_id)->title : Yii::t('gromver.cmf', 'All news'),
                 'language' => Yii::$app->language
             ],
             'items' => [
@@ -88,7 +89,7 @@ class PostController extends Controller
                     },
                 'description' => function ($model, $widget) {
                         /** @var $model \gromver\cmf\common\models\Post */
-                        return $model->preview_text ? $model->preview_text : \yii\helpers\StringHelper::truncateWords(strip_tags($model->detail_text), 40);
+                        return $model->preview_text ? $model->preview_text : StringHelper::truncateWords(strip_tags($model->detail_text), 40);
                     },
                 'link' => function ($model, $widget) {
                         /** @var $model \gromver\cmf\common\models\Post */

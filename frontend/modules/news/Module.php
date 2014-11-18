@@ -21,6 +21,7 @@ class Module extends \yii\base\Module implements MenuRouterInterface
 {
     public $controllerNamespace = 'gromver\cmf\frontend\modules\news\controllers';
     public $defaultRoute = 'post';
+    public $rssPageSize = 50;
 
     public function getMenuRouter()
     {
