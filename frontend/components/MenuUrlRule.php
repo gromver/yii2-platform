@@ -27,10 +27,6 @@ class MenuUrlRule extends Object {
      * @var string
      */
     public $router;
-    /**
-     * @var string
-     */
-    public $matchRoute;
 
     public function init()
     {
@@ -41,16 +37,12 @@ class MenuUrlRule extends Object {
         if (!isset($this->router) || !is_string($this->router)) {
             throw new InvalidConfigException(__CLASS__ . '::router must be set.');
         }
-
-        if (!isset($this->matchRoute) || !is_string($this->matchRoute)) {
-            throw new InvalidConfigException(__CLASS__ . '::matchRoute must be set.');
-        }
     }
 
     /**
     * /**
      * @param $requestInfo MenuRequest
-     * @param $menuManager MenuManager2
+     * @param $menuManager MenuManager
      * @return array|false
      */
     public function process($requestInfo, $menuManager)

@@ -16,11 +16,16 @@ namespace gromver\cmf\frontend\components;
  */
 class MenuUrlRuleParse extends MenuUrlRule {
     /**
+     * @var string
+     */
+    public $menuRoute;
+
+    /**
      * @inheritdoc
      */
     public function process($requestInfo, $menuManager)
     {
-        if ($this->matchRoute != $requestInfo->menuRoute) {
+        if ($this->menuRoute && $this->menuRoute != $requestInfo->menuRoute) {
             return false;
         }
 

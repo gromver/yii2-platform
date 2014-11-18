@@ -9,11 +9,11 @@
 
 namespace gromver\cmf\frontend\modules\search;
 
+use gromver\cmf\frontend\interfaces\MenuRouterInterface;
+use gromver\cmf\frontend\modules\search\components\MenuRouterSearch;
 use gromver\modulequery\ModuleQuery;
 use gromver\cmf\common\interfaces\SearchableInterface;
 use gromver\cmf\common\models\search\ActiveDocument;
-use gromver\cmf\frontend\interfaces\MenuUrlRuleInterface;
-use gromver\cmf\frontend\modules\search\components\SearchMenuUrlBehavior;
 use yii\base\BootstrapInterface;
 
 /**
@@ -21,7 +21,7 @@ use yii\base\BootstrapInterface;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class Module extends \yii\base\Module implements BootstrapInterface, SearchableInterface, MenuUrlRuleInterface
+class Module extends \yii\base\Module implements BootstrapInterface, SearchableInterface, MenuRouterInterface
 {
     public $controllerNamespace = 'gromver\cmf\frontend\modules\search\controllers';
     public $documentClasses = [];
@@ -45,8 +45,8 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     /**
      * @inheritdoc
      */
-    public function getMenuUrlRuleBehavior()
+    public function getMenuRouter()
     {
-        return SearchMenuUrlBehavior::className();
+        return MenuRouterSearch::className();
     }
 }

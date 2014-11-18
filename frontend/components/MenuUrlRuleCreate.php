@@ -15,19 +15,26 @@ namespace gromver\cmf\frontend\components;
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuUrlRuleCreate extends MenuUrlRule {
-    public $matchParams;
+    /**
+     * @var string
+     */
+    public $requestRoute;
+    /**
+     * @var array
+     */
+    public $requestParams;
 
     /**
      * @inheritdoc
      */
     public function process($requestInfo, $menuManager)
     {
-        if ($this->matchRoute != $requestInfo->requestRoute) {
+        if ($this->requestRoute && $this->requestRoute != $requestInfo->requestRoute) {
             return false;
         }
 
-        if (isset($this->matchParams)) {
-            foreach ($this->matchParams as $param) {
+        if (isset($this->requestParams)) {
+            foreach ($this->requestParams as $param) {
                 if (!isset($requestInfo->requestParams[$param])) {
                     return false;
                 }

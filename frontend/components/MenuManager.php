@@ -14,6 +14,9 @@ use gromver\modulequery\ModuleQuery;
 use gromver\cmf\common\models\MenuItem;
 use Yii;
 use yii\base\Component;
+use yii\base\InvalidConfigException;
+use yii\caching\Cache;
+use yii\di\Instance;
 use yii\web\ForbiddenHttpException;
 use yii\web\Request;
 use yii\web\UrlRuleInterface;
@@ -22,35 +25,90 @@ use yii\web\View;
 
 /**
  * Class MenuManager
- * Теория - есть 2 случая применения меню
- * 1.1 когда путь к меню(MenuItem::path) совпадает с \yii\web\Request::getPathInfo(),
- * такой пункт меню считается активным и прерывает обработку запроса отдавая роут и параметры распарсенные из MenuItem::link
- * 1.2 здесь есть частный случай когда для наибольшей части \yii\web\Request::getPathInfo() найдено совпадение пункта меню(MenuItem::path),
- * такой пункт меню не может использоватся в качестве поставщика роута (MenuItem::route), но тем не менее считается активным,
- * данный запрос необходимо обработать с учетом роута и параметров найденного пункта меню и оставшейся части \yii\web\Request::getPathInfo() и \yii\web\Request::getQueryParams()
- * 2. Независимо от пунктов 1 и 1.2 для пунктов меню с типом MenuItem::LINK_HREF ищем все пункты у которых MenuItem::link совпадает c Request::getUrl()
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuManager extends Component implements UrlRuleInterface
 {
-    const CACHE_KEY = __CLASS__;
+    public $cache = 'cache';
 
     /**
      * @var MenuItem
      */
     private $_menu;
     private $_maps = [];
-    private $_activeMenuIds = [];        //айдишники всех пунктов меню соответсвующих 1.1, 1.2 и 2.
+    private $_activeMenuIds = [];
+    private $_routers = [];
+    /**
+     * @var MenuUrlRuleCreate[]
+     */
+    private $_createUrlRules = [];
+    /**
+     * @var MenuUrlRuleParse[]
+     */
+    private $_parseUrlRules = [];
 
-    const EVENT_PARSE_REQUEST = 'parseRequest';
-    const EVENT_CREATE_URL = 'createUrl';
-
-    public function behaviors()
+    public function init()
     {
-        return ModuleQuery::instance()->implement('\gromver\cmf\frontend\interfaces\MenuUrlRuleInterface')->execute('getMenuUrlRuleBehavior');
+        if ($this->cache) {
+            /** @var Cache $cache */
+            $this->cache = Instance::ensure($this->cache, Cache::className());
+            $cacheKey = __CLASS__;
+            if ((list($createUrlRules, $parseUrlRules) = $this->cache->get($cacheKey)) === false) {
+                $this->buildRules();
+                $this->cache->set($cacheKey, [$this->_createUrlRules, $this->_parseUrlRules]);
+            } else {
+                $this->_createUrlRules = $createUrlRules;
+                $this->_parseUrlRules = $parseUrlRules;
+            }
+        } else {
+            $this->buildRules();
+        }
     }
 
+    protected function buildRules()
+    {
+        //нам нужно собрать все роутеры от модулей и вытащить из них инструкции по маршрутизации
+        $routers = ModuleQuery::instance()->implement('\gromver\cmf\frontend\interfaces\MenuRouterInterface')->execute('getMenuRouter');
+        // вытаскиваем инструкции из всех роутеров
+        foreach ($routers as $routerClass) {
+            $router = $this->getRouter($routerClass);
+
+            foreach ($router->createUrlRules() as $rule) {
+                @$rule['class'] or $rule['class'] = MenuUrlRuleCreate::className();
+                $rule['router'] = $router->className();
+                $this->_createUrlRules[] = Yii::createObject($rule);
+            }
+
+            foreach ($router->parseUrlRules() as $rule) {
+                @$rule['class'] or $rule['class'] = MenuUrlRuleParse::className();
+                $rule['router'] = $router->className();
+                $this->_parseUrlRules[] = Yii::createObject($rule);
+            }
+        }
+    }
+
+    /**
+     * @param $router string|array|MenuRouter
+     * @return MenuRouter
+     * @throws InvalidConfigException
+     */
+    public function getRouter($router)
+    {
+        if (is_string($router) && isset($this->_routers[$router])) {
+            return $this->_routers[$router];
+        }
+
+        if (!is_object($router)) {
+            $router = Yii::createObject($router);
+        }
+
+        if (!$router instanceof MenuRouter) {
+            throw new InvalidConfigException('Routers must be an instance of \gromver\cmf\frontend\components\MenuRouter class.');
+        }
+
+        return $this->_routers[$router->className()] = $router;
+    }
 
     /**
      * @param null $language
@@ -122,17 +180,24 @@ class MenuManager extends Component implements UrlRuleInterface
         } else {
             $requestRoute = substr($pathInfo, mb_strlen($this->_menu->path) + 1);
             list($menuRoute, $menuParams) = $this->_menu->parseUrl();
-            $event = new MenuUrlRuleEvent([
+            $requestInfo = new MenuRequest([
                 'menuMap' => $this->getMenuMap(),
                 'menuRoute' => $menuRoute,
                 'menuParams' => $menuParams,
                 'requestRoute' => $requestRoute,
                 'requestParams' => $request->getQueryParams()
             ]);
-            $this->trigger(self::EVENT_PARSE_REQUEST, $event);
-            return $event->result;
+
+            foreach ($this->_parseUrlRules as $rule) {
+                if ($result = $rule->process($requestInfo, $this)) {
+                    return $result;
+                }
+            }
+
+            return false;
         }
     }
+
     /**
      * Creates a URL according to the given route and parameters.
      * @param UrlManager $manager the URL manager
@@ -148,13 +213,19 @@ class MenuManager extends Component implements UrlRuleInterface
             return $path;
         }
 
-        $event = new MenuUrlRuleEvent([
+        $requestInfo = new MenuRequest([
             'menuMap' => $this->getMenuMap($language),
             'requestRoute' => $route,
             'requestParams' => $params,
         ]);
-        $this->trigger(self::EVENT_CREATE_URL, $event);
-        return $event->result;
+
+        foreach ($this->_createUrlRules as $rule) {
+            if ($result = $rule->process($requestInfo, $this)) {
+                return $result;
+            }
+        }
+
+        return false;
     }
 
     public function applyMetaData()

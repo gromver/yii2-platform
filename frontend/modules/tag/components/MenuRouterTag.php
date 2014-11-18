@@ -20,13 +20,11 @@ use gromver\cmf\common\models\Tag;
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class MenuRouterTag extends MenuRouter {
-    public $postSuffix = 'html';
-
     public function parseUrlRules()
     {
         return [
             [
-                'matchRoute' => 'cmf/tag/default/index',
+                'menuRoute' => 'cmf/tag/default/index',
                 'handler' => 'parseTagCloud'
             ],
         ];
@@ -39,8 +37,8 @@ class MenuRouterTag extends MenuRouter {
     {
         return [
             [
-                'matchRoute' => 'cmf/tag/default/view',
-                'matchParams' => ['id'],
+                'requestRoute' => 'cmf/tag/default/view',
+                'requestParams' => ['id'],
                 'handler' => 'createTagItems'
             ],
         ];

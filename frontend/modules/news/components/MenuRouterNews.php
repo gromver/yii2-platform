@@ -28,11 +28,11 @@ class MenuRouterNews extends MenuRouter {
     {
         return [
             [
-                'matchRoute' => 'cmf/news/category/view',
+                'menuRoute' => 'cmf/news/category/view',
                 'handler' => 'parseCategory'
             ],
             [
-                'matchRoute' => 'cmf/news/post/index',
+                'menuRoute' => 'cmf/news/post/index',
                 'handler' => 'parseAllPosts'
             ],
         ];
@@ -45,30 +45,30 @@ class MenuRouterNews extends MenuRouter {
     {
         return [
             [
-                'matchRoute' => 'cmf/news/post/view',
-                'matchParams' => ['id'],
+                'requestRoute' => 'cmf/news/post/view',
+                'requestParams' => ['id'],
                 'handler' => 'createPost'
             ],
             [
-                'matchRoute' => 'cmf/news/category/view',
-                'matchParams' => ['id'],
+                'requestRoute' => 'cmf/news/category/view',
+                'requestParams' => ['id'],
                 'handler' => 'createCategory'
             ],
             [
-                'matchRoute' => 'cmf/news/post/day',
-                'matchParams' => ['year', 'month', 'day'],
+                'requestRoute' => 'cmf/news/post/day',
+                'requestParams' => ['year', 'month', 'day'],
                 'handler' => 'createDayPosts'
             ],
             [
-                'matchRoute' => 'cmf/news/post/index',
+                'requestRoute' => 'cmf/news/post/index',
                 'handler' => 'createAllPosts'
             ],
             [
-                'matchRoute' => 'cmf/tag/default/posts',
+                'requestRoute' => 'cmf/tag/default/posts',
                 'handler' => 'createTagPosts'
             ],
             [
-                'matchRoute' => 'cmf/news/post/rss',
+                'requestRoute' => 'cmf/news/post/rss',
                 'handler' => 'createRss'
             ],
         ];
