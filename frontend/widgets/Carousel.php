@@ -39,8 +39,4 @@ class CarouselItem {
      */
     public $content;
     public $caption;
-    /**
-     * @type media
-     */
-    //public $test;
 }

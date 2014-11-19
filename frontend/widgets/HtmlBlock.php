@@ -6,7 +6,7 @@
  * Time: 16:24
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\cmf\frontend\widgets;
 
 
 use gromver\cmf\common\widgets\Widget;
