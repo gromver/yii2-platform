@@ -140,7 +140,7 @@ class SiteMenu extends Widget {
             [
                 'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/index']),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Menu Items list')]
+                'options' => ['title' => Yii::t('gromver.cmf', 'Menu Items list'), 'target' => '_blank']
             ],
         ];
     }
