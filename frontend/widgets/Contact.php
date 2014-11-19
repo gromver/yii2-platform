@@ -49,7 +49,7 @@ class Contact extends Widget {
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Email is sent.'));
                 return $this->render($this->viewSuccess);
             } else {
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Error.'));
+                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', 'Error.'));
                 //throw new \HttpRuntimeException(Yii::t('gromver.cmf', 'Email sending is failed.'));
             }
         }
