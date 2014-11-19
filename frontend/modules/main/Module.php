@@ -46,10 +46,10 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     public function bootstrap($app)
     {
         Yii::$container->set('gromver\models\fields\EditorField', [
-            'controller' => $app->urlManagerBackend->createUrl(['cmf/media/manager'])
+            'controller' => 'cmf/media/manager'
         ]);
         Yii::$container->set('gromver\models\fields\MediaField', [
-            'controller' => $app->urlManagerBackend->createUrl(['cmf/media/manager'])
+            'controller' => 'cmf/media/manager'
         ]);
         Yii::$container->set('gromver\modulequery\ModuleQuery', [
             'cache' => $app->cache,
@@ -79,8 +79,9 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
 
         $params = @include Yii::getAlias($this->paramsPath . '/params.php');
 
-        if(is_array($params))
+        if (is_array($params)) {
             $this->params = ArrayHelper::merge($params, $this->params);
+        }
 
         $view = Yii::$app->getView();
         $view->title = @$this->params['title'];
