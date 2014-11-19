@@ -6,7 +6,10 @@
 
 use yii\helpers\Html;
 ?>
-<?php \yii\widgets\Pjax::begin() ?>
+<?php \yii\widgets\Pjax::begin([
+    'id' => 'news-calendar',
+    'enablePushState' => false
+]) ?>
 
 <div id="<?= $widget->id ?>" class="calendar">
     <div class="calendar-container">
