@@ -71,15 +71,15 @@ class PostDay extends Widget {
 
         echo $this->render($this->layout, [
             'dataProvider' => new ActiveDataProvider([
-                    'query' => Post::find()->published()->category($categoryId)->day($this->year, $this->month, $this->day),
+                    'query' => Post::find()->published()->category($categoryId)->day($this->year, $this->month, $this->day)->last(),
                     'pagination' => false,
                     'sort' => [
                         'defaultOrder' => [$this->sort => (int)$this->dir]
                     ]
                 ]),
             'itemLayout' => $this->itemLayout,
-            'prevDayPost' => Post::find()->published()->category($categoryId)->beforeDay($this->year, $this->month, $this->day)->one(),
-            'nextDayPost' => Post::find()->published()->category($categoryId)->afterDay($this->year, $this->month, $this->day)->one(),
+            'prevDayPost' => Post::find()->published()->category($categoryId)->beforeDay($this->year, $this->month, $this->day)->last()->one(),
+            'nextDayPost' => Post::find()->published()->category($categoryId)->afterDay($this->year, $this->month, $this->day)->last()->one(),
             'category' => $this->category,
             'year' => $this->year,
             'month' => $this->month,

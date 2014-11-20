@@ -56,9 +56,10 @@ class Calendar extends Widget
         $query = Post::find()
             ->published()
             ->category($this->categoryId)
-            ->andWhere('published_at>=:begin AND published_at<:end', [':begin'=>$this->getCurrentMonthDate(), ':end'=>$this->getNextMonthDate()])
+            ->andWhere('published_at>=:begin AND published_at<:end', [':begin' => $this->getCurrentMonthDate(), ':end' => $this->getNextMonthDate()])
             ->groupBy('day')
             ->select(['count' => 'count(id)', 'day' => 'day(from_unixtime(published_at))'])
+            ->last()
             ->asArray();
 
         foreach($query->all() as $item) {
