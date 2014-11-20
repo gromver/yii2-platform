@@ -61,6 +61,15 @@ class PostQuery extends ActiveQuery {
     }
 
     /**
+     * Послдение новости
+     * @return static
+     */
+    public function last()
+    {
+        return $this->andWhere('{{%cms_post}}.published_at<=:now', [':now' => time()]);
+    }
+
+    /**
      * Статьи за указанный день
      * @param $year integer
      * @param $month integer

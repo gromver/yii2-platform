@@ -94,7 +94,7 @@ class PostList extends Widget {
 
     protected function getQuery()
     {
-        return Post::find()->published()->category($this->category ? $this->category->id : null)->language($this->language)->with('tags');
+        return Post::find()->published()->category($this->category ? $this->category->id : null)->language($this->language)->with('tags')->last();
     }
 
     public function customControls()
