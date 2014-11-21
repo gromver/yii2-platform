@@ -48,12 +48,6 @@ class Request extends \yii\web\Request
     private $_pathInfo;
     private $_defaultLanguage;
 
-    // Определяем язык приложения еще до момента бутстрапа
-    public function init()
-    {
-        $this->getPathInfo();
-    }
-
     public function getPathInfo()
     {
         if ($this->_pathInfo === null) {
@@ -63,10 +57,11 @@ class Request extends \yii\web\Request
             $baseUrl = $this->getBaseUrl();
 
             if ($this->_pathInfo) {
-                if(($pos = strpos($this->_pathInfo, '/')) !== false)
+                if (($pos = strpos($this->_pathInfo, '/')) !== false) {
                     $language = substr($this->_pathInfo, 0, $pos);
-                else
+                } else {
                     $language = $this->_pathInfo;
+                }
 
                 if(in_array($language, Yii::$app->languages)) {
                     //язык обнаружен в начале пути - ru/site/index
@@ -75,45 +70,46 @@ class Request extends \yii\web\Request
                     $this->_pathInfo = trim(substr($this->_pathInfo, strlen($language)), '/');
 
                     //сохраняем выбранный язык в куках
-                    if($this->persistLanguage) {
+                    if ($this->persistLanguage) {
                         Yii::$app->session[self::LANGUAGE_KEY] = $language;
-                        if($this->languageCookieLifetime) {
+                        if ($this->languageCookieLifetime) {
                             Yii::$app->response->cookies->add(new Cookie([
-                                'name'=>self::LANGUAGE_KEY,
-                                'value'=>$language,
-                                'expire'=>time() + $this->languageCookieLifetime
+                                'name' => self::LANGUAGE_KEY,
+                                'value' => $language,
+                                'expire' => time() + $this->languageCookieLifetime
                             ]));
                         }
                     }
 
                     //если язык совпадает с тем что используется по умолчанию то редиректим на туже страницу но вырезаем язык из пути
-                    if($language==$this->getDefaultLanguage() && $this->redirectDefault && Yii::$app->request->getIsGet()) {
+                    if ($language == $this->getDefaultLanguage() && $this->redirectDefault && $this->getIsGet()) {
                         Yii::$app->response->redirect(preg_replace("#^{$baseUrl}/{$language}#", $baseUrl, $this->getUrl()));
                         Yii::$app->end();
                     }
-                } else
+                } else {
                     $language = null;
-
+                }
             }
 
-            if($language===null) {
+            if ($language === null) {
                 //язык не обнаружен в начале пути
                 //если язык сохранен в сесии то тянем его от туда
-                if($this->persistLanguage) {
+                if ($this->persistLanguage) {
                     $language = Yii::$app->session[self::LANGUAGE_KEY];
 
-                    if($language===null)
+                    if ($language === null) {
                         $language = $this->getCookies()->getValue(self::LANGUAGE_KEY);
+                    }
                 }
 
                 //если в сессии не обнаружен, пытаемся определить подходящий исходя из списка языков поддерживаемых браузером
-                if($language===null && $this->detectLanguage) {
+                if ($language === null && $this->detectLanguage) {
                     $language = $this->getPreferredLanguage(Yii::$app->languages);
                 }
 
-                //еслы определенный язык не совпадает с языком по умолчанию - то редиректим на тотже адрес с указанием определенного языка
-                if($language!=$this->getDefaultLanguage() && Yii::$app->request->getIsGet()){
-                    Yii::$app->response->redirect(preg_replace('#^'.$this->getBaseUrl().'#', $this->getBaseUrl().'/'.$language, $this->getUrl()));
+                //если определенный язык не совпадает с языком по умолчанию - то редиректим на тотже адрес с указанием определенного языка
+                if ($language != $this->getDefaultLanguage() && $this->getIsGet()){
+                    Yii::$app->response->redirect(preg_replace('#^' . $this->getBaseUrl() . '#', $this->getBaseUrl() . '/' . $language, $this->getUrl()));
                     Yii::$app->end();
                 }
             }
