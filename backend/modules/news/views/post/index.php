@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'language',
+                'width' => '80px',
                 'value' => function($model) {
                         /** @var $model \gromver\cmf\common\models\Post */
                         return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);

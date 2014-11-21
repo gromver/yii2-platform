@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'language',
+                'width' => '80px',
                 'value' => function($model) {
                         /** @var \gromver\cmf\common\models\Category $model */
                         return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
@@ -72,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
             [
-                'header' => 'Posts',
+                'header' => Yii::t('gromver.cmf', 'Posts'),
                 'value' => function($model) {
                         /** @var \gromver\cmf\common\models\Category $model */
                         return Html::a('('.$model->getPosts()->count().')', ['post/index', 'PostSearch[category_id]' => $model->id], ['data-pjax' => 0]);

@@ -34,7 +34,7 @@ class SearchForm extends Widget {
 
         echo Html::input('text', $this->queryParam, $this->query);
 
-        echo Html::submitButton(\Yii::t('gromver.cmf', 'Найти'));
+        echo Html::submitButton(\Yii::t('gromver.cmf', 'Find'));
 
         echo Html::endForm();
     }

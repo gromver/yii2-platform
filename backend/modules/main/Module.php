@@ -62,12 +62,22 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function init()
     {
         parent::init();
+        $this->initI18N();
 
         $params = @include Yii::getAlias($this->paramsPath . '/params.php');
 
         if (is_array($params)) {
             $this->params = ArrayHelper::merge($params, $this->params);
         }
+    }
+
+    public function initI18N()
+    {
+        Yii::$app->i18n->translations['gromver.*'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => '@gromver/cmf/backend/messages',
+            //'forceTranslation' => true,
+        ];
     }
 
     /**

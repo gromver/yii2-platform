@@ -5,7 +5,7 @@ use yii\widgets\DetailView;
 
 /**
  * @var yii\web\View $this
- * @var backend\modules\history\models\History $model
+ * @var gromver\cmf\common\models\Version $model
  */
 
 $this->title = $model->item_class . ' ID: ' . $model->id;

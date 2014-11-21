@@ -33,10 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             ['class' => 'yii\grid\CheckboxColumn'],
-
             ['attribute'=>'id', 'width'=>'50px'],
             [
                 'attribute' => 'language',
+                'width' => '80px',
                 'value' => function($model) {
                         /** @var $model \gromver\cmf\common\models\Tag */
                         return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
@@ -71,9 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'floatHeader' => true,
         'bordered' => false,
         'panel' => [
-            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> '.Html::encode($this->title).' </h3>',
+            'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> ' . Html::encode($this->title) . ' </h3>',
             'type' => 'info',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success', 'data-pjax' => 0]),
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('gromver.cmf', 'Add'), ['create'], ['class' => 'btn btn-success', 'data-pjax' => 0]),
             'after' =>
                 Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.cmf', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax'=>'0', 'onclick'=>'processAction(this); return false']) . ' ' .
                 Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), ['index'], ['class' => 'btn btn-info']),

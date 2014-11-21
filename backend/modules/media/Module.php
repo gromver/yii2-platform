@@ -11,6 +11,7 @@ namespace gromver\cmf\backend\modules\media;
 
 use gromver\cmf\backend\interfaces\DesktopInterface;
 use Yii;
+use yii\base\Exception;
 
 /**
  * Class Module

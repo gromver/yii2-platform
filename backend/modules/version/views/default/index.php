@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel gromver\cmf\backend\modules\version\models\VersionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('gromver.cmf', 'Versions');
+$this->title = Yii::t('gromver.cmf', 'Version Manager');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-index">

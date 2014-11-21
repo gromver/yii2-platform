@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $searchModel gromver\cmf\backend\modules\widget\models\WidgetConfigSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('gromver.cmf', 'Widget Configs');
+$this->title = Yii::t('gromver.cmf', 'Widget\'s Settings');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="widget-config-index">

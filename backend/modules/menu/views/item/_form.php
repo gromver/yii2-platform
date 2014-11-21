@@ -26,14 +26,14 @@ use yii\bootstrap\ActiveForm;
     <br/>
     <div class="tab-content">
         <div id="main" class="tab-pane active">
-            <?= $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
+            <?= $form->field($model, 'menu_type_id')->dropDownList(['' => Yii::t('gromver.cmf', 'Select ...')] + \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(),'id', 'title'), ['id' => 'menu_type_id']) ?>
 
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...'), 'id' => 'language']) ?>
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select ...'), 'id' => 'language']) ?>
 
             <?= $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
                 'pluginOptions'=>[
                     'depends' => ['menu_type_id', 'language'],
-                    'placeholder' => Yii::t('gromver.cmf', 'Select...'),
+                    'placeholder' => Yii::t('gromver.cmf', 'Select ...'),
                     'url' => \yii\helpers\Url::to(['type-items', 'update_item_id' => $model->isNewRecord ? null : $model->id, 'selected' => $model->parent_id]),
                 ]
             ]) ?>
@@ -42,7 +42,7 @@ use yii\bootstrap\ActiveForm;
 
             <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
 
-            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
+            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select ...')] + $model->statusLabels()) ?>
 
             <?//= $form->field($model, 'path')->textInput(['maxlength' => 2048]) ?>
 

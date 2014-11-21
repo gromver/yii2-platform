@@ -30,9 +30,9 @@ use yii\bootstrap\ActiveForm;
     <br/>
     <div class="tab-content">
         <div id="main-options" class="tab-pane active">
-            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...')]) ?>
+            <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select ...')]) ?>
 
-            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
+            <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select ...')] + $model->statusLabels()) ?>
 
             <?= $form->field($model, 'group')->textInput(['maxlength' => 255, 'placeholder' => isset($sourceModel) ? $sourceModel->group : null]) ?>
         </div>

@@ -5,7 +5,7 @@
 
 use yii\helpers\Html;
 
-$this->title = Yii::t('gromver.cmf', 'Media manager');
+$this->title = Yii::t('gromver.cmf', 'Media Manager');
 $this->params['breadcrumbs'][] = $this->title;
 
 \yii\jui\Resizable::begin([

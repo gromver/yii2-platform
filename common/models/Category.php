@@ -136,7 +136,7 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
     {
         return [
             'id' => Yii::t('gromver.cmf', 'ID'),
-            'parent_id' => Yii::t('gromver.cmf', 'Parent ID'),
+            'parent_id' => Yii::t('gromver.cmf', 'Parent'),
             'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
             'language' => Yii::t('gromver.cmf', 'Language'),
             'title' => Yii::t('gromver.cmf', 'Title'),
@@ -146,8 +146,8 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             'preview_image' => Yii::t('gromver.cmf', 'Preview Image'),
             'detail_text' => Yii::t('gromver.cmf', 'Detail Text'),
             'detail_image' => Yii::t('gromver.cmf', 'Detail Image'),
-            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
-            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
+            'metakey' => Yii::t('gromver.cmf', 'Meta keywords'),
+            'metadesc' => Yii::t('gromver.cmf', 'Meta description'),
             'created_at' => Yii::t('gromver.cmf', 'Created At'),
             'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
             'published_at' => Yii::t('gromver.cmf', 'Published At'),

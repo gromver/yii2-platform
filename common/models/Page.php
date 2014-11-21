@@ -107,15 +107,17 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
             'alias' => Yii::t('gromver.cmf', 'Alias'),
             'preview_text' => Yii::t('gromver.cmf', 'Preview Text'),
             'detail_text' => Yii::t('gromver.cmf', 'Detail Text'),
-            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
-            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
+            'metakey' => Yii::t('gromver.cmf', 'Meta keywords'),
+            'metadesc' => Yii::t('gromver.cmf', 'Meta description'),
             'created_at' => Yii::t('gromver.cmf', 'Created At'),
             'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
             'status' => Yii::t('gromver.cmf', 'Status'),
+            'tags' => Yii::t('gromver.cmf', 'Tags'),
             'created_by' => Yii::t('gromver.cmf', 'Created By'),
             'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
             'hits' => Yii::t('gromver.cmf', 'Hits'),
             'lock' => Yii::t('gromver.cmf', 'Lock'),
+            'versionNote' => Yii::t('gromver.cmf', 'Version Note')
         ];
     }
 

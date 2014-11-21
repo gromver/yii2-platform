@@ -44,20 +44,20 @@ use yii\bootstrap\ActiveForm;
                         ]) ?>
                     </div>
                 </div>
-                <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select...'), 'id' => 'language']) ?>
+                <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select ...'), 'id' => 'language']) ?>
 
                 <?= $form->field($model, 'parent_id')->widget(\kartik\widgets\DepDrop::className(), [
                     'pluginOptions' => [
                         //'initialize' => true,
                         'depends' => ['language'],
-                        'placeholder' => Yii::t('gromver.cmf', 'Select...'),
+                        'placeholder' => Yii::t('gromver.cmf', 'Select ...'),
                         'url' => \yii\helpers\Url::to(['categories', 'update_item_id' => $model->isNewRecord ? null : $model->id, 'selected' => $model->parent_id]),
                     ]
                 ]) ?>
 
                 <?//= $form->field($model, 'path')->textInput(['maxlength' => 2000]) ?>
 
-                <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select...')] + $model->statusLabels()) ?>
+                <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select ...')] + $model->statusLabels()) ?>
 
                 <?= $form->field($model, 'published_at')->widget(\kartik\widgets\DateTimePicker::className(), [
                     'options' => ['value' => date('d.m.Y H:i', is_int($model->published_at) ? $model->published_at : time())],

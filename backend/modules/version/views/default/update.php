@@ -8,8 +8,10 @@ use yii\helpers\Html;
 $this->title = Yii::t('gromver.cmf', 'Update Version: {id}', [
     'id' => $model->id
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Versions'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Version Manager'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'ID: {id}', [
+    'id' => $model->id
+]), 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
 ?>
 <div class="history-update">
