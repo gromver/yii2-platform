@@ -48,6 +48,12 @@ class Request extends \yii\web\Request
     private $_pathInfo;
     private $_defaultLanguage;
 
+    // Определяем язык приложения еще до момента бутстрапа
+    public function init()
+    {
+        $this->getPathInfo();
+    }
+
     public function getPathInfo()
     {
         if ($this->_pathInfo === null) {
@@ -121,8 +127,9 @@ class Request extends \yii\web\Request
 
     public function getDefaultLanguage()
     {
-        if(!isset($this->_defaultLanguage))
+        if (!isset($this->_defaultLanguage)) {
             $this->_defaultLanguage = Yii::$app->language;
+        }
 
         return $this->_defaultLanguage;
     }
