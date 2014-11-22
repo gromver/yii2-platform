@@ -16,13 +16,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="search-default-index">
     <h1><?= $this->title ?></h1>
-    <?php echo \gromver\cmf\common\widgets\SearchForm::widget([
+    <?php echo \gromver\cmf\backend\modules\elasticsearch\widgets\SearchForm::widget([
         'id' => 'fSearchForm',
         'query' => $query,
         'showPanel' => false
     ]);
 
-    echo \gromver\cmf\common\widgets\SearchResults::widget([
+    echo \gromver\cmf\backend\modules\elasticsearch\widgets\SearchResults::widget([
         'id' => 'fSearchResult',
         'query' => $query,
         'language' => Yii::$app->language,

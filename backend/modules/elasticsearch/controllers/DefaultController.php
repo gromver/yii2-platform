@@ -7,8 +7,9 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\search\controllers;
+namespace gromver\cmf\backend\modules\elasticsearch\controllers;
 
+use yii\elasticsearch\ActiveRecord;
 use yii\elasticsearch\Exception;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
@@ -47,9 +48,9 @@ class DefaultController extends Controller
     public function actionReindex()
     {
         $documents = [
-            'gromver\cmf\common\models\search\Page',
-            'gromver\cmf\common\models\search\Post',
-            'gromver\cmf\common\models\search\Category',
+            'gromver\cmf\backend\modules\elasticsearch\models\Page',
+            'gromver\cmf\backend\modules\elasticsearch\models\Post',
+            'gromver\cmf\backend\modules\elasticsearch\models\Category',
         ];
 
         foreach ($documents as $documentClass) {
@@ -60,7 +61,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $documentClass \gromver\cmf\common\models\search\ActiveDocument
+     * @param $documentClass \gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument
      * @return int
      * @throws \yii\elasticsearch\Exception
      */
@@ -69,7 +70,7 @@ class DefaultController extends Controller
         $bulk = '';
         /** @var \yii\db\ActiveRecord|string $modelClass */
         $modelClass = $documentClass::model();
-        /** @var \gromver\cmf\common\models\search\ActiveDocument $document */
+        /** @var \gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument $document */
         $document = new $documentClass;
         $uploaded = 0;
         foreach ($modelClass::find()->each() as $model) {
@@ -89,7 +90,7 @@ class DefaultController extends Controller
         }
 
         $url = [$documentClass::index(), $documentClass::type(), '_bulk'];
-        $response = \yii\elasticsearch\ActiveRecord::getDb()->post($url, [], $bulk);
+        $response = ActiveRecord::getDb()->post($url, [], $bulk);
         $n = 0;
         $errors = [];
         foreach ($response['items'] as $item) {

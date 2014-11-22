@@ -7,9 +7,10 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\widgets;
+namespace gromver\cmf\backend\modules\elasticsearch\widgets;
 
 
+use gromver\cmf\common\widgets\Widget;
 use yii\helpers\Html;
 
 /**

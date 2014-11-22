@@ -10,7 +10,6 @@
 namespace gromver\cmf\backend\modules\main;
 
 use gromver\modulequery\ModuleQuery;
-use gromver\cmf\common\interfaces\SearchableInterface;
 use gromver\cmf\common\models\Table;
 use gromver\cmf\backend\interfaces\DesktopInterface;
 use gromver\cmf\backend\interfaces\MenuRouterInterface;
@@ -28,7 +27,7 @@ use yii\helpers\ArrayHelper;
  * @property string $siteName
  * @property bool $isEditMode
  */
-class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInterface, BootstrapInterface, SearchableInterface
+class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInterface, BootstrapInterface
 {
     public $controllerNamespace = 'gromver\cmf\backend\modules\main\controllers';
 
@@ -48,12 +47,11 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);
 
-        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
-
         Table::bootstrap();
 
         $app->set($this->id, $this);
 
+        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
     }
 
     /**
@@ -112,15 +110,6 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getIsEditMode()
     {
         return true;
-    }
-
-    public function getDocumentClasses()
-    {
-        return [
-            'gromver\cmf\common\models\search\Page',
-            'gromver\cmf\common\models\search\Post',
-            'gromver\cmf\common\models\search\Category',
-        ];
     }
 
     public function getSiteName()

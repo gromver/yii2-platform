@@ -22,7 +22,6 @@ class Application extends \yii\web\Application {
     public $sourceLanguage = 'en';
     public $defaultRoute = 'cmf/default/index';
     public $layout = '@gromver/cmf/backend/views/layouts/main';
-    public $elasticsearchIndex = 'cmf';
 
     private $_modulesHash;
 
@@ -91,7 +90,7 @@ class Application extends \yii\web\Application {
                         'version'   => ['class' => 'gromver\cmf\backend\modules\version\Module'],
                         'widget'    => ['class' => 'gromver\cmf\backend\modules\widget\Module'],
                         'media'     => ['class' => 'gromver\cmf\backend\modules\media\Module'],
-                        'search'    => ['class' => 'gromver\cmf\backend\modules\search\Module'],
+                        //'search'    => ['class' => 'gromver\cmf\backend\modules\elasticsearch\Module'],
                     ]
                 ],
                 'gridview' => ['class' => 'kartik\grid\Module']

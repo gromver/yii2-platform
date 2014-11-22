@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models\search;
+namespace gromver\cmf\backend\modules\elasticsearch\models;
 
 
 use gromver\cmf\common\interfaces\ViewableInterface;
@@ -32,9 +32,11 @@ class ActiveDocument extends ActiveRecord implements ViewableInterface {
         ];
     }
 
+    public static $index = 'cmf';
+
     public static function index()
     {
-        return Yii::$app->elasticsearchIndex;
+        return self::$index;
     }
 
     /**

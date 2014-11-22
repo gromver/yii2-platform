@@ -3,10 +3,10 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \gromver\cmf\common\models\search\ActiveDocument */
+/* @var $model \gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument */
 
 echo Html::beginTag('div', ['class' => 'search-result-item']);
-
+// todo (array)$model->highlight['text']
 echo Html::a($model->highlight['title'][0], $model->getViewLink(), ['class' => 'h4 title']);
 echo Html::tag('p', ($model->hasAttribute('date') ? Html::tag('small', Yii::$app->formatter->asDate($model->date, 'd MMMM Y'), ['class' => 'date']) . ' - ' : '') . implode(' ... ', $model->highlight['text']), ['class' => 'text']);
 

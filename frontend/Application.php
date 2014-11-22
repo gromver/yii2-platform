@@ -23,7 +23,6 @@ class Application extends \yii\web\Application {
     public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
     public $layout = '@gromver/cmf/frontend/views/layouts/main';
-    public $elasticsearchIndex = 'cmf';
 
     private $_modulesHash;
 
@@ -78,7 +77,7 @@ class Application extends \yii\web\Application {
                         'widget'    => ['class' => 'gromver\cmf\frontend\modules\widget\Module'],
                         'tag'       => ['class' => 'gromver\cmf\frontend\modules\tag\Module'],
                         'user'      => ['class' => 'gromver\cmf\frontend\modules\user\Module'],
-                        'search'    => ['class' => 'gromver\cmf\frontend\modules\search\Module'],
+                        //'search'    => ['class' => 'gromver\cmf\frontend\modules\search\Module'],
                         'media'     => ['class' => 'gromver\cmf\frontend\modules\media\Module'],
                     ]
                 ],

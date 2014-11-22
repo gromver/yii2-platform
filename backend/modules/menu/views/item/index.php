@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     Html::endTag('div');
                 },
                 'filter' => \gromver\cmf\common\models\MenuItem::statusLabels(),
-                'width' => '80px',
+                'width' => '90px',
                 'format' => 'raw'
             ],
             [

@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models\search;
+namespace gromver\cmf\backend\modules\elasticsearch\models;
 
 /**
  * Class Page

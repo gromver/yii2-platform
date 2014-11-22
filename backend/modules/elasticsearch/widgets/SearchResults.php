@@ -7,11 +7,12 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\widgets;
+namespace gromver\cmf\backend\modules\elasticsearch\widgets;
 
 
-use gromver\cmf\common\models\search\ActiveDocument;
-use gromver\cmf\common\models\search\Search;
+use gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument;
+use gromver\cmf\backend\modules\elasticsearch\models\Search;
+use gromver\cmf\common\widgets\Widget;
 use Yii;
 use yii\caching\Cache;
 use yii\data\ActiveDataProvider;

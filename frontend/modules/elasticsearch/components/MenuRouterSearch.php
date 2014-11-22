@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\search\components;
+namespace gromver\cmf\frontend\modules\elasticsearch\components;
 
 
 use gromver\cmf\frontend\components\MenuRouter;
