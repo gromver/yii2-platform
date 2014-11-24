@@ -90,7 +90,7 @@ class Application extends \yii\web\Application {
                         'version'   => ['class' => 'gromver\cmf\backend\modules\version\Module'],
                         'widget'    => ['class' => 'gromver\cmf\backend\modules\widget\Module'],
                         'media'     => ['class' => 'gromver\cmf\backend\modules\media\Module'],
-                        //'search'    => ['class' => 'gromver\cmf\backend\modules\elasticsearch\Module'],
+                        //'search'    => ['class' => 'gromver\cmf\common\modules\elasticsearch\Module'],
                     ]
                 ],
                 'gridview' => ['class' => 'kartik\grid\Module']
@@ -105,11 +105,11 @@ class Application extends \yii\web\Application {
     /**
      * @inheritdoc
      */
-    protected function bootstrap()
+    public function init()
     {
         $this->bootstrap = array_merge($this->bootstrap, ['cmf']);
 
-        parent::bootstrap();
+        parent::init();
     }
 
     /**

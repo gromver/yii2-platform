@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model \gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument */
+/* @var $model \gromver\cmf\common\models\elasticsearch\ActiveDocument */
 
 echo Html::beginTag('div', ['class' => 'search-result-item']);
 // todo (array)$model->highlight['text']

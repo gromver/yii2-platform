@@ -77,8 +77,8 @@ class Application extends \yii\web\Application {
                         'widget'    => ['class' => 'gromver\cmf\frontend\modules\widget\Module'],
                         'tag'       => ['class' => 'gromver\cmf\frontend\modules\tag\Module'],
                         'user'      => ['class' => 'gromver\cmf\frontend\modules\user\Module'],
-                        //'search'    => ['class' => 'gromver\cmf\frontend\modules\search\Module'],
                         'media'     => ['class' => 'gromver\cmf\frontend\modules\media\Module'],
+                        //'search'    => ['class' => 'gromver\cmf\frontend\modules\search\Module'],
                     ]
                 ],
                 'gridview' => ['class' => 'kartik\grid\Module']

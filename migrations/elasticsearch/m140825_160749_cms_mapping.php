@@ -9,7 +9,7 @@ class m140825_160749_cms_mapping extends Migration
     {
         $connection = \yii\elasticsearch\ActiveRecord::getDb();
 
-        $index = \gromver\cmf\common\models\search\ActiveDocument::index();
+        $index = \gromver\cmf\common\models\elasticsearch\ActiveDocument::index();
 
         if ($connection->createCommand()->indexExists($index)) {
             $connection->createCommand()->deleteIndex($index);
@@ -173,9 +173,9 @@ class m140825_160749_cms_mapping extends Migration
         echo "Index $index created.\n";
 
         $documents = [
-            'gromver\cmf\common\models\search\Page',
-            'gromver\cmf\common\models\search\Post',
-            'gromver\cmf\common\models\search\Category',
+            'gromver\cmf\common\models\elasticsearch\Page',
+            'gromver\cmf\common\models\elasticsearch\Post',
+            'gromver\cmf\common\models\elasticsearch\Category',
         ];
 
         foreach ($documents as $documentClass) {
@@ -186,7 +186,7 @@ class m140825_160749_cms_mapping extends Migration
     }
 
     /**
-     * @param $documentClass \gromver\cmf\common\models\search\ActiveDocument
+     * @param $documentClass \gromver\cmf\common\models\elasticsearch\ActiveDocument
      * @return int
      * @throws Exception
      */
@@ -195,7 +195,7 @@ class m140825_160749_cms_mapping extends Migration
         $bulk = '';
         /** @var \yii\db\ActiveRecord $modelClass */
         $modelClass = $documentClass::model();
-        /** @var \gromver\cmf\common\models\search\ActiveDocument $document */
+        /** @var \gromver\cmf\common\models\elasticsearch\ActiveDocument $document */
         $document = new $documentClass;
         $query = $modelClass::find();
         //древовидные модели, не должны индексировать рутовый элемент
@@ -242,11 +242,10 @@ class m140825_160749_cms_mapping extends Migration
 
     public function down()
     {
-        $index = \gromver\cmf\common\models\search\ActiveDocument::index();
+        $index = \gromver\cmf\common\models\elasticsearch\ActiveDocument::index();
 
         \yii\elasticsearch\ActiveRecord::getDb()->createCommand()->deleteIndex($index);//->deleteAllIndexes();//
 
         echo "Index $index are deleted successfully.";
-        //echo 'All indexes are deleted successfully.';
     }
 }

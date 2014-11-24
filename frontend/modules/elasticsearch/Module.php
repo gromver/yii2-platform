@@ -9,7 +9,7 @@
 
 namespace gromver\cmf\frontend\modules\elasticsearch;
 
-use gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument;
+use gromver\cmf\common\models\elasticsearch\ActiveDocument;
 use gromver\cmf\common\interfaces\BootstrapInterface;
 use gromver\cmf\frontend\interfaces\MenuRouterInterface;
 use gromver\cmf\frontend\modules\elasticsearch\components\MenuRouterSearch;
@@ -29,9 +29,9 @@ class Module extends \yii\base\Module implements BootstrapInterface, MenuRouterI
     public function init()
     {
         $this->documentClasses = array_merge($this->documentClasses, [
-            'gromver\cmf\backend\modules\elasticsearch\models\Page',
-            'gromver\cmf\backend\modules\elasticsearch\models\Post',
-            'gromver\cmf\backend\modules\elasticsearch\models\Category',
+            'gromver\cmf\common\models\elasticsearch\Page',
+            'gromver\cmf\common\models\elasticsearch\Post',
+            'gromver\cmf\common\models\elasticsearch\Category',
         ]);
 
         if ($this->elasticsearchIndex) {

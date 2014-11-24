@@ -9,9 +9,9 @@
 
 namespace gromver\cmf\frontend\modules\main;
 
-use gromver\cmf\common\interfaces\SearchableInterface;
 use gromver\cmf\common\models\MenuItem;
 use gromver\cmf\common\models\Table;
+use gromver\modulequery\ModuleQuery;
 use Yii;
 use gromver\cmf\frontend\components\MenuManager;
 use yii\base\BootstrapInterface;
@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
  * @property string $siteName
  * @property bool $isEditMode
  */
-class Module extends \yii\base\Module implements BootstrapInterface, SearchableInterface
+class Module extends \yii\base\Module implements BootstrapInterface
 {
     const SESSION_KEY_MODE = '__cms_mode';
 
@@ -71,6 +71,8 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
 
         $app->set('menuManager', $manager);
         $app->set($this->id, $this);
+
+        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
     }
 
     public function init()
@@ -121,15 +123,6 @@ class Module extends \yii\base\Module implements BootstrapInterface, SearchableI
     public static function modes()
     {
         return [self::MODE_VIEW, self::MODE_EDIT];
-    }
-
-    public function getDocumentClasses()
-    {
-        return [
-            'gromver\cmf\common\models\search\Page',
-            'gromver\cmf\common\models\search\Post',
-            'gromver\cmf\common\models\search\Category',
-        ];
     }
 
     public function getSiteName()

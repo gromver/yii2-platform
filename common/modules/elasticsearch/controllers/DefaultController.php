@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\elasticsearch\controllers;
+namespace gromver\cmf\common\modules\elasticsearch\controllers;
 
 use yii\elasticsearch\ActiveRecord;
 use yii\elasticsearch\Exception;
@@ -48,9 +48,9 @@ class DefaultController extends Controller
     public function actionReindex()
     {
         $documents = [
-            'gromver\cmf\backend\modules\elasticsearch\models\Page',
-            'gromver\cmf\backend\modules\elasticsearch\models\Post',
-            'gromver\cmf\backend\modules\elasticsearch\models\Category',
+            'gromver\cmf\common\models\elasticsearch\Page',
+            'gromver\cmf\common\models\elasticsearch\Post',
+            'gromver\cmf\common\models\elasticsearch\Category',
         ];
 
         foreach ($documents as $documentClass) {
@@ -61,7 +61,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $documentClass \gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument
+     * @param $documentClass \gromver\cmf\common\models\elasticsearch\ActiveDocument
      * @return int
      * @throws \yii\elasticsearch\Exception
      */
@@ -70,7 +70,7 @@ class DefaultController extends Controller
         $bulk = '';
         /** @var \yii\db\ActiveRecord|string $modelClass */
         $modelClass = $documentClass::model();
-        /** @var \gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument $document */
+        /** @var \gromver\cmf\common\models\elasticsearch\ActiveDocument $document */
         $document = new $documentClass;
         $uploaded = 0;
         foreach ($modelClass::find()->each() as $model) {

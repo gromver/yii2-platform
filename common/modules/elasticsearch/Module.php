@@ -7,11 +7,11 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\elasticsearch;
+namespace gromver\cmf\common\modules\elasticsearch;
 
 use gromver\cmf\backend\interfaces\DesktopInterface;
 use gromver\cmf\backend\interfaces\MenuRouterInterface;
-use gromver\cmf\backend\modules\elasticsearch\models\ActiveDocument;
+use gromver\cmf\common\models\elasticsearch\ActiveDocument;
 use gromver\cmf\common\interfaces\BootstrapInterface;
 use gromver\modulequery\ModuleQuery;
 use Yii;
@@ -24,19 +24,17 @@ use Yii;
  */
 class Module extends \yii\base\Module implements BootstrapInterface, DesktopInterface, MenuRouterInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\elasticsearch\controllers';
-    public $documentClasses =  [];
+    public $controllerNamespace = 'gromver\cmf\common\modules\elasticsearch\controllers';
     public $desktopOrder = 6;
     public $elasticsearchIndex;
+    public $documentClasses = [
+        'gromver\cmf\common\models\elasticsearch\Page',
+        'gromver\cmf\common\models\elasticsearch\Post',
+        'gromver\cmf\common\models\elasticsearch\Category',
+    ];
 
     public function init()
     {
-        $this->documentClasses = array_merge($this->documentClasses, [
-            'gromver\cmf\backend\modules\elasticsearch\models\Page',
-            'gromver\cmf\backend\modules\elasticsearch\models\Post',
-            'gromver\cmf\backend\modules\elasticsearch\models\Category',
-        ]);
-
         if ($this->elasticsearchIndex) {
             ActiveDocument::$index = $this->elasticsearchIndex;
         }
@@ -47,7 +45,8 @@ class Module extends \yii\base\Module implements BootstrapInterface, DesktopInte
      */
     public function bootstrap($application)
     {
-        ActiveDocument::watch(array_merge($this->documentClasses, ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE)));
+        $this->documentClasses = array_merge($this->documentClasses, ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
+        ActiveDocument::watch($this->documentClasses);
     }
 
     /**

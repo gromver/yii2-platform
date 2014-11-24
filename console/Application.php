@@ -56,13 +56,23 @@ class Application extends \yii\console\Application {
                 ]
             ],
             'modules' => [
-                'search' => 'gromver\cmf\console\modules\search\Module'
+                'cmf' => 'gromver\cmf\console\modules\main\Module'
             ]
         ], $config);
 
         $this->_modulesHash = md5(json_encode($config['modules']));
 
         parent::__construct($config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        $this->bootstrap = array_merge($this->bootstrap, ['cmf']);
+
+        parent::init();
     }
 
     /**
