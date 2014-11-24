@@ -18,13 +18,8 @@ use yii\helpers\ArrayHelper;
  *
  * @property $cms \gromver\cmf\frontend\modules\cmf\Module
  */
-class Application extends \yii\web\Application {
-    public $language = 'en';
-    public $languages = ['en', 'ru'];
-    public $sourceLanguage = 'en';
+class Application extends \gromver\cmf\common\Application {
     public $layout = '@gromver/cmf/frontend/views/layouts/main';
-
-    private $_modulesHash;
 
     /**
      * @inheritdoc
@@ -78,14 +73,12 @@ class Application extends \yii\web\Application {
                         'tag'       => ['class' => 'gromver\cmf\frontend\modules\tag\Module'],
                         'user'      => ['class' => 'gromver\cmf\frontend\modules\user\Module'],
                         'media'     => ['class' => 'gromver\cmf\frontend\modules\media\Module'],
-                        //'search'    => ['class' => 'gromver\cmf\frontend\modules\search\Module'],
+                        //'search'    => ['class' => 'gromver\cmf\frontend\modules\elasticsearch\Module'],
                     ]
                 ],
                 'gridview' => ['class' => 'kartik\grid\Module']
             ]
         ], $config);
-
-        $this->_modulesHash = md5(json_encode($config['modules']));
 
         parent::__construct($config);
     }
@@ -98,28 +91,5 @@ class Application extends \yii\web\Application {
         $this->bootstrap = array_merge($this->bootstrap, ['cmf']);
 
         parent::init();
-    }
-
-    /**
-     * @return string
-     */
-    public function getModulesHash() {
-        return $this->_modulesHash;
-    }
-
-    /**
-     * @return array
-     */
-    public function getLanguagesList()
-    {
-        return array_combine($this->languages, $this->languages);
-    }
-
-    /**
-     * @return \yii\elasticsearch\Connection
-     */
-    public function getElasticSearch()
-    {
-        return $this->get('elasticsearch');
     }
 }

@@ -16,14 +16,9 @@ use yii\helpers\ArrayHelper;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class Application extends \yii\web\Application {
-    public $language = 'en';
-    public $languages = ['en', 'ru'];
-    public $sourceLanguage = 'en';
+class Application extends \gromver\cmf\common\Application {
     public $defaultRoute = 'cmf/default/index';
     public $layout = '@gromver/cmf/backend/views/layouts/main';
-
-    private $_modulesHash;
 
     /**
      * @inheritdoc
@@ -62,13 +57,6 @@ class Application extends \yii\web\Application {
                 ],
                 'cache' => ['class' => 'yii\caching\FileCache'],
                 'elasticsearch' => ['class' => 'yii\elasticsearch\Connection'],
-                /*'i18n' => [
-                    'translations' => [
-                        '*' => [
-                            'class' => 'yii\i18n\PhpMessageSource'
-                        ],
-                    ],
-                ],*/
                 'assetManager' => [
                     'bundles' => [
                         'mihaildev\ckeditor\Assets' => [
@@ -90,14 +78,12 @@ class Application extends \yii\web\Application {
                         'version'   => ['class' => 'gromver\cmf\backend\modules\version\Module'],
                         'widget'    => ['class' => 'gromver\cmf\backend\modules\widget\Module'],
                         'media'     => ['class' => 'gromver\cmf\backend\modules\media\Module'],
-                        //'search'    => ['class' => 'gromver\cmf\common\modules\elasticsearch\Module'],
+                        //'search'    => ['class' => 'gromver\cmf\backend\modules\elasticsearch\Module'],
                     ]
                 ],
                 'gridview' => ['class' => 'kartik\grid\Module']
             ]
         ], $config);
-
-        $this->_modulesHash = md5(json_encode($config['modules']));
 
         parent::__construct($config);
     }
@@ -110,28 +96,5 @@ class Application extends \yii\web\Application {
         $this->bootstrap = array_merge($this->bootstrap, ['cmf']);
 
         parent::init();
-    }
-
-    /**
-     * @return string
-     */
-    public function getModulesHash() {
-        return $this->_modulesHash;
-    }
-
-    /**
-     * @return array
-     */
-    public function getLanguagesList()
-    {
-        return array_combine($this->languages, $this->languages);
-    }
-
-    /**
-     * @return \yii\elasticsearch\Connection
-     */
-    public function getElasticSearch()
-    {
-        return $this->get('elasticsearch');
     }
 }

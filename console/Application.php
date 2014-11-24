@@ -20,7 +20,6 @@ class Application extends \yii\console\Application {
     public $language = 'en';
     public $languages = ['en', 'ru'];
     public $sourceLanguage = 'en';
-    public $elasticsearchIndex = 'cmf';
 
     private $_modulesHash;
 
