@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\modules\elasticsearch\widgets;
+namespace gromver\cmf\common\widgets;
 
 
 use gromver\cmf\common\models\elasticsearch\ActiveDocument;
@@ -49,8 +49,6 @@ use yii\di\Instance;
  * @property array $filters
  */
 class SearchResults extends Widget {
-    const CACHE_KEY = 'SearchResults';
-
     /**
      * @ignore
      */
@@ -194,10 +192,10 @@ class SearchResults extends Widget {
             if ($this->cache) {
                 /** @var Cache $cache */
                 $cache = Instance::ensure($this->cache, Cache::className());
-                $this->_filters = $cache->get([self::CACHE_KEY, $this->types]);
+                $this->_filters = $cache->get([__CLASS__, $this->types]);
                 if ($this->_filters === false) {
                     $this->_filters = $this->collectFilters();
-                    $cache->set([self::CACHE_KEY, $this->types], $this->_filters, $this->cacheDuration);
+                    $cache->set([__CLASS__, $this->types], $this->_filters, $this->cacheDuration);
                 }
             } else {
                 $this->_filters = $this->collectFilters();

@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\modules\elasticsearch\widgets;
+namespace gromver\cmf\common\widgets;
 
 
 use gromver\cmf\common\widgets\Widget;

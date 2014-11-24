@@ -7,7 +7,7 @@
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\modules\elasticsearch\controllers;
+namespace gromver\cmf\backend\modules\elasticsearch\controllers;
 
 use yii\elasticsearch\ActiveRecord;
 use yii\elasticsearch\Exception;
@@ -47,11 +47,7 @@ class DefaultController extends Controller
 
     public function actionReindex()
     {
-        $documents = [
-            'gromver\cmf\common\models\elasticsearch\Page',
-            'gromver\cmf\common\models\elasticsearch\Post',
-            'gromver\cmf\common\models\elasticsearch\Category',
-        ];
+        $documents = $this->module->documentClasses;
 
         foreach ($documents as $documentClass) {
             echo "Uploading {$documentClass} models.";
