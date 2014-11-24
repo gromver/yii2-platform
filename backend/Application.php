@@ -63,7 +63,14 @@ class Application extends \gromver\cmf\common\Application {
                             'sourcePath' => '@gromver/cmf/backend/assets/ckeditor',
                         ],
                     ],
-                ]
+                ],
+                'i18n' => [
+                    'translations' => [
+                        '*' => [
+                            'class' => 'yii\i18n\PhpMessageSource'
+                        ],
+                    ],
+                ],
             ],
             'modules' => [
                 'cmf' => [
