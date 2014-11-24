@@ -109,14 +109,52 @@ server {
 
 #### Подключение поиска(опционально)
 * Установить [Elasticsearch](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_installation.html)
+* Подключаем поисковые модули еластиксерча. Настрайваем консольное приложение, правим /console/config/main.php
+```
+[
+    'modules' => [
+        'cmf' => [
+            'modules' => [
+                'search' => [
+                    'class' => 'gromver\cmf\common\modules\elasticsearch\Module',
+                    'elasticsearchIndex' => 'myapp'	//по умолчанию 'cmf'
+                ]
+            ]
+        ]
+    ],
+]
+```
+Фронтенд, правим /frontend/config/main.php
+```
+[
+    'modules' => [
+        'cmf' => [
+            'modules' => [
+                'search' => [
+                    'class' => 'gromver\cmf\frontend\modules\elasticsearch\Module',
+                    'elasticsearchIndex' => 'myapp'	//по умолчанию 'cmf'
+                ]
+            ]
+        ]
+    ],
+]
+```
+Бэкенд, правим /backend/config/main.php
+```
+[
+    'modules' => [
+        'cmf' => [
+            'modules' => [
+                'search' => [
+                    'class' => 'gromver\cmf\backend\modules\elasticsearch\Module',
+                    'elasticsearchIndex' => 'myapp'	//по умолчанию 'cmf'
+                ]
+            ]
+        ]
+    ],
+]
+```
 * Применяем миграцию для Elasticsearch
 ```
   php yii migrate --migrationPath=@gromver/cmf/migrations/elasticsearch
 ```
-* Добавляем в бутстрап фронтенда и бэкенда модуль 'cmf/search'. Правим файлы /frontend/config/main.php и /backend/config/main.php
-```
-[
-  'bootstrap' => ['log', 'cmf/search'],
-]
-```
-  
