@@ -55,7 +55,9 @@ class Application extends \yii\console\Application {
                 ]
             ],
             'modules' => [
-                'cmf' => 'gromver\cmf\console\modules\main\Module'
+                'cmf' => [
+                    'class' => 'gromver\cmf\console\modules\main\Module'
+                ]
             ]
         ], $config);
 
