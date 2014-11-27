@@ -90,7 +90,7 @@ class CategoryList extends Widget {
                 'options' => ['title' => Yii::t('gromver.cmf', 'Create Category')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/index', 'CategorySearch[parent_id]' => $this->category ? $this->category->id : null, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/index', 'CategorySearch' => ['parent_id' => $this->category ? $this->category->id : null]]),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Categories list'), 'target' => '_blank']
             ],

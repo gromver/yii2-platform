@@ -138,7 +138,7 @@ class SiteMenu extends Widget {
                 'options' => ['title' => Yii::t('gromver.cmf', 'Create Menu Item')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/index']),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/index', 'MenuItemSearch' => ['menu_type_id' => (int)$this->type, 'language' => $this->language]]),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Menu Items list'), 'target' => '_blank']
             ],
