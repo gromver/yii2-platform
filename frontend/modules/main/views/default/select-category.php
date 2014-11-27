@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'published_at',
-                'format' => ['date', 'd MMM Y H:i'],
+                'format' => ['date', 'd MMM Y H:mm'],
                 'width' => '160px',
                 'filterType' => GridView::FILTER_DATE,
                 'filterWidgetOptions' => [

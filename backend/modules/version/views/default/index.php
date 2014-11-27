@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'version_note',
             [
                 'attribute' => 'created_at',
-                'format' => ['date', 'd MMM Y H:i'],
+                'format' => ['date', 'd MMM Y H:mm'],
                 'width' => '160px',
                 'filterType' => GridView::FILTER_DATE,
                 'filterWidgetOptions' => [
