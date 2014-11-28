@@ -133,7 +133,7 @@ class SiteMenu extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/create', 'menu_type_id' => (int)$this->type]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/create', 'menu_type_id' => (int)$this->type, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-plus"></i>',
                 'options' => ['title' => Yii::t('gromver.cmf', 'Create Menu Item')]
             ],
