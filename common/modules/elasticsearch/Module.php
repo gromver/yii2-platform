@@ -33,6 +33,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
     {
         if ($this->elasticsearchIndex) {
             ActiveDocument::$index = $this->elasticsearchIndex;
+        } elseif(!empty(Yii::$app->cmf->params['elasticsearchIndex'])) {
+            ActiveDocument::$index = Yii::$app->cmf->params['elasticsearchIndex'];
         }
     }
 

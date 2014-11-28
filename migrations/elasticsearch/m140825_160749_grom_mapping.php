@@ -3,7 +3,7 @@
 use yii\db\Migration;
 use yii\helpers\Json;
 
-class m140825_160749_cms_mapping extends Migration
+class m140825_160749_grom_mapping extends Migration
 {
     public function up()
     {

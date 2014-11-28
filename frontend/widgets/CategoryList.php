@@ -13,7 +13,6 @@ use gromver\cmf\common\widgets\Widget;
 use gromver\cmf\common\models\Category;
 use yii\data\ActiveDataProvider;
 use Yii;
-use yii\helpers\Url;
 
 /**
  * Class CategoryList

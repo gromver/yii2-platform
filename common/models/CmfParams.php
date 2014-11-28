@@ -23,11 +23,18 @@ class CmfParams extends  Object
     /**
      * @type multiple
      * @fieldType text
+     * @email
      */
     public $adminEmail;
     /**
      * @type multiple
      * @fieldType text
+     * @email
      */
     public $supportEmail;
+    /**
+     * @before <h3 class="col-sm-12">Elasticsearch Settings</h3>
+     * @pattern #^\w*$#
+     */
+    public $elasticsearchIndex;
 }

@@ -3,7 +3,7 @@
 use gromver\cmf\common\models\User;
 use yii\db\Migration;
 
-class m140811_143627_cms_setup extends Migration
+class m140811_143627_grom_user_setup extends Migration
 {
     public function up()
     {
@@ -22,7 +22,6 @@ class m140811_143627_cms_setup extends Migration
             throw new \yii\console\Exception('Error when creating admin user.');
         }
         echo 'User created successfully.' . PHP_EOL;
-
     }
 
     public function down()

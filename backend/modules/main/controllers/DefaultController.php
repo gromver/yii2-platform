@@ -83,6 +83,7 @@ class DefaultController extends Controller
 
                 FileHelper::createDirectory($paramsPath);
                 file_put_contents($paramsFile, '<?php return ' . var_export($model->toArray(), true) . ';');
+                @chmod($paramsFile, 0777);
 
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Configuration saved.'));
 
