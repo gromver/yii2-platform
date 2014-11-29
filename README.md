@@ -1,4 +1,4 @@
-# yii2-cmf
+# yii2-platform
 
 CMF для Yii2. Данное расширение представляет собою легкую, но в тоже время, функциональную систему управления сайтом. При разработке данной cmf ставилось 2 цели:
 
@@ -67,28 +67,28 @@ server {
 #### Установка yii2-cms
 Запускаем через composer
 
-    php composer.phar require --prefer-dist gromver/yii2-cmf "*"
+    php composer.phar require --prefer-dist gromver/yii2-platform "*"
     
 Или добавляем  
 
-    "gromver/yii2-cmf": "*"
+    "gromver/yii2-platform": "*"
     
 в require секцию composer.json файла.
 
-#### Настройка yii2-cmf
+#### Настройка yii2-platform
 Заменяем фронтенд, бэкенд и консольное приложения на соответсвующие из данного расширения. Для этого правим файлы:
 
 * /backend/web/index.php
 ```
-  $application = new \gromver\cmf\backend\Application($config); // yii\web\Application($config);
+  $application = new \gromver\platform\backend\Application($config); // yii\web\Application($config);
 ```
 * /frontend/web/index.php   
 ```
-  $application = new \gromver\cmf\frontend\Application($config); // yii\web\Application($config);
+  $application = new \gromver\platform\frontend\Application($config); // yii\web\Application($config);
 ```
 * /yii.php
 ```
-  $application = new \gromver\cmf\console\Application($config); // yii\console\Application($config);
+  $application = new \gromver\platform\console\Application($config); // yii\console\Application($config);
 ```
 
 Нужно отредактировать стандартный конфиг: /frontend/config/main.php, /backend/config/main.php
@@ -105,7 +105,7 @@ server {
 ```
 #### Добавляем таблицы в БД
 
-    php yii migrate --migrationPath=@gromver/cmf/migrations
+    php yii migrate --migrationPath=@gromver/platform/migrations
 
 #### Подключение поиска(опционально)
 * Установить [Elasticsearch](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/_installation.html)
@@ -113,10 +113,10 @@ server {
 ```
 [
     'modules' => [
-        'cmf' => [
+        'grom' => [
             'modules' => [
                 'search' => [
-                    'class' => 'gromver\cmf\common\modules\elasticsearch\Module',
+                    'class' => 'gromver\platform\common\modules\elasticsearch\Module',
                     'elasticsearchIndex' => 'myapp'	//по умолчанию 'cmf'
                 ]
             ]
@@ -128,10 +128,10 @@ server {
 ```
 [
     'modules' => [
-        'cmf' => [
+        'grom' => [
             'modules' => [
                 'search' => [
-                    'class' => 'gromver\cmf\frontend\modules\elasticsearch\Module',
+                    'class' => 'gromver\platform\frontend\modules\elasticsearch\Module',
                     'elasticsearchIndex' => 'myapp'	//по умолчанию 'cmf'
                 ]
             ]
@@ -143,10 +143,10 @@ server {
 ```
 [
     'modules' => [
-        'cmf' => [
+        'grom' => [
             'modules' => [
                 'search' => [
-                    'class' => 'gromver\cmf\backend\modules\elasticsearch\Module',
+                    'class' => 'gromver\platform\backend\modules\elasticsearch\Module',
                     'elasticsearchIndex' => 'myapp'	//по умолчанию 'cmf'
                 ]
             ]
@@ -156,5 +156,5 @@ server {
 ```
 * Применяем миграцию для Elasticsearch
 ```
-  php yii migrate --migrationPath=@gromver/cmf/migrations/elasticsearch
+  php yii migrate --migrationPath=@gromver/platform/migrations/elasticsearch
 ```
