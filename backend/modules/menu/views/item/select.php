@@ -6,10 +6,10 @@ use kartik\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var gromver\cmf\backend\modules\page\models\MenuItemSearch $searchModel
+ * @var gromver\platform\backend\modules\page\models\MenuItemSearch $searchModel
  */
 
-$this->title = Yii::t('gromver.cmf', 'Select Menu Item');
+$this->title = Yii::t('gromver.platform', 'Select Menu Item');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'title',
                 'value' => function ($model) {
-                        /** @var $model \gromver\cmf\common\models\MenuItem */
+                        /** @var $model \gromver\platform\common\models\MenuItem */
                         return str_repeat(" • ", max($model->level-2, 0)) . $model->title . '<br/>' . Html::tag('small', $model->path, ['class' => 'text-muted']);
                     },
                 'format' => 'html'
@@ -48,18 +48,18 @@ $this->params['breadcrumbs'][] = $this->title;
 			[
                 'attribute' => 'status',
                 'value' => function ($model, $index, $widget) {
-                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    /** @var $model \gromver\platform\common\models\MenuItem */
                     return $model->getStatusLabel();
                 },
-                'filter' => \gromver\cmf\common\models\MenuItem::statusLabels()
+                'filter' => \gromver\platform\common\models\MenuItem::statusLabels()
             ],
             [
                 'value' => function ($model) {
-                        return Html::a(Yii::t('gromver.cmf', 'Select'), '#', [
+                        return Html::a(Yii::t('gromver.platform', 'Select'), '#', [
                             'class' => 'btn btn-primary btn-xs',
                             'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                     'id' => $model->id,
-                                    'description' => Yii::t('gromver.cmf', 'Menu Item: {title}', ['title' => $model->title]),
+                                    'description' => Yii::t('gromver.platform', 'Menu Item: {title}', ['title' => $model->title]),
                                     'link' => $model->viewLink,
                                     'value' => $model->id . ':' . $model->alias
                                 ]),
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> ' . Html::encode($this->title) . '</h3>',
             'type' => 'info',
-            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), [null], ['class' => 'btn btn-info']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.platform', 'Reset List'), [null], ['class' => 'btn btn-info']),
             'showFooter' => false,
         ],
 	]) ?>

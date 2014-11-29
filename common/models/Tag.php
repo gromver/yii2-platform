@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
-use gromver\cmf\common\components\UrlManager;
-use gromver\cmf\common\interfaces\ViewableInterface;
+use gromver\platform\common\components\UrlManager;
+use gromver\platform\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -21,7 +21,7 @@ use yii\db\Query;
 use yii\helpers\Inflector;
 
 /**
- * This is the model class for table "cms_tag".
+ * This is the model class for table "grom_tag".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -41,7 +41,7 @@ use yii\helpers\Inflector;
  * @property integer $hits
  * @property integer $lock
  *
- * @property \gromver\cmf\common\models\TagToItem[] $tagToItems
+ * @property \gromver\platform\common\models\TagToItem[] $tagToItems
  * @property Tag[] $translations
  */
 class Tag extends ActiveRecord implements ViewableInterface
@@ -54,7 +54,7 @@ class Tag extends ActiveRecord implements ViewableInterface
      */
     public static function tableName()
     {
-        return '{{%cms_tag}}';
+        return '{{%grom_tag}}';
     }
 
     /**
@@ -62,7 +62,7 @@ class Tag extends ActiveRecord implements ViewableInterface
      */
     public static function pivotTableName()
     {
-        return '{{%cms_tag_to_item}}';
+        return '{{%grom_tag_to_item}}';
     }
 
     /**
@@ -94,7 +94,7 @@ class Tag extends ActiveRecord implements ViewableInterface
             [['translation_id'], 'unique', 'filter' => function($query) {
                 /** @var $query \yii\db\ActiveQuery */
                 $query->andWhere(['language' => $this->language]);
-            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
+            }, 'message' => Yii::t('gromver.platform', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
         ];
     }
 
@@ -104,21 +104,21 @@ class Tag extends ActiveRecord implements ViewableInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
-            'language' => Yii::t('gromver.cmf', 'Language'),
-            'title' => Yii::t('gromver.cmf', 'Title'),
-            'alias' => Yii::t('gromver.cmf', 'Alias'),
-            'status' => Yii::t('gromver.cmf', 'Status'),
-            'group' => Yii::t('gromver.cmf', 'Group'),
-            'metakey' => Yii::t('gromver.cmf', 'Meta keywords'),
-            'metadesc' => Yii::t('gromver.cmf', 'Meta description'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
-            'created_by' => Yii::t('gromver.cmf', 'Created By'),
-            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
-            'hits' => Yii::t('gromver.cmf', 'Hits'),
-            'lock' => Yii::t('gromver.cmf', 'Lock'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'translation_id' => Yii::t('gromver.platform', 'Translation ID'),
+            'language' => Yii::t('gromver.platform', 'Language'),
+            'title' => Yii::t('gromver.platform', 'Title'),
+            'alias' => Yii::t('gromver.platform', 'Alias'),
+            'status' => Yii::t('gromver.platform', 'Status'),
+            'group' => Yii::t('gromver.platform', 'Group'),
+            'metakey' => Yii::t('gromver.platform', 'Meta keywords'),
+            'metadesc' => Yii::t('gromver.platform', 'Meta description'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'updated_at' => Yii::t('gromver.platform', 'Updated At'),
+            'created_by' => Yii::t('gromver.platform', 'Created By'),
+            'updated_by' => Yii::t('gromver.platform', 'Updated By'),
+            'hits' => Yii::t('gromver.platform', 'Hits'),
+            'lock' => Yii::t('gromver.platform', 'Lock'),
         ];
     }
 
@@ -152,13 +152,13 @@ class Tag extends ActiveRecord implements ViewableInterface
     public static function statusLabels()
     {
         return array_map(function($label) {
-            return Yii::t('gromver.cmf', $label);
+            return Yii::t('gromver.platform', $label);
         }, self::$_statuses);
     }
 
     public function getStatusLabel($status = null)
     {
-        return Yii::t('gromver.cmf', self::$_statuses[$status === null ? $this->status : $status]);
+        return Yii::t('gromver.platform', self::$_statuses[$status === null ? $this->status : $status]);
     }
 
     public function afterDelete()
@@ -276,13 +276,13 @@ class Tag extends ActiveRecord implements ViewableInterface
      */
     public function getViewLink()
     {
-        return ['/cmf/tag/default/view', 'id' => $this->id, 'alias' => $this->alias, UrlManager::LANGUAGE_PARAM => $this->language];
+        return ['/grom/tag/default/view', 'id' => $this->id, 'alias' => $this->alias, UrlManager::LANGUAGE_PARAM => $this->language];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/tag/default/view', 'id' => $model['id'], 'alias' => $model['alias'], UrlManager::LANGUAGE_PARAM => $model['language']];
+        return ['/grom/tag/default/view', 'id' => $model['id'], 'alias' => $model['alias'], UrlManager::LANGUAGE_PARAM => $model['language']];
     }
 }

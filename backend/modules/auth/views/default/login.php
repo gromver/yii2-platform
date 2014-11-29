@@ -6,7 +6,7 @@ use yii\captcha\Captcha;
 /**
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
- * @var gromver\cmf\backend\modules\auth\models\LoginForm $model
+ * @var gromver\platform\backend\modules\auth\models\LoginForm $model
  */
 $this->title = \Yii::t('auth.user', 'Login');
 $this->params['breadcrumbs'][] = $this->title;

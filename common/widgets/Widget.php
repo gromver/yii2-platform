@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\widgets;
+namespace gromver\platform\common\widgets;
 
 use gromver\models\ObjectModel;
 use gromver\models\SpecificationInterface;
-use gromver\cmf\common\models\WidgetConfig;
+use gromver\platform\common\models\WidgetConfig;
 use gromver\widgets\ModalIFrame;
 use Yii;
 use yii\base\InvalidConfigException;
@@ -102,7 +102,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
     public function run()
     {
-        echo Html::beginTag('div', ['id' => $this->id, 'class' => 'widget-wrapper' . ($this->canEdit() && Yii::$app->cmf->getIsEditMode() && $this->getShowPanel() ? ' edit-mode' : '')]);
+        echo Html::beginTag('div', ['id' => $this->id, 'class' => 'widget-wrapper' . ($this->canEdit() && Yii::$app->grom->getIsEditMode() && $this->getShowPanel() ? ' edit-mode' : '')]);
         if ($this->_exception === null) {
             try {
                 $this->launch();
@@ -116,7 +116,7 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
                 $this->renderException();
             }
 
-            if ($this->_showPanel && Yii::$app->cmf->getIsEditMode()) {
+            if ($this->_showPanel && Yii::$app->grom->getIsEditMode()) {
                 $this->renderControls();
             }
         }
@@ -141,13 +141,13 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
     public function renderException()
     {
-        echo Html::tag('p', Yii::t('gromver.cmf', 'Widget error: {error}', ['error' => $this->_exception->getMessage()]), ['class' => 'text-danger widget-error']);
+        echo Html::tag('p', Yii::t('gromver.platform', 'Widget error: {error}', ['error' => $this->_exception->getMessage()]), ['class' => 'text-danger widget-error']);
     }
 
     public function renderControls()
     {
         echo Html::tag('div', $this->normalizeControls(array_merge($this->customControls(), [$this->widgetConfigControl()])), ['class' => 'widget-controls btn-group']);
-        echo Html::tag('div', Yii::t('gromver.cmf', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]), ['class' => 'widget-description']);
+        echo Html::tag('div', Yii::t('gromver.platform', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]), ['class' => 'widget-description']);
     }
 
     public function customControls()
@@ -274,18 +274,18 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
         ModalIFrame::begin([
             'modalOptions' => [
-                'header' => Yii::t('gromver.cmf', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]),
+                'header' => Yii::t('gromver.platform', 'Widget "{name}" (ID: {id})', ['name' => $this->className(), 'id' => $this->id]),
                 'size' => Modal::SIZE_LARGE
             ],
             'buttonOptions' => [
                 'class' => 'btn btn-default',
                 'tag' => 'button',
                 'onclick' => "jQuery('#$formId').submit()",
-                'title' => Yii::t('gromver.cmf', 'Configure widget')
+                'title' => Yii::t('gromver.platform', 'Configure widget')
             ],
         ]);
 
-        echo Html::beginForm(['/cmf/widget/default/configure', 'modal' => 1], 'post', ['id' => $formId]);
+        echo Html::beginForm(['/grom/widget/default/configure', 'modal' => 1], 'post', ['id' => $formId]);
 
         echo Html::hiddenInput('url', Yii::$app->request->getAbsoluteUrl());
 

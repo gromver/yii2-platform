@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
 use Yii;
 use yii\bootstrap\Widget;
@@ -37,7 +37,7 @@ class Translations extends Widget {
         $items = '';
 
         foreach($this->model->translations as $language => $item) {
-            /** @var $item \gromver\cmf\common\interfaces\ViewableInterface */
+            /** @var $item \gromver\platform\common\interfaces\ViewableInterface */
             if ($this->model->language === $language) {
                 $items = strtr($this->labelTemplate, [
                         '{label}' => $language

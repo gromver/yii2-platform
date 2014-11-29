@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\interfaces;
+namespace gromver\platform\frontend\interfaces;
 
 /**
  * Interface MenuRouterInterface
@@ -16,7 +16,7 @@ namespace gromver\cmf\frontend\interfaces;
  */
 interface MenuRouterInterface {
     /**
-     * @return string | \gromver\cmf\frontend\components\MenuRouter
+     * @return string | \gromver\platform\frontend\components\MenuRouter
      */
     public function getMenuRouter();
 } 

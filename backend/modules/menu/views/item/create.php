@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\Menu */
-/* @var $sourceModel gromver\cmf\common\models\Menu */
-/* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
+/* @var $model gromver\platform\common\models\Menu */
+/* @var $sourceModel gromver\platform\common\models\Menu */
+/* @var $linkParamsModel gromver\platform\common\models\MenuLinkParams */
 
-$this->title = Yii::t('gromver.cmf', 'Add Menu Item');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Menu Types'), 'url' => ['type/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Menu Items'), 'url' => ['index']];
+$this->title = Yii::t('gromver.platform', 'Add Menu Item');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Menu Types'), 'url' => ['type/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Menu Items'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-create">

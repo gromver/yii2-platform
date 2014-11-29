@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
 use Yii;
@@ -16,7 +16,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\helpers\Inflector;
 
 /**
- * This is the model class for table "cms_menu_type".
+ * This is the model class for table "grom_menu_type".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -39,7 +39,7 @@ class MenuType extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%cms_menu_type}}';
+        return '{{%grom_menu_type}}';
     }
 
     /**
@@ -70,16 +70,16 @@ class MenuType extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'status' => Yii::t('gromver.cmf', 'Status'),
-            'title' => Yii::t('gromver.cmf', 'Title'),
-            'alias' => Yii::t('gromver.cmf', 'Alias'),
-            'note' => Yii::t('gromver.cmf', 'Note'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
-            'created_by' => Yii::t('gromver.cmf', 'Created By'),
-            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
-            'lock' => Yii::t('gromver.cmf', 'Lock'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'status' => Yii::t('gromver.platform', 'Status'),
+            'title' => Yii::t('gromver.platform', 'Title'),
+            'alias' => Yii::t('gromver.platform', 'Alias'),
+            'note' => Yii::t('gromver.platform', 'Note'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'updated_at' => Yii::t('gromver.platform', 'Updated At'),
+            'created_by' => Yii::t('gromver.platform', 'Created By'),
+            'updated_by' => Yii::t('gromver.platform', 'Updated By'),
+            'lock' => Yii::t('gromver.platform', 'Lock'),
         ];
     }
 

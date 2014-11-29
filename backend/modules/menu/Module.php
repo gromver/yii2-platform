@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\menu;
+namespace gromver\platform\backend\modules\menu;
 
-use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\platform\backend\interfaces\DesktopInterface;
 use Yii;
 
 /**
@@ -19,7 +19,7 @@ use Yii;
  */
 class Module extends \yii\base\Module implements DesktopInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\menu\controllers';
+    public $controllerNamespace = 'gromver\platform\backend\modules\menu\controllers';
     public $defaultRoute = 'item';
     public $desktopOrder = 4;
 
@@ -29,10 +29,10 @@ class Module extends \yii\base\Module implements DesktopInterface
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Menu'),
+            'label' => Yii::t('gromver.platform', 'Menu'),
             'links' => [
-                ['label' => Yii::t('gromver.cmf', 'Menu Types'), 'url' => ['/cmf/menu/type']],
-                ['label' => Yii::t('gromver.cmf', 'Menu Items'), 'url' => ['/cmf/menu/item']],
+                ['label' => Yii::t('gromver.platform', 'Menu Types'), 'url' => ['/grom/menu/type']],
+                ['label' => Yii::t('gromver.platform', 'Menu Items'), 'url' => ['/grom/menu/item']],
             ]
         ];
     }

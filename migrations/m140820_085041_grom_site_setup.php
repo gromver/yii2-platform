@@ -2,19 +2,19 @@
 
 use yii\db\Migration;
 
-class m141128_060147_grom_site_setup extends Migration
+class m140820_085041_grom_site_setup extends Migration
 {
     public function up()
     {
         // Creates the default platform config
-        /** @var \gromver\cmf\console\modules\main\Module $main */
-        $cmf = Yii::$app->cmf;
+        /** @var \gromver\platform\console\modules\main\Module $main */
+        $cmf = Yii::$app->grom;
         $paramsPath = Yii::getAlias($cmf->paramsPath);
         $paramsFile = $paramsPath . DIRECTORY_SEPARATOR . 'params.php';
 
         $params = $cmf->params;
 
-        $model = new \gromver\models\ObjectModel(\gromver\cmf\common\models\CmfParams::className());
+        $model = new \gromver\models\ObjectModel(\gromver\platform\common\models\CmfParams::className());
         $model->setAttributes($params);
 
         echo 'Setup application config: ' . PHP_EOL;

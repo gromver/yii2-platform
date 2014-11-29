@@ -4,11 +4,11 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\Post */
-/* @var $sourceModel gromver\cmf\common\models\Post */
+/* @var $model gromver\platform\common\models\Post */
+/* @var $sourceModel gromver\platform\common\models\Post */
 
-$this->title = Yii::t('gromver.cmf', 'Add Post');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Posts'), 'url' => ['index']];
+$this->title = Yii::t('gromver.platform', 'Add Post');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Posts'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\tag\controllers;
+namespace gromver\platform\frontend\modules\tag\controllers;
 
-use gromver\cmf\common\models\Tag;
+use gromver\platform\common\models\Tag;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use Yii;
@@ -44,7 +44,7 @@ class DefaultController extends Controller
     public function loadModel($id)
     {
         if(!($model = Tag::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested tag does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested tag does not exist..'));
         }
 
         return $model;

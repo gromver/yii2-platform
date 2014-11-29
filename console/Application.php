@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\console;
+namespace gromver\platform\console;
 
 use yii\helpers\ArrayHelper;
 
@@ -32,10 +32,10 @@ class Application extends \yii\console\Application {
             'components' => [
                 'authManager' => [
                     'class' => 'yii\rbac\DbManager',
-                    'itemTable' => '{{%cms_auth_item}}',
-                    'itemChildTable' => '{{%cms_auth_item_child}}',
-                    'assignmentTable' => '{{%cms_auth_assignment}}',
-                    'ruleTable' => '{{%cms_auth_rule}}'
+                    'itemTable' => '{{%grom_auth_item}}',
+                    'itemChildTable' => '{{%grom_auth_item_child}}',
+                    'assignmentTable' => '{{%grom_auth_assignment}}',
+                    'ruleTable' => '{{%grom_auth_rule}}'
                 ],
                 'cache' => ['class' => 'yii\caching\FileCache'],
                 'elasticsearch' => ['class' => 'yii\elasticsearch\Connection'],
@@ -55,8 +55,8 @@ class Application extends \yii\console\Application {
                 ]
             ],
             'modules' => [
-                'cmf' => [
-                    'class' => 'gromver\cmf\console\modules\main\Module'
+                'grom' => [
+                    'class' => 'gromver\platform\console\modules\main\Module'
                 ]
             ]
         ], $config);
@@ -71,7 +71,7 @@ class Application extends \yii\console\Application {
      */
     public function init()
     {
-        $this->bootstrap = array_merge($this->bootstrap, ['cmf']);
+        $this->bootstrap = array_merge($this->bootstrap, ['grom']);
 
         parent::init();
     }

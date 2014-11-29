@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel gromver\cmf\backend\modules\menu\models\MenuItemSearch */
+/* @var $searchModel gromver\platform\backend\modules\menu\models\MenuItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('gromver.cmf', 'Menu Items');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Menu Types'), 'url' => ['type/index']];
+$this->title = Yii::t('gromver.platform', 'Menu Items');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Menu Types'), 'url' => ['type/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?php /*<p>
-        <?= Html::a(Yii::t('gromver.cmf', 'Create {modelClass}', [
+        <?= Html::a(Yii::t('gromver.platform', 'Create {modelClass}', [
     'modelClass' => 'Menu',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>*/?>
@@ -42,8 +42,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'language',
                 'width' => '80px',
                 'value' => function ($model) {
-                    /** @var $model \gromver\cmf\common\models\MenuItem */
-                    return \gromver\cmf\backend\widgets\Translator::widget(['model' => $model]);
+                    /** @var $model \gromver\platform\common\models\MenuItem */
+                    return \gromver\platform\backend\widgets\Translator::widget(['model' => $model]);
                 },
                 'format' => 'raw',
                 'filter' => Yii::$app->getLanguagesList()
@@ -52,27 +52,27 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'menu_type_id',
                 'width' => '100px',
                 'value' => function ($model) {
-                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    /** @var $model \gromver\platform\common\models\MenuItem */
                     return $model->menuType->title;
                 },
-                'filter' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuType::find()->all(), 'id', 'title')
+                'filter' => \yii\helpers\ArrayHelper::map(\gromver\platform\common\models\MenuType::find()->all(), 'id', 'title')
             ],
             /*[
                 'attribute' => 'parent_id',
                 'width' => '100px',
                 'value' => function ($model) {
-                    /** @var $model \gromver\cmf\common\models\MenuItem * /
+                    /** @var $model \gromver\platform\common\models\MenuItem * /
                     return $model->level > 2 ? $model->parent->title : '';
                 },
-                'filter' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\MenuItem::find()->noRoots()->orderBy('lft')->all(), 'id', function($model){
-                    /** @var $model \gromver\cmf\common\models\MenuItem * /
+                'filter' => \yii\helpers\ArrayHelper::map(\gromver\platform\common\models\MenuItem::find()->noRoots()->orderBy('lft')->all(), 'id', function($model){
+                    /** @var $model \gromver\platform\common\models\MenuItem * /
                     return str_repeat(" • ", max($model->level-2, 0)) . $model->title;
                 })
             ],*/
             [
                 'attribute' => 'title',
                 'value' => function ($model) {
-                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    /** @var $model \gromver\platform\common\models\MenuItem */
                     return str_repeat(" • ", max($model->level-2, 0)) . $model->title . '<br/>'.Html::tag('small', $model->path);
                 },
                 'format' => 'html'
@@ -81,21 +81,21 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model){
-                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    /** @var $model \gromver\platform\common\models\MenuItem */
                     return Html::beginTag('div', ['class' => 'btn-group']) .
                     Html::a('<i class="glyphicon glyphicon-star"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_MAIN_PAGE]), ['class' => 'btn btn-xs' . ($model::STATUS_MAIN_PAGE == $model->status ? ' btn-success active' : ' btn-default'), 'data-pjax' => 0, 'data-method' => 'post']) .
                     Html::a('<i class="glyphicon glyphicon-ok-circle"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_PUBLISHED]), ['class' => 'btn btn-xs' . ($model::STATUS_PUBLISHED == $model->status ? ' btn-primary active' : ' btn-default'), 'data-pjax' => 0, 'data-method' => 'post']) .
                     Html::a('<i class="glyphicon glyphicon-remove-circle"></i>', \yii\helpers\Url::to(['status', 'id' => $model->id, 'status' => $model::STATUS_UNPUBLISHED]), ['class' => 'btn btn-xs' . ($model::STATUS_UNPUBLISHED == $model->status ? ' btn-default active' : ' btn-default'), 'data-pjax' => 0, 'data-method' => 'post']) .
                     Html::endTag('div');
                 },
-                'filter' => \gromver\cmf\common\models\MenuItem::statusLabels(),
+                'filter' => \gromver\platform\common\models\MenuItem::statusLabels(),
                 'width' => '90px',
                 'format' => 'raw'
             ],
             [
                 'attribute' => 'ordering',
                 'value' => function ($model) {
-                    /** @var $model \gromver\cmf\common\models\MenuItem */
+                    /** @var $model \gromver\platform\common\models\MenuItem */
                     return Html::input('text', 'order', $model->ordering, ['class' => 'form-control']);
                 },
                 'format' => 'raw',
@@ -114,11 +114,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> ' . Html::encode($this->title) . ' </h3>',
             'type' => 'info',
-            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('gromver.cmf', 'Add'), ['create', 'menu_type_id' => $searchModel->menu_type_id], ['class' => 'btn btn-success', 'data-pjax' => '0']),
+            'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('gromver.platform', 'Add'), ['create', 'menu_type_id' => $searchModel->menu_type_id], ['class' => 'btn btn-success', 'data-pjax' => '0']),
             'after' =>
-                Html::a('<i class="glyphicon glyphicon-sort-by-attributes"></i> ' . Yii::t('gromver.cmf', 'Ordering'), ['ordering'], ['class' => 'btn btn-default', 'data-pjax' => '0', 'onclick' => 'processOrdering(this); return false']).' '.
-                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.cmf', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax' => '0', 'onclick' => 'processAction(this); return false']) . ' ' .
-                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
+                Html::a('<i class="glyphicon glyphicon-sort-by-attributes"></i> ' . Yii::t('gromver.platform', 'Ordering'), ['ordering'], ['class' => 'btn btn-default', 'data-pjax' => '0', 'onclick' => 'processOrdering(this); return false']).' '.
+                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.platform', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax' => '0', 'onclick' => 'processAction(this); return false']) . ' ' .
+                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.platform', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
             'showFooter' => false
         ],
     ]); ?>
@@ -132,7 +132,7 @@ $this->params['breadcrumbs'][] = $this->title;
             selection = $grid.yiiGridView('getSelectedRows'),
             data = {}
         if(!selection.length) {
-            alert(<?= json_encode(Yii::t('gromver.cmf', 'Select items.')) ?>)
+            alert(<?= json_encode(Yii::t('gromver.platform', 'Select items.')) ?>)
             return
         }
         $.each(selection, function(index, value){
@@ -148,7 +148,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $grid = $('#table-grid'),
             selection = $grid.yiiGridView('getSelectedRows')
         if(!selection.length) {
-            alert(<?= json_encode(Yii::t('gromver.cmf', 'Select items.')) ?>)
+            alert(<?= json_encode(Yii::t('gromver.platform', 'Select items.')) ?>)
             return
         }
 

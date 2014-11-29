@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\tag\controllers;
+namespace gromver\platform\backend\modules\tag\controllers;
 
 use Yii;
-use gromver\cmf\common\models\Tag;
-use gromver\cmf\backend\modules\tag\models\TagSearch;
+use gromver\platform\common\models\Tag;
+use gromver\platform\backend\modules\tag\models\TagSearch;
 use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
@@ -219,7 +219,7 @@ class DefaultController extends Controller
         if (($model = Tag::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }

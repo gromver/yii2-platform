@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\menu\controllers;
+namespace gromver\platform\backend\modules\menu\controllers;
 
 use kartik\widgets\Alert;
 use Yii;
-use gromver\cmf\common\models\MenuType;
-use gromver\cmf\backend\modules\menu\models\MenuTypeSearch;
+use gromver\platform\common\models\MenuType;
+use gromver\platform\backend\modules\menu\models\MenuTypeSearch;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -135,7 +135,7 @@ class TypeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->getItems()->count()) {
-            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It's impossible to remove menu type so far the menu items are attached to it.", ['id' => $model->id]));
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', "It's impossible to remove menu type so far the menu items are attached to it.", ['id' => $model->id]));
         } else {
             $model->delete();
         }
@@ -159,7 +159,7 @@ class TypeController extends Controller
         if (($model = MenuType::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }

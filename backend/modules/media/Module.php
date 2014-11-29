@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\media;
+namespace gromver\platform\backend\modules\media;
 
-use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\platform\backend\interfaces\DesktopInterface;
 use Yii;
 use yii\base\Exception;
 
@@ -20,7 +20,7 @@ use yii\base\Exception;
  */
 class Module extends \yii\base\Module implements DesktopInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\media\controllers';
+    public $controllerNamespace = 'gromver\platform\backend\modules\media\controllers';
     /**
      * @var array elFinder manager controller config
      * @see \mihaildev\elfinder\Controller
@@ -40,7 +40,7 @@ class Module extends \yii\base\Module implements DesktopInterface
                         'path' => 'files/global',
                         'baseUrl' => '',
                         'basePath' => '@frontend/web',
-                        'name' => Yii::t('gromver.cmf', 'Global'),
+                        'name' => Yii::t('gromver.platform', 'Global'),
                         'access' => ['write' => 'update']
                     ],
                     [
@@ -48,7 +48,7 @@ class Module extends \yii\base\Module implements DesktopInterface
                         'baseUrl' => '',
                         'basePath' => '@frontend/web',
                         'path' => 'files/user_{id}',
-                        'name' => Yii::t('gromver.cmf', 'My Documents'),
+                        'name' => Yii::t('gromver.platform', 'My Documents'),
                         'access' => ['read' => 'read', 'write' => 'update']
                     ]
                 ]
@@ -67,9 +67,9 @@ class Module extends \yii\base\Module implements DesktopInterface
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Media'),
+            'label' => Yii::t('gromver.platform', 'Media'),
             'links' => [
-                ['label' => Yii::t('gromver.cmf', 'Media Manager'), 'url' => ['/cmf/media/default/index']]
+                ['label' => Yii::t('gromver.platform', 'Media Manager'), 'url' => ['/grom/media/default/index']]
             ]
         ];
     }

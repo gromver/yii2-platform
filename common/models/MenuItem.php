@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
-use gromver\cmf\backend\behaviors\NestedSetBehavior;
-use gromver\cmf\common\interfaces\ViewableInterface;
+use gromver\platform\backend\behaviors\NestedSetBehavior;
+use gromver\platform\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -21,7 +21,7 @@ use yii\helpers\Inflector;
 use yii\helpers\Json;
 
 /**
- * This is the model class for table "cms_menu_item".
+ * This is the model class for table "grom_menu_item".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -77,7 +77,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
      */
     public static function tableName()
     {
-        return '{{%cms_menu_item}}';
+        return '{{%grom_menu_item}}';
     }
 
     /**
@@ -93,7 +93,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
             [['language'], 'string', 'max' => 7],
             [['language'], function($attribute) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
-                    $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
+                    $this->addError($attribute, Yii::t('gromver.platform', 'Language has to match with the parental.'));
                 }
             }],
             [['title', 'link', 'layout_path'], 'string', 'max' => 1024],
@@ -105,12 +105,12 @@ class MenuItem extends ActiveRecord implements ViewableInterface
             [['parent_id'], 'compare', 'compareAttribute' => 'id', 'operator' => '!='],
             [['parent_id'], function($attribute) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->menu_type_id != $this->menu_type_id) {
-                    $this->addError($attribute, Yii::t('gromver.cmf', 'Parental point of the menu doesn\'t correspond to the chosen menu type.'));
+                    $this->addError($attribute, Yii::t('gromver.platform', 'Parental point of the menu doesn\'t correspond to the chosen menu type.'));
                 }
             }],
             [['status'], function($attribute) {
                 if ($this->status == self::STATUS_MAIN_PAGE && $this->link_type == self::LINK_HREF) {
-                    $this->addError($attribute, Yii::t('gromver.cmf', 'Alias of the menu item can\'t be a main page.'));
+                    $this->addError($attribute, Yii::t('gromver.platform', 'Alias of the menu item can\'t be a main page.'));
                 }
             }],
             [['alias'], 'filter', 'filter' => 'trim'],
@@ -137,7 +137,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
             [['translation_id'], 'unique', 'filter' => function($query) {
                 /** @var $query \yii\db\ActiveQuery */
                 $query->andWhere(['language' => $this->language]);
-            }, 'message' => Yii::t('gromver.cmf', 'Localization ({language}) for item (ID: {id}) already exists.', ['language' => $this->language, 'id' => $this->translation_id])],
+            }, 'message' => Yii::t('gromver.platform', 'Localization ({language}) for item (ID: {id}) already exists.', ['language' => $this->language, 'id' => $this->translation_id])],
             [['title',  'link', 'status'], 'required'],
         ];
     }
@@ -148,35 +148,35 @@ class MenuItem extends ActiveRecord implements ViewableInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'menu_type_id' => Yii::t('gromver.cmf', 'Menu Type ID'),
-            'parent_id' => Yii::t('gromver.cmf', 'Parent ID'),
-            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
-            'status' => Yii::t('gromver.cmf', 'Status'),
-            'language' => Yii::t('gromver.cmf', 'Language'),
-            'title' => Yii::t('gromver.cmf', 'Title'),
-            'alias' => Yii::t('gromver.cmf', 'Alias'),
-            'path' => Yii::t('gromver.cmf', 'Path'),
-            'note' => Yii::t('gromver.cmf', 'Note'),
-            'link' => Yii::t('gromver.cmf', 'Link'),
-            'link_type' => Yii::t('gromver.cmf', 'Link Type'),
-            'link_params' => Yii::t('gromver.cmf', 'Link Params'),
-            'layout_path' => Yii::t('gromver.cmf', 'Layout Path'),
-            'access_rule' => Yii::t('gromver.cmf', 'Access Rule'),
-            'metakey' => Yii::t('gromver.cmf', 'Metakey'),
-            'metadesc' => Yii::t('gromver.cmf', 'Metadesc'),
-            'robots' => Yii::t('gromver.cmf', 'Robots'),
-            'secure' => Yii::t('gromver.cmf', 'Secure'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
-            'created_by' => Yii::t('gromver.cmf', 'Created By'),
-            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
-            'lft' => Yii::t('gromver.cmf', 'Lft'),
-            'rgt' => Yii::t('gromver.cmf', 'Rgt'),
-            'level' => Yii::t('gromver.cmf', 'Level'),
-            'ordering' => Yii::t('gromver.cmf', 'Ordering'),
-            'hits' => Yii::t('gromver.cmf', 'Hits'),
-            'lock' => Yii::t('gromver.cmf', 'Lock'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'menu_type_id' => Yii::t('gromver.platform', 'Menu Type ID'),
+            'parent_id' => Yii::t('gromver.platform', 'Parent ID'),
+            'translation_id' => Yii::t('gromver.platform', 'Translation ID'),
+            'status' => Yii::t('gromver.platform', 'Status'),
+            'language' => Yii::t('gromver.platform', 'Language'),
+            'title' => Yii::t('gromver.platform', 'Title'),
+            'alias' => Yii::t('gromver.platform', 'Alias'),
+            'path' => Yii::t('gromver.platform', 'Path'),
+            'note' => Yii::t('gromver.platform', 'Note'),
+            'link' => Yii::t('gromver.platform', 'Link'),
+            'link_type' => Yii::t('gromver.platform', 'Link Type'),
+            'link_params' => Yii::t('gromver.platform', 'Link Params'),
+            'layout_path' => Yii::t('gromver.platform', 'Layout Path'),
+            'access_rule' => Yii::t('gromver.platform', 'Access Rule'),
+            'metakey' => Yii::t('gromver.platform', 'Metakey'),
+            'metadesc' => Yii::t('gromver.platform', 'Metadesc'),
+            'robots' => Yii::t('gromver.platform', 'Robots'),
+            'secure' => Yii::t('gromver.platform', 'Secure'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'updated_at' => Yii::t('gromver.platform', 'Updated At'),
+            'created_by' => Yii::t('gromver.platform', 'Created By'),
+            'updated_by' => Yii::t('gromver.platform', 'Updated By'),
+            'lft' => Yii::t('gromver.platform', 'Lft'),
+            'rgt' => Yii::t('gromver.platform', 'Rgt'),
+            'level' => Yii::t('gromver.platform', 'Level'),
+            'ordering' => Yii::t('gromver.platform', 'Ordering'),
+            'hits' => Yii::t('gromver.platform', 'Hits'),
+            'lock' => Yii::t('gromver.platform', 'Lock'),
         ];
     }
 
@@ -232,16 +232,16 @@ class MenuItem extends ActiveRecord implements ViewableInterface
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('gromver.cmf', $label);
+                return Yii::t('gromver.platform', $label);
             }, self::$_statuses);
     }
 
     public function getStatusLabel($status=null)
     {
         if ($status === null) {
-            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
+            return Yii::t('gromver.platform', self::$_statuses[$this->status]);
         }
-        return Yii::t('gromver.cmf', self::$_statuses[$status]);
+        return Yii::t('gromver.platform', self::$_statuses[$status]);
     }
 
     public function getTranslations()
@@ -382,16 +382,16 @@ class MenuItem extends ActiveRecord implements ViewableInterface
     public static function linkTypeLabels()
     {
         return array_map(function($label) {
-                return Yii::t('gromver.cmf', $label);
+                return Yii::t('gromver.platform', $label);
             }, self::$_statuses);
     }
 
     public function getLinkTypeLabel($type=null)
     {
         if ($type === null) {
-            return Yii::t('gromver.cmf', self::$_linkTypes[$this->link_type]);
+            return Yii::t('gromver.platform', self::$_linkTypes[$this->link_type]);
         }
-        return Yii::t('gromver.cmf', self::$_linkTypes[$type]);
+        return Yii::t('gromver.platform', self::$_linkTypes[$type]);
     }
 
 

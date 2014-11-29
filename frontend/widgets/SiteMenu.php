@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\MenuItem;
-use gromver\cmf\common\models\Table;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\MenuItem;
+use gromver\platform\common\models\Table;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
@@ -27,7 +27,7 @@ class SiteMenu extends Widget {
      * MenuTypeId or MenuTypeId:MenuTypeAlias
      * @var string
      * @type modal
-     * @url /cmf/default/select-menu
+     * @url /grom/default/select-menu
      */
     public $type;
     /**
@@ -64,7 +64,7 @@ class SiteMenu extends Widget {
         parent::init();
 
         if (empty($this->type)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Menu type must be set.'));
+            throw new InvalidConfigException(Yii::t('gromver.platform', 'Menu type must be set.'));
         }
 
         $this->language or $this->language = Yii::$app->language;
@@ -133,20 +133,20 @@ class SiteMenu extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/create', 'menu_type_id' => (int)$this->type, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/menu/item/create', 'menu_type_id' => (int)$this->type, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-plus"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Create Menu Item')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Create Menu Item')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/menu/item/index', 'MenuItemSearch' => ['menu_type_id' => (int)$this->type, 'language' => $this->language]]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/menu/item/index', 'MenuItemSearch' => ['menu_type_id' => (int)$this->type, 'language' => $this->language]]),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Menu Items list'), 'target' => '_blank']
+                'options' => ['title' => Yii::t('gromver.platform', 'Menu Items list'), 'target' => '_blank']
             ],
         ];
     }
 
     public static function languages()
     {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.platform', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 }

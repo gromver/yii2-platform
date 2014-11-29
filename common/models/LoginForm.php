@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use Yii;
 use yii\base\Model;
@@ -38,7 +38,7 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
-            ['verifyCode', 'captcha', 'captchaAction' => 'cmf/auth/default/captcha', 'on' => 'withCaptcha']
+            ['verifyCode', 'captcha', 'captchaAction' => 'grom/auth/default/captcha', 'on' => 'withCaptcha']
         ];
     }
 
@@ -62,10 +62,10 @@ class LoginForm extends Model
     public function attributeLabels()
     {
         return [
-            'username' => Yii::t('gromver.cmf', 'Username or Email'),
-            'password' => Yii::t('gromver.cmf', 'Password'),
-            'rememberMe' => Yii::t('gromver.cmf', 'Remember Me'),
-            'verifyCode' => Yii::t('gromver.cmf', 'Verify Code'),
+            'username' => Yii::t('gromver.platform', 'Username or Email'),
+            'password' => Yii::t('gromver.platform', 'Password'),
+            'rememberMe' => Yii::t('gromver.platform', 'Remember Me'),
+            'verifyCode' => Yii::t('gromver.platform', 'Verify Code'),
         ];
     }
     /**
@@ -76,7 +76,7 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? Yii::$app->getModule('cmf/auth')->rememberMeTime/*3600 * 24 * 30*/ : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? Yii::$app->getModule('grom/auth')->rememberMeTime/*3600 * 24 * 30*/ : 0);
         } else {
             return false;
         }

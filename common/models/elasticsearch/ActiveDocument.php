@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models\elasticsearch;
+namespace gromver\platform\common\models\elasticsearch;
 
 
-use gromver\cmf\common\interfaces\ViewableInterface;
+use gromver\platform\common\interfaces\ViewableInterface;
 use yii\base\Event;
 use yii\base\InvalidConfigException;
 use Yii;
@@ -32,7 +32,7 @@ class ActiveDocument extends ActiveRecord implements ViewableInterface {
         ];
     }
 
-    public static $index = 'cmf';
+    public static $index = 'grom';
 
     public static function index()
     {
@@ -72,7 +72,7 @@ class ActiveDocument extends ActiveRecord implements ViewableInterface {
     /**
      * Поисковый фильтр по умолчанию, применим для поиска во фронтенде, например фильтрация опубликованных постов
      * @return array
-     * @see \gromver\cmf\common\widgets\SearchResults
+     * @see \gromver\platform\common\widgets\SearchResults
      */
     public static function searchDefaultFilter()
     {

@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\auth;
+namespace gromver\platform\frontend\modules\auth;
 
 /**
  * Class Module
@@ -16,7 +16,7 @@ namespace gromver\cmf\frontend\modules\auth;
  */
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'gromver\cmf\frontend\modules\auth\controllers';
+    public $controllerNamespace = 'gromver\platform\frontend\modules\auth\controllers';
 
     /**
      * @var int

@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\backend\assets\CkeditorHighlightAsset;
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\Post;
+use gromver\platform\backend\assets\CkeditorHighlightAsset;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\Post;
 use yii\base\InvalidConfigException;
 use Yii;
 
@@ -25,7 +25,7 @@ class PostView extends Widget {
      * Post model or PostId or PostId:PageAlias
      * @var Post|string
      * @type modal
-     * @url /cmf/default/select-post
+     * @url /grom/default/select-post
      */
     public $post;
     /**
@@ -50,7 +50,7 @@ class PostView extends Widget {
         }
 
         if (empty($this->post)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Post not found.'));
+            throw new InvalidConfigException(Yii::t('gromver.platform', 'Post not found.'));
         }
 
         if ($this->useHighlights) {
@@ -66,9 +66,9 @@ class PostView extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/post/update', 'id' => $this->post->id, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/news/post/update', 'id' => $this->post->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Update Post')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Update Post')]
             ],
         ];
     }
@@ -76,8 +76,8 @@ class PostView extends Widget {
     public static function layouts()
     {
         return [
-            'post/viewArticle' => Yii::t('gromver.cmf', 'Article'),
-            'post/viewIssue' => Yii::t('gromver.cmf', 'Issue'),
+            'post/viewArticle' => Yii::t('gromver.platform', 'Article'),
+            'post/viewIssue' => Yii::t('gromver.platform', 'Issue'),
         ];
     }
 } 

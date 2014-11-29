@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\elasticsearch;
+namespace gromver\platform\backend\modules\elasticsearch;
 
-use gromver\cmf\backend\interfaces\DesktopInterface;
-use gromver\cmf\backend\interfaces\MenuRouterInterface;
-use gromver\cmf\common\interfaces\BootstrapInterface;
+use gromver\platform\backend\interfaces\DesktopInterface;
+use gromver\platform\backend\interfaces\MenuRouterInterface;
+use gromver\platform\common\interfaces\BootstrapInterface;
 use Yii;
 
 /**
@@ -20,9 +20,9 @@ use Yii;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class Module extends \gromver\cmf\common\modules\elasticsearch\Module implements BootstrapInterface, DesktopInterface, MenuRouterInterface
+class Module extends \gromver\platform\common\modules\elasticsearch\Module implements BootstrapInterface, DesktopInterface, MenuRouterInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\elasticsearch\controllers';
+    public $controllerNamespace = 'gromver\platform\backend\modules\elasticsearch\controllers';
     public $desktopOrder = 6;
 
     /**
@@ -31,9 +31,9 @@ class Module extends \gromver\cmf\common\modules\elasticsearch\Module implements
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Search'),
+            'label' => Yii::t('gromver.platform', 'Search'),
             'links' => [
-                ['label' => Yii::t('gromver.cmf', 'Searching'), 'url' => ['/' . $this->getUniqueId() . '/default/index']],
+                ['label' => Yii::t('gromver.platform', 'Searching'), 'url' => ['/' . $this->getUniqueId() . '/default/index']],
             ]
         ];
     }
@@ -44,9 +44,9 @@ class Module extends \gromver\cmf\common\modules\elasticsearch\Module implements
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Search'),
+            'label' => Yii::t('gromver.platform', 'Search'),
             'routers' => [
-                ['label' => Yii::t('gromver.cmf', 'Searching'), 'route' =>  $this->getUniqueId() . '/default/index'],
+                ['label' => Yii::t('gromver.platform', 'Searching'), 'route' =>  $this->getUniqueId() . '/default/index'],
             ]
         ];
     }

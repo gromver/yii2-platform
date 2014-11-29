@@ -6,11 +6,11 @@ use kartik\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var \gromver\cmf\backend\modules\news\models\CategorySearch $searchModel
+ * @var \gromver\platform\backend\modules\news\models\CategorySearch $searchModel
  * @var string $route
  */
 
-$this->title = Yii::t('gromver.cmf', 'Select Category');
+$this->title = Yii::t('gromver.platform', 'Select Category');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'title',
                 'value' => function ($model) {
-                        /** @var $model \gromver\cmf\common\models\Category */
+                        /** @var $model \gromver\platform\common\models\Category */
                         return str_repeat(" • ", max($model->level-1, 0)) . $model->title . '<br/>' . Html::tag('small', ' — ' . $model->path, ['class' => 'text-muted']);
                     },
                 'format' => 'html'
@@ -47,10 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function ($model, $index, $widget) {
-                    /** @var $model \gromver\cmf\common\models\Category */
+                    /** @var $model \gromver\platform\common\models\Category */
                     return $model->getStatusLabel();
                 },
-                'filter' => \gromver\cmf\common\models\Category::statusLabels()
+                'filter' => \gromver\platform\common\models\Category::statusLabels()
             ],
             [
                 'attribute' => 'published_at',
@@ -67,26 +67,26 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'tags',
                 'value' => function ($model){
-                        /** @var $model \gromver\cmf\common\models\Category */
+                        /** @var $model \gromver\platform\common\models\Category */
                         return implode(', ', \yii\helpers\ArrayHelper::map($model->tags, 'id', 'title'));
                     },
                 'filterType' => \dosamigos\selectize\Selectize::className(),
                 'filterWidgetOptions' => [
-                    'items' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
+                    'items' => \yii\helpers\ArrayHelper::map(\gromver\platform\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
                     'clientOptions' => [
                         'maxItems' => 1
                     ],
-                    'url' => ['/cmf/tag/default/tag-list']
+                    'url' => ['/grom/tag/default/tag-list']
                 ]
             ],
             [
                 'value' => function ($model) use ($route) {
-                        return Html::a(Yii::t('gromver.cmf', 'Select'), '#', [
+                        return Html::a(Yii::t('gromver.platform', 'Select'), '#', [
                             'class' => 'btn btn-primary btn-xs',
                             'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                     'id' => $model->id,
-                                    'description' => Yii::t('gromver.cmf', 'Category: {title}', ['title' => $model->title]),
-                                    'link' => \gromver\cmf\common\models\MenuItem::toRoute($route, ['id' => $model->id]),
+                                    'description' => Yii::t('gromver.platform', 'Category: {title}', ['title' => $model->title]),
+                                    'link' => \gromver\platform\common\models\MenuItem::toRoute($route, ['id' => $model->id]),
                                     'value' => $model->id . ':' . $model->alias
                                 ]),
                         ]);
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> ' . Html::encode($this->title) . '</h3>',
             'type' => 'info',
-            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), [null], ['class' => 'btn btn-info']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.platform', 'Reset List'), [null], ['class' => 'btn btn-info']),
             'showFooter' => false,
         ],
     ]) ?>

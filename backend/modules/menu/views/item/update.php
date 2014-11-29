@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\MenuItem */
-/* @var $linkParamsModel gromver\cmf\common\models\MenuLinkParams */
+/* @var $model gromver\platform\common\models\MenuItem */
+/* @var $linkParamsModel gromver\platform\common\models\MenuLinkParams */
 
-$this->title = Yii::t('gromver.cmf', 'Update Menu Item: {title}', [
+$this->title = Yii::t('gromver.platform', 'Update Menu Item: {title}', [
     'title' => $model->title
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Menu Types'), 'url' => ['type/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Menu Types'), 'url' => ['type/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->menuType->title, 'url' => ['index', 'MenuItemSearch' => ['menu_type_id' => $model->menuType->id]]];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('gromver.platform', 'Update');
 ?>
 <div class="menu-update">
 

@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\tag\components;
+namespace gromver\platform\frontend\modules\tag\components;
 
 
-use gromver\cmf\frontend\components\MenuRouter;
-use gromver\cmf\common\models\MenuItem;
-use gromver\cmf\common\models\Tag;
+use gromver\platform\frontend\components\MenuRouter;
+use gromver\platform\common\models\MenuItem;
+use gromver\platform\common\models\Tag;
 
 /**
  * Class MenuRouterTag
@@ -24,7 +24,7 @@ class MenuRouterTag extends MenuRouter {
     {
         return [
             [
-                'menuRoute' => 'cmf/tag/default/index',
+                'menuRoute' => 'grom/tag/default/index',
                 'handler' => 'parseTagCloud'
             ],
         ];
@@ -37,7 +37,7 @@ class MenuRouterTag extends MenuRouter {
     {
         return [
             [
-                'requestRoute' => 'cmf/tag/default/view',
+                'requestRoute' => 'grom/tag/default/view',
                 'requestParams' => ['id'],
                 'handler' => 'createTagItems'
             ],
@@ -47,15 +47,15 @@ class MenuRouterTag extends MenuRouter {
     public function parseTagCloud($requestInfo)
     {
         if (preg_match('/^\d+$/', $requestInfo->requestRoute)) {
-            return ['cmf/tag/default/view', ['id' => $requestInfo->requestRoute]];
+            return ['grom/tag/default/view', ['id' => $requestInfo->requestRoute]];
         } else {
-            return ['cmf/tag/default/view', ['id' => Tag::find()->select('id')->where(['alias' => $requestInfo->requestRoute])->scalar()]];
+            return ['grom/tag/default/view', ['id' => Tag::find()->select('id')->where(['alias' => $requestInfo->requestRoute])->scalar()]];
         }
     }
 
     public function createTagItems($requestInfo)
     {
-        if($path = $requestInfo->menuMap->getMenuPathByRoute('cmf/tag/default/index')) {
+        if($path = $requestInfo->menuMap->getMenuPathByRoute('grom/tag/default/index')) {
             $path .= '/' . (isset($requestInfo->requestParams['alias']) ? $requestInfo->requestParams['alias'] : $requestInfo->requestParams['id']);
             unset($requestInfo->requestParams['id'], $requestInfo->requestParams['alias']);
             return MenuItem::toRoute($path, $requestInfo->requestParams);

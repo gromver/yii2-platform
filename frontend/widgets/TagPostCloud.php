@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\models\Post;
-use gromver\cmf\common\widgets\Widget;
+use gromver\platform\common\models\Post;
+use gromver\platform\common\widgets\Widget;
 
 /**
  * Class TagItems
@@ -28,11 +28,11 @@ class TagPostCloud extends Widget {
     protected function launch()
     {
         $tags = Post::find()->category($this->categoryId)->published()->innerJoinWith('tags', false)->select([
-            'id' => '{{%cms_tag}}.id',
-            'title' => '{{%cms_tag}}.title',
-            'alias' => '{{%cms_tag}}.alias',
-            'weight' => 'count({{%cms_tag}}.id)'
-        ])->groupBy('{{%cms_tag}}.id')->asArray()->all();
+            'id' => '{{%grom_tag}}.id',
+            'title' => '{{%grom_tag}}.title',
+            'alias' => '{{%grom_tag}}.alias',
+            'weight' => 'count({{%grom_tag}}.id)'
+        ])->groupBy('{{%grom_tag}}.id')->asArray()->all();
 
         $maxWeight = 0;
         array_walk($tags, function ($v) use (&$maxWeight){

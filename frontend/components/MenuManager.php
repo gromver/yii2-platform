@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\components;
+namespace gromver\platform\frontend\components;
 
-use gromver\cmf\common\components\UrlManager;
+use gromver\platform\common\components\UrlManager;
 use gromver\modulequery\ModuleQuery;
-use gromver\cmf\common\models\MenuItem;
+use gromver\platform\common\models\MenuItem;
 use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
@@ -69,7 +69,7 @@ class MenuManager extends Component implements UrlRuleInterface
     protected function buildRules()
     {
         //нам нужно собрать все роутеры от модулей и вытащить из них инструкции по маршрутизации
-        $routers = ModuleQuery::instance()->implement('\gromver\cmf\frontend\interfaces\MenuRouterInterface')->execute('getMenuRouter');
+        $routers = ModuleQuery::instance()->implement('\gromver\platform\frontend\interfaces\MenuRouterInterface')->execute('getMenuRouter');
         // вытаскиваем инструкции из всех роутеров
         foreach ($routers as $routerClass) {
             $router = $this->getRouter($routerClass);
@@ -104,7 +104,7 @@ class MenuManager extends Component implements UrlRuleInterface
         }
 
         if (!$router instanceof MenuRouter) {
-            throw new InvalidConfigException('Routers must be an instance of \gromver\cmf\frontend\components\MenuRouter class.');
+            throw new InvalidConfigException('Routers must be an instance of \gromver\platform\frontend\components\MenuRouter class.');
         }
 
         return $this->_routers[$router->className()] = $router;
@@ -171,7 +171,7 @@ class MenuManager extends Component implements UrlRuleInterface
             if (Yii::$app->user->getIsGuest()) {
                 Yii::$app->user->loginRequired();
             } else {
-                throw new ForbiddenHttpException(Yii::t('gromver.cmf', 'You have no rights for access to this section of the site.'));
+                throw new ForbiddenHttpException(Yii::t('gromver.platform', 'You have no rights for access to this section of the site.'));
             }
         }
 

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\WidgetConfig */
+/* @var $model gromver\platform\common\models\WidgetConfig */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -37,7 +37,7 @@ use yii\bootstrap\ActiveForm;
     <?= Html::activeHiddenInput($model, 'lock') ?>
 
     <div>
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.cmf', 'Create') : Yii::t('gromver.cmf', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.platform', 'Create') : Yii::t('gromver.platform', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

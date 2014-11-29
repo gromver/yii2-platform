@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\Version */
+/* @var $model gromver\platform\common\models\Version */
 
-$this->title = Yii::t('gromver.cmf', 'Update Version: {id}', [
+$this->title = Yii::t('gromver.platform', 'Update Version: {id}', [
     'id' => $model->id
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Version Manager'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'ID: {id}', [
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Version Manager'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'ID: {id}', [
     'id' => $model->id
 ]), 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('gromver.platform', 'Update');
 ?>
 <div class="history-update">
 

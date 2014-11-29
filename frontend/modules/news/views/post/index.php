@@ -5,19 +5,19 @@
 
 use yii\helpers\Html;
 
-/** @var \gromver\cmf\common\models\MenuItem $menu */
+/** @var \gromver\platform\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
-    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('gromver.cmf', 'News');
+    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('gromver.platform', 'News');
     $this->params['breadcrumbs'] = $menu->getBreadcrumbs($menu->isApplicableContext());
 } else {
-    $this->title = Yii::t('gromver.cmf', 'News');
+    $this->title = Yii::t('gromver.platform', 'News');
 }
 //$this->params['breadcrumbs'][] = $this->title;
 
 echo Html::tag('h2', Html::encode($this->title));
 
-echo \gromver\cmf\frontend\widgets\PostList::widget([
+echo \gromver\platform\frontend\widgets\PostList::widget([
     'id' => 'post-index',
     'context' =>  Yii::$app->menuManager->activeMenu ? Yii::$app->menuManager->activeMenu->path : null,
 ]);

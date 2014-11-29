@@ -1,11 +1,11 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model \gromver\cmf\common\models\Tag
+ * @var $model \gromver\platform\common\models\Tag
  * @var $categoryId string
  */
 
-/** @var \gromver\cmf\common\models\MenuItem $menu */
+/** @var \gromver\platform\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : $model->title;
@@ -23,7 +23,7 @@ if ($model->metadesc) {
 }
 
 
-echo \gromver\cmf\frontend\widgets\TagPosts::widget([
+echo \gromver\platform\frontend\widgets\TagPosts::widget([
     'id' => 'tag-posts',
     'tag' => $model,
     'categoryId' => $categoryId,

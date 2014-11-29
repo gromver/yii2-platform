@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\user\controllers;
+namespace gromver\platform\frontend\modules\user\controllers;
 
 use kartik\widgets\Alert;
 use gromver\models\ObjectModel;
 use Yii;
-use gromver\cmf\common\models\User;
+use gromver\platform\common\models\User;
 use gromver\models\Model;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
@@ -48,7 +48,7 @@ class DefaultController extends Controller
 
     public function actionUpdate()
     {
-        /** @var \gromver\cmf\common\models\User $user */
+        /** @var \gromver\platform\common\models\User $user */
         $user = Yii::$app->user->getIdentity();
 
         $model = $this->extractParamsModel($user);
@@ -57,10 +57,10 @@ class DefaultController extends Controller
             $user->setParamsArray($model->toArray());
 
             if ($user->save()) {
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', "Profile saved."));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', "Profile saved."));
                 return $this->redirect('');
             } else {
-                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It wasn't succeeded to keep the user's parameters. Error:\n{error}", ['error' => implode("\n", $user->getFirstErrors())]));
+                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', "It wasn't succeeded to keep the user's parameters. Error:\n{error}", ['error' => implode("\n", $user->getFirstErrors())]));
             }
         }
 

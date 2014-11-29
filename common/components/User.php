@@ -2,19 +2,19 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\components;
+namespace gromver\platform\common\components;
 
 use yii\web\User as BaseUser;
 
 
 /**
  * Class User
- * @property \gromver\cmf\common\models\User $identity The identity object associated with the currently logged user. Null
+ * @property \gromver\platform\common\models\User $identity The identity object associated with the currently logged user. Null
  * is returned if the user is not logged in (not authenticated).
  *
  * @package yii2-cmf
@@ -26,7 +26,7 @@ class User extends BaseUser
     /**
 	 * @inheritdoc
 	 */
-	public $identityClass = 'gromver\cmf\common\models\User';
+	public $identityClass = 'gromver\platform\common\models\User';
 
 	/**
 	 * @inheritdoc
@@ -36,7 +36,7 @@ class User extends BaseUser
 	/**
 	 * @inheritdoc
 	 */
-	public $loginUrl = ['/cmf/auth/default/login'];
+	public $loginUrl = ['/grom/auth/default/login'];
 
     public $superAdmins = ['admin'];
 

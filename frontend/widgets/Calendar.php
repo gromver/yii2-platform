@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
 
-use gromver\cmf\common\models\Post;
-use gromver\cmf\common\widgets\Widget;
+use gromver\platform\common\models\Post;
+use gromver\platform\common\widgets\Widget;
 use Yii;
 use yii\web\View;
 
@@ -40,7 +40,7 @@ class Calendar extends Widget
     private $_day;
 
     public $categoryId;
-    public $route = '/cmf/news/post/day';
+    public $route = '/grom/news/post/day';
 
     private $_calendar = [];
 

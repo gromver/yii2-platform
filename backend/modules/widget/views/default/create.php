@@ -4,12 +4,12 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\WidgetConfig */
+/* @var $model gromver\platform\common\models\WidgetConfig */
 
-$this->title = Yii::t('gromver.cmf', 'Create Settings for Widget: {id}', [
+$this->title = Yii::t('gromver.platform', 'Create Settings for Widget: {id}', [
     'id' => $model->widget_id
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Widget\'s Settings'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Widget\'s Settings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="widget-config-create">

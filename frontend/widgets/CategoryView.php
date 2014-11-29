@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\Category;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\Category;
 use yii\base\InvalidConfigException;
 use Yii;
 
@@ -24,7 +24,7 @@ class CategoryView extends Widget {
      * Category or CategoryId or CategoryId:CategoryPath
      * @var Category|string
      * @type modal
-     * @url /cmf/default/select-category
+     * @url /grom/default/select-category
      */
     public $category;
     /**
@@ -41,7 +41,7 @@ class CategoryView extends Widget {
         }
 
         if (empty($this->category)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Category not found.'));
+            throw new InvalidConfigException(Yii::t('gromver.platform', 'Category not found.'));
         }
 
         echo $this->render($this->layout, [
@@ -53,9 +53,9 @@ class CategoryView extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/update', 'id' => $this->category->id, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/news/category/update', 'id' => $this->category->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Update Category')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Update Category')]
             ],
         ];
     }
@@ -63,10 +63,10 @@ class CategoryView extends Widget {
     public static function layouts()
     {
         return [
-            'category/viewDefault' => Yii::t('gromver.cmf', 'Default'),
-            'category/viewVerbose' => Yii::t('gromver.cmf', 'Verbose'),
-            'category/viewOnlyCategories' => Yii::t('gromver.cmf', 'Only categories list'),
-            'category/viewOnlyPosts' => Yii::t('gromver.cmf', 'Only posts list'),
+            'category/viewDefault' => Yii::t('gromver.platform', 'Default'),
+            'category/viewVerbose' => Yii::t('gromver.platform', 'Verbose'),
+            'category/viewOnlyCategories' => Yii::t('gromver.platform', 'Only categories list'),
+            'category/viewOnlyPosts' => Yii::t('gromver.platform', 'Only posts list'),
         ];
     }
 }

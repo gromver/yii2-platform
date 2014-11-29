@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\modules\elasticsearch;
+namespace gromver\platform\common\modules\elasticsearch;
 
-use gromver\cmf\common\models\elasticsearch\ActiveDocument;
-use gromver\cmf\common\interfaces\BootstrapInterface;
+use gromver\platform\common\models\elasticsearch\ActiveDocument;
+use gromver\platform\common\interfaces\BootstrapInterface;
 use gromver\modulequery\ModuleQuery;
 use Yii;
 
@@ -24,17 +24,17 @@ class Module extends \yii\base\Module implements BootstrapInterface
 {
     public $elasticsearchIndex;
     public $documentClasses = [
-        'gromver\cmf\common\models\elasticsearch\Page',
-        'gromver\cmf\common\models\elasticsearch\Post',
-        'gromver\cmf\common\models\elasticsearch\Category',
+        'gromver\platform\common\models\elasticsearch\Page',
+        'gromver\platform\common\models\elasticsearch\Post',
+        'gromver\platform\common\models\elasticsearch\Category',
     ];
 
     public function init()
     {
         if ($this->elasticsearchIndex) {
             ActiveDocument::$index = $this->elasticsearchIndex;
-        } elseif(!empty(Yii::$app->cmf->params['elasticsearchIndex'])) {
-            ActiveDocument::$index = Yii::$app->cmf->params['elasticsearchIndex'];
+        } elseif(@Yii::$app->grom->params['elasticsearchIndex']) {
+            ActiveDocument::$index = Yii::$app->grom->params['elasticsearchIndex'];
         }
     }
 
@@ -43,7 +43,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($application)
     {
-        $this->documentClasses = array_merge($this->documentClasses, ModuleQuery::instance()->implement('gromver\cmf\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
+        $this->documentClasses = array_merge($this->documentClasses, ModuleQuery::instance()->implement('gromver\platform\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
         ActiveDocument::watch($this->documentClasses);
     }
 }

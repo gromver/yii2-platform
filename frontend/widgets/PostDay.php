@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\Category;
-use gromver\cmf\common\models\Post;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\Category;
+use gromver\platform\common\models\Post;
 use yii\data\ActiveDataProvider;
 use Yii;
 
@@ -24,7 +24,7 @@ class PostDay extends Widget {
     /**
      * @var Category|string
      * @type modal
-     * @url /cmf/default/select-category
+     * @url /grom/default/select-category
      */
     public $category;
     public $year;
@@ -91,33 +91,33 @@ class PostDay extends Widget {
     public static function layouts()
     {
         return [
-            'post/day' => Yii::t('gromver.cmf', 'Default'),
+            'post/day' => Yii::t('gromver.platform', 'Default'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemArticle' => Yii::t('gromver.cmf', 'Article'),
-            '_itemIssue' => Yii::t('gromver.cmf', 'Issue'),
+            '_itemArticle' => Yii::t('gromver.platform', 'Article'),
+            '_itemIssue' => Yii::t('gromver.platform', 'Issue'),
         ];
     }
 
     public static function sortColumns()
     {
         return [
-            'published_at' => Yii::t('gromver.cmf', 'By publish date'),
-            'created_at' => Yii::t('gromver.cmf', 'By create date'),
-            'title' => Yii::t('gromver.cmf', 'By name'),
-            'ordering' => Yii::t('gromver.cmf', 'By order'),
+            'published_at' => Yii::t('gromver.platform', 'By publish date'),
+            'created_at' => Yii::t('gromver.platform', 'By create date'),
+            'title' => Yii::t('gromver.platform', 'By name'),
+            'ordering' => Yii::t('gromver.platform', 'By order'),
         ];
     }
 
     public static function sortDirections()
     {
         return [
-            SORT_ASC => Yii::t('gromver.cmf', 'Asc'),
-            SORT_DESC => Yii::t('gromver.cmf', 'Desc'),
+            SORT_ASC => Yii::t('gromver.platform', 'Asc'),
+            SORT_DESC => Yii::t('gromver.platform', 'Desc'),
         ];
     }
 }

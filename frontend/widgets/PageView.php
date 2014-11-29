@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\backend\assets\CkeditorHighlightAsset;
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\Page;
+use gromver\platform\backend\assets\CkeditorHighlightAsset;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\Page;
 use yii\base\InvalidConfigException;
 use Yii;
 
@@ -25,7 +25,7 @@ class PageView extends Widget {
      * Page model or PageId or PageId:PageAlias
      * @var Page|string
      * @type modal
-     * @url /cmf/default/select-page
+     * @url /grom/default/select-page
      */
     public $page;
     /**
@@ -49,7 +49,7 @@ class PageView extends Widget {
         }
 
         if (empty($this->page)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Page not found.'));
+            throw new InvalidConfigException(Yii::t('gromver.platform', 'Page not found.'));
         }
 
         if ($this->useHighlights) {
@@ -65,14 +65,14 @@ class PageView extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/update', 'id' => $this->page->id, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/page/default/update', 'id' => $this->page->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Update Page')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Update Page')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/page/default/index']),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/page/default/index']),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Pages list'), 'target' => '_blank']
+                'options' => ['title' => Yii::t('gromver.platform', 'Pages list'), 'target' => '_blank']
             ],
         ];
     }
@@ -80,8 +80,8 @@ class PageView extends Widget {
     public static function layouts()
     {
         return [
-            'page/article' => Yii::t('gromver.cmf', 'Article'),
-            'page/content' => Yii::t('gromver.cmf', 'Content'),
+            'page/article' => Yii::t('gromver.platform', 'Article'),
+            'page/content' => Yii::t('gromver.platform', 'Content'),
         ];
     }
 } 

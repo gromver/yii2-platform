@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\behaviors;
+namespace gromver\platform\backend\behaviors;
 
 use Yii;
 use yii\base\Behavior;
@@ -18,7 +18,7 @@ use yii\helpers\FileHelper;
 use yii\validators\FileValidator;
 use yii\validators\Validator;
 use yii\web\UploadedFile;
-use gromver\cmf\backend\behaviors\upload\BaseProcessor;
+use gromver\platform\backend\behaviors\upload\BaseProcessor;
 
 /**
  * Class UploadBehavior
@@ -171,7 +171,7 @@ class UploadBehavior extends Behavior {
 
     /**
      * @param $attribute
-     * @return array|null|\gromver\cmf\backend\behaviors\upload\BaseProcessor
+     * @return array|null|\gromver\platform\backend\behaviors\upload\BaseProcessor
      * @throws \yii\base\InvalidConfigException
      */
     private function getProcessor($attribute)

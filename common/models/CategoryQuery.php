@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use creocoder\behaviors\NestedSetQuery;
 use yii\db\ActiveQuery;
@@ -34,15 +34,15 @@ class CategoryQuery extends ActiveQuery
     {
         $badcatsQuery = new Query([
             'select' => ['badcats.id'],
-            'from' => ['{{%cms_category}} AS unpublished'],
+            'from' => ['{{%grom_category}} AS unpublished'],
             'join' => [
-                ['LEFT JOIN', '{{%cms_category}} AS badcats', 'unpublished.lft <= badcats.lft AND unpublished.rgt >= badcats.rgt']
+                ['LEFT JOIN', '{{%grom_category}} AS badcats', 'unpublished.lft <= badcats.lft AND unpublished.rgt >= badcats.rgt']
             ],
             'where' => 'unpublished.status != '.Category::STATUS_PUBLISHED,
             'groupBy' => ['badcats.id']
         ]);
 
-        return $this->andWhere(['NOT IN', '{{%cms_category}}.id', $badcatsQuery]);
+        return $this->andWhere(['NOT IN', '{{%grom_category}}.id', $badcatsQuery]);
     }
 
     /**
@@ -50,7 +50,7 @@ class CategoryQuery extends ActiveQuery
      */
     public function unpublished()
     {
-        return $this->innerJoin('{{%cms_category}} AS ancestors', '{{%cms_category}}.lft >= ancestors.lft AND {{%cms_category}}.rgt <= ancestors.rgt')->andWhere('ancestors.status != '.Category::STATUS_PUBLISHED)->addGroupBy(['{{%cms_category}}.id']);
+        return $this->innerJoin('{{%grom_category}} AS ancestors', '{{%grom_category}}.lft >= ancestors.lft AND {{%grom_category}}.rgt <= ancestors.rgt')->andWhere('ancestors.status != '.Category::STATUS_PUBLISHED)->addGroupBy(['{{%grom_category}}.id']);
     }
 
     /**
@@ -60,7 +60,7 @@ class CategoryQuery extends ActiveQuery
      */
     public function parent($id)
     {
-        return $this->andWhere(['{{%cms_category}}.parent_id' => $id]);
+        return $this->andWhere(['{{%grom_category}}.parent_id' => $id]);
     }
 
     /**
@@ -69,7 +69,7 @@ class CategoryQuery extends ActiveQuery
      */
     public function language($language)
     {
-        return $this->andFilterWhere(['{{%cms_category}}.language' => $language]);
+        return $this->andFilterWhere(['{{%grom_category}}.language' => $language]);
     }
 
     /**
@@ -77,6 +77,6 @@ class CategoryQuery extends ActiveQuery
      */
     public function noRoots()
     {
-        return $this->andWhere('{{%cms_category}}.lft!=1');
+        return $this->andWhere('{{%grom_category}}.lft!=1');
     }
 } 

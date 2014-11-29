@@ -2,18 +2,18 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\user\controllers;
+namespace gromver\platform\backend\modules\user\controllers;
 
 use kartik\widgets\Alert;
 use gromver\models\ObjectModel;
 use Yii;
-use gromver\cmf\common\models\User;
-use gromver\cmf\backend\modules\user\models\UserSearch;
+use gromver\platform\common\models\User;
+use gromver\platform\backend\modules\user\models\UserSearch;
 use yii\base\InvalidParamException;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -27,7 +27,7 @@ use yii\filters\VerbFilter;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
- * @property \gromver\cmf\backend\modules\user\Module $module
+ * @property \gromver\platform\backend\modules\user\Module $module
  */
 class DefaultController extends Controller
 {
@@ -130,7 +130,7 @@ class DefaultController extends Controller
     {
         $model = $this->findModel($id);
         if (!Yii::$app->user->isSuperAdmin && $model->id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException(Yii::t('gromver.cmf', 'You can edit only your profile.'));
+            throw new ForbiddenHttpException(Yii::t('gromver.platform', 'You can edit only your profile.'));
         }
 
         $model->scenario = 'update';
@@ -157,7 +157,7 @@ class DefaultController extends Controller
     {
         $model = $this->findModel($id);
         if (!Yii::$app->user->isSuperAdmin && $model->id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException(Yii::t('gromver.cmf', 'You can remove only your profile.'));
+            throw new ForbiddenHttpException(Yii::t('gromver.platform', 'You can remove only your profile.'));
         }
 
         if ($model->status !== User::STATUS_DELETED) {
@@ -202,7 +202,7 @@ class DefaultController extends Controller
     {
         $user = $this->findModel($id);
         if (!Yii::$app->user->isSuperAdmin && $user->id !== Yii::$app->user->id) {
-            throw new ForbiddenHttpException(Yii::t('gromver.cmf', 'You can edit only your profile.'));
+            throw new ForbiddenHttpException(Yii::t('gromver.platform', 'You can edit only your profile.'));
         }
 
         $model = $this->extractParamsModel($user);
@@ -213,7 +213,7 @@ class DefaultController extends Controller
             if ($user->save()) {
                 $this->redirect(['view', 'id' => $user->id]);
             } else {
-                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It wasn't succeeded to keep the user's parameters. Error:\n{error}", ['error' => implode("\n", $user->getFirstErrors())]));
+                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', "It wasn't succeeded to keep the user's parameters. Error:\n{error}", ['error' => implode("\n", $user->getFirstErrors())]));
             }
         }
 
@@ -256,7 +256,7 @@ class DefaultController extends Controller
         if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }

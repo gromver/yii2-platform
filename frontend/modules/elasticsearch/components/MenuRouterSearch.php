@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\elasticsearch\components;
+namespace gromver\platform\frontend\modules\elasticsearch\components;
 
 
-use gromver\cmf\frontend\components\MenuRouter;
-use gromver\cmf\common\models\MenuItem;
+use gromver\platform\frontend\components\MenuRouter;
+use gromver\platform\common\models\MenuItem;
 
 /**
  * Class MenuRouterSearch
@@ -26,7 +26,7 @@ class MenuRouterSearch extends MenuRouter {
     {
         return [
             [
-                'requestRoute' => 'cmf/search/default/index',
+                'requestRoute' => 'grom/search/default/index',
                 'handler' => 'createSearch'
             ],
         ];
@@ -34,7 +34,7 @@ class MenuRouterSearch extends MenuRouter {
 
     public function createSearch($requestInfo)
     {
-        if($path = $requestInfo->menuMap->getMenuPathByRoute('cmf/search/default/index')) {
+        if($path = $requestInfo->menuMap->getMenuPathByRoute('grom/search/default/index')) {
             return MenuItem::toRoute($path, $requestInfo->requestParams);
         }
     }

@@ -10,7 +10,7 @@ use yii\grid\GridView;
  * @var \yii\db\ActiveRecord $item
  */
 
-$this->title = Yii::t('gromver.cmf', 'Item Versions');
+$this->title = Yii::t('gromver.platform', 'Item Versions');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -19,11 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 	<?php /*<h1><?= Html::encode($this->title) ?></h1>*/?>
 
     <div class="btn-group pull-right">
-        <?=Html::label('<i class="glyphicon glyphicon-open"></i> ' . Yii::t('gromver.cmf', 'Restore'), null, ['id' => 'restore-button', 'class' => 'btn btn-default', 'data' => ['toggle'=>"tooltip", 'url' => Url::toRoute(['restore'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon glyphicon-eye-open"></i> ' . Yii::t('gromver.cmf', 'Preview'), null, ['id' => 'preview-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['preview'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon"></i> ' . Yii::t('gromver.cmf', 'Compare'), null, ['id' => 'compare-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['compare'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon glyphicon-lock"></i> ' . Yii::t('gromver.cmf', 'Keep On/Off'), null, ['id' => 'keep-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-keep-forever'])], 'title' => 'tooltip']) ?>
-        <?=Html::label('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.cmf', 'Delete'), null, ['id' => 'delete-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-delete'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-open"></i> ' . Yii::t('gromver.platform', 'Restore'), null, ['id' => 'restore-button', 'class' => 'btn btn-default', 'data' => ['toggle'=>"tooltip", 'url' => Url::toRoute(['restore'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-eye-open"></i> ' . Yii::t('gromver.platform', 'Preview'), null, ['id' => 'preview-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['preview'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon"></i> ' . Yii::t('gromver.platform', 'Compare'), null, ['id' => 'compare-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['compare'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-lock"></i> ' . Yii::t('gromver.platform', 'Keep On/Off'), null, ['id' => 'keep-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-keep-forever'])], 'title' => 'tooltip']) ?>
+        <?=Html::label('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.platform', 'Delete'), null, ['id' => 'delete-button', 'class' => 'btn btn-default', 'data' => ['toggle' => "tooltip", 'url' => Url::toRoute(['bulk-delete'])], 'title' => 'tooltip']) ?>
     </div>
 
     <?php \yii\bootstrap\BootstrapPluginAsset::register($this);
@@ -107,7 +107,7 @@ JS
             [
                 'attribute' => 'created_at',
                 'value' => function($model) use($itemVersionHash) {
-                        /** $model \gromver\cmf\common\models\Version */
+                        /** $model \gromver\platform\common\models\Version */
                         return date('d.m.Y H:i', $model->created_at).($itemVersionHash == $model->version_hash ? ' <small class="glyphicon glyphicon-star"></small>' : '');
                     },
                 'format' => 'raw'
@@ -116,15 +116,15 @@ JS
             [
                 'attribute' => 'keep_forever',
                 'value' => function($model) {
-                        /** $model \gromver\cmf\common\models\Version */
-                        return Html::a($model->keep_forever ? Yii::t('gromver.cmf', 'Yes') . ' <small class="glyphicon glyphicon-lock"></small>' : Yii::t('gromver.cmf', 'No'), ['keep-forever', 'id' => $model->id], ['class' => 'btn btn-xs btn-default active btn-keep-forever', 'data-method' => 'post']);
+                        /** $model \gromver\platform\common\models\Version */
+                        return Html::a($model->keep_forever ? Yii::t('gromver.platform', 'Yes') . ' <small class="glyphicon glyphicon-lock"></small>' : Yii::t('gromver.platform', 'No'), ['keep-forever', 'id' => $model->id], ['class' => 'btn btn-xs btn-default active btn-keep-forever', 'data-method' => 'post']);
                     },
                 'format' => 'raw'
             ],
 			[
                 'attribute' => 'created_by',
                 'value' => function($model) {
-                        /** $model \gromver\cmf\common\models\Version */
+                        /** $model \gromver\platform\common\models\Version */
                         return $model->user->username;
                     }
             ],
@@ -133,30 +133,30 @@ JS
                 'class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'restore' => function($url, $model) {
-                            /** $model \gromver\cmf\common\models\Version */
+                            /** $model \gromver\platform\common\models\Version */
                             return Html::a('<i class="glyphicon glyphicon-open"></i>', ['restore', 'id' => $model->id, 'modal' => 1], [
-                                'title' => Yii::t('gromver.cmf', 'Restore'),
+                                'title' => Yii::t('gromver.platform', 'Restore'),
                                 'data-method' => 'post',
                                 'class' => 'btn-restore'
                             ]);
                         },
                     'preview' => function ($url, $model) {
                             return Html::a('<i class="glyphicon glyphicon-eye-open"></i>', $url, [
-                                'title' => Yii::t('gromver.cmf', 'Preview'),
+                                'title' => Yii::t('gromver.platform', 'Preview'),
                                 'class' => 'btn-preview'
                             ]);
                         },
                     'delete' => function ($url, $model) {
                             return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
-                                'title' => Yii::t('gromver.cmf', 'Delete'),
-                                'data-confirm' => Yii::t('gromver.cmf', 'Are you sure to delete this item?'),
+                                'title' => Yii::t('gromver.platform', 'Delete'),
+                                'data-confirm' => Yii::t('gromver.platform', 'Are you sure to delete this item?'),
                                 'data-method' => 'delete',
                                 'class' => 'btn-delete'
                             ]);
                         },
                     'update' => function ($url, $model) {
                             return Html::a('<i class="glyphicon glyphicon-pencil"></i>', ['update', 'id' => $model->id, 'modal' => 1], [
-                                'title' => Yii::t('gromver.cmf', 'Update'),
+                                'title' => Yii::t('gromver.platform', 'Update'),
                             ]);
                         }
                 ],

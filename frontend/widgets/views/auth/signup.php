@@ -6,7 +6,7 @@ use yii\captcha\Captcha;
 /**
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
- * @var gromver\cmf\common\models\User $model
+ * @var gromver\platform\common\models\User $model
  */
 ?>
 <?php $form = ActiveForm::begin([

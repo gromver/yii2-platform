@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\behaviors;
+namespace gromver\platform\frontend\behaviors;
 
-use gromver\cmf\frontend\components\MenuManager;
+use gromver\platform\frontend\components\MenuManager;
 use yii\base\Behavior;
 
 /**
@@ -28,7 +28,7 @@ class MenuUrlRuleBehavior extends Behavior
     }
 
     /**
-     * @param $event \gromver\cmf\frontend\components\MenuUrlRuleEvent
+     * @param $event \gromver\platform\frontend\components\MenuUrlRuleEvent
      */
     public function parseRequest($event)
     {
@@ -36,7 +36,7 @@ class MenuUrlRuleBehavior extends Behavior
     }
 
     /**
-     * @param $event \gromver\cmf\frontend\components\MenuUrlRuleEvent
+     * @param $event \gromver\platform\frontend\components\MenuUrlRuleEvent
      */
     public function createUrl($event)
     {

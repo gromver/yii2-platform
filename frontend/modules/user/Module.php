@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\user;
+namespace gromver\platform\frontend\modules\user;
 
-use gromver\cmf\common\interfaces\BootstrapInterface;
-use gromver\cmf\common\models\User;
+use gromver\platform\common\interfaces\BootstrapInterface;
+use gromver\platform\common\models\User;
 
 /**
  * Class Module
@@ -19,6 +19,6 @@ use gromver\cmf\common\models\User;
  */
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'gromver\cmf\frontend\modules\user\controllers';
-    public $userParamsClass = 'gromver\cmf\common\models\UserParams';
+    public $controllerNamespace = 'gromver\platform\frontend\modules\user\controllers';
+    public $userParamsClass = 'gromver\platform\common\models\UserParams';
 }

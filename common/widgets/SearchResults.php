@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\widgets;
+namespace gromver\platform\common\widgets;
 
 
-use gromver\cmf\common\models\elasticsearch\ActiveDocument;
-use gromver\cmf\common\models\elasticsearch\Search;
-use gromver\cmf\common\widgets\Widget;
+use gromver\platform\common\models\elasticsearch\ActiveDocument;
+use gromver\platform\common\models\elasticsearch\Search;
+use gromver\platform\common\widgets\Widget;
 use Yii;
 use yii\caching\Cache;
 use yii\data\ActiveDataProvider;
@@ -144,7 +144,7 @@ class SearchResults extends Widget {
         }
 
         //чтоб в ActiveQuery задать фильтр по типу надо обязательно задать фильтр по индексу
-        //$query->index = 'cmf';
+        //$query->index = 'grom';
         //$query->type = 'page';
 
         $query->highlight = $this->highlight;
@@ -215,19 +215,19 @@ class SearchResults extends Widget {
     public static function layouts()
     {
         return [
-            'search/results' => Yii::t('gromver.cmf', 'Default'),
+            'search/results' => Yii::t('gromver.platform', 'Default'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemDefault' => Yii::t('gromver.cmf', 'Default'),
+            '_itemDefault' => Yii::t('gromver.platform', 'Default'),
         ];
     }
 
     public static function languages()
     {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.platform', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 }

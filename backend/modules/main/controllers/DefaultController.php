@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\main\controllers;
+namespace gromver\platform\backend\modules\main\controllers;
 
 use gromver\modulequery\ModuleQuery;
-use gromver\cmf\common\models\CmfParams;
+use gromver\platform\common\models\CmfParams;
 use kartik\widgets\Alert;
-use gromver\cmf\common\models\ContactForm;
+use gromver\platform\common\models\ContactForm;
 use gromver\models\ObjectModel;
 use gromver\widgets\ModalIFrame;
 use Yii;
@@ -64,7 +64,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->render('index', [
-                'items' => ModuleQuery::instance()->implement('\gromver\cmf\backend\interfaces\DesktopInterface')->orderBy('desktopOrder')->execute('getDesktopItem')
+                'items' => ModuleQuery::instance()->implement('\gromver\platform\backend\interfaces\DesktopInterface')->orderBy('desktopOrder')->execute('getDesktopItem')
             ]);
     }
 
@@ -85,7 +85,7 @@ class DefaultController extends Controller
                 file_put_contents($paramsFile, '<?php return ' . var_export($model->toArray(), true) . ';');
                 @chmod($paramsFile, 0777);
 
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Configuration saved.'));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Configuration saved.'));
 
                 if ($modal) {
                     ModalIFrame::refreshPage();
@@ -109,7 +109,7 @@ class DefaultController extends Controller
 
         $cache->flush();
 
-        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Cache flushed.'));
+        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Cache flushed.'));
 
         return $this->redirect(['index']);
     }
@@ -119,7 +119,7 @@ class DefaultController extends Controller
         $model = new ContactForm();
 
         if (!Yii::$app->user->isGuest) {
-            /** @var \gromver\cmf\common\models\User $user */
+            /** @var \gromver\platform\common\models\User $user */
             $user = Yii::$app->user->identity;
             $userParams = $user->getParamsArray();
             $model->name = $userParams['name'] ? $userParams['name'] : $user->username;
@@ -127,11 +127,11 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->cmf->params['adminEmail'])) {
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Email is sent.'));
+            if ($model->sendEmail(Yii::$app->grom->params['adminEmail'])) {
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Email is sent.'));
                 return $this->render('contactSuccess');
             } else {
-                throw new \HttpRuntimeException(Yii::t('gromver.cmf', 'Email sending is failed.'));
+                throw new \HttpRuntimeException(Yii::t('gromver.platform', 'Email sending is failed.'));
             }
         }
 

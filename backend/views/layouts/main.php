@@ -22,7 +22,7 @@ AppAsset::register($this);
 <body>
 	<?php $this->beginBody() ?>
 	<div class="wrap">
-        <?= \gromver\cmf\backend\widgets\CmfPanel::widget() ?>
+        <?= \gromver\platform\backend\widgets\PlatformPanel::widget() ?>
 
         <div class="container">
             <?= Breadcrumbs::widget([
@@ -39,7 +39,7 @@ AppAsset::register($this);
 
 	<footer class="footer">
 		<div class="container">
-            <p class="pull-left">&copy; <?= Yii::$app->cmf->siteName . ' ' . date('Y') ?></p>
+            <p class="pull-left">&copy; <?= Yii::$app->grom->siteName . ' ' . date('Y') ?></p>
             <p class="pull-right"><?= Yii::powered() ?></p>
 		</div>
 	</footer>

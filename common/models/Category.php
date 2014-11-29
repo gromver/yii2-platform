@@ -2,22 +2,22 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
-use gromver\cmf\backend\behaviors\NestedSetBehavior;
-use gromver\cmf\backend\behaviors\TaggableBehavior;
-use gromver\cmf\backend\behaviors\upload\ThumbnailProcessor;
-use gromver\cmf\backend\behaviors\UploadBehavior;
-use gromver\cmf\backend\behaviors\VersioningBehavior;
-use gromver\cmf\common\components\UrlManager;
-use gromver\cmf\common\interfaces\TranslatableInterface;
-use gromver\cmf\common\interfaces\ViewableInterface;
+use gromver\platform\backend\behaviors\NestedSetBehavior;
+use gromver\platform\backend\behaviors\TaggableBehavior;
+use gromver\platform\backend\behaviors\upload\ThumbnailProcessor;
+use gromver\platform\backend\behaviors\UploadBehavior;
+use gromver\platform\backend\behaviors\VersioningBehavior;
+use gromver\platform\common\components\UrlManager;
+use gromver\platform\common\interfaces\TranslatableInterface;
+use gromver\platform\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -25,7 +25,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 
 /**
- * This is the model class for table "cms_category".
+ * This is the model class for table "grom_category".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -69,7 +69,7 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
      */
     public static function tableName()
     {
-        return '{{%cms_category}}';
+        return '{{%grom_category}}';
     }
 
     /**
@@ -92,7 +92,7 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             [['language'], 'string', 'max' => 7],
             /*[['language'], function($attribute) {
                 if (($parent = self::findOne($this->parent_id)) && !$parent->isRoot() && $parent->language != $this->language) {
-                    $this->addError($attribute, Yii::t('gromver.cmf', 'Language has to match with the parental.'));
+                    $this->addError($attribute, Yii::t('gromver.platform', 'Language has to match with the parental.'));
                 }
             }],*/
             [['parent_id'], 'exist', 'targetAttribute' => 'id'],
@@ -122,7 +122,7 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
             [['translation_id'], 'unique', 'filter' => function($query) {
                 /** @var $query \yii\db\ActiveQuery */
                 $query->andWhere(['language' => $this->language]);
-            }, 'message' => Yii::t('gromver.cmf', 'Localization ({language}) for item (ID: {id}) already exists.', ['language' => $this->language, 'id' => $this->translation_id])],
+            }, 'message' => Yii::t('gromver.platform', 'Localization ({language}) for item (ID: {id}) already exists.', ['language' => $this->language, 'id' => $this->translation_id])],
 
             [['title', 'detail_text', 'status'], 'required'],
             [['tags', 'versionNote'], 'safe']
@@ -135,33 +135,33 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'parent_id' => Yii::t('gromver.cmf', 'Parent'),
-            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
-            'language' => Yii::t('gromver.cmf', 'Language'),
-            'title' => Yii::t('gromver.cmf', 'Title'),
-            'alias' => Yii::t('gromver.cmf', 'Alias'),
-            'path' => Yii::t('gromver.cmf', 'Path'),
-            'preview_text' => Yii::t('gromver.cmf', 'Preview Text'),
-            'preview_image' => Yii::t('gromver.cmf', 'Preview Image'),
-            'detail_text' => Yii::t('gromver.cmf', 'Detail Text'),
-            'detail_image' => Yii::t('gromver.cmf', 'Detail Image'),
-            'metakey' => Yii::t('gromver.cmf', 'Meta keywords'),
-            'metadesc' => Yii::t('gromver.cmf', 'Meta description'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
-            'published_at' => Yii::t('gromver.cmf', 'Published At'),
-            'status' => Yii::t('gromver.cmf', 'Status'),
-            'created_by' => Yii::t('gromver.cmf', 'Created By'),
-            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
-            'lft' => Yii::t('gromver.cmf', 'Lft'),
-            'rgt' => Yii::t('gromver.cmf', 'Rgt'),
-            'level' => Yii::t('gromver.cmf', 'Level'),
-            'ordering' => Yii::t('gromver.cmf', 'Ordering'),
-            'hits' => Yii::t('gromver.cmf', 'Hits'),
-            'lock' => Yii::t('gromver.cmf', 'Lock'),
-            'tags' => Yii::t('gromver.cmf', 'Tags'),
-            'versionNote' => Yii::t('gromver.cmf', 'Version Note')
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'parent_id' => Yii::t('gromver.platform', 'Parent'),
+            'translation_id' => Yii::t('gromver.platform', 'Translation ID'),
+            'language' => Yii::t('gromver.platform', 'Language'),
+            'title' => Yii::t('gromver.platform', 'Title'),
+            'alias' => Yii::t('gromver.platform', 'Alias'),
+            'path' => Yii::t('gromver.platform', 'Path'),
+            'preview_text' => Yii::t('gromver.platform', 'Preview Text'),
+            'preview_image' => Yii::t('gromver.platform', 'Preview Image'),
+            'detail_text' => Yii::t('gromver.platform', 'Detail Text'),
+            'detail_image' => Yii::t('gromver.platform', 'Detail Image'),
+            'metakey' => Yii::t('gromver.platform', 'Meta keywords'),
+            'metadesc' => Yii::t('gromver.platform', 'Meta description'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'updated_at' => Yii::t('gromver.platform', 'Updated At'),
+            'published_at' => Yii::t('gromver.platform', 'Published At'),
+            'status' => Yii::t('gromver.platform', 'Status'),
+            'created_by' => Yii::t('gromver.platform', 'Created By'),
+            'updated_by' => Yii::t('gromver.platform', 'Updated By'),
+            'lft' => Yii::t('gromver.platform', 'Lft'),
+            'rgt' => Yii::t('gromver.platform', 'Rgt'),
+            'level' => Yii::t('gromver.platform', 'Level'),
+            'ordering' => Yii::t('gromver.platform', 'Ordering'),
+            'hits' => Yii::t('gromver.platform', 'Hits'),
+            'lock' => Yii::t('gromver.platform', 'Lock'),
+            'tags' => Yii::t('gromver.platform', 'Tags'),
+            'versionNote' => Yii::t('gromver.platform', 'Version Note')
         ];
     }
 
@@ -221,16 +221,16 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('gromver.cmf', $label);
+                return Yii::t('gromver.platform', $label);
             }, self::$_statuses);
     }
 
     public function getStatusLabel($status=null)
     {
         if ($status === null) {
-            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
+            return Yii::t('gromver.platform', self::$_statuses[$this->status]);
         }
-        return Yii::t('gromver.cmf', self::$_statuses[$status]);
+        return Yii::t('gromver.platform', self::$_statuses[$status]);
     }
 
     public function optimisticLock()
@@ -334,14 +334,14 @@ class Category extends ActiveRecord implements TranslatableInterface, ViewableIn
      */
     public function getViewLink()
     {
-        return ['/cmf/news/category/view', 'id' => $this->id, UrlManager::LANGUAGE_PARAM => $this->language/*, 'alias'=>$this->alias*/];
+        return ['/grom/news/category/view', 'id' => $this->id, UrlManager::LANGUAGE_PARAM => $this->language/*, 'alias'=>$this->alias*/];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/news/category/view', 'id' => $model['id'], UrlManager::LANGUAGE_PARAM => $model['language']/*, 'alias'=>$model['alias']*/];
+        return ['/grom/news/category/view', 'id' => $model['id'], UrlManager::LANGUAGE_PARAM => $model['language']/*, 'alias'=>$model['alias']*/];
     }
 
     //translatable interface

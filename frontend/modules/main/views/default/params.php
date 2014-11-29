@@ -6,7 +6,7 @@ use yii\helpers\Html;
  * @var gromver\models\ObjectModel $model
  * @var yii\web\View $this
  */
-$this->title = Yii::t('gromver.cmf', 'Site Configuration');
+$this->title = Yii::t('gromver.platform', 'Site Configuration');
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="page-heading">
@@ -22,8 +22,8 @@ $this->params['breadcrumbs'][] = $this->title; ?>
     <?= \gromver\models\widgets\Fields::widget(['model' => $model]) ?>
 
     <div>
-        <?= Html::submitButton('<i class="glyphicon glyphicon-save"></i> ' . Yii::t('gromver.cmf', 'Save'), ['class' => 'btn btn-success']) ?>
-        <?//= Html::submitButton('<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('gromver.cmf', 'Refresh'), ['class' => 'btn btn-default', 'name' => 'task', 'value' => 'refresh']) ?>
+        <?= Html::submitButton('<i class="glyphicon glyphicon-save"></i> ' . Yii::t('gromver.platform', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?//= Html::submitButton('<i class="glyphicon glyphicon-refresh"></i> ' . Yii::t('gromver.platform', 'Refresh'), ['class' => 'btn btn-default', 'name' => 'task', 'value' => 'refresh']) ?>
     </div>
 
     <?php \yii\bootstrap\ActiveForm::end(); ?>

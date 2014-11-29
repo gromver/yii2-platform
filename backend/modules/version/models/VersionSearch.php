@@ -2,19 +2,19 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
-namespace gromver\cmf\backend\modules\version\models;
+namespace gromver\platform\backend\modules\version\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use gromver\cmf\common\models\Version;
+use gromver\platform\common\models\Version;
 
 /**
- * Class VersionSearch represents the model behind the search form about `gromver\cmf\common\models\Version`.
+ * Class VersionSearch represents the model behind the search form about `gromver\platform\common\models\Version`.
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
@@ -64,21 +64,21 @@ class VersionSearch extends Version
         }
 
         if ($this->created_at) {
-            $query->andWhere('{{%cms_version}}.created_at >= :timestamp', ['timestamp' => $this->created_at]);
+            $query->andWhere('{{%grom_version}}.created_at >= :timestamp', ['timestamp' => $this->created_at]);
         }
 
         $query->andFilterWhere([
-            '{{%cms_version}}.id' => $this->id,
-            '{{%cms_version}}.item_id' => $this->item_id,
-            '{{%cms_version}}.character_count' => $this->character_count,
-            '{{%cms_version}}.created_by' => $this->created_by,
+            '{{%grom_version}}.id' => $this->id,
+            '{{%grom_version}}.item_id' => $this->item_id,
+            '{{%grom_version}}.character_count' => $this->character_count,
+            '{{%grom_version}}.created_by' => $this->created_by,
         ]);
 
-        $query->andFilterWhere(['like', '{{%cms_version}}.item_class', $this->item_class])
-            ->andFilterWhere(['like', '{{%cms_version}}.version_note', $this->version_note])
-            ->andFilterWhere(['like', '{{%cms_version}}.version_hash', $this->version_hash])
-            ->andFilterWhere(['like', '{{%cms_version}}.version_data', $this->version_data])
-            ->andFilterWhere(['like', '{{%cms_version}}.keep_forever', $this->keep_forever]);
+        $query->andFilterWhere(['like', '{{%grom_version}}.item_class', $this->item_class])
+            ->andFilterWhere(['like', '{{%grom_version}}.version_note', $this->version_note])
+            ->andFilterWhere(['like', '{{%grom_version}}.version_hash', $this->version_hash])
+            ->andFilterWhere(['like', '{{%grom_version}}.version_data', $this->version_data])
+            ->andFilterWhere(['like', '{{%grom_version}}.keep_forever', $this->keep_forever]);
 
         return $dataProvider;
     }

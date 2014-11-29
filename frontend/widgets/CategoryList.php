@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\Category;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\Category;
 use yii\data\ActiveDataProvider;
 use Yii;
 
@@ -24,7 +24,7 @@ class CategoryList extends Widget {
      * Category or CategoryId or CategoryId:CategoryPath
      * @var Category|string
      * @type modal
-     * @url /cmf/default/select-category
+     * @url /grom/default/select-category
      */
     public $category;
     /**
@@ -84,14 +84,14 @@ class CategoryList extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/create', 'parentId' => $this->category ? $this->category->id : null, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/news/category/create', 'parentId' => $this->category ? $this->category->id : null, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-plus"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Create Category')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Create Category')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/news/category/index', 'CategorySearch' => ['parent_id' => $this->category ? $this->category->id : null]]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/news/category/index', 'CategorySearch' => ['parent_id' => $this->category ? $this->category->id : null]]),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Categories list'), 'target' => '_blank']
+                'options' => ['title' => Yii::t('gromver.platform', 'Categories list'), 'target' => '_blank']
             ],
         ];
     }
@@ -99,7 +99,7 @@ class CategoryList extends Widget {
     public static function layouts()
     {
         return [
-            'category/list' => Yii::t('gromver.cmf', 'Default'),
+            'category/list' => Yii::t('gromver.platform', 'Default'),
         ];
     }
 
@@ -107,25 +107,25 @@ class CategoryList extends Widget {
     public static function itemLayouts()
     {
         return [
-            '_itemArticle' => Yii::t('gromver.cmf', 'Article'),
+            '_itemArticle' => Yii::t('gromver.platform', 'Article'),
         ];
     }
 
     public static function sortColumns()
     {
         return [
-            'published_at' => Yii::t('gromver.cmf', 'By publish date'),
-            'created_at' => Yii::t('gromver.cmf', 'By create date'),
-            'title' => Yii::t('gromver.cmf', 'By name'),
-            'ordering' => Yii::t('gromver.cmf', 'By order'),
+            'published_at' => Yii::t('gromver.platform', 'By publish date'),
+            'created_at' => Yii::t('gromver.platform', 'By create date'),
+            'title' => Yii::t('gromver.platform', 'By name'),
+            'ordering' => Yii::t('gromver.platform', 'By order'),
         ];
     }
 
     public static function sortDirections()
     {
         return [
-            SORT_ASC => Yii::t('gromver.cmf', 'Asc'),
-            SORT_DESC => Yii::t('gromver.cmf', 'Desc'),
+            SORT_ASC => Yii::t('gromver.platform', 'Asc'),
+            SORT_DESC => Yii::t('gromver.platform', 'Desc'),
         ];
     }
 } 

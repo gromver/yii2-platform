@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\interfaces;
+namespace gromver\platform\backend\interfaces;
 
 /**
  * Interface DesktopInterface
@@ -18,7 +18,7 @@ interface DesktopInterface
 {
     /**
      * @return array
-     * @see \gromver\cmf\backend\widgets\Desktop
+     * @see \gromver\platform\backend\widgets\Desktop
      */
     public function getDesktopItem();
 }

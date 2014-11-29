@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\main;
+namespace gromver\platform\backend\modules\main;
 
 use gromver\modulequery\ModuleQuery;
-use gromver\cmf\common\models\Table;
-use gromver\cmf\backend\interfaces\DesktopInterface;
-use gromver\cmf\backend\interfaces\MenuRouterInterface;
+use gromver\platform\common\models\Table;
+use gromver\platform\backend\interfaces\DesktopInterface;
+use gromver\platform\backend\interfaces\MenuRouterInterface;
 use Yii;
 use yii\base\BootstrapInterface;
 use yii\caching\ExpressionDependency;
@@ -29,9 +29,9 @@ use yii\helpers\ArrayHelper;
  */
 class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInterface, BootstrapInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\main\controllers';
+    public $controllerNamespace = 'gromver\platform\backend\modules\main\controllers';
 
-    public $paramsPath = '@common/config/cmf';
+    public $paramsPath = '@common/config/grom';
 
     public $desktopOrder = 1;
 
@@ -40,8 +40,10 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
      */
     public function bootstrap($app)
     {
-        Yii::$container->set('gromver\models\fields\EditorField', ['controller' => 'cmf/media/manager']);
-        Yii::$container->set('gromver\models\fields\MediaField', ['controller' => 'cmf/media/manager']);
+        $app->set($this->id, $this);
+
+        Yii::$container->set('gromver\models\fields\EditorField', ['controller' => 'grom/media/manager']);
+        Yii::$container->set('gromver\models\fields\MediaField', ['controller' => 'grom/media/manager']);
         Yii::$container->set('gromver\modulequery\ModuleQuery', [
             'cache' => $app->cache,
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
@@ -49,9 +51,8 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
 
         Table::bootstrap();
 
-        $app->set($this->id, $this);
 
-        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
+        ModuleQuery::instance()->implement('\gromver\platform\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
     }
 
     /**
@@ -73,8 +74,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     {
         Yii::$app->i18n->translations['gromver.*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
-            'basePath' => '@gromver/cmf/backend/messages',
-            //'forceTranslation' => true,
+            'basePath' => '@gromver/platform/backend/messages',
         ];
     }
 
@@ -84,11 +84,11 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'System'),
+            'label' => Yii::t('gromver.platform', 'System'),
             'links' => [
-                ['label' => Yii::t('gromver.cmf', 'Site Map'), 'url' => ['/cmf/default/index']],
-                ['label' => Yii::t('gromver.cmf', 'Settings'), 'url' => ['/cmf/default/params']],
-                ['label' => Yii::t('gromver.cmf', 'Flush Cache'), 'url' => ['/cmf/default/flush-cache']],
+                ['label' => Yii::t('gromver.platform', 'Site Map'), 'url' => ['/grom/default/index']],
+                ['label' => Yii::t('gromver.platform', 'Settings'), 'url' => ['/grom/default/params']],
+                ['label' => Yii::t('gromver.platform', 'Flush Cache'), 'url' => ['/grom/default/flush-cache']],
             ]
         ];
     }
@@ -99,10 +99,10 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'System'),
+            'label' => Yii::t('gromver.platform', 'System'),
             'routers' => [
-                //['label' => Yii::t('gromver.cmf', 'Sitemap'), 'route' => 'cmf/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/],
-                ['label' => Yii::t('gromver.cmf', 'Contact Form'), 'route' => 'cmf/default/contact'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
+                //['label' => Yii::t('gromver.platform', 'Sitemap'), 'route' => 'grom/default/sitemap'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/],
+                ['label' => Yii::t('gromver.platform', 'Contact Form'), 'route' => 'grom/default/contact'/*, 'icon' => '<i class="glyphicon glyphicon-cog"></i>'*/]
             ]
         ];
     }

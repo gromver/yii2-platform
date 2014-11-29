@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\news\controllers;
+namespace gromver\platform\backend\modules\news\controllers;
 
 use kartik\widgets\Alert;
 use Yii;
-use gromver\cmf\common\models\Category;
-use gromver\cmf\backend\modules\news\models\CategorySearch;
+use gromver\platform\common\models\Category;
+use gromver\platform\backend\modules\news\models\CategorySearch;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -85,13 +85,13 @@ class CategoryController extends Controller
      * @param string $route
      * @return string
      */
-    public function actionSelect($route = 'cmf/news/category/view')
+    public function actionSelect($route = 'grom/news/category/view')
     {
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, true);
         $dataProvider->query->noRoots();
 
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
         return $this->render('select', [
                 'dataProvider' => $dataProvider,
@@ -198,9 +198,9 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($model->descendants()->count()) {
-            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It's impossible to remove category ID:{id} to contain in it subcategories so far.", ['id' => $model->id]));
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', "It's impossible to remove category ID:{id} to contain in it subcategories so far.", ['id' => $model->id]));
         } elseif ($model->getPosts()->count() > 0) {
-            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It's impossible to remove category ID:{id} to contain in it posts so far.", ['id' => $model->id]));
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', "It's impossible to remove category ID:{id} to contain in it posts so far.", ['id' => $model->id]));
         } else {
             $model->deleteNode();
         }
@@ -259,7 +259,7 @@ class CategoryController extends Controller
         }
 
         Category::find()->roots()->one()->reorderNode('ordering');
-        (new Category())->trigger(ActiveRecord::EVENT_AFTER_UPDATE);    //фиксируем изменение таблицы в \gromver\cmf\common\models\Table
+        (new Category())->trigger(ActiveRecord::EVENT_AFTER_UPDATE);    //фиксируем изменение таблицы в \gromver\platform\common\models\Table
 
         return $this->redirect(ArrayHelper::getValue(Yii::$app->request, 'referrer', ['index']));
     }
@@ -296,7 +296,7 @@ class CategoryController extends Controller
                 $root = Category::find()->roots()->one();
                 array_unshift($out, [
                     'id' => $root->id,
-                    'name' => Yii::t('gromver.cmf', 'Root')
+                    'name' => Yii::t('gromver.platform', 'Root')
                 ]);
 
                 echo Json::encode(['output' => $out, 'selected' => $selected ? $selected : $root->id]);
@@ -318,7 +318,7 @@ class CategoryController extends Controller
         if (($model = Category::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }

@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\WidgetConfig */
+/* @var $model gromver\platform\common\models\WidgetConfig */
 
-$this->title = Yii::t('gromver.cmf', 'Update Settings for Widget: {id}', [
+$this->title = Yii::t('gromver.platform', 'Update Settings for Widget: {id}', [
     'id' => $model->widget_id
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Widget\'s Settings'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Widget\'s Settings'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->widget_id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = Yii::t('gromver.cmf', 'Update');
+$this->params['breadcrumbs'][] = Yii::t('gromver.platform', 'Update');
 ?>
 <div class="widget-config-update">
 

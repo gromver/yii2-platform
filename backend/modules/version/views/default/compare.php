@@ -5,11 +5,11 @@ use yii\helpers\ArrayHelper;
 
 /**
  * @var yii\web\View $this
- * @var \gromver\cmf\common\models\Version $a
- * @var \gromver\cmf\common\models\Version $b
+ * @var \gromver\platform\common\models\Version $a
+ * @var \gromver\platform\common\models\Version $b
  */
 
-$this->title = Yii::t('gromver.cmf', 'Comparison of objects');
+$this->title = Yii::t('gromver.platform', 'Comparison of objects');
 $this->params['breadcrumbs'][] = ['label' => 'Versions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -17,7 +17,7 @@ $dummyModel = new $a->item_class;
 $aData = $a->getVersionData();
 $bData = $b->getVersionData();
 
-\gromver\cmf\backend\modules\version\assets\TextDiffAsset::register($this);
+\gromver\platform\backend\modules\version\assets\TextDiffAsset::register($this);
 ?>
 <div class="history-view">
 
@@ -26,10 +26,10 @@ $bData = $b->getVersionData();
     <table id="compare-table" class="table table-striped">
         <thead>
             <tr>
-                <th><?= Yii::t('gromver.cmf', 'Field') ?></th>
-                <th><?= Yii::t('gromver.cmf', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($a->created_at, 'd MMM Y HH:mm')]) ?></th>
-                <th><?= Yii::t('gromver.cmf', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($b->created_at, 'd MMM Y HH:mm')]) ?></th>
-                <th><?= Yii::t('gromver.cmf', 'Changes') ?></th>
+                <th><?= Yii::t('gromver.platform', 'Field') ?></th>
+                <th><?= Yii::t('gromver.platform', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($a->created_at, 'd MMM Y HH:mm')]) ?></th>
+                <th><?= Yii::t('gromver.platform', 'Saved on {date}', ['date' => Yii::$app->formatter->asDatetime($b->created_at, 'd MMM Y HH:mm')]) ?></th>
+                <th><?= Yii::t('gromver.platform', 'Changes') ?></th>
             </tr>
         </thead>
         <tbody>

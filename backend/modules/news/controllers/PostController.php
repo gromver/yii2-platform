@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\news\controllers;
+namespace gromver\platform\backend\modules\news\controllers;
 
-use gromver\cmf\common\models\Category;
-use gromver\cmf\common\models\Post;
-use gromver\cmf\backend\modules\news\models\PostSearch;
+use gromver\platform\common\models\Category;
+use gromver\platform\common\models\Post;
+use gromver\platform\backend\modules\news\models\PostSearch;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -84,12 +84,12 @@ class PostController extends Controller
      * @param string $route
      * @return mixed
      */
-    public function actionSelect($route = 'cmf/news/post/view')
+    public function actionSelect($route = 'grom/news/post/view')
     {
         $searchModel = new PostSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
         return $this->render('select', [
                 'dataProvider' => $dataProvider,
@@ -280,7 +280,7 @@ class PostController extends Controller
         if (($model = Post::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }

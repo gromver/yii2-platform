@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\models\Tag;
-use gromver\cmf\common\widgets\Widget;
+use gromver\platform\common\models\Tag;
+use gromver\platform\common\widgets\Widget;
 use yii\db\Query;
 use Yii;
 
@@ -76,20 +76,20 @@ class TagCloud extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/create', 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/tag/default/create', 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-plus"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Create Tag')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Create Tag')]
             ],
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/index']),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/tag/default/index']),
                 'label' => '<i class="glyphicon glyphicon-th-list"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Tags list'), 'target' => '_blank']
+                'options' => ['title' => Yii::t('gromver.platform', 'Tags list'), 'target' => '_blank']
             ],
         ];
     }
 
     public static function languages()
     {
-        return ['' => Yii::t('gromver.cmf', 'Autodetect')] + Yii::$app->getLanguagesList();
+        return ['' => Yii::t('gromver.platform', 'Autodetect')] + Yii::$app->getLanguagesList();
     }
 } 

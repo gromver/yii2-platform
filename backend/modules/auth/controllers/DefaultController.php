@@ -2,28 +2,29 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\auth\controllers;
+namespace gromver\platform\backend\modules\auth\controllers;
 
 use kartik\widgets\Alert;
 use Yii;
 use yii\di\Instance;
+use yii\filters\AccessControl;
 use yii\mail\BaseMailer;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
-use gromver\cmf\common\models\LoginForm;
-use gromver\cmf\common\models\User;
+use gromver\platform\common\models\LoginForm;
+use gromver\platform\common\models\User;
 
 /**
  * Class DefaultController
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
- * @property \gromver\cmf\backend\modules\auth\Module Module
+ * @property \gromver\platform\backend\modules\auth\Module Module
  */
 class DefaultController extends Controller
 {
@@ -35,7 +36,7 @@ class DefaultController extends Controller
     {
         return [
             'access' => [
-                'class' => \yii\filters\AccessControl::className(),
+                'class' => AccessControl::className(),
                 'only' => ['logout', 'signup'],
                 'rules' => [
                     [
@@ -133,10 +134,10 @@ class DefaultController extends Controller
         $model->scenario = 'requestPasswordResetToken';
         if ($model->load($_POST) && $model->validate()) {
             if ($this->sendPasswordResetEmail($model->email)) {
-                Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Check your email for further instructions.'));
+                Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Check your email for further instructions.'));
                 return $this->goHome();
             } else {
-                Yii::$app->getSession()->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', 'There was an error sending email.'));
+                Yii::$app->getSession()->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', 'There was an error sending email.'));
             }
         }
         return $this->render('requestPasswordResetToken', [
@@ -152,12 +153,12 @@ class DefaultController extends Controller
         ]);
 
         if (!$model) {
-            throw new BadRequestHttpException(Yii::t('gromver.cmf', 'Wrong password reset token.'));
+            throw new BadRequestHttpException(Yii::t('gromver.platform', 'Wrong password reset token.'));
         }
 
         $model->scenario = 'resetPassword';
         if ($model->load($_POST) && $model->save()) {
-            Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'New password was saved.'));
+            Yii::$app->getSession()->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'New password was saved.'));
             return $this->goHome();
         }
 
@@ -181,10 +182,10 @@ class DefaultController extends Controller
         if ($user->save(false)) {
             $mailer = Instance::ensure($this->mailer, BaseMailer::className());
 
-            return $mailer->compose('@gromver/cmf/backend/modules/auth/views/emails/passwordResetToken', ['user' => $user])
-                ->setFrom(Yii::$app->cmf->params['supportEmail'], Yii::t('gromver.cmf', '{name} robot', ['name' => Yii::$app->cmf->siteName]))
+            return $mailer->compose('@gromver/platform/backend/modules/auth/views/emails/passwordResetToken', ['user' => $user])
+                ->setFrom(Yii::$app->grom->params['supportEmail'], Yii::t('gromver.platform', '{name} robot', ['name' => Yii::$app->grom->siteName]))
                 ->setTo($user->email)
-                ->setSubject(Yii::t('gromver.cmf', 'Password reset for {name}.', ['name' => Yii::$app->cmf->siteName]))
+                ->setSubject(Yii::t('gromver.platform', 'Password reset for {name}.', ['name' => Yii::$app->grom->siteName]))
                 ->send();
         }
 

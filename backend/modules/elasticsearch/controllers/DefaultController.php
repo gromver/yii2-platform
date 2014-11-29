@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\elasticsearch\controllers;
+namespace gromver\platform\backend\modules\elasticsearch\controllers;
 
 use yii\elasticsearch\ActiveRecord;
 use yii\elasticsearch\Exception;
@@ -57,7 +57,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * @param $documentClass \gromver\cmf\common\models\elasticsearch\ActiveDocument
+     * @param $documentClass \gromver\platform\common\models\elasticsearch\ActiveDocument
      * @return int
      * @throws \yii\elasticsearch\Exception
      */
@@ -66,7 +66,7 @@ class DefaultController extends Controller
         $bulk = '';
         /** @var \yii\db\ActiveRecord|string $modelClass */
         $modelClass = $documentClass::model();
-        /** @var \gromver\cmf\common\models\elasticsearch\ActiveDocument $document */
+        /** @var \gromver\platform\common\models\elasticsearch\ActiveDocument $document */
         $document = new $documentClass;
         $uploaded = 0;
         foreach ($modelClass::find()->each() as $model) {

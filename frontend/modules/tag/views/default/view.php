@@ -1,17 +1,17 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model gromver\cmf\common\models\Tag
+ * @var $model gromver\platform\common\models\Tag
  */
 
-/** @var \gromver\cmf\common\models\MenuItem $menu */
+/** @var \gromver\platform\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
-    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('gromver.cmf', 'Tag: {tag}', ['tag' => $model->title]);
+    $this->title = $menu->isProperContext() ? $menu->title : Yii::t('gromver.platform', 'Tag: {tag}', ['tag' => $model->title]);
     $this->params['breadcrumbs'] = $menu->getBreadcrumbs($menu->isApplicableContext());
 } else {
-    $this->title = Yii::t('gromver.cmf', 'Tag: {tag}', ['tag' => $model->title]);
-    $this->params['breadcrumbs'][] = ['label' => 'Tag cloud', 'url' => ['/cmf/tag/default/index']];
+    $this->title = Yii::t('gromver.platform', 'Tag: {tag}', ['tag' => $model->title]);
+    $this->params['breadcrumbs'][] = ['label' => 'Tag cloud', 'url' => ['/grom/tag/default/index']];
 }
 //$this->params['breadcrumbs'][] = $this->title;
 //мета теги
@@ -23,7 +23,7 @@ if ($model->metadesc) {
 }
 
 
-echo \gromver\cmf\frontend\widgets\TagItems::widget([
+echo \gromver\platform\frontend\widgets\TagItems::widget([
     'id' => 'tag-items',
     'tag' => $model,
 ]);

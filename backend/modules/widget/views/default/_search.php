@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\backend\modules\widget\models\WidgetConfigSearch */
+/* @var $model gromver\platform\backend\modules\widget\models\WidgetConfigSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -40,8 +40,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'lock') ?>
 
     <div>
-        <?= Html::submitButton(Yii::t('gromver.cmf', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('gromver.cmf', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('gromver.platform', 'Search'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('gromver.platform', 'Reset'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

@@ -2,17 +2,17 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\version\controllers;
+namespace gromver\platform\backend\modules\version\controllers;
 
 use gromver\widgets\ModalIFrame;
 use Yii;
-use gromver\cmf\common\models\Version;
-use gromver\cmf\backend\modules\version\models\VersionSearch;
+use gromver\platform\common\models\Version;
+use gromver\platform\backend\modules\version\models\VersionSearch;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -119,7 +119,7 @@ class DefaultController extends Controller
     {
         $model = $this->findModel($id);
         if ($modal) {
-            Yii::$app->cmf->layout = 'modal';
+            Yii::$app->grom->layout = 'modal';
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -170,12 +170,12 @@ class DefaultController extends Controller
             }
         }
 
-        throw new HttpException(409, Yii::t('gromver.cmf', "Version restore is failed:\n{errors}", ['errors' => implode("\n", $model->getRestoreErrors())]));
+        throw new HttpException(409, Yii::t('gromver.platform', "Version restore is failed:\n{errors}", ['errors' => implode("\n", $model->getRestoreErrors())]));
     }
 
     public function actionPreview($id)
     {
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
         return $this->render('preview', [
             'model' => $this->findModel($id),
@@ -184,7 +184,7 @@ class DefaultController extends Controller
 
     public function actionCompare($id1, $id2)
     {
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
         return $this->render('compare', [
             'a' => $this->findModel($id1),
@@ -201,7 +201,7 @@ class DefaultController extends Controller
             'pagination' => false
         ]);
 
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
         return $this->render('item', [
             'item' => $item,

@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -16,7 +16,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\Json;
 
 /**
- * This is the model class for table "cms_widget_config".
+ * This is the model class for table "grom_widget_config".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -41,7 +41,7 @@ class WidgetConfig extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%cms_widget_config}}';
+        return '{{%grom_widget_config}}';
     }
 
     /**
@@ -69,19 +69,19 @@ class WidgetConfig extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'widget_id' => Yii::t('gromver.cmf', 'Widget ID'),
-            'widget_class' => Yii::t('gromver.cmf', 'Widget Class'),
-            'language' => Yii::t('gromver.cmf', 'Language'),
-            'context' => Yii::t('gromver.cmf', 'Context'),
-            'url' => Yii::t('gromver.cmf', 'Url'),
-            'params' => Yii::t('gromver.cmf', 'Params'),
-            'valid' => Yii::t('gromver.cmf', 'Valid'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
-            'created_by' => Yii::t('gromver.cmf', 'Created By'),
-            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
-            'lock' => Yii::t('gromver.cmf', 'Lock'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'widget_id' => Yii::t('gromver.platform', 'Widget ID'),
+            'widget_class' => Yii::t('gromver.platform', 'Widget Class'),
+            'language' => Yii::t('gromver.platform', 'Language'),
+            'context' => Yii::t('gromver.platform', 'Context'),
+            'url' => Yii::t('gromver.platform', 'Url'),
+            'params' => Yii::t('gromver.platform', 'Params'),
+            'valid' => Yii::t('gromver.platform', 'Valid'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'updated_at' => Yii::t('gromver.platform', 'Updated At'),
+            'created_by' => Yii::t('gromver.platform', 'Created By'),
+            'updated_by' => Yii::t('gromver.platform', 'Updated By'),
+            'lock' => Yii::t('gromver.platform', 'Lock'),
         ];
     }
 

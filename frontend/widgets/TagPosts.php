@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\Post;
-use gromver\cmf\common\models\Tag;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\Post;
+use gromver\platform\common\models\Tag;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
@@ -26,14 +26,14 @@ class TagPosts extends Widget {
      * Tag or TagId or TagId:TagAlias
      * @var Tag|string
      * @type modal
-     * @url /cmf/default/select-tag
+     * @url /grom/default/select-tag
      */
     public $tag;
     /**
      * CategoryId
      * @var string
      * @type modal
-     * @url /cmf/default/select-category
+     * @url /grom/default/select-category
      */
     public $categoryId;
     /**
@@ -74,7 +74,7 @@ class TagPosts extends Widget {
         }
 
         if (empty($this->tag)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Tag must be set.'));
+            throw new InvalidConfigException(Yii::t('gromver.platform', 'Tag must be set.'));
         }
 
         echo $this->render($this->layout, [
@@ -94,16 +94,16 @@ class TagPosts extends Widget {
 
     protected function getQuery()
     {
-        return Post::find()->published()->category($this->categoryId)->innerJoinWith('tags', false)->andWhere(['{{%cms_tag}}.id' => $this->tag->id]);
+        return Post::find()->published()->category($this->categoryId)->innerJoinWith('tags', false)->andWhere(['{{%grom_tag}}.id' => $this->tag->id]);
     }
 
     public function customControls()
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/update', 'id' => $this->tag->id, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/tag/default/update', 'id' => $this->tag->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Update Tag')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Update Tag')]
             ],
         ];
     }
@@ -111,15 +111,15 @@ class TagPosts extends Widget {
     public static function layouts()
     {
         return [
-            'tag/postsDefault' => Yii::t('gromver.cmf', 'Default'),
-            'tag/postsList' => Yii::t('gromver.cmf', 'List'),
+            'tag/postsDefault' => Yii::t('gromver.platform', 'Default'),
+            'tag/postsList' => Yii::t('gromver.platform', 'List'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemPost' => Yii::t('gromver.cmf', 'Default'),
+            '_itemPost' => Yii::t('gromver.platform', 'Default'),
         ];
     }
 
@@ -127,18 +127,18 @@ class TagPosts extends Widget {
     public static function sortColumns()
     {
         return [
-            'published_at' => Yii::t('gromver.cmf', 'By publish date'),
-            'created_at' => Yii::t('gromver.cmf', 'By create date'),
-            'title' => Yii::t('gromver.cmf', 'By name'),
-            'ordering' => Yii::t('gromver.cmf', 'By order'),
+            'published_at' => Yii::t('gromver.platform', 'By publish date'),
+            'created_at' => Yii::t('gromver.platform', 'By create date'),
+            'title' => Yii::t('gromver.platform', 'By name'),
+            'ordering' => Yii::t('gromver.platform', 'By order'),
         ];
     }
 
     public static function sortDirections()
     {
         return [
-            SORT_ASC => Yii::t('gromver.cmf', 'Asc'),
-            SORT_DESC => Yii::t('gromver.cmf', 'Desc'),
+            SORT_ASC => Yii::t('gromver.platform', 'Asc'),
+            SORT_DESC => Yii::t('gromver.platform', 'Desc'),
         ];
     }
 } 

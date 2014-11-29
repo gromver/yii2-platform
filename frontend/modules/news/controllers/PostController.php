@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\news\controllers;
+namespace gromver\platform\frontend\modules\news\controllers;
 
-use gromver\cmf\common\models\Category;
-use gromver\cmf\common\models\Post;
-use gromver\cmf\common\models\Table;
+use gromver\platform\common\models\Category;
+use gromver\platform\common\models\Post;
+use gromver\platform\common\models\Table;
 use yii\data\ActiveDataProvider;
 use yii\helpers\StringHelper;
 use yii\helpers\Url;
@@ -36,7 +36,7 @@ class PostController extends Controller
                 'class' => 'yii\filters\HttpCache',
                 'only' => ['rss'],
                 'lastModified' => function ($action, $params) {
-                        return Table::timestamp('{{%cms_post}}');
+                        return Table::timestamp('{{%grom_post}}');
                     },
             ],
         ];
@@ -77,34 +77,34 @@ class PostController extends Controller
                     ],
                 ]),
             'channel' => [
-                'title' => Yii::$app->cmf->siteName,
+                'title' => Yii::$app->grom->siteName,
                 'link' => Url::toRoute(['', 'category_id' => $category_id], true),
-                'description' => $category_id ? $this->loadCategoryModel($category_id)->title : Yii::t('gromver.cmf', 'All news'),
+                'description' => $category_id ? $this->loadCategoryModel($category_id)->title : Yii::t('gromver.platform', 'All news'),
                 'language' => Yii::$app->language
             ],
             'items' => [
                 'title' => function ($model, $widget) {
-                        /** @var $model \gromver\cmf\common\models\Post */
+                        /** @var $model \gromver\platform\common\models\Post */
                         return $model->title;
                     },
                 'description' => function ($model, $widget) {
-                        /** @var $model \gromver\cmf\common\models\Post */
+                        /** @var $model \gromver\platform\common\models\Post */
                         return $model->preview_text ? $model->preview_text : StringHelper::truncateWords(strip_tags($model->detail_text), 40);
                     },
                 'link' => function ($model, $widget) {
-                        /** @var $model \gromver\cmf\common\models\Post */
+                        /** @var $model \gromver\platform\common\models\Post */
                         return Url::toRoute($model->getViewLink(), true);
                     },
                 'author' => function ($model, $widget) {
-                        /** @var $model \gromver\cmf\common\models\Post */
+                        /** @var $model \gromver\platform\common\models\Post */
                         return $model->user->email . ' (' . $model->user->username . ')';
                     },
                 'guid' => function ($model, $widget) {
-                        /** @var $model \gromver\cmf\common\models\Post */
+                        /** @var $model \gromver\platform\common\models\Post */
                         return Url::toRoute($model->getViewLink(), true) . ' ' . Yii::$app->formatter->asDatetime($model->updated_at, 'php:'.DATE_RSS);
                     },
                 'pubDate' => function ($model, $widget) {
-                        /** @var $model \gromver\cmf\common\models\Post */
+                        /** @var $model \gromver\platform\common\models\Post */
                         return Yii::$app->formatter->asDatetime($model->published_at, 'php:'.DATE_RSS);
                     }
             ]
@@ -114,7 +114,7 @@ class PostController extends Controller
     public function loadModel($id)
     {
         if(!($model = Post::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested post does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested post does not exist..'));
         }
 
         return $model;
@@ -123,7 +123,7 @@ class PostController extends Controller
     public function loadCategoryModel($id)
     {
         if(!($model = Category::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested category does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested category does not exist..'));
         }
 
         return $model;

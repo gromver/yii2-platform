@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use Yii;
 use yii\base\Event;
@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "cms_table".
+ * This is the model class for table "grom_table".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -31,7 +31,7 @@ class Table extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%cms_table}}';
+        return '{{%grom_table}}';
     }
 
     /**
@@ -52,8 +52,8 @@ class Table extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'timestamp' => Yii::t('gromver.cmf', 'Timestamp'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'timestamp' => Yii::t('gromver.platform', 'Timestamp'),
         ];
     }
 

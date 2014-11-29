@@ -2,18 +2,18 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\menu\controllers;
+namespace gromver\platform\backend\modules\menu\controllers;
 
 use kartik\widgets\Alert;
 use gromver\modulequery\ModuleQuery;
 use Yii;
-use gromver\cmf\common\models\MenuItem;
-use gromver\cmf\backend\modules\menu\models\MenuItemSearch;
+use gromver\platform\common\models\MenuItem;
+use gromver\platform\backend\modules\menu\models\MenuItemSearch;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -93,7 +93,7 @@ class ItemController extends Controller
         $params['MenuItemSearch']['link_type'] = MenuItem::LINK_ROUTE;
         $dataProvider = $searchModel->search($params);
 
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
         return $this->render('select', [
             'dataProvider' => $dataProvider,
@@ -107,9 +107,9 @@ class ItemController extends Controller
      */
     public function actionRouters()
     {
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
-        $items = ModuleQuery::instance()->implement('\gromver\cmf\backend\interfaces\MenuRouterInterface')->orderBy('desktopOrder')->execute('getMenuRoutes');
+        $items = ModuleQuery::instance()->implement('\gromver\platform\backend\interfaces\MenuRouterInterface')->orderBy('desktopOrder')->execute('getMenuRoutes');
 
         return $this->render('routers', [
                 'items' => $items
@@ -223,7 +223,7 @@ class ItemController extends Controller
         $model = $this->findModel($id);
 
         if ($model->descendants()->count()) {
-            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', "It's impossible to remove menu item ID:{id} so far it contains descendants.", ['id' => $model->id]));
+            Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', "It's impossible to remove menu item ID:{id} so far it contains descendants.", ['id' => $model->id]));
          } else {
             $model->deleteNode();
         }
@@ -264,7 +264,7 @@ class ItemController extends Controller
         }
 
         MenuItem::find()->roots()->one()->reorderNode('ordering');
-        (new MenuItem())->trigger(ActiveRecord::EVENT_AFTER_UPDATE);    //фиксируем изменение таблицы в \gromver\cmf\common\models\Table
+        (new MenuItem())->trigger(ActiveRecord::EVENT_AFTER_UPDATE);    //фиксируем изменение таблицы в \gromver\platform\common\models\Table
 
         return $this->redirect(ArrayHelper::getValue(Yii::$app->request, 'referrer', ['index']));
     }
@@ -327,7 +327,7 @@ class ItemController extends Controller
                 $root = MenuItem::find()->roots()->one();
                 array_unshift($out, [
                     'id' => $root->id,
-                    'name' => Yii::t('gromver.cmf', 'Root')
+                    'name' => Yii::t('gromver.platform', 'Root')
                 ]);
 
                 echo Json::encode(['output' => $out, 'selected' => $selected ? $selected : $root->id]);
@@ -349,7 +349,7 @@ class ItemController extends Controller
         if (($model = MenuItem::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }

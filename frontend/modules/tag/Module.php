@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\tag;
+namespace gromver\platform\frontend\modules\tag;
 
-use gromver\cmf\frontend\interfaces\MenuRouterInterface;
-use gromver\cmf\frontend\modules\tag\components\MenuRouterTag;
+use gromver\platform\frontend\interfaces\MenuRouterInterface;
+use gromver\platform\frontend\modules\tag\components\MenuRouterTag;
 
 /**
  * Class Module
@@ -19,7 +19,7 @@ use gromver\cmf\frontend\modules\tag\components\MenuRouterTag;
  */
 class Module extends \yii\base\Module implements MenuRouterInterface
 {
-    public $controllerNamespace = 'gromver\cmf\frontend\modules\tag\controllers';
+    public $controllerNamespace = 'gromver\platform\frontend\modules\tag\controllers';
 
     /**
      * @inheritdoc

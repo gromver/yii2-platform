@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\widget;
+namespace gromver\platform\frontend\modules\widget;
 
 /**
  * Class Module
@@ -16,5 +16,5 @@ namespace gromver\cmf\frontend\modules\widget;
  */
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'gromver\cmf\frontend\modules\widget\controllers';
+    public $controllerNamespace = 'gromver\platform\frontend\modules\widget\controllers';
 }

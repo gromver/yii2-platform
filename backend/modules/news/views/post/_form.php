@@ -4,8 +4,8 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\Post */
-/* @var $sourceModel gromver\cmf\common\models\Post */
+/* @var $model gromver\platform\common\models\Post */
+/* @var $sourceModel gromver\platform\common\models\Post */
 /* @var $form yii\bootstrap\ActiveForm */
 ?>
 
@@ -20,14 +20,14 @@ use yii\bootstrap\ActiveForm;
 
         <?= $form->field($model, 'title')->textInput(['maxlength' => 1024, 'placeholder' => isset($sourceModel) ? $sourceModel->title : null]) ?>
 
-        <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.cmf', 'Auto-generate')]) ?>
+        <?= $form->field($model, 'alias')->textInput(['maxlength' => 255, 'placeholder' => Yii::t('gromver.platform', 'Auto-generate')]) ?>
 
         <?= $form->field($model, 'versionNote')->textInput() ?>
 
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#main-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Main') ?></a></li>
-            <li><a href="#advanced-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Advanced') ?></a></li>
-            <li><a href="#meta-options" data-toggle="tab"><?= Yii::t('gromver.cmf', 'Metadata') ?></a></li>
+            <li class="active"><a href="#main-options" data-toggle="tab"><?= Yii::t('gromver.platform', 'Main') ?></a></li>
+            <li><a href="#advanced-options" data-toggle="tab"><?= Yii::t('gromver.platform', 'Advanced') ?></a></li>
+            <li><a href="#meta-options" data-toggle="tab"><?= Yii::t('gromver.platform', 'Metadata') ?></a></li>
         </ul>
         <br/>
         <div class="tab-content">
@@ -38,24 +38,24 @@ use yii\bootstrap\ActiveForm;
                         <?= \mihaildev\ckeditor\CKEditor::widget([
                             'model' => $model,
                             'attribute' => 'detail_text',
-                            'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('cmf/media/manager', [
+                            'editorOptions' => \mihaildev\elfinder\ElFinder::ckeditorOptions('grom/media/manager', [
                                 'extraPlugins' => 'codesnippet'
                             ])
                         ]) ?>
                     </div>
                 </div>
-                <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.cmf', 'Select ...'), 'id' => 'language']) ?>
+                <?= $form->field($model, 'language')->dropDownList(Yii::$app->getLanguagesList(), ['prompt' => Yii::t('gromver.platform', 'Select ...'), 'id' => 'language']) ?>
 
                 <?= $form->field($model, 'category_id')->widget(\kartik\widgets\DepDrop::className(), [
                     'pluginOptions' => [
                         //'initialize' => true,
                         'depends' => ['language'],
-                        'placeholder' => Yii::t('gromver.cmf', 'Select ...'),
+                        'placeholder' => Yii::t('gromver.platform', 'Select ...'),
                         'url' => \yii\helpers\Url::to(['categories', 'selected' => $model->category_id]),
                     ]
                 ]) ?>
 
-                <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.cmf', 'Select ...')] + $model->statusLabels()) ?>
+                <?= $form->field($model, 'status')->dropDownList(['' => Yii::t('gromver.platform', 'Select ...')] + $model->statusLabels()) ?>
 
                 <?= $form->field($model, 'published_at')->widget(\kartik\widgets\DateTimePicker::className(), [
                     'options' => ['value' => date('d.m.Y H:i', is_int($model->published_at) ? $model->published_at : time())],
@@ -79,15 +79,15 @@ use yii\bootstrap\ActiveForm;
                     'clientOptions' => [
                         'maxItems' => 'NaN'
                     ],
-                    'url' => ['/cmf/tag/default/tag-list']
+                    'url' => ['/grom/tag/default/tag-list']
                 ]) ?>
 
-                <?= $form->field($model, 'detail_image')->widget(\gromver\cmf\backend\widgets\FileInput::classname(), [
+                <?= $form->field($model, 'detail_image')->widget(\gromver\platform\backend\widgets\FileInput::classname(), [
                     'options' => ['accept' => 'image/*'],
                     'pluginOptions' => ['showUpload' => false]
                 ]) ?>
 
-                <?= $form->field($model, 'preview_image')->widget(\gromver\cmf\backend\widgets\FileInput::classname(), [
+                <?= $form->field($model, 'preview_image')->widget(\gromver\platform\backend\widgets\FileInput::classname(), [
                     'options' => ['accept' => 'image/*'],
                     'pluginOptions' => ['showUpload' => false]
                 ]) ?>
@@ -102,7 +102,7 @@ use yii\bootstrap\ActiveForm;
         <?= Html::activeHiddenInput($model, 'lock') ?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.cmf', 'Create') : Yii::t('gromver.cmf', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.platform', 'Create') : Yii::t('gromver.platform', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

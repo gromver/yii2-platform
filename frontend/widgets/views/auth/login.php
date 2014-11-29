@@ -2,7 +2,7 @@
 /**
  * @var yii\web\View $this
  * @var yii\widgets\ActiveForm $form
- * @var gromver\cmf\common\models\User $model
+ * @var gromver\platform\common\models\User $model
  */
 
 use yii\helpers\Html;

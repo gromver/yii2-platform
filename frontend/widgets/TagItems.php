@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\widgets\Widget;
-use gromver\cmf\common\models\Tag;
+use gromver\platform\common\widgets\Widget;
+use gromver\platform\common\models\Tag;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\data\ActiveDataProvider;
@@ -25,7 +25,7 @@ class TagItems extends Widget {
      * Tag model or TagId
      * @var Tag|string
      * @type modal
-     * @url /cmf/default/select-tag
+     * @url /grom/default/select-tag
      */
     public $tag;
     public $pageSize = 20;
@@ -49,7 +49,7 @@ class TagItems extends Widget {
         }
 
         if (empty($this->tag)) {
-            throw new InvalidConfigException(Yii::t('gromver.cmf', 'Tag not found.'));
+            throw new InvalidConfigException(Yii::t('gromver.platform', 'Tag not found.'));
         }
 
         echo $this->render($this->layout, [
@@ -70,9 +70,9 @@ class TagItems extends Widget {
     {
         return [
             [
-                'url' => Yii::$app->urlManagerBackend->createUrl(['cmf/tag/default/update', 'id' => $this->tag->id, 'backUrl' => $this->getBackUrl()]),
+                'url' => Yii::$app->urlManagerBackend->createUrl(['grom/tag/default/update', 'id' => $this->tag->id, 'backUrl' => $this->getBackUrl()]),
                 'label' => '<i class="glyphicon glyphicon-pencil"></i>',
-                'options' => ['title' => Yii::t('gromver.cmf', 'Update Tag')]
+                'options' => ['title' => Yii::t('gromver.platform', 'Update Tag')]
             ],
         ];
     }
@@ -80,15 +80,15 @@ class TagItems extends Widget {
     public static function layouts()
     {
         return [
-            'tag/itemsDefault' => Yii::t('gromver.cmf', 'Default'),
-            'tag/itemsList' => Yii::t('gromver.cmf', 'List'),
+            'tag/itemsDefault' => Yii::t('gromver.platform', 'Default'),
+            'tag/itemsList' => Yii::t('gromver.platform', 'List'),
         ];
     }
 
     public static function itemLayouts()
     {
         return [
-            '_itemItem' => Yii::t('gromver.cmf', 'Default'),
+            '_itemItem' => Yii::t('gromver.platform', 'Default'),
         ];
     }
 }

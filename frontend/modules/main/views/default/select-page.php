@@ -6,10 +6,10 @@ use kartik\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var gromver\cmf\backend\modules\page\models\PageSearch $searchModel
+ * @var gromver\platform\backend\modules\page\models\PageSearch $searchModel
  */
 
-$this->title = Yii::t('gromver.cmf', 'Select Page');
+$this->title = Yii::t('gromver.platform', 'Select Page');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-index">
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'title',
                 'value' => function($model) {
-                        /** @var $model \gromver\cmf\common\models\Page */
+                        /** @var $model \gromver\platform\common\models\Page */
                         return $model->title . '<br/>' . Html::tag('small', $model->alias, ['class' => 'text-muted']);
                     },
                 'format' => 'html'
@@ -47,33 +47,33 @@ $this->params['breadcrumbs'][] = $this->title;
 			[
                 'attribute' => 'status',
                 'value' => function ($model, $index, $widget) {
-                    /** @var $model \gromver\cmf\common\models\Page */
+                    /** @var $model \gromver\platform\common\models\Page */
                     return $model->getStatusLabel();
                 },
-                'filter' => \gromver\cmf\common\models\Page::statusLabels()
+                'filter' => \gromver\platform\common\models\Page::statusLabels()
             ],
             [
                 'attribute' => 'tags',
                 'value' => function($model){
-                        /** @var $model \gromver\cmf\common\models\Page */
+                        /** @var $model \gromver\platform\common\models\Page */
                         return implode(', ', \yii\helpers\ArrayHelper::map($model->tags, 'id', 'title'));
                     },
                 'filterType' => \dosamigos\selectize\Selectize::className(),
                 'filterWidgetOptions' => [
-                    'items' => \yii\helpers\ArrayHelper::map(\gromver\cmf\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
+                    'items' => \yii\helpers\ArrayHelper::map(\gromver\platform\common\models\Tag::find()->where(['id' => $searchModel->tags])->all(), 'id', 'title', 'group'),
                     'clientOptions' => [
                         'maxItems' => 1
                     ],
-                    'url' => ['/cmf/default/tag-list']
+                    'url' => ['/grom/default/tag-list']
                 ]
             ],
             [
                 'value' => function($model) {
-                    return Html::a(Yii::t('gromver.cmf', 'Select'), '#', [
+                    return Html::a(Yii::t('gromver.platform', 'Select'), '#', [
                         'class' => 'btn btn-primary btn-xs',
                         'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                 'id' => $model->id,
-                                'description' => Yii::t('gromver.cmf', 'Page: {title}', ['title' => $model->title]),
+                                'description' => Yii::t('gromver.platform', 'Page: {title}', ['title' => $model->title]),
                                 'value' => $model->id . ':' . $model->alias
                             ]),
                     ]);
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'panel' => [
             'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> ' . Html::encode($this->title) . ' </h3>',
             'type' => 'info',
-            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), [null], ['class' => 'btn btn-info']),
+            'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.platform', 'Reset List'), [null], ['class' => 'btn btn-info']),
             'showFooter' => false,
         ],
 	]) ?>

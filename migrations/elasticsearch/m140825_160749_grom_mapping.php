@@ -9,7 +9,7 @@ class m140825_160749_grom_mapping extends Migration
     {
         $connection = \yii\elasticsearch\ActiveRecord::getDb();
 
-        $index = \gromver\cmf\common\models\elasticsearch\ActiveDocument::index();
+        $index = \gromver\platform\common\models\elasticsearch\ActiveDocument::index();
 
         if ($connection->createCommand()->indexExists($index)) {
             $connection->createCommand()->deleteIndex($index);
@@ -19,15 +19,15 @@ class m140825_160749_grom_mapping extends Migration
             /*'settings' => [
                 'analysis' => [
                     'analyzer' => [
-                        'cms_analyzer' => [
+                        'grom_analyzer' => [
                             'type' => 'custom',
                             'char_filter' => 'html_strip',
                             'tokenizer' => 'standard',
-                            'filter' => ["lowercase", "russian_morphology", "english_morphology", "cms_stopwords"]
+                            'filter' => ["lowercase", "russian_morphology", "english_morphology", "grom_stopwords"]
                         ]
                     ],
                     'filter' => [
-                        'cms_stopwords' => [
+                        'grom_stopwords' => [
                             'type' => 'stop',
                             'stopwords' => 'а,без,более,бы,был,была,были,было,быть,в,вам,вас,весь,во,вот,все,всего,всех,вы,где,да,даже,для,до,его,ее,если,есть,еще,же,за,здесь,и,из,или,им,их,к,как,ко,когда,кто,ли,либо,мне,может,мы,на,надо,наш,не,него,нее,нет,ни,них,но,ну,о,об,однако,он,она,они,оно,от,очень,по,под,при,с,со,так,также,такой,там,те,тем,то,того,тоже,той,только,том,ты,у,уже,хотя,чего,чей,чем,что,чтобы,чье,чья,эта,эти,это,я,a,an,and,are,as,at,be,but,by,for,if,in,into,is,it,no,not,of,on,or,such,that,the,their,then,there,these,they,this,to,was,will,with'
                         ]
@@ -36,7 +36,7 @@ class m140825_160749_grom_mapping extends Migration
             ],*/
             'mappings' => [
                 'page' => [
-                    //'_all' => ['analyzer' => 'cms_analyzer'],
+                    //'_all' => ['analyzer' => 'grom_analyzer'],
                     'properties' => [
                         'model_class' => [
                             'type' => 'string',
@@ -53,11 +53,11 @@ class m140825_160749_grom_mapping extends Migration
                         ],
                         'title' => [
                             'type' => 'string',
-                            //'analyzer' => 'cms_analyzer'
+                            //'analyzer' => 'grom_analyzer'
                         ],
                         'text' => [
                             'type' => 'string',
-                            //'analyzer' => 'cms_analyzer',
+                            //'analyzer' => 'grom_analyzer',
                             //"index_options" => "offsets",
                             //"term_vector" => "with_positions_offsets"
                         ],
@@ -77,7 +77,7 @@ class m140825_160749_grom_mapping extends Migration
                     ]
                 ],
                 'post' => [
-                    //'_all' => ['analyzer' => 'cms_analyzer'],
+                    //'_all' => ['analyzer' => 'grom_analyzer'],
                     'properties' => [
                         'model_class' => [
                             'type' => 'string',
@@ -98,11 +98,11 @@ class m140825_160749_grom_mapping extends Migration
                         ],
                         'title' => [
                             'type' => 'string',
-                            //'analyzer' => 'cms_analyzer'
+                            //'analyzer' => 'grom_analyzer'
                         ],
                         'text' => [
                             'type' => 'string',
-                            //'analyzer' => 'cms_analyzer',
+                            //'analyzer' => 'grom_analyzer',
                             //"index_options" => "offsets",
                             //"term_vector" => "with_positions_offsets"
                         ],
@@ -122,7 +122,7 @@ class m140825_160749_grom_mapping extends Migration
                     ]
                 ],
                 'category' => [
-                    //'_all' => ['analyzer' => 'cms_analyzer'],
+                    //'_all' => ['analyzer' => 'grom_analyzer'],
                     'properties' => [
                         'model_class' => [
                             'type' => 'string',
@@ -143,11 +143,11 @@ class m140825_160749_grom_mapping extends Migration
                         ],
                         'title' => [
                             'type' => 'string',
-                            //'analyzer' => 'cms_analyzer'
+                            //'analyzer' => 'grom_analyzer'
                         ],
                         'text' => [
                             'type' => 'string',
-                            //'analyzer' => 'cms_analyzer',
+                            //'analyzer' => 'grom_analyzer',
                             //"index_options" => "offsets",
                             //"term_vector" => "with_positions_offsets"
                         ],
@@ -173,9 +173,9 @@ class m140825_160749_grom_mapping extends Migration
         echo "Index $index created.\n";
 
         $documents = [
-            'gromver\cmf\common\models\elasticsearch\Page',
-            'gromver\cmf\common\models\elasticsearch\Post',
-            'gromver\cmf\common\models\elasticsearch\Category',
+            'gromver\platform\common\models\elasticsearch\Page',
+            'gromver\platform\common\models\elasticsearch\Post',
+            'gromver\platform\common\models\elasticsearch\Category',
         ];
 
         foreach ($documents as $documentClass) {
@@ -186,7 +186,7 @@ class m140825_160749_grom_mapping extends Migration
     }
 
     /**
-     * @param $documentClass \gromver\cmf\common\models\elasticsearch\ActiveDocument
+     * @param $documentClass \gromver\platform\common\models\elasticsearch\ActiveDocument
      * @return int
      * @throws Exception
      */
@@ -195,7 +195,7 @@ class m140825_160749_grom_mapping extends Migration
         $bulk = '';
         /** @var \yii\db\ActiveRecord $modelClass */
         $modelClass = $documentClass::model();
-        /** @var \gromver\cmf\common\models\elasticsearch\ActiveDocument $document */
+        /** @var \gromver\platform\common\models\elasticsearch\ActiveDocument $document */
         $document = new $documentClass;
         $query = $modelClass::find();
         //древовидные модели, не должны индексировать рутовый элемент
@@ -242,7 +242,7 @@ class m140825_160749_grom_mapping extends Migration
 
     public function down()
     {
-        $index = \gromver\cmf\common\models\elasticsearch\ActiveDocument::index();
+        $index = \gromver\platform\common\models\elasticsearch\ActiveDocument::index();
 
         \yii\elasticsearch\ActiveRecord::getDb()->createCommand()->deleteIndex($index);//->deleteAllIndexes();//
 

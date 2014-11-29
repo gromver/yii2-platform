@@ -3,6 +3,6 @@
  * @var $items array
  */
 
-echo \gromver\cmf\backend\widgets\Desktop::widget([
+echo \gromver\platform\backend\widgets\Desktop::widget([
         'items' => $items
     ]); ?>

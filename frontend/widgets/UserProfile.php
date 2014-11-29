@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
-use gromver\cmf\common\widgets\Widget;
+use gromver\platform\common\widgets\Widget;
 use gromver\models\ObjectModel;
 use yii\base\InvalidParamException;
 
@@ -28,7 +28,7 @@ class UserProfile extends Widget {
      * @multiple
      * @items params
      * @empty All
-     * @translation gromver.cmf
+     * @translation gromver.platform
      */
     public $params;
 
@@ -64,7 +64,7 @@ class UserProfile extends Widget {
 
     private static function model()
     {
-        return new ObjectModel(\Yii::$app->getModule('cmf/user')->userParamsClass);
+        return new ObjectModel(\Yii::$app->getModule('grom/user')->userParamsClass);
     }
 
     public static function params()

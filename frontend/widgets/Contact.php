@@ -2,18 +2,18 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
 
 use kartik\widgets\Alert;
-use gromver\cmf\common\models\ContactForm;
-use gromver\cmf\common\widgets\Widget;
+use gromver\platform\common\models\ContactForm;
+use gromver\platform\common\widgets\Widget;
 use Yii;
 
 /**
@@ -37,7 +37,7 @@ class Contact extends Widget {
         }
 
         if (!Yii::$app->user->isGuest) {
-            /** @var \gromver\cmf\common\models\User $user */
+            /** @var \gromver\platform\common\models\User $user */
             $user = Yii::$app->user->identity;
             $userParams = $user->getParamsArray();
             $model->name = $userParams['name'] ? $userParams['name'] : $user->username;
@@ -45,12 +45,12 @@ class Contact extends Widget {
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail(Yii::$app->cmf->params['adminEmail'])) {
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Email is sent.'));
+            if ($model->sendEmail(Yii::$app->grom->params['adminEmail'])) {
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Email is sent.'));
                 return $this->render($this->viewSuccess);
             } else {
-                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.cmf', 'Error.'));
-                //throw new \HttpRuntimeException(Yii::t('gromver.cmf', 'Email sending is failed.'));
+                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', 'Error.'));
+                //throw new \HttpRuntimeException(Yii::t('gromver.platform', 'Email sending is failed.'));
             }
         }
 

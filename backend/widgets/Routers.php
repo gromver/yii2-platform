@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\widgets;
+namespace gromver\platform\backend\widgets;
 
-use gromver\cmf\common\models\MenuItem;
+use gromver\platform\common\models\MenuItem;
 use gromver\widgets\ModalIFrame;
 use Yii;
 use yii\bootstrap\Widget;

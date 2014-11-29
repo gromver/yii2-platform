@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\widgets;
+namespace gromver\platform\backend\widgets;
 
 use kartik\helpers\Html;
 use kartik\widgets\FileInput as KartikFileInput;
@@ -31,7 +31,7 @@ class FileInput extends InputWidget {
                 <div class="file-preview">
                     <div class="file-preview-thumbnails">
                         <div class="file-preview-frame">
-                            <?=Html::img($imageUrl, ['class' => 'file-preview-image', 'alt' => \Yii::t('gromver.cmf', 'File not found.')])?>
+                            <?=Html::img($imageUrl, ['class' => 'file-preview-image', 'alt' => \Yii::t('gromver.platform', 'File not found.')])?>
                         </div>
                     </div>
                     <div class="clearfix"></div>

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use gromver\cmf\common\models\WidgetConfig;
+use gromver\platform\common\models\WidgetConfig;
 
 /**
  * @var yii\web\View $this
@@ -23,7 +23,7 @@ foreach ($contexts as $i=>$part) {
     if ($selected_context == $context) {
         $class .= ' selected';
     }
-    $description = empty($part) ? Yii::t('gromver.cmf', 'Default') : $part;
+    $description = empty($part) ? Yii::t('gromver.platform', 'Default') : $part;
 
 
     if ($i) {

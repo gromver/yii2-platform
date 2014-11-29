@@ -1,10 +1,10 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model gromver\cmf\common\models\Category
+ * @var $model gromver\platform\common\models\Category
  */
 
-/** @var \gromver\cmf\common\models\MenuItem $menu */
+/** @var \gromver\platform\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : $model->title;
@@ -32,7 +32,7 @@ if ($model->metadesc) {
 }
 
 
-echo \gromver\cmf\frontend\widgets\CategoryList::widget([
+echo \gromver\platform\frontend\widgets\CategoryList::widget([
     'id' => 'cat-cats',
     'category' => $model
 ]);

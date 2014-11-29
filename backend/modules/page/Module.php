@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\page;
+namespace gromver\platform\backend\modules\page;
 
-use gromver\cmf\backend\interfaces\DesktopInterface;
-use gromver\cmf\backend\interfaces\MenuRouterInterface;
+use gromver\platform\backend\interfaces\DesktopInterface;
+use gromver\platform\backend\interfaces\MenuRouterInterface;
 use Yii;
 
 /**
@@ -20,7 +20,7 @@ use Yii;
  */
 class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\page\controllers';
+    public $controllerNamespace = 'gromver\platform\backend\modules\page\controllers';
     public $desktopOrder = 5;
 
     /**
@@ -29,9 +29,9 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Page'),
+            'label' => Yii::t('gromver.platform', 'Page'),
             'links' => [
-                ['label' => Yii::t('gromver.cmf', 'Pages'), 'url' => ['/cmf/page/default/index']]
+                ['label' => Yii::t('gromver.platform', 'Pages'), 'url' => ['/grom/page/default/index']]
             ]
         ];
     }
@@ -42,9 +42,9 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Page'),
+            'label' => Yii::t('gromver.platform', 'Page'),
             'routers' => [
-                ['label' => Yii::t('gromver.cmf', 'Page View'), 'url' => ['/cmf/page/default/select']],
+                ['label' => Yii::t('gromver.platform', 'Page View'), 'url' => ['/grom/page/default/select']],
             ]
         ];
     }

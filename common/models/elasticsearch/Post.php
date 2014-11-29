@@ -1,16 +1,16 @@
 <?php
 /**
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models\elasticsearch;
+namespace gromver\platform\common\models\elasticsearch;
 
 
-use gromver\cmf\common\models\Category;
+use gromver\platform\common\models\Category;
 
 /**
  * Class Post
@@ -25,11 +25,11 @@ class Post extends ActiveDocument {
 
     public static function model()
     {
-        return \gromver\cmf\common\models\Post::className();
+        return \gromver\platform\common\models\Post::className();
     }
 
     /**
-     * @param \gromver\cmf\common\models\Page $model
+     * @param \gromver\platform\common\models\Page $model
      */
     public function loadModel($model)
     {
@@ -53,7 +53,7 @@ class Post extends ActiveDocument {
             ],
         ];
 
-        if ($unpublishedCategories = Category::find()->unpublished()->select('{{%cms_category}}.id')->column()) {
+        if ($unpublishedCategories = Category::find()->unpublished()->select('{{%grom_category}}.id')->column()) {
             $filters[] =             [
                 'not' => [
                     'and' => [

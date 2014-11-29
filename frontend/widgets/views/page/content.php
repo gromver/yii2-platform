@@ -1,7 +1,7 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model \gromver\cmf\common\models\Page
+ * @var $model \gromver\platform\common\models\Page
  */
 
 use yii\helpers\Html;

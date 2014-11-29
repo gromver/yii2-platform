@@ -2,13 +2,13 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use gromver\cmf\common\models\User;
+use gromver\platform\common\models\User;
 
 /* @var $this yii\web\View */
-/* @var $searchModel gromver\cmf\backend\modules\user\models\UserSearch */
+/* @var $searchModel gromver\platform\backend\modules\user\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('gromver.cmf', 'Users');
+$this->title = Yii::t('gromver.platform', 'Users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php /*// echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a(Yii::t('gromver.cmf', 'Create {modelClass}', [
+        <?= Html::a(Yii::t('gromver.platform', 'Create {modelClass}', [
     'modelClass' => 'User',
 ]), ['create'], ['class' => 'btn btn-success']) ?>
     </p>*/?>
@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'class' => 'kartik\grid\ActionColumn',
-                //'class' => 'gromver\cmf\backend\widgets\ActionColumn',
+                //'class' => 'gromver\platform\backend\widgets\ActionColumn',
                 'template' => '{params} {view} {update} {delete}',
                 'deleteOptions' => ['data-method'=>'delete'],
                 'buttons' => [
@@ -84,8 +84,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'type' => 'info',
             'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success', 'data-pjax' => 0]),
             'after' =>
-                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.cmf', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax'=>'0', 'onclick'=>'processAction(this); return false']) . ' ' .
-                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.cmf', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
+                Html::a('<i class="glyphicon glyphicon-trash"></i> ' . Yii::t('gromver.platform', 'Delete'), ['bulk-delete'], ['class' => 'btn btn-danger', 'data-pjax'=>'0', 'onclick'=>'processAction(this); return false']) . ' ' .
+                Html::a('<i class="glyphicon glyphicon-repeat"></i> ' . Yii::t('gromver.platform', 'Reset List'), ['index'], ['class' => 'btn btn-info']),
             'showFooter' => false
         ],
     ]) ?>
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
             $grid = $('#table-grid'),
             selection = $grid.yiiGridView('getSelectedRows')
         if(!selection.length) {
-            alert(<?= json_encode(Yii::t('gromver.cmf', 'Выберите элементы.')) ?>)
+            alert(<?= json_encode(Yii::t('gromver.platform', 'Выберите элементы.')) ?>)
             return
         }
 

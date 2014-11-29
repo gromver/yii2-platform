@@ -2,20 +2,20 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\page\models;
+namespace gromver\platform\backend\modules\page\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use gromver\cmf\common\models\Page;
+use gromver\platform\common\models\Page;
 
 /**
- * Class PageSearch represents the model behind the search form about `gromver\cmf\common\models\Page`.
+ * Class PageSearch represents the model behind the search form about `gromver\platform\common\models\Page`.
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
@@ -76,7 +76,7 @@ class PageSearch extends Page
             'lock' => $this->lock,
         ]);
 
-        $query->andFilterWhere(['like', '{{%cms_page}}.language', $this->language])
+        $query->andFilterWhere(['like', '{{%grom_page}}.language', $this->language])
             ->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'alias', $this->alias])
             ->andFilterWhere(['like', 'preview_text', $this->preview_text])
@@ -85,7 +85,7 @@ class PageSearch extends Page
             ->andFilterWhere(['like', 'metadesc', $this->metadesc]);
 
         if($this->tags)
-            $query->innerJoinWith('tags')->andFilterWhere(['{{%cms_tag}}.id' => $this->tags]);
+            $query->innerJoinWith('tags')->andFilterWhere(['{{%grom_tag}}.id' => $this->tags]);
 
         return $dataProvider;
     }

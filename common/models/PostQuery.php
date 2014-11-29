@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use yii\db\ActiveQuery;
 use yii\db\Query;
@@ -26,15 +26,15 @@ class PostQuery extends ActiveQuery {
     {
         $badcatsQuery = new Query([
             'select' => ['badcats.id'],
-            'from' => ['{{%cms_category}} AS unpublished'],
+            'from' => ['{{%grom_category}} AS unpublished'],
             'join' => [
-                ['LEFT JOIN', '{{%cms_category}} AS badcats', 'unpublished.lft <= badcats.lft AND unpublished.rgt >= badcats.rgt']
+                ['LEFT JOIN', '{{%grom_category}} AS badcats', 'unpublished.lft <= badcats.lft AND unpublished.rgt >= badcats.rgt']
             ],
             'where' => 'unpublished.status != '.Category::STATUS_PUBLISHED,
             'groupBy' => ['badcats.id']
         ]);
 
-        return $this->andWhere(['{{%cms_post}}.status' => Post::STATUS_PUBLISHED])->andWhere(['NOT IN', '{{%cms_post}}.category_id', $badcatsQuery]);
+        return $this->andWhere(['{{%grom_post}}.status' => Post::STATUS_PUBLISHED])->andWhere(['NOT IN', '{{%grom_post}}.category_id', $badcatsQuery]);
     }
 
     /**
@@ -44,7 +44,7 @@ class PostQuery extends ActiveQuery {
      */
     public function category($id = null)
     {
-        return $this->andFilterWhere(['{{%cms_post}}.category_id' => $id]);
+        return $this->andFilterWhere(['{{%grom_post}}.category_id' => $id]);
     }
 
     /**
@@ -54,7 +54,7 @@ class PostQuery extends ActiveQuery {
     public function language($value = null)
     {
         if ($value) {
-            $this->innerJoinWith('category', false)->andWhere(['{{%cms_category}}.language' => $value]);
+            $this->innerJoinWith('category', false)->andWhere(['{{%grom_category}}.language' => $value]);
         }
 
         return $this;
@@ -66,7 +66,7 @@ class PostQuery extends ActiveQuery {
      */
     public function last()
     {
-        return $this->andWhere('{{%cms_post}}.published_at<=:now', [':now' => time()]);
+        return $this->andWhere('{{%grom_post}}.published_at<=:now', [':now' => time()]);
     }
 
     /**
@@ -81,7 +81,7 @@ class PostQuery extends ActiveQuery {
         $from = mktime(0,0,0,$month,$day,$year);
         $to = $from + 86400;
 
-        return $this->andWhere('{{%cms_post}}.published_at>=:from AND {{%cms_post}}.published_at<:to', [':from' => $from, ':to' => $to]);
+        return $this->andWhere('{{%grom_post}}.published_at>=:from AND {{%grom_post}}.published_at<:to', [':from' => $from, ':to' => $to]);
     }
     /**
      * Статьи до указанного дня
@@ -94,7 +94,7 @@ class PostQuery extends ActiveQuery {
     {
         $date = mktime(0,0,0,$month,$day,$year);
 
-        return $this->andWhere('{{%cms_post}}.published_at<=:date', [':date' => $date])->orderBy('{{%cms_post}}.published_at DESC');
+        return $this->andWhere('{{%grom_post}}.published_at<=:date', [':date' => $date])->orderBy('{{%grom_post}}.published_at DESC');
     }
     /**
      * Статьи после указанного дня
@@ -107,6 +107,6 @@ class PostQuery extends ActiveQuery {
     {
         $date = mktime(0,0,0,$month,$day,$year)+86400;
 
-        return $this->andWhere('{{%cms_post}}.published_at>=:date', [':date' => $date])->orderBy('{{%cms_post}}.published_at ASC');
+        return $this->andWhere('{{%grom_post}}.published_at>=:date', [':date' => $date])->orderBy('{{%grom_post}}.published_at ASC');
     }
 } 

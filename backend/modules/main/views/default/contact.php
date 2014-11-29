@@ -5,7 +5,7 @@ use yii\captcha\Captcha;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \gromver\cmf\common\models\ContactForm */
+/* @var $model \gromver\platform\common\models\ContactForm */
 
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]);
                 } ?>
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('gromver.cmf', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton(Yii::t('gromver.platform', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
             <?php ActiveForm::end(); ?>
         </div>

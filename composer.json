@@ -1,7 +1,7 @@
 {
-    "name": "gromver/yii2-cmf",
+    "name": "gromver/yii2-platform",
     "description": "CMF for Yii2.",
-    "keywords": ["yii", "application", "cms", "cmf"],
+    "keywords": ["yii", "yii2", "application", "cms", "cmf", "platform", "grom"],
     "type": "yii2-extension",
     "license": "GNU-GPL-v2",
     "authors": [
@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "gromver\\cmf\\": ""
+            "gromver\\platform\\": ""
         }
     }
 }

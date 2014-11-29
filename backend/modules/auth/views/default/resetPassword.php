@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
 /**
  * @var yii\web\View $this
  * @var yii\bootstrap\ActiveForm $form
- * @var gromver\cmf\backend\modules\auth\models\User $model
+ * @var gromver\platform\backend\modules\auth\models\User $model
  */
 
 $this->title = \Yii::t('auth.user', 'Reset Password');

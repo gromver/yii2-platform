@@ -2,20 +2,20 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\news\models;
+namespace gromver\platform\backend\modules\news\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use gromver\cmf\common\models\Post;
+use gromver\platform\common\models\Post;
 
 /**
- * Class PostSearch represents the model behind the search form about `gromver\cmf\common\models\Post`.
+ * Class PostSearch represents the model behind the search form about `gromver\platform\common\models\Post`.
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
@@ -71,36 +71,36 @@ class PostSearch extends Post
         }
 
         $query->andFilterWhere([
-            '{{%cms_post}}.id' => $this->id,
-            '{{%cms_post}}.category_id' => $this->category_id,
-            '{{%cms_post}}.created_at' => $this->created_at,
-            '{{%cms_post}}.updated_at' => $this->updated_at,
-            '{{%cms_post}}.status' => $this->status,
-            '{{%cms_post}}.created_by' => $this->created_by,
-            '{{%cms_post}}.updated_by' => $this->updated_by,
-            '{{%cms_post}}.ordering' => $this->ordering,
-            '{{%cms_post}}.hits' => $this->hits,
-            '{{%cms_post}}.lock' => $this->lock,
+            '{{%grom_post}}.id' => $this->id,
+            '{{%grom_post}}.category_id' => $this->category_id,
+            '{{%grom_post}}.created_at' => $this->created_at,
+            '{{%grom_post}}.updated_at' => $this->updated_at,
+            '{{%grom_post}}.status' => $this->status,
+            '{{%grom_post}}.created_by' => $this->created_by,
+            '{{%grom_post}}.updated_by' => $this->updated_by,
+            '{{%grom_post}}.ordering' => $this->ordering,
+            '{{%grom_post}}.hits' => $this->hits,
+            '{{%grom_post}}.lock' => $this->lock,
         ]);
 
         if ($this->published_at) {
-            $query->andWhere('{{%cms_post}}.published_at >= :timestamp', ['timestamp' => $this->published_at]);
+            $query->andWhere('{{%grom_post}}.published_at >= :timestamp', ['timestamp' => $this->published_at]);
         }
 
-        $query->andFilterWhere(['like', '{{%cms_post}}.title', $this->title])
-            ->andFilterWhere(['like', '{{%cms_post}}.alias', $this->alias])
-            ->andFilterWhere(['like', '{{%cms_post}}.preview_text', $this->preview_text])
-            ->andFilterWhere(['like', '{{%cms_post}}.preview_image', $this->preview_image])
-            ->andFilterWhere(['like', '{{%cms_post}}.detail_text', $this->detail_text])
-            ->andFilterWhere(['like', '{{%cms_post}}.detail_image', $this->detail_image])
-            ->andFilterWhere(['like', '{{%cms_post}}.metakey', $this->metakey])
-            ->andFilterWhere(['like', '{{%cms_post}}.metadesc', $this->metadesc]);
+        $query->andFilterWhere(['like', '{{%grom_post}}.title', $this->title])
+            ->andFilterWhere(['like', '{{%grom_post}}.alias', $this->alias])
+            ->andFilterWhere(['like', '{{%grom_post}}.preview_text', $this->preview_text])
+            ->andFilterWhere(['like', '{{%grom_post}}.preview_image', $this->preview_image])
+            ->andFilterWhere(['like', '{{%grom_post}}.detail_text', $this->detail_text])
+            ->andFilterWhere(['like', '{{%grom_post}}.detail_image', $this->detail_image])
+            ->andFilterWhere(['like', '{{%grom_post}}.metakey', $this->metakey])
+            ->andFilterWhere(['like', '{{%grom_post}}.metadesc', $this->metadesc]);
 
         if($this->tags)
-            $query->innerJoinWith('tags')->andFilterWhere(['{{%cms_tag}}.id' => $this->tags]);
+            $query->innerJoinWith('tags')->andFilterWhere(['{{%grom_tag}}.id' => $this->tags]);
 
         if($this->language)
-            $query->innerJoinWith('category', false)->andFilterWhere(['like', '{{%cms_category}}.language', $this->language]);
+            $query->innerJoinWith('category', false)->andFilterWhere(['like', '{{%grom_category}}.language', $this->language]);
 
 
         return $dataProvider;

@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend;
+namespace gromver\platform\backend;
 
 use yii\helpers\ArrayHelper;
 
@@ -16,9 +16,9 @@ use yii\helpers\ArrayHelper;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class Application extends \gromver\cmf\common\Application {
-    public $defaultRoute = 'cmf/default/index';
-    public $layout = '@gromver/cmf/backend/views/layouts/main';
+class Application extends \gromver\platform\common\Application {
+    public $defaultRoute = 'grom/default/index';
+    public $layout = '@gromver/platform/backend/views/layouts/main';
 
     /**
      * @inheritdoc
@@ -28,16 +28,16 @@ class Application extends \gromver\cmf\common\Application {
         $config = ArrayHelper::merge([
             'components' => [
                 'request' => [
-                    'class' => 'gromver\cmf\common\components\Request',
+                    'class' => 'gromver\platform\common\components\Request',
                     'csrfParam' => '_csrfBackend',
                 ],
                 'urlManager' => [
-                    'class' => 'gromver\cmf\common\components\UrlManager',
+                    'class' => 'gromver\platform\common\components\UrlManager',
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                 ],
                 'user' => [
-                    'class' => 'gromver\cmf\common\components\User',
+                    'class' => 'gromver\platform\common\components\User',
                     'idParam' => '__idBackend',
                     'authTimeoutParam' => '__expireBackend',
                     'absoluteAuthTimeoutParam' => '__absoluteExpireBackend',
@@ -46,21 +46,21 @@ class Application extends \gromver\cmf\common\Application {
                 ],
                 'errorHandler' => [
                     'class' => 'yii\web\ErrorHandler',
-                    'errorAction' => 'cmf/default/error'
+                    'errorAction' => 'grom/default/error'
                 ],
                 'authManager' => [
                     'class' => 'yii\rbac\DbManager',
-                    'itemTable' => '{{%cms_auth_item}}',
-                    'itemChildTable' => '{{%cms_auth_item_child}}',
-                    'assignmentTable' => '{{%cms_auth_assignment}}',
-                    'ruleTable' => '{{%cms_auth_rule}}'
+                    'itemTable' => '{{%grom_auth_item}}',
+                    'itemChildTable' => '{{%grom_auth_item_child}}',
+                    'assignmentTable' => '{{%grom_auth_assignment}}',
+                    'ruleTable' => '{{%grom_auth_rule}}'
                 ],
                 'cache' => ['class' => 'yii\caching\FileCache'],
                 'elasticsearch' => ['class' => 'yii\elasticsearch\Connection'],
                 'assetManager' => [
                     'bundles' => [
                         'mihaildev\ckeditor\Assets' => [
-                            'sourcePath' => '@gromver/cmf/backend/assets/ckeditor',
+                            'sourcePath' => '@gromver/platform/backend/assets/ckeditor',
                         ],
                     ],
                 ],
@@ -73,19 +73,19 @@ class Application extends \gromver\cmf\common\Application {
                 ],
             ],
             'modules' => [
-                'cmf' => [
-                    'class' => 'gromver\cmf\backend\modules\main\Module',
+                'grom' => [
+                    'class' => 'gromver\platform\backend\modules\main\Module',
                     'modules' => [
-                        'user'      => ['class' => 'gromver\cmf\backend\modules\user\Module'],
-                        'auth'      => ['class' => 'gromver\cmf\backend\modules\auth\Module'],
-                        'menu'      => ['class' => 'gromver\cmf\backend\modules\menu\Module'],
-                        'news'      => ['class' => 'gromver\cmf\backend\modules\news\Module'],
-                        'page'      => ['class' => 'gromver\cmf\backend\modules\page\Module'],
-                        'tag'       => ['class' => 'gromver\cmf\backend\modules\tag\Module'],
-                        'version'   => ['class' => 'gromver\cmf\backend\modules\version\Module'],
-                        'widget'    => ['class' => 'gromver\cmf\backend\modules\widget\Module'],
-                        'media'     => ['class' => 'gromver\cmf\backend\modules\media\Module'],
-                        //'search'    => ['class' => 'gromver\cmf\backend\modules\elasticsearch\Module'],
+                        'user'      => ['class' => 'gromver\platform\backend\modules\user\Module'],
+                        'auth'      => ['class' => 'gromver\platform\backend\modules\auth\Module'],
+                        'menu'      => ['class' => 'gromver\platform\backend\modules\menu\Module'],
+                        'news'      => ['class' => 'gromver\platform\backend\modules\news\Module'],
+                        'page'      => ['class' => 'gromver\platform\backend\modules\page\Module'],
+                        'tag'       => ['class' => 'gromver\platform\backend\modules\tag\Module'],
+                        'version'   => ['class' => 'gromver\platform\backend\modules\version\Module'],
+                        'widget'    => ['class' => 'gromver\platform\backend\modules\widget\Module'],
+                        'media'     => ['class' => 'gromver\platform\backend\modules\media\Module'],
+                        //'search'    => ['class' => 'gromver\platform\backend\modules\elasticsearch\Module'],
                     ]
                 ],
                 'gridview' => ['class' => 'kartik\grid\Module']
@@ -100,7 +100,7 @@ class Application extends \gromver\cmf\common\Application {
      */
     public function init()
     {
-        $this->bootstrap = array_merge($this->bootstrap, ['cmf']);
+        $this->bootstrap = array_merge($this->bootstrap, ['grom']);
 
         parent::init();
     }

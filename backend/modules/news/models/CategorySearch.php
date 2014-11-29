@@ -2,19 +2,19 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\news\models;
+namespace gromver\platform\backend\modules\news\models;
 
-use gromver\cmf\common\models\Category;
+use gromver\platform\common\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
 
 /**
- * Class CategorySearch represents the model behind the search form about `gromver\cmf\common\models\Category`.
+ * Class CategorySearch represents the model behind the search form about `gromver\platform\common\models\Category`.
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
@@ -55,38 +55,38 @@ class CategorySearch extends Category
         }
 
         $query->andFilterWhere([
-            '{{%cms_category}}.id' => $this->id,
-            '{{%cms_category}}.parent_id' => $this->parent_id,
-            '{{%cms_category}}.created_at' => $this->created_at,
-            '{{%cms_category}}.updated_at' => $this->updated_at,
-            '{{%cms_category}}.status' => $this->status,
-            '{{%cms_category}}.created_by' => $this->created_by,
-            '{{%cms_category}}.updated_by' => $this->updated_by,
-            '{{%cms_category}}.lft' => $this->lft,
-            '{{%cms_category}}.rgt' => $this->rgt,
-            '{{%cms_category}}.level' => $this->level,
-            '{{%cms_category}}.ordering' => $this->ordering,
-            '{{%cms_category}}.hits' => $this->hits,
-            '{{%cms_category}}.lock' => $this->lock,
+            '{{%grom_category}}.id' => $this->id,
+            '{{%grom_category}}.parent_id' => $this->parent_id,
+            '{{%grom_category}}.created_at' => $this->created_at,
+            '{{%grom_category}}.updated_at' => $this->updated_at,
+            '{{%grom_category}}.status' => $this->status,
+            '{{%grom_category}}.created_by' => $this->created_by,
+            '{{%grom_category}}.updated_by' => $this->updated_by,
+            '{{%grom_category}}.lft' => $this->lft,
+            '{{%grom_category}}.rgt' => $this->rgt,
+            '{{%grom_category}}.level' => $this->level,
+            '{{%grom_category}}.ordering' => $this->ordering,
+            '{{%grom_category}}.hits' => $this->hits,
+            '{{%grom_category}}.lock' => $this->lock,
         ]);
 
         if ($this->published_at) {
-            $query->andWhere('{{%cms_category}}.published_at >= :timestamp', ['timestamp' => $this->published_at]);
+            $query->andWhere('{{%grom_category}}.published_at >= :timestamp', ['timestamp' => $this->published_at]);
         }
 
-        $query->andFilterWhere(['like', '{{%cms_category}}.language', $this->language])
-            ->andFilterWhere(['like', '{{%cms_category}}.title', $this->title])
-            ->andFilterWhere(['like', '{{%cms_category}}.alias', $this->alias])
-            ->andFilterWhere(['like', '{{%cms_category}}.path', $this->path])
-            ->andFilterWhere(['like', '{{%cms_category}}.preview_text', $this->preview_text])
-            ->andFilterWhere(['like', '{{%cms_category}}.preview_image', $this->preview_image])
-            ->andFilterWhere(['like', '{{%cms_category}}.detail_text', $this->detail_text])
-            ->andFilterWhere(['like', '{{%cms_category}}.detail_image', $this->detail_image])
-            ->andFilterWhere(['like', '{{%cms_category}}.metakey', $this->metakey])
-            ->andFilterWhere(['like', '{{%cms_category}}.metadesc', $this->metadesc]);
+        $query->andFilterWhere(['like', '{{%grom_category}}.language', $this->language])
+            ->andFilterWhere(['like', '{{%grom_category}}.title', $this->title])
+            ->andFilterWhere(['like', '{{%grom_category}}.alias', $this->alias])
+            ->andFilterWhere(['like', '{{%grom_category}}.path', $this->path])
+            ->andFilterWhere(['like', '{{%grom_category}}.preview_text', $this->preview_text])
+            ->andFilterWhere(['like', '{{%grom_category}}.preview_image', $this->preview_image])
+            ->andFilterWhere(['like', '{{%grom_category}}.detail_text', $this->detail_text])
+            ->andFilterWhere(['like', '{{%grom_category}}.detail_image', $this->detail_image])
+            ->andFilterWhere(['like', '{{%grom_category}}.metakey', $this->metakey])
+            ->andFilterWhere(['like', '{{%grom_category}}.metadesc', $this->metadesc]);
 
         if($this->tags)
-            $query->innerJoinWith('tags')->andFilterWhere(['{{%cms_tag}}.id' => $this->tags]);
+            $query->innerJoinWith('tags')->andFilterWhere(['{{%grom_tag}}.id' => $this->tags]);
 
         return $dataProvider;
     }

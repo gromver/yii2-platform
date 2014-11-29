@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
-use gromver\cmf\backend\behaviors\VersioningBehavior;
+use gromver\platform\backend\behaviors\VersioningBehavior;
 use Yii;
 use yii\behaviors\AttributeBehavior;
 use yii\behaviors\BlameableBehavior;
@@ -19,7 +19,7 @@ use yii\helpers\Json;
 use yii\helpers\StringHelper;
 
 /**
- * This is the model class for table "cms_history".
+ * This is the model class for table "grom_history".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -41,7 +41,7 @@ class Version extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%cms_version}}';
+        return '{{%grom_version}}';
     }
 
     /**
@@ -76,16 +76,16 @@ class Version extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'item_id' => Yii::t('gromver.cmf', 'Item ID'),
-            'item_class' => Yii::t('gromver.cmf', 'Item Class'),
-            'version_note' => Yii::t('gromver.cmf', 'Version Note'),
-            'version_hash' => Yii::t('gromver.cmf', 'Version Hash'),
-            'version_data' => Yii::t('gromver.cmf', 'Version Data'),
-            'character_count' => Yii::t('gromver.cmf', 'Character Count'),
-            'keep_forever' => Yii::t('gromver.cmf', 'Keep Forever'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'created_by' => Yii::t('gromver.cmf', 'Created By'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'item_id' => Yii::t('gromver.platform', 'Item ID'),
+            'item_class' => Yii::t('gromver.platform', 'Item Class'),
+            'version_note' => Yii::t('gromver.platform', 'Version Note'),
+            'version_hash' => Yii::t('gromver.platform', 'Version Hash'),
+            'version_data' => Yii::t('gromver.platform', 'Version Data'),
+            'character_count' => Yii::t('gromver.platform', 'Character Count'),
+            'keep_forever' => Yii::t('gromver.platform', 'Keep Forever'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'created_by' => Yii::t('gromver.platform', 'Created By'),
         ];
     }
 

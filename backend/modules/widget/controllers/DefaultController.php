@@ -2,18 +2,18 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\widget\controllers;
+namespace gromver\platform\backend\modules\widget\controllers;
 
 use gromver\models\ObjectModel;
 use gromver\widgets\ModalIFrame;
 use Yii;
-use gromver\cmf\common\models\WidgetConfig;
-use gromver\cmf\backend\modules\widget\models\WidgetConfigSearch;
+use gromver\platform\common\models\WidgetConfig;
+use gromver\platform\backend\modules\widget\models\WidgetConfigSearch;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -158,20 +158,20 @@ class DefaultController extends Controller
     public function actionConfigure($modal=null)
     {
         if (!($widget_id = Yii::$app->request->getBodyParam('widget_id')))
-            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget ID isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.platform', "Widget ID isn't specified"));
 
         if (!($widget_class = Yii::$app->request->getBodyParam('widget_class')))
-            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget Class isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.platform', "Widget Class isn't specified"));
 
         if (($widget_context = Yii::$app->request->getBodyParam('widget_context'))===null)
-            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget Context isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.platform', "Widget Context isn't specified"));
 
         $selected_context = Yii::$app->request->getBodyParam('selected_context', $widget_context);
 
         $task = Yii::$app->request->getBodyParam('task');
 
         if (($url = Yii::$app->request->getBodyParam('url'))===null)
-            throw new BadRequestHttpException(Yii::t('gromver.cmf', "Widget page url isn't specified"));
+            throw new BadRequestHttpException(Yii::t('gromver.platform', "Widget page url isn't specified"));
         //$url = Yii::$app->request->getBodyParam('url', Yii::$app->request->getReferrer());
 
         if ($task == 'delete') {
@@ -238,7 +238,7 @@ class DefaultController extends Controller
         }
 
         if ($modal) {
-            Yii::$app->cmf->layout = 'modal';
+            Yii::$app->grom->layout = 'modal';
         }
 
         return $this->render('_formConfig', [
@@ -265,7 +265,7 @@ class DefaultController extends Controller
         if (($model = WidgetConfig::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }

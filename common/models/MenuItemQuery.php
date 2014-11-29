@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use creocoder\behaviors\NestedSetQuery;
 use yii\db\ActiveQuery;
@@ -32,7 +32,7 @@ class MenuItemQuery extends ActiveQuery
      */
     public function type($typeId)
     {
-        return $this->andWhere(['{{%cms_menu_item}}.menu_type_id' => $typeId]);
+        return $this->andWhere(['{{%grom_menu_item}}.menu_type_id' => $typeId]);
     }
     /**
      * @return static
@@ -41,15 +41,15 @@ class MenuItemQuery extends ActiveQuery
     {
         $badcatsQuery = new Query([
             'select' => ['badcats.id'],
-            'from' => ['{{%cms_menu_item}} AS unpublished'],
+            'from' => ['{{%grom_menu_item}} AS unpublished'],
             'join' => [
-                ['LEFT JOIN', '{{%cms_menu_item}} AS badcats', 'unpublished.lft <= badcats.lft AND unpublished.rgt >= badcats.rgt']
+                ['LEFT JOIN', '{{%grom_menu_item}} AS badcats', 'unpublished.lft <= badcats.lft AND unpublished.rgt >= badcats.rgt']
             ],
             'where' => 'unpublished.status = ' . MenuItem::STATUS_UNPUBLISHED,
             'groupBy' => ['badcats.id']
         ]);
 
-        return $this->andWhere(['NOT IN', '{{%cms_menu_item}}.id', $badcatsQuery]);
+        return $this->andWhere(['NOT IN', '{{%grom_menu_item}}.id', $badcatsQuery]);
     }
 
     /**
@@ -58,7 +58,7 @@ class MenuItemQuery extends ActiveQuery
      */
     public function language($language)
     {
-        return $this->andFilterWhere(['{{%cms_menu_item}}.language' => $language]);
+        return $this->andFilterWhere(['{{%grom_menu_item}}.language' => $language]);
     }
 
     /**
@@ -66,6 +66,6 @@ class MenuItemQuery extends ActiveQuery
      */
     public function noRoots()
     {
-        return $this->andWhere('{{%cms_menu_item}}.lft!=1');
+        return $this->andWhere('{{%grom_menu_item}}.lft!=1');
     }
 }

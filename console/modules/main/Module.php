@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\console\modules\main;
+namespace gromver\platform\console\modules\main;
 
 use gromver\modulequery\ModuleQuery;
 use Yii;
@@ -25,7 +25,7 @@ use yii\helpers\ArrayHelper;
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
-    public $paramsPath = '@common/config/cmf';
+    public $paramsPath = '@common/config/grom';
 
     /**
      * Bootstrap method to be called during application bootstrap stage.
@@ -33,14 +33,14 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        $app->set($this->id, $this);
+
         Yii::$container->set('gromver\modulequery\ModuleQuery', [
             'cache' => $app->cache,
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);
 
-        $app->set($this->id, $this);
-
-        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
+        ModuleQuery::instance()->implement('\gromver\platform\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
     }
 
     public function init()

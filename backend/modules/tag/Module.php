@@ -2,15 +2,15 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\tag;
+namespace gromver\platform\backend\modules\tag;
 
-use gromver\cmf\backend\interfaces\DesktopInterface;
-use gromver\cmf\backend\interfaces\MenuRouterInterface;
+use gromver\platform\backend\interfaces\DesktopInterface;
+use gromver\platform\backend\interfaces\MenuRouterInterface;
 use Yii;
 
 /**
@@ -20,7 +20,7 @@ use Yii;
  */
 class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\tag\controllers';
+    public $controllerNamespace = 'gromver\platform\backend\modules\tag\controllers';
     public $desktopOrder = 7;
 
     /**
@@ -29,9 +29,9 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Tag'),
+            'label' => Yii::t('gromver.platform', 'Tag'),
             'links' => [
-                ['label' => Yii::t('gromver.cmf', 'Tags'), 'url' => ['/cmf/tag/default/index']],
+                ['label' => Yii::t('gromver.platform', 'Tags'), 'url' => ['/grom/tag/default/index']],
             ]
         ];
     }
@@ -42,9 +42,9 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Tag'),
+            'label' => Yii::t('gromver.platform', 'Tag'),
             'routers' => [
-                ['label' => Yii::t('gromver.cmf', 'Tag Cloud'), 'route' => 'cmf/tag/default/index'],
+                ['label' => Yii::t('gromver.platform', 'Tag Cloud'), 'route' => 'grom/tag/default/index'],
             ]
         ];
     }

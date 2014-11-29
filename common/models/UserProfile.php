@@ -2,18 +2,18 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
 
 /**
- * This is the model class for table "cms_user_profile".
+ * This is the model class for table "grom_user_profile".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -37,7 +37,7 @@ class UserProfile extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%cms_user_profile}}';
+        return '{{%grom_user_profile}}';
     }
 
     /**
@@ -62,16 +62,16 @@ class UserProfile extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'user_id' => Yii::t('gromver.cmf', 'User ID'),
-            'name' => Yii::t('gromver.cmf', 'Name'),
-            'surname' => Yii::t('gromver.cmf', 'Surname'),
-            'patronymic' => Yii::t('gromver.cmf', 'Patronymic'),
-            'phone' => Yii::t('gromver.cmf', 'Phone'),
-            'work_phone' => Yii::t('gromver.cmf', 'Work Phone'),
-            'email' => Yii::t('gromver.cmf', 'Email'),
-            'work_email' => Yii::t('gromver.cmf', 'Work Email'),
-            'address' => Yii::t('gromver.cmf', 'Address'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'user_id' => Yii::t('gromver.platform', 'User ID'),
+            'name' => Yii::t('gromver.platform', 'Name'),
+            'surname' => Yii::t('gromver.platform', 'Surname'),
+            'patronymic' => Yii::t('gromver.platform', 'Patronymic'),
+            'phone' => Yii::t('gromver.platform', 'Phone'),
+            'work_phone' => Yii::t('gromver.platform', 'Work Phone'),
+            'email' => Yii::t('gromver.platform', 'Email'),
+            'work_email' => Yii::t('gromver.platform', 'Work Email'),
+            'address' => Yii::t('gromver.platform', 'Address'),
         ];
     }
 

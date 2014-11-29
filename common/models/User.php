@@ -2,12 +2,12 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use Yii;
 use yii\base\ModelEvent;
@@ -19,7 +19,7 @@ use yii\helpers\Json;
 use yii\web\IdentityInterface;
 
 /**
- * This is the model class for table "cms_user".
+ * This is the model class for table "grom_user".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -36,8 +36,8 @@ use yii\web\IdentityInterface;
  * @property integer $deleted_at
  * @property integer $last_visit_at
  *
- * @property \gromver\cmf\common\models\Post[] $viewedPosts
- * @property \gromver\cmf\common\models\UserProfile $profile
+ * @property \gromver\platform\common\models\Post[] $viewedPosts
+ * @property \gromver\platform\common\models\UserProfile $profile
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -76,7 +76,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%cms_user}}';
+        return '{{%grom_user}}';
     }
 
     /**
@@ -95,7 +95,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'string', 'max' => 64],
             ['username', 'required'],
-            ['username', 'unique', 'message' => Yii::t('gromver.cmf', 'This username has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
+            ['username', 'unique', 'message' => Yii::t('gromver.platform', 'This username has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
@@ -104,7 +104,7 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique', 'filter' => function ($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
-                }, 'message' => Yii::t('gromver.cmf', 'This email address has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
+                }, 'message' => Yii::t('gromver.platform', 'This email address has already been taken.'), 'on' => ['create', 'signup', 'signupWithCaptcha']],
             ['email', 'unique', 'filter' => function ($query) {
                     /** @var $query \yii\db\ActiveQuery */
                     $query->andWhere('status!='.self::STATUS_DELETED);
@@ -113,14 +113,14 @@ class User extends ActiveRecord implements IdentityInterface
                         /** @var $query static */
                         return $this->status != self::STATUS_DELETED;
                     },
-                'message' => Yii::t('gromver.cmf', 'This email address has already been taken.'), 'on' => 'default'],
-            ['email', 'exist', 'message' => Yii::t('gromver.cmf', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
+                'message' => Yii::t('gromver.platform', 'This email address has already been taken.'), 'on' => 'default'],
+            ['email', 'exist', 'message' => Yii::t('gromver.platform', 'There is no user with such email.'), 'on' => 'requestPasswordResetToken'],
 
             ['password', 'required', 'on' => ['create', 'signup', 'resetPassword', 'signupWithCaptcha']],
             ['password', 'string', 'min' => 6],
 
             ['password_confirm', 'compare', 'compareAttribute' => 'password', 'skipOnEmpty' => false, 'on' => ['create', 'resetPassword', 'update', 'profile']],
-            ['verifyCode', 'captcha', 'captchaAction' => 'cmf/auth/default/captcha', 'on' => 'signupWithCaptcha']
+            ['verifyCode', 'captcha', 'captchaAction' => 'grom/auth/default/captcha', 'on' => 'signupWithCaptcha']
         ];
     }
 
@@ -130,20 +130,20 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'username' => Yii::t('gromver.cmf', 'Username'),
-            'email' => Yii::t('gromver.cmf', 'Email'),
-            'password_hash' => Yii::t('gromver.cmf', 'Password Hash'),
-            'password_reset_token' => Yii::t('gromver.cmf', 'Password Reset Token'),
-            'password_new' => Yii::t('gromver.cmf', 'New Password'),
-            'password_confirm' => Yii::t('gromver.cmf', 'Confirm Password'),
-            'auth_key' => Yii::t('gromver.cmf', 'Auth Key'),
-            'params' => Yii::t('gromver.cmf', 'Params Hash'),
-            'status' => Yii::t('gromver.cmf', 'Status'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
-            'deleted_at' => Yii::t('gromver.cmf', 'Deleted At'),
-            'last_visit_at' => Yii::t('gromver.cmf', 'Last Visit At'),
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'username' => Yii::t('gromver.platform', 'Username'),
+            'email' => Yii::t('gromver.platform', 'Email'),
+            'password_hash' => Yii::t('gromver.platform', 'Password Hash'),
+            'password_reset_token' => Yii::t('gromver.platform', 'Password Reset Token'),
+            'password_new' => Yii::t('gromver.platform', 'New Password'),
+            'password_confirm' => Yii::t('gromver.platform', 'Confirm Password'),
+            'auth_key' => Yii::t('gromver.platform', 'Auth Key'),
+            'params' => Yii::t('gromver.platform', 'Params Hash'),
+            'status' => Yii::t('gromver.platform', 'Status'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'updated_at' => Yii::t('gromver.platform', 'Updated At'),
+            'deleted_at' => Yii::t('gromver.platform', 'Deleted At'),
+            'last_visit_at' => Yii::t('gromver.platform', 'Last Visit At'),
         ];
     }
 
@@ -190,15 +190,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function getStatusLabel($status = null)
     {
         if ($status === null) {
-            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
+            return Yii::t('gromver.platform', self::$_statuses[$this->status]);
         }
-        return Yii::t('gromver.cmf', self::$_statuses[$status]);
+        return Yii::t('gromver.platform', self::$_statuses[$status]);
     }
 
     public static function statusLabels()
     {
         return array_map(function ($label) {
-                return Yii::t('gromver.cmf', $label);
+                return Yii::t('gromver.platform', $label);
             }, self::$_statuses);
     }
 

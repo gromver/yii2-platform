@@ -2,19 +2,19 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\common\models;
+namespace gromver\platform\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
-use gromver\cmf\backend\behaviors\TaggableBehavior;
-use gromver\cmf\backend\behaviors\VersioningBehavior;
-use gromver\cmf\common\components\UrlManager;
-use gromver\cmf\common\interfaces\TranslatableInterface;
-use gromver\cmf\common\interfaces\ViewableInterface;
+use gromver\platform\backend\behaviors\TaggableBehavior;
+use gromver\platform\backend\behaviors\VersioningBehavior;
+use gromver\platform\common\components\UrlManager;
+use gromver\platform\common\interfaces\TranslatableInterface;
+use gromver\platform\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -22,7 +22,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 
 /**
- * This is the model class for table "cms_page".
+ * This is the model class for table "grom_page".
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
@@ -55,7 +55,7 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
      */
     public static function tableName()
     {
-        return '{{%cms_page}}';
+        return '{{%grom_page}}';
     }
 
     /**
@@ -89,7 +89,7 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
             [['translation_id'], 'unique', 'filter' => function($query) {
                 /** @var $query \yii\db\ActiveQuery */
                 $query->andWhere(['language' => $this->language]);
-            }, 'message' => Yii::t('gromver.cmf', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
+            }, 'message' => Yii::t('gromver.platform', 'Локализация ({language}) для записи (ID:{id}) уже существует.', ['language' => $this->language, 'id' => $this->translation_id])],
             [['tags', 'versionNote', 'lock'], 'safe']
         ];
     }
@@ -100,24 +100,24 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('gromver.cmf', 'ID'),
-            'translation_id' => Yii::t('gromver.cmf', 'Translation ID'),
-            'language' => Yii::t('gromver.cmf', 'Language'),
-            'title' => Yii::t('gromver.cmf', 'Title'),
-            'alias' => Yii::t('gromver.cmf', 'Alias'),
-            'preview_text' => Yii::t('gromver.cmf', 'Preview Text'),
-            'detail_text' => Yii::t('gromver.cmf', 'Detail Text'),
-            'metakey' => Yii::t('gromver.cmf', 'Meta keywords'),
-            'metadesc' => Yii::t('gromver.cmf', 'Meta description'),
-            'created_at' => Yii::t('gromver.cmf', 'Created At'),
-            'updated_at' => Yii::t('gromver.cmf', 'Updated At'),
-            'status' => Yii::t('gromver.cmf', 'Status'),
-            'tags' => Yii::t('gromver.cmf', 'Tags'),
-            'created_by' => Yii::t('gromver.cmf', 'Created By'),
-            'updated_by' => Yii::t('gromver.cmf', 'Updated By'),
-            'hits' => Yii::t('gromver.cmf', 'Hits'),
-            'lock' => Yii::t('gromver.cmf', 'Lock'),
-            'versionNote' => Yii::t('gromver.cmf', 'Version Note')
+            'id' => Yii::t('gromver.platform', 'ID'),
+            'translation_id' => Yii::t('gromver.platform', 'Translation ID'),
+            'language' => Yii::t('gromver.platform', 'Language'),
+            'title' => Yii::t('gromver.platform', 'Title'),
+            'alias' => Yii::t('gromver.platform', 'Alias'),
+            'preview_text' => Yii::t('gromver.platform', 'Preview Text'),
+            'detail_text' => Yii::t('gromver.platform', 'Detail Text'),
+            'metakey' => Yii::t('gromver.platform', 'Meta keywords'),
+            'metadesc' => Yii::t('gromver.platform', 'Meta description'),
+            'created_at' => Yii::t('gromver.platform', 'Created At'),
+            'updated_at' => Yii::t('gromver.platform', 'Updated At'),
+            'status' => Yii::t('gromver.platform', 'Status'),
+            'tags' => Yii::t('gromver.platform', 'Tags'),
+            'created_by' => Yii::t('gromver.platform', 'Created By'),
+            'updated_by' => Yii::t('gromver.platform', 'Updated By'),
+            'hits' => Yii::t('gromver.platform', 'Hits'),
+            'lock' => Yii::t('gromver.platform', 'Lock'),
+            'versionNote' => Yii::t('gromver.platform', 'Version Note')
         ];
     }
 
@@ -157,16 +157,16 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
     public static function statusLabels()
     {
         return array_map(function($label) {
-                return Yii::t('gromver.cmf', $label);
+                return Yii::t('gromver.platform', $label);
             }, self::$_statuses);
     }
 
     public function getStatusLabel($status=null)
     {
         if ($status === null) {
-            return Yii::t('gromver.cmf', self::$_statuses[$this->status]);
+            return Yii::t('gromver.platform', self::$_statuses[$this->status]);
         }
-        return Yii::t('gromver.cmf', self::$_statuses[$status]);
+        return Yii::t('gromver.platform', self::$_statuses[$status]);
     }
 
     public function optimisticLock()
@@ -191,14 +191,14 @@ class Page extends ActiveRecord implements TranslatableInterface, ViewableInterf
      */
     public function getViewLink()
     {
-        return ['/cmf/page/default/view', 'id' => $this->id, UrlManager::LANGUAGE_PARAM => $this->language];
+        return ['/grom/page/default/view', 'id' => $this->id, UrlManager::LANGUAGE_PARAM => $this->language];
     }
     /**
      * @inheritdoc
      */
     public static function viewLink($model)
     {
-        return ['/cmf/page/default/view', 'id' => $model['id'], UrlManager::LANGUAGE_PARAM => $model['language']];
+        return ['/grom/page/default/view', 'id' => $model['id'], UrlManager::LANGUAGE_PARAM => $model['language']];
     }
 
     public function extraFields()

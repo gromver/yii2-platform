@@ -2,18 +2,18 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\main;
+namespace gromver\platform\frontend\modules\main;
 
-use gromver\cmf\common\models\MenuItem;
-use gromver\cmf\common\models\Table;
+use gromver\platform\common\models\MenuItem;
+use gromver\platform\common\models\Table;
 use gromver\modulequery\ModuleQuery;
 use Yii;
-use gromver\cmf\frontend\components\MenuManager;
+use gromver\platform\frontend\components\MenuManager;
 use yii\base\BootstrapInterface;
 use yii\caching\ExpressionDependency;
 use yii\helpers\ArrayHelper;
@@ -28,14 +28,14 @@ use yii\helpers\ArrayHelper;
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
-    const SESSION_KEY_MODE = '__cms_mode';
+    const SESSION_KEY_MODE = '__grom_mode';
 
     const MODE_EDIT = 'edit';
     const MODE_VIEW = 'view';
 
-    public $controllerNamespace = '\gromver\cmf\frontend\modules\main\controllers';
-    public $paramsPath = '@common/config/cmf';
-    public $blockModules = ['news', 'page', 'tag', 'user'];   //список модулей к которым нельзя попасть на прямую(cmf/post/..., cmf/page/...)
+    public $controllerNamespace = '\gromver\platform\frontend\modules\main\controllers';
+    public $paramsPath = '@common/config/grom';
+    public $blockModules = ['news', 'page', 'tag', 'user'];   //список модулей к которым нельзя попасть на прямую(grom/post/..., grom/page/...)
 
     private $_mode;
 
@@ -45,17 +45,19 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
+        $app->set($this->id, $this);
+
         Yii::$container->set('gromver\models\fields\EditorField', [
-            'controller' => 'cmf/media/manager'
+            'controller' => 'grom/media/manager'
         ]);
         Yii::$container->set('gromver\models\fields\MediaField', [
-            'controller' => 'cmf/media/manager'
+            'controller' => 'grom/media/manager'
         ]);
         Yii::$container->set('gromver\modulequery\ModuleQuery', [
             'cache' => $app->cache,
             'cacheDependency' => new ExpressionDependency(['expression' => '\Yii::$app->getModulesHash()'])
         ]);
-        Yii::$container->set('gromver\cmf\frontend\components\MenuMap', [
+        Yii::$container->set('gromver\platform\frontend\components\MenuMap', [
             'cache' => $app->cache,
             'cacheDependency' => Table::dependency(MenuItem::tableName())
         ]);
@@ -64,20 +66,20 @@ class Module extends \yii\base\Module implements BootstrapInterface
         $manager = \Yii::createObject(MenuManager::className());
         $rules = [$manager];
         if (is_array($this->blockModules) && count($this->blockModules)) {
-            $rules['cmf/<module:(' . implode('|', $this->blockModules). ')><path:(/.*)?>'] = 'cmf/default/page-not-found'; //блокируем доступ к контент модулям напрямую
+            $rules['grom/<module:(' . implode('|', $this->blockModules). ')><path:(/.*)?>'] = 'grom/default/page-not-found'; //блокируем доступ к контент модулям напрямую
         }
 
         $app->urlManager->addRules($rules, false); //вставляем в начало списка
 
         $app->set('menuManager', $manager);
-        $app->set($this->id, $this);
 
-        ModuleQuery::instance()->implement('\gromver\cmf\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
+        ModuleQuery::instance()->implement('\gromver\platform\common\interfaces\BootstrapInterface')->invoke('bootstrap', [$app]);
     }
 
     public function init()
     {
         parent::init();
+        $this->initI18N();
 
         $params = @include Yii::getAlias($this->paramsPath . '/params.php');
 
@@ -98,12 +100,22 @@ class Module extends \yii\base\Module implements BootstrapInterface
         }
     }
 
+
+    public function initI18N()
+    {
+        Yii::$app->i18n->translations['gromver.*'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'basePath' => '@gromver/platform/frontend/messages',
+        ];
+    }
+
     public function setMode($mode, $saveInSession = true)
     {
         $this->_mode = in_array($mode, self::modes()) ? $mode : self::MODE_VIEW;
 
-        if($saveInSession)
+        if ($saveInSession) {
             Yii::$app->session->set(self::SESSION_KEY_MODE, $mode);
+        }
     }
 
     public function getMode()

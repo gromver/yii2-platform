@@ -1,7 +1,7 @@
 <?php
 /**
  * @var $this yii\web\View
- * @var $model gromver\cmf\common\models\Category
+ * @var $model gromver\platform\common\models\Category
  * @var $year integer
  * @var $month integer
  * @var $day integer
@@ -9,7 +9,7 @@
 
 use yii\helpers\Html;
 
-/** @var \gromver\cmf\common\models\MenuItem $menu */
+/** @var \gromver\platform\common\models\MenuItem $menu */
 $menu = Yii::$app->menuManager->getActiveMenu();
 if ($menu) {
     $this->title = $menu->isProperContext() ? $menu->title : Yii::$app->formatter->asDate(mktime(0,0,0,$month, $day, $year), 'dd MMMM Y');
@@ -41,7 +41,7 @@ if ($model) {
 
 echo Html::tag('h2', Html::encode($this->title));
 
-echo \gromver\cmf\frontend\widgets\PostDay::widget([
+echo \gromver\platform\frontend\widgets\PostDay::widget([
     'id' => 'day-posts',
     'category' => $model,
     'year' => $year,

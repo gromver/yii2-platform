@@ -2,14 +2,14 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\widget;
+namespace gromver\platform\backend\modules\widget;
 
-use gromver\cmf\backend\interfaces\DesktopInterface;
+use gromver\platform\backend\interfaces\DesktopInterface;
 use Yii;
 
 /**
@@ -19,7 +19,7 @@ use Yii;
  */
 class Module extends \yii\base\Module implements DesktopInterface
 {
-    public $controllerNamespace = 'gromver\cmf\backend\modules\widget\controllers';
+    public $controllerNamespace = 'gromver\platform\backend\modules\widget\controllers';
     public $desktopOrder = 10;
 
     /**
@@ -28,9 +28,9 @@ class Module extends \yii\base\Module implements DesktopInterface
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.cmf', 'Widget'),
+            'label' => Yii::t('gromver.platform', 'Widget'),
             'links' => [
-                ['label' => Yii::t('gromver.cmf', 'Configurations'), 'url' => ['/cmf/widget/default/index']]
+                ['label' => Yii::t('gromver.platform', 'Configurations'), 'url' => ['/grom/widget/default/index']]
             ]
         ];
     }

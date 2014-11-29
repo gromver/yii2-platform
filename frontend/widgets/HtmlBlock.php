@@ -6,10 +6,10 @@
  * Time: 16:24
  */
 
-namespace gromver\cmf\frontend\widgets;
+namespace gromver\platform\frontend\widgets;
 
 
-use gromver\cmf\common\widgets\Widget;
+use gromver\platform\common\widgets\Widget;
 use yii\helpers\Html;
 
 class HtmlBlock extends Widget {

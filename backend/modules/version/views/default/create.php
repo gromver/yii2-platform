@@ -4,10 +4,10 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model gromver\cmf\common\models\Version */
+/* @var $model gromver\platform\common\models\Version */
 
-$this->title = Yii::t('gromver.cmf', 'Create Version');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.cmf', 'Version Manager'), 'url' => ['index']];
+$this->title = Yii::t('gromver.platform', 'Create Version');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('gromver.platform', 'Version Manager'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="history-create">

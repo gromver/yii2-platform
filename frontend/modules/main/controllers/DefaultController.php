@@ -2,19 +2,19 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\frontend\modules\main\controllers;
+namespace gromver\platform\frontend\modules\main\controllers;
 
-use gromver\cmf\backend\modules\menu\models\MenuTypeSearch;
-use gromver\cmf\backend\modules\news\models\CategorySearch;
-use gromver\cmf\backend\modules\news\models\PostSearch;
-use gromver\cmf\backend\modules\page\models\PageSearch;
-use gromver\cmf\common\models\Tag;
-use gromver\cmf\common\models\CmfParams;
+use gromver\platform\backend\modules\menu\models\MenuTypeSearch;
+use gromver\platform\backend\modules\news\models\CategorySearch;
+use gromver\platform\backend\modules\news\models\PostSearch;
+use gromver\platform\backend\modules\page\models\PageSearch;
+use gromver\platform\common\models\Tag;
+use gromver\platform\common\models\CmfParams;
 use kartik\widgets\Alert;
 use gromver\models\ObjectModel;
 use gromver\widgets\ModalIFrame;
@@ -32,7 +32,7 @@ use yii\web\NotFoundHttpException;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  *
- * @property $module \gromver\cmf\frontend\modules\main\Module
+ * @property $module \gromver\platform\frontend\modules\main\Module
  */
 class DefaultController extends Controller
 {
@@ -98,7 +98,7 @@ class DefaultController extends Controller
                 FileHelper::createDirectory($paramsPath);
                 file_put_contents($paramsFile, '<?php return '.var_export($model->toArray(), true).';');
 
-                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Configuration saved.'));
+                Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Configuration saved.'));
 
                 if ($modal) {
                     ModalIFrame::refreshPage();
@@ -124,7 +124,7 @@ class DefaultController extends Controller
 
         $cache->flush();
 
-        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.cmf', 'Cache flushed.'));
+        Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Cache flushed.'));
 
         return $this->redirect(['index']);
     }

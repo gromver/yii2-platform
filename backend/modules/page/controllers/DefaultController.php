@@ -2,16 +2,16 @@
 /**
  * @link https://github.com/gromver/yii2-cmf.git#readme
  * @copyright Copyright (c) Gayazov Roman, 2014
- * @license https://github.com/gromver/yii2-cmf/blob/master/LICENSE
+ * @license https://github.com/gromver/yii2-grom/blob/master/LICENSE
  * @package yii2-cmf
  * @version 1.0.0
  */
 
-namespace gromver\cmf\backend\modules\page\controllers;
+namespace gromver\platform\backend\modules\page\controllers;
 
 use Yii;
-use gromver\cmf\common\models\Page;
-use gromver\cmf\backend\modules\page\models\PageSearch;
+use gromver\platform\common\models\Page;
+use gromver\platform\backend\modules\page\models\PageSearch;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\AccessControl;
@@ -81,12 +81,12 @@ class DefaultController extends Controller
      * @param string $route
      * @return string
      */
-    public function actionSelect($route = 'cmf/page/default/view')
+    public function actionSelect($route = 'grom/page/default/view')
     {
         $searchModel = new PageSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->getQueryParams());
 
-        Yii::$app->cmf->layout = 'modal';
+        Yii::$app->grom->layout = 'modal';
 
         return $this->render('select', [
             'dataProvider' => $dataProvider,
@@ -227,7 +227,7 @@ class DefaultController extends Controller
         if (($model = Page::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException(Yii::t('gromver.cmf', 'The requested page does not exist.'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
     }
 }
