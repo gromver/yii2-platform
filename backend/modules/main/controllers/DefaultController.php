@@ -64,7 +64,7 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->render('index', [
-                'items' => ModuleQuery::instance()->implement('\gromver\platform\backend\interfaces\DesktopInterface')->orderBy('desktopOrder')->execute('getDesktopItem')
+                'items' => ModuleQuery::instance()->implement('\gromver\platform\backend\interfaces\DesktopInterface')->orderBy('desktopOrder')->fetch('getDesktopItem')
             ]);
     }
 

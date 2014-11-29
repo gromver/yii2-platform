@@ -43,7 +43,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($application)
     {
-        $this->documentClasses = array_merge($this->documentClasses, ModuleQuery::instance()->implement('gromver\platform\common\interfaces\SearchableInterface')->execute('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
+        $this->documentClasses = array_merge($this->documentClasses, ModuleQuery::instance()->implement('gromver\platform\common\interfaces\SearchableInterface')->fetch('getDocumentClasses', [], ModuleQuery::AGGREGATE_MERGE));
         ActiveDocument::watch($this->documentClasses);
     }
 }
