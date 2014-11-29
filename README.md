@@ -61,7 +61,7 @@ server {
 }
 ```
 
-#### Установка yii2-cms
+#### Установка Grom Platform
 Запускаем через composer
 
     php composer.phar require --prefer-dist gromver/yii2-platform "*"
@@ -72,7 +72,7 @@ server {
     
 в require секцию composer.json файла.
 
-#### Настройка yii2-platform
+#### Настройка Grom Platform
 Заменяем фронтенд, бэкенд и консольное приложения на соответсвующие из данного расширения. Для этого правим файлы:
 
 * /backend/web/index.php
