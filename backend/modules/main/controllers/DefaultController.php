@@ -10,7 +10,7 @@
 namespace gromver\platform\backend\modules\main\controllers;
 
 use gromver\modulequery\ModuleQuery;
-use gromver\platform\common\models\CmfParams;
+use gromver\platform\common\models\PlatformParams;
 use kartik\widgets\Alert;
 use gromver\platform\common\models\ContactForm;
 use gromver\models\ObjectModel;
@@ -75,7 +75,7 @@ class DefaultController extends Controller
 
         $params = $this->module->params;
 
-        $model = new ObjectModel(CmfParams::className());
+        $model = new ObjectModel(PlatformParams::className());
         $model->setAttributes($params);
 
         if ($model->load(Yii::$app->request->post())) {
@@ -131,7 +131,7 @@ class DefaultController extends Controller
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Email is sent.'));
                 return $this->render('contactSuccess');
             } else {
-                throw new \HttpRuntimeException(Yii::t('gromver.platform', 'Email sending is failed.'));
+                throw new \HttpRuntimeException(Yii::t('gromver.platform', 'There was an error sending email.'));
             }
         }
 

@@ -14,7 +14,7 @@ use gromver\platform\backend\modules\news\models\CategorySearch;
 use gromver\platform\backend\modules\news\models\PostSearch;
 use gromver\platform\backend\modules\page\models\PageSearch;
 use gromver\platform\common\models\Tag;
-use gromver\platform\common\models\CmfParams;
+use gromver\platform\common\models\PlatformParams;
 use kartik\widgets\Alert;
 use gromver\models\ObjectModel;
 use gromver\widgets\ModalIFrame;
@@ -89,7 +89,7 @@ class DefaultController extends Controller
 
         $params = $this->module->params;
 
-        $model = new ObjectModel(CmfParams::className());
+        $model = new ObjectModel(PlatformParams::className());
         $model->setAttributes($params);
 
         if($model->load(Yii::$app->request->post())) {

@@ -86,8 +86,8 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
         return [
             'label' => Yii::t('gromver.platform', 'System'),
             'links' => [
-                ['label' => Yii::t('gromver.platform', 'Site Map'), 'url' => ['/grom/default/index']],
-                ['label' => Yii::t('gromver.platform', 'Settings'), 'url' => ['/grom/default/params']],
+                ['label' => Yii::t('gromver.platform', 'Desktop'), 'url' => ['/grom/default/index']],
+                ['label' => Yii::t('gromver.platform', 'System Configuration'), 'url' => ['/grom/default/params']],
                 ['label' => Yii::t('gromver.platform', 'Flush Cache'), 'url' => ['/grom/default/flush-cache']],
             ]
         ];

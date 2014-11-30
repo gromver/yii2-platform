@@ -111,9 +111,10 @@ class DefaultController extends Controller
 
     /**
      * Updates an existing Version model.
-     * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
-     * @return mixed
+     * @param null $modal
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id, $modal = null)
     {
@@ -247,6 +248,12 @@ class DefaultController extends Controller
         }
     }
 
+    /**
+     * @param $id
+     * @param $class
+     * @throws NotFoundHttpException
+     * @return Version's item model
+     */
     protected function findItemModel($id, $class)
     {
         if ($id !== null && ($model = $class::findOne($id)) !== null) {

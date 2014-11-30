@@ -10,6 +10,7 @@
 namespace gromver\platform\common\models;
 
 use yii\base\Model;
+use Yii;
 
 /**
  * Class MenuLinkParams

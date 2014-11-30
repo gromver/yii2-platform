@@ -17,7 +17,7 @@ use yii\bootstrap\ActiveForm;
     <?= \gromver\models\widgets\Fields::widget(['model' => $model]) ?>
 
     <div>
-        <?= Html::submitButton(Yii::t('gromver.platform', 'Update'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('<i class="glyphicon glyphicon-pencil"></i> ' . Yii::t('gromver.platform', 'Update'), ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

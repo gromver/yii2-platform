@@ -20,7 +20,7 @@ use yii\bootstrap\ActiveForm;
 
     <ul class="nav nav-tabs">
         <li class="active"><a href="#main" data-toggle="tab"><?= Yii::t('gromver.platform', 'Main') ?></a></li>
-        <li><a href="#link-options" data-toggle="tab"><?= Yii::t('gromver.platform', 'Link') ?></a></li>
+        <li><a href="#link-options" data-toggle="tab"><?= Yii::t('gromver.platform', 'Link params') ?></a></li>
         <li><a href="#meta-options" data-toggle="tab"><?= Yii::t('gromver.platform', 'Metadata') ?></a></li>
     </ul>
     <br/>
@@ -131,7 +131,7 @@ use yii\bootstrap\ActiveForm;
     <?= Html::activeHiddenInput($model, 'lock') ?>
 
     <div>
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('gromver.platform', 'Create') : Yii::t('gromver.platform', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? ('<i class="glyphicon glyphicon-plus"></i> ' . Yii::t('gromver.platform', 'Create')) : ('<i class="glyphicon glyphicon-pencil"></i> ' . Yii::t('gromver.platform', 'Update')), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

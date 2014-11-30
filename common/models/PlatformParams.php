@@ -17,24 +17,31 @@ use yii\base\Object;
  * @package yii2-cmf
  * @author Gayazov Roman <gromver5@gmail.com>
  */
-class CmfParams extends  Object
+class PlatformParams extends  Object
 {
+    /**
+     * @translation gromver.platform
+     */
     public $siteName;
     /**
      * @type multiple
      * @fieldType text
      * @email
+     * @translation gromver.platform
      */
     public $adminEmail;
     /**
      * @type multiple
      * @fieldType text
      * @email
+     * @translation gromver.platform
      */
     public $supportEmail;
     /**
-     * @before <h3 class="col-sm-12">Elasticsearch Settings</h3>
+     * @before <h3 class="col-sm-12">Elasticsearch</h3>
      * @pattern #^\w*$#
+     * @translation gromver.platform
+     * @label Index
      */
     public $elasticsearchIndex;
 }

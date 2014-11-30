@@ -31,7 +31,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.platform', 'User'),
+            'label' => Yii::t('gromver.platform', 'Users'),
             'links' => [
                 ['label' => Yii::t('gromver.platform', 'Users'), 'url' => ['/grom/user/default/index']]
             ]
@@ -44,7 +44,7 @@ class Module extends \yii\base\Module implements DesktopInterface, MenuRouterInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('gromver.platform', 'User'),
+            'label' => Yii::t('gromver.platform', 'Users'),
             'routers' => [
                 ['label' => Yii::t('gromver.platform', 'User Profile'), 'route' => 'grom/user/default/update'],
             ]

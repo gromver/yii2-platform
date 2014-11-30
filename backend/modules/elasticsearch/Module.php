@@ -33,7 +33,7 @@ class Module extends \gromver\platform\common\modules\elasticsearch\Module imple
         return [
             'label' => Yii::t('gromver.platform', 'Search'),
             'links' => [
-                ['label' => Yii::t('gromver.platform', 'Searching'), 'url' => ['/' . $this->getUniqueId() . '/default/index']],
+                ['label' => Yii::t('gromver.platform', 'Search'), 'url' => ['/' . $this->getUniqueId() . '/default/index']],
             ]
         ];
     }
@@ -46,7 +46,7 @@ class Module extends \gromver\platform\common\modules\elasticsearch\Module imple
         return [
             'label' => Yii::t('gromver.platform', 'Search'),
             'routers' => [
-                ['label' => Yii::t('gromver.platform', 'Searching'), 'route' =>  $this->getUniqueId() . '/default/index'],
+                ['label' => Yii::t('gromver.platform', 'Search'), 'route' =>  $this->getUniqueId() . '/default/index'],
             ]
         ];
     }

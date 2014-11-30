@@ -163,8 +163,8 @@ class MenuItem extends ActiveRecord implements ViewableInterface
             'link_params' => Yii::t('gromver.platform', 'Link Params'),
             'layout_path' => Yii::t('gromver.platform', 'Layout Path'),
             'access_rule' => Yii::t('gromver.platform', 'Access Rule'),
-            'metakey' => Yii::t('gromver.platform', 'Metakey'),
-            'metadesc' => Yii::t('gromver.platform', 'Metadesc'),
+            'metakey' => Yii::t('gromver.platform', 'Meta keywords'),
+            'metadesc' => Yii::t('gromver.platform', 'Meta description'),
             'robots' => Yii::t('gromver.platform', 'Robots'),
             'secure' => Yii::t('gromver.platform', 'Secure'),
             'created_at' => Yii::t('gromver.platform', 'Created At'),
@@ -226,7 +226,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
     private static $_statuses = [
         self::STATUS_PUBLISHED => 'Published',
         self::STATUS_UNPUBLISHED => 'Unpublished',
-        self::STATUS_MAIN_PAGE => 'Main page',
+        self::STATUS_MAIN_PAGE => 'Main Page',
     ];
 
     public static function statusLabels()

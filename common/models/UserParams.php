@@ -15,20 +15,40 @@ namespace gromver\platform\common\models;
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class UserParams {
+    /**
+     * @translation gromver.platform
+     */
     public $name;
+    /**
+     * @translation gromver.platform
+     */
     public $surname;
+    /**
+     * @translation gromver.platform
+     */
     public $patronymic;
+    /**
+     * @translation gromver.platform
+     */
     public $phone;
-    public $work;
+    /**
+     * @translation gromver.platform
+     */
+    public $work_phone;
     /**
      * @type text
      * @email
+     * @translation gromver.platform
      */
     public $email;
     /**
      * @type text
      * @email
+     * @translation gromver.platform
      */
     public $work_email;
+    /**
+     * @translation gromver.platform
+     */
     public $address;
 } 

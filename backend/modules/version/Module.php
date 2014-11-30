@@ -28,7 +28,7 @@ class Module extends \yii\base\Module implements DesktopInterface
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.platform', 'Version'),
+            'label' => Yii::t('gromver.platform', 'Versions'),
             'links' => [
                 ['label' => Yii::t('gromver.platform', 'Versions'), 'url' => ['/grom/version/default/index']]
             ]

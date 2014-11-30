@@ -6,7 +6,7 @@ use kartik\grid\GridView;
 /**
  * @var yii\web\View $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var gromver\platform\backend\modules\page\models\MenuItemSearch $searchModel
+ * @var gromver\platform\backend\modules\menu\models\MenuItemSearch $searchModel
  */
 
 $this->title = Yii::t('gromver.platform', 'Select Menu Item');

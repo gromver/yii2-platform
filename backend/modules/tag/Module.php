@@ -29,7 +29,7 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getDesktopItem()
     {
         return [
-            'label' => Yii::t('gromver.platform', 'Tag'),
+            'label' => Yii::t('gromver.platform', 'Tags'),
             'links' => [
                 ['label' => Yii::t('gromver.platform', 'Tags'), 'url' => ['/grom/tag/default/index']],
             ]
@@ -42,7 +42,7 @@ class Module extends \yii\base\Module implements MenuRouterInterface, DesktopInt
     public function getMenuRoutes()
     {
         return [
-            'label' => Yii::t('gromver.platform', 'Tag'),
+            'label' => Yii::t('gromver.platform', 'Tags'),
             'routers' => [
                 ['label' => Yii::t('gromver.platform', 'Tag Cloud'), 'route' => 'grom/tag/default/index'],
             ]

@@ -14,7 +14,7 @@ class m140820_085041_grom_site_setup extends Migration
 
         $params = $cmf->params;
 
-        $model = new \gromver\models\ObjectModel(\gromver\platform\common\models\CmfParams::className());
+        $model = new \gromver\models\ObjectModel(\gromver\platform\common\models\PlatformParams::className());
         $model->setAttributes($params);
 
         echo 'Setup application config: ' . PHP_EOL;

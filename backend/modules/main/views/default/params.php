@@ -6,7 +6,7 @@ use yii\helpers\Html;
  * @var gromver\models\ObjectModel $model
  * @var yii\web\View $this
  */
-$this->title = Yii::t('gromver.platform', 'Site Configuration');
+$this->title = Yii::t('gromver.platform', 'System Configuration');
 $this->params['breadcrumbs'][] = $this->title; ?>
 
 <div class="page-heading">

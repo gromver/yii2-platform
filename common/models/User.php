@@ -38,6 +38,7 @@ use yii\web\IdentityInterface;
  *
  * @property \gromver\platform\common\models\Post[] $viewedPosts
  * @property \gromver\platform\common\models\UserProfile $profile
+ * @property string[] $roles
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -133,13 +134,15 @@ class User extends ActiveRecord implements IdentityInterface
             'id' => Yii::t('gromver.platform', 'ID'),
             'username' => Yii::t('gromver.platform', 'Username'),
             'email' => Yii::t('gromver.platform', 'Email'),
+            'password' => Yii::t('gromver.platform', 'Password'),
             'password_hash' => Yii::t('gromver.platform', 'Password Hash'),
             'password_reset_token' => Yii::t('gromver.platform', 'Password Reset Token'),
             'password_new' => Yii::t('gromver.platform', 'New Password'),
             'password_confirm' => Yii::t('gromver.platform', 'Confirm Password'),
             'auth_key' => Yii::t('gromver.platform', 'Auth Key'),
-            'params' => Yii::t('gromver.platform', 'Params Hash'),
+            'params' => Yii::t('gromver.platform', 'Params'),
             'status' => Yii::t('gromver.platform', 'Status'),
+            'roles' => Yii::t('gromver.platform', 'Roles'),
             'created_at' => Yii::t('gromver.platform', 'Created At'),
             'updated_at' => Yii::t('gromver.platform', 'Updated At'),
             'deleted_at' => Yii::t('gromver.platform', 'Deleted At'),

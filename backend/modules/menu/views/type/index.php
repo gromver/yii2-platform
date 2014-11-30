@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'alias',
             [
-                'header' => 'Items',
+                'header' => Yii::t('gromver.platform', 'Menu Items'),
                 'value' => function($model) {
                         /** @var $model \gromver\platform\common\models\MenuType */
                         return Html::a('('.$model->getItems()->count().')', ['item/index', 'MenuItemSearch[menu_type_id]' => $model->id], ['data-pjax' => 0]);
