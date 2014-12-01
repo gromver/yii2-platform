@@ -37,7 +37,11 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'verifyCode' => 'Verification Code',
+            'name' => Yii::t('gromver.platform', 'Name'),
+            'email' => Yii::t('gromver.platform', 'Email'),
+            'subject' => Yii::t('gromver.platform', 'Subject'),
+            'body' => Yii::t('gromver.platform', 'Body'),
+            'verifyCode' => Yii::t('gromver.platform', 'Verification Code'),
         ];
     }
 

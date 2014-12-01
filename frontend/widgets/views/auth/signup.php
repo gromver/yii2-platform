@@ -31,7 +31,7 @@ use yii\captcha\Captcha;
 
 <div class="form-group">
     <div class="text-center">
-        <?= Html::submitButton(\Yii::t('auth.user', 'Signup'), ['class' => 'btn btn-primary btn-lg btn-block']) ?>
+        <?= Html::submitButton(\Yii::t('gromver.platform', 'Signup'), ['class' => 'btn btn-primary btn-lg btn-block']) ?>
     </div>
 </div>
 

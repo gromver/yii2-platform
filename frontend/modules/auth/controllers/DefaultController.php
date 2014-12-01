@@ -128,7 +128,7 @@ class DefaultController extends Controller
                     return $this->goHome();
                 }
             } else {
-                Yii::$app->getSession()->setFlash(Alert::TYPE_DANGER, 'The form is filled incorrectly.');
+                Yii::$app->getSession()->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', 'The form is filled incorrectly.'));
             }
         }
 

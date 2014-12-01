@@ -44,7 +44,7 @@ class DefaultController extends Controller
     public function loadModel($id)
     {
         if(!($model = Tag::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested tag does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested tag does not exist.'));
         }
 
         return $model;

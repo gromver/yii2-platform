@@ -54,7 +54,7 @@ class PostView extends Widget {
         }
 
         if ($this->useHighlights) {
-            CkeditorHighlightAsset::register($this->view);
+            CkeditorHighlightAsset::register($this->layout);
         }
 
         echo $this->render($this->layout, [

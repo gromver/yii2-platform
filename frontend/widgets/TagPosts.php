@@ -27,6 +27,7 @@ class TagPosts extends Widget {
      * @var Tag|string
      * @type modal
      * @url /grom/default/select-tag
+     * @translation gromver.platform
      */
     public $tag;
     /**
@@ -34,32 +35,40 @@ class TagPosts extends Widget {
      * @var string
      * @type modal
      * @url /grom/default/select-category
+     * @translation gromver.platform
      */
     public $categoryId;
     /**
      * @type list
      * @items layouts
      * @editable
+     * @translation gromver.platform
      */
     public $layout = 'tag/postsDefault';
     /**
      * @type list
      * @items itemLayouts
      * @editable
+     * @translation gromver.platform
      */
     public $itemLayout = '_itemPost';
+    /**
+     * @translation gromver.platform
+     */
     public $pageSize = 20;
     /**
      * @type list
      * @editable
      * @items sortColumns
      * @var string
+     * @translation gromver.platform
      */
     public $sort = 'published_at';
     /**
      * @type list
      * @editable
      * @items sortDirections
+     * @translation gromver.platform
      */
     public $dir = SORT_DESC;
     /**

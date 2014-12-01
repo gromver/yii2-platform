@@ -300,7 +300,6 @@ class Widget extends \yii\base\Widget implements SpecificationInterface
 
         echo Html::hiddenInput('widget_config', Json::encode($objectModel->toArray(array_keys($this->_config))));
 
-        //echo Html::submitButton('<i class="glyphicon glyphicon-cog"></i>', ['class' => 'btn btn-link']);
         echo '<i class="glyphicon glyphicon-cog"></i>';
 
         echo Html::endForm();

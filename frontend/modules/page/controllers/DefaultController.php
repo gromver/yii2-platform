@@ -23,7 +23,7 @@ class DefaultController extends Controller
 {
     public function actionIndex()
     {
-        throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist..'));
+        throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
     }
 
     public function actionView($id)
@@ -36,7 +36,7 @@ class DefaultController extends Controller
     public function loadModel($id)
     {
         if(!($model = Page::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested category does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested page does not exist.'));
         }
 
         return $model;

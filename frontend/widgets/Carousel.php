@@ -22,6 +22,8 @@ class Carousel extends Widget {
      * @type multiple
      * @fieldType object
      * @object \gromver\platform\frontend\widgets\CarouselItem
+     * @label Slides
+     * @translation gromver.platform
      */
     public $items;
 
@@ -36,7 +38,11 @@ class Carousel extends Widget {
 class CarouselItem {
     /**
      * @type editor
+     * @translation gromver.platform
      */
     public $content;
+    /**
+     * @translation gromver.platform
+     */
     public $caption;
 }

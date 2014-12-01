@@ -13,9 +13,15 @@ use gromver\platform\common\widgets\Widget;
 use yii\helpers\Html;
 
 class HtmlBlock extends Widget {
+    /**
+     * @translation gromver.platform
+     */
     public $title;
     /**
      * @type editor
+     * @label Content
+     * @translation gromver.platform
+     * @var string
      */
     public $html;
 

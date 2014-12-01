@@ -26,37 +26,46 @@ class PostList extends Widget {
      * @var Category|string
      * @type modal
      * @url /grom/default/select-category
+     * @translation gromver.platform
      */
     public $category;
     /**
      * @type list
      * @items languages
+     * @translation gromver.platform
      */
     public $language;
     /**
      * @type list
      * @items layouts
      * @editable
+     * @translation gromver.platform
      */
     public $layout = 'post/listDefault';
     /**
      * @type list
      * @items itemLayouts
      * @editable
+     * @translation gromver.platform
      */
     public $itemLayout = '_itemIssue';
+    /**
+     * @translation gromver.platform
+     */
     public $pageSize = 20;
     /**
      * @type list
      * @editable
      * @items sortColumns
      * @var string
+     * @translation gromver.platform
      */
     public $sort = 'published_at';
     /**
      * @type list
      * @editable
      * @items sortDirections
+     * @translation gromver.platform
      */
     public $dir = SORT_DESC;
     /**

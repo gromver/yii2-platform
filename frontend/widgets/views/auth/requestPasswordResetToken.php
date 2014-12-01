@@ -23,7 +23,7 @@ use yii\bootstrap\ActiveForm;
 
 <div class="form-group">
     <div classs="text-center">
-        <?= Html::submitButton(\Yii::t('auth.user', 'Submit'), ['class' => 'btn btn-primary btn-lg btn-block']) ?>
+        <?= Html::submitButton(\Yii::t('gromver.platform', 'Submit'), ['class' => 'btn btn-primary btn-lg btn-block']) ?>
     </div>
 </div>
 

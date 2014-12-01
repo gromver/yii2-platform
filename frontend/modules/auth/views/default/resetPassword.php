@@ -15,11 +15,13 @@ if ($menu) {
 }
 //$this->params['breadcrumbs'][] = $this->title;?>
 
-<div class="form-auth-heading row">
+<div class="form-auth-heading">
     <h1><?= \yii\helpers\Html::encode($this->title) ?></h1>
 </div>
 
-<?php echo \gromver\platform\frontend\widgets\AuthResetPassword::widget([
-    'id' => 'auth-pass',
-    'model' => $model
-]);
+<div class="container-fluid">
+    <?= \gromver\platform\frontend\widgets\AuthResetPassword::widget([
+        'id' => 'auth-pass',
+        'model' => $model
+    ]) ?>
+</div>

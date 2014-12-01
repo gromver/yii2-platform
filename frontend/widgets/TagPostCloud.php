@@ -19,10 +19,17 @@ use gromver\platform\common\widgets\Widget;
  */
 class TagPostCloud extends Widget {
     /**
-     * CategoryId
+     * @label Category
+     * @translation gromver.platform
      */
     public $categoryId;
+    /**
+     * @translation gromver.platform
+     */
     public $fontBase = 14;
+    /**
+     * @translation gromver.platform
+     */
     public $fontSpace = 6;
 
     protected function launch()

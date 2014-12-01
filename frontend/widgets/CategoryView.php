@@ -25,12 +25,14 @@ class CategoryView extends Widget {
      * @var Category|string
      * @type modal
      * @url /grom/default/select-category
+     * @translation gromver.platform
      */
     public $category;
     /**
      * @type list
      * @items layouts
      * @editable
+     * @translation gromver.platform
      */
     public $layout = 'category/viewDefault';
 

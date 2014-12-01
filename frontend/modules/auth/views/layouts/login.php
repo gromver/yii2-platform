@@ -35,7 +35,7 @@ AppAsset::register($this);
                 'body' => $body
             ]) ?>
         <div class="container">
-            <div class="center-block col-lg-3 col-md-4 col-sm-6" style="float:none;">
+            <div class="center-block col-lg-5 col-md-6 col-sm-7" style="float:none;">
                 <?= $content ?>
             </div>
         </div>

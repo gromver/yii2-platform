@@ -20,13 +20,20 @@ use Yii;
  * @author Gayazov Roman <gromver5@gmail.com>
  */
 class TagCloud extends Widget {
-    public $fontBase = 14;
-    public $fontSpace = 6;
     /**
      * @type list
      * @items languages
+     * @translation gromver.platform
      */
     public $language;
+    /**
+     * @translation gromver.platform
+     */
+    public $fontBase = 14;
+    /**
+     * @translation gromver.platform
+     */
+    public $fontSpace = 6;
 
     private $_tags;
     private $_maxWeight;

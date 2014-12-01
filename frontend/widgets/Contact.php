@@ -7,7 +7,6 @@
  * @version 1.0.0
  */
 
-
 namespace gromver\platform\frontend\widgets;
 
 
@@ -24,10 +23,17 @@ use Yii;
 class Contact extends Widget {
     /**
      * @type yesno
+     * @translation gromver.platform
      */
     public $withCaptcha;
-    public $view = 'contact/form';
-    public $viewSuccess = 'contact/success';
+    /**
+     * @translation gromver.platform
+     */
+    public $layout = 'contact/form';
+    /**
+     * @translation gromver.platform
+     */
+    public $successLayout = 'contact/success';
 
     protected function launch()
     {
@@ -47,14 +53,13 @@ class Contact extends Widget {
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->grom->params['adminEmail'])) {
                 Yii::$app->session->setFlash(Alert::TYPE_SUCCESS, Yii::t('gromver.platform', 'Email is sent.'));
-                return $this->render($this->viewSuccess);
+                return $this->render($this->successLayout);
             } else {
-                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', 'Error.'));
-                //throw new \HttpRuntimeException(Yii::t('gromver.platform', 'Email sending is failed.'));
+                Yii::$app->session->setFlash(Alert::TYPE_DANGER, Yii::t('gromver.platform', 'There was an error.'));
             }
         }
 
-        echo $this->render($this->view, [
+        echo $this->render($this->layout, [
             'model' => $model
         ]);
     }

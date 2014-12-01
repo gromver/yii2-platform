@@ -26,19 +26,23 @@ class PageView extends Widget {
      * @var Page|string
      * @type modal
      * @url /grom/default/select-page
+     * @translation gromver.platform
      */
     public $page;
     /**
      * @type list
      * @items layouts
+     * @translation gromver.platform
      */
     public $layout = 'page/article';
     /**
      * @type yesno
+     * @translation gromver.platform
      */
     public $showTranslations;
     /**
      * @type yesno
+     * @translation gromver.platform
      */
     public $useHighlights = true;
 
@@ -53,7 +57,7 @@ class PageView extends Widget {
         }
 
         if ($this->useHighlights) {
-            CkeditorHighlightAsset::register($this->view);
+            CkeditorHighlightAsset::register($this->layout);
         }
 
         echo $this->render($this->layout, [

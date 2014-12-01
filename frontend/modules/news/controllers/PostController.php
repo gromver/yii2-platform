@@ -114,7 +114,7 @@ class PostController extends Controller
     public function loadModel($id)
     {
         if(!($model = Post::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested post does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested post does not exist.'));
         }
 
         return $model;
@@ -123,7 +123,7 @@ class PostController extends Controller
     public function loadCategoryModel($id)
     {
         if(!($model = Category::findOne($id))) {
-            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested category does not exist..'));
+            throw new NotFoundHttpException(Yii::t('gromver.platform', 'The requested category does not exist.'));
         }
 
         return $model;
