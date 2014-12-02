@@ -57,7 +57,7 @@ class PageView extends Widget {
         }
 
         if ($this->useHighlights) {
-            CkeditorHighlightAsset::register($this->layout);
+            CkeditorHighlightAsset::register($this->getView());
         }
 
         echo $this->render($this->layout, [

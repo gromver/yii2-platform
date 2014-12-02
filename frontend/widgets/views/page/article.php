@@ -6,13 +6,14 @@
 
 use yii\helpers\Html;
 
-if($this->context->showTranslations)
+if ($this->context->showTranslations) {
     echo \gromver\platform\frontend\widgets\Translations::widget([
         'model' => $model,
         'options' => [
             'class' => 'pull-right'
         ]
     ]);
+}
 
 echo Html::tag('h2', Html::encode($model->title));
 
