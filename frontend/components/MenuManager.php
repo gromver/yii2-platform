@@ -151,15 +151,14 @@ class MenuManager extends Component implements UrlRuleInterface
         //Пункт 2
         $this->_activeMenuIds = array_keys($this->getMenuMap()->getLinks(), $request->getUrl());
 
-        //Пункт 1.1
         if ($this->_menu = $this->getMenuMap()->getMenuByPath($pathInfo)) {
+            //Пункт 1.1
             $this->_activeMenuIds[] = $this->_menu->id;
             $this->_menu->setContext(MenuItem::CONTEXT_PROPER);
             //при полном совпадении метаданные меню перекрывают метаднные контроллера
             Yii::$app->getView()->on(View::EVENT_BEGIN_PAGE, [$this, 'applyMetaData']);
-        }
-        //Пункт 1.2
-        elseif($this->_menu = $this->getMenuMap()->getApplicableMenuByPath($pathInfo)) {
+        } elseif($this->_menu = $this->getMenuMap()->getApplicableMenuByPath($pathInfo)) {
+            //Пункт 1.2
             $this->_activeMenuIds[] = $this->_menu->id;
             $this->_menu->setContext(MenuItem::CONTEXT_APPLICABLE);
             $this->applyMetaData();
@@ -173,6 +172,11 @@ class MenuManager extends Component implements UrlRuleInterface
             } else {
                 throw new ForbiddenHttpException(Yii::t('gromver.platform', 'You have no rights for access to this section of the site.'));
             }
+        }
+
+        if ($this->_menu->layout_path) {
+            // если пункт меню имеет шаблон приложения, устанавливаем его
+            Yii::$app->layout = $this->_menu->layout_path;
         }
 
         if ($this->_menu->getContext() === MenuItem::CONTEXT_PROPER) {
