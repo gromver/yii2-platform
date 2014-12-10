@@ -14,9 +14,11 @@ use gromver\modulequery\ModuleQuery;
 use gromver\platform\common\models\MenuItem;
 use Yii;
 use yii\base\Component;
+use yii\base\Event;
 use yii\base\InvalidConfigException;
 use yii\caching\Cache;
 use yii\di\Instance;
+use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\Request;
 use yii\web\UrlRuleInterface;
@@ -165,6 +167,9 @@ class MenuManager extends Component implements UrlRuleInterface
         } else
             return false;
 
+        // устанавливаем макет приложению
+        Event::on(Controller::className(), Controller::EVENT_BEFORE_ACTION, [$this, 'applyLayout']);
+
         //Проверка на доступ к пунтку меню
         if (!empty($this->_menu->access_rule) && !Yii::$app->user->can($this->_menu->access_rule)) {
             if (Yii::$app->user->getIsGuest()) {
@@ -172,11 +177,6 @@ class MenuManager extends Component implements UrlRuleInterface
             } else {
                 throw new ForbiddenHttpException(Yii::t('gromver.platform', 'You have no rights for access to this section of the site.'));
             }
-        }
-
-        if ($this->_menu->layout_path) {
-            // если пункт меню имеет шаблон приложения, устанавливаем его
-            Yii::$app->layout = $this->_menu->layout_path;
         }
 
         if ($this->_menu->getContext() === MenuItem::CONTEXT_PROPER) {
@@ -242,6 +242,14 @@ class MenuManager extends Component implements UrlRuleInterface
         }
         if ($this->_menu->robots) {
             Yii::$app->getView()->registerMetaTag(['name' => 'robots', 'content' => $this->_menu->robots], 'robots');
+        }
+    }
+
+    public function applyLayout()
+    {
+        if ($this->_menu->layout_path) {
+            // если в пункте меню установлен шаблон приложения, применяем его
+            Yii::$app->controller->layout = $this->_menu->layout_path;
         }
     }
 }
