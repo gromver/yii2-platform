@@ -92,7 +92,7 @@ class PostList extends Widget {
                         'pageSize' => $this->pageSize
                     ],
                     'sort' => [
-                        'defaultOrder' => [$this->sort => (int)$this->dir]
+                        'defaultOrder' => [$this->sort => intval($this->dir)]
                     ]
                 ]),
             'itemLayout' => $this->itemLayout,

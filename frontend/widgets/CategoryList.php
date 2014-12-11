@@ -43,13 +43,14 @@ class CategoryList extends Widget {
      */
     public $itemLayout = '_itemArticle';
     /**
+     * @var string
      * @type list
      * @editable
      * @items sortColumns
-     * @var string
      */
-    public $sort = 'published_at';
+    public $sort = 'lft';
     /**
+     * @var string
      * @type list
      * @editable
      * @items sortDirections
@@ -77,7 +78,7 @@ class CategoryList extends Widget {
                     'query' => $this->category ? $this->category->children()->published()->orderBy(null) : Category::find()->roots()->published(),
                     'pagination' => false,
                     'sort' => [
-                        'defaultOrder' => [$this->sort => $this->dir]
+                        'defaultOrder' => [$this->sort => intval($this->dir)]
                     ]
                 ]),
             'itemLayout' => $this->itemLayout
@@ -121,7 +122,7 @@ class CategoryList extends Widget {
             'published_at' => Yii::t('gromver.platform', 'By publish date'),
             'created_at' => Yii::t('gromver.platform', 'By create date'),
             'title' => Yii::t('gromver.platform', 'By name'),
-            'ordering' => Yii::t('gromver.platform', 'By order'),
+            'lft' => Yii::t('gromver.platform', 'By order'),
         ];
     }
 
