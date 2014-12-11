@@ -47,6 +47,7 @@ class CategoryList extends Widget {
      * @type list
      * @editable
      * @items sortColumns
+     * @translation gromver.platform
      */
     public $sort = 'lft';
     /**

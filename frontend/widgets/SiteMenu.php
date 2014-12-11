@@ -28,19 +28,24 @@ class SiteMenu extends Widget {
      * @var string
      * @type modal
      * @url /grom/default/select-menu
+     * @translation gromver.platform
+     * @label Menu Type
      */
     public $type;
     /**
      * @type list
      * @items languages
+     * @translation gromver.platform
      */
     public $language;
     /**
      * @type yesno
+     * @translation gromver.platform
      */
     public $showInaccessible = true;
     /**
      * @var int
+     * @translation gromver.platform
      */
     public $cacheDuration = 3600;
 
