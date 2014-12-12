@@ -27,8 +27,10 @@ class NestedSetBehavior extends NestedSet
 
     /**
      * Сортировка дерева начиная с $this элемента. Сортировка поуровневая.
-     *
      * @param string $orderByAttribute  Колонка по которой будет сортироватся элементы(ex: ordering asc/lft asc).
+     * @param int $orderByDir
+     * @throws Exception
+     * @throws \Exception
      */
     public function reorderNode($orderByAttribute, $orderByDir = SORT_ASC)
     {
