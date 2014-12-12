@@ -15,7 +15,7 @@ if ($this->context->showTranslations) {
     ]);
 } ?>
 
-<h2 class="issue-header"><?= Html::encode($model->title) ?></h2>
+<h1 class="page-title title-issue"><?= Html::encode($model->title) ?></h1>
 
 <div class="issue-bar">
     <small class="issue-published"><?= Yii::$app->formatter->asDatetime($model->published_at) ?></small>

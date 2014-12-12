@@ -24,7 +24,7 @@ use yii\helpers\Html; ?>
             'day' => $day
         ]) ?>
 
-        <h3>Теги</h3>
+        <h3><?= Yii::t('gromver.platform', 'Tags') ?></h3>
 
         <?= \gromver\platform\frontend\widgets\TagPostCloud::widget([
             'id' => 'posts-tags',

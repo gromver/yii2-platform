@@ -6,7 +6,7 @@
  * @var $model \gromver\platform\common\models\Tag
  */
 
-echo \yii\helpers\Html::tag('h2', \yii\helpers\Html::encode($model->title));
+echo \yii\helpers\Html::tag('h1', \yii\helpers\Html::encode($model->title), ['class' => 'page-title title-tag-posts']);
 
 echo \yii\widgets\ListView::widget(array_merge([
     'dataProvider' => $dataProvider,

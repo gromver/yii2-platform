@@ -5,7 +5,7 @@
  */
 ?>
 
-<h2><?=\yii\helpers\Html::encode($model->title) ?></h2>
+<h1 class="page-title title-category"><?=\yii\helpers\Html::encode($model->title) ?></h1>
 
 <?php echo \gromver\platform\frontend\widgets\CategoryList::widget([
     'id' => 'cat-cats',

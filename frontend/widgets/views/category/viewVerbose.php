@@ -5,22 +5,22 @@
  */
 ?>
 
-<h2><?=\yii\helpers\Html::encode($model->title)?></h2>
+<h1 class="page-title title-category"><?=\yii\helpers\Html::encode($model->title)?></h1>
 
 <div class="well">
     <?=$model->detail_text ?>
 </div>
 
-<h3><?= Yii::t('gromver.platform', 'Категории') ?></h3>
+<h2><?= Yii::t('gromver.platform', 'Категории') ?></h2>
 
 <?= \gromver\platform\frontend\widgets\CategoryList::widget([
-'id' => 'cat-cats',
-'category' => $model,
+    'id' => 'cat-cats',
+    'category' => $model,
 ]) ?>
 
-<h3><?= Yii::t('gromver.platform', 'Статьи') ?></h3>
+<h2><?= Yii::t('gromver.platform', 'Статьи') ?></h2>
 
 <?= \gromver\platform\frontend\widgets\PostList::widget([
-'id' => 'cat-posts',
-'category' => $model,
+    'id' => 'cat-posts',
+    'category' => $model,
 ]) ?>

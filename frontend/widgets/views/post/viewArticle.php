@@ -14,7 +14,7 @@ if($this->context->showTranslations)
         ]
     ]);
 
-echo Html::tag('h2', Html::encode($model->title));
+echo Html::tag('h1', Html::encode($model->title), ['class' => 'page-title title-article']);
 
 if($model->detail_image) echo Html::img($model->getFileUrl('detail_image'), [
     'class' => 'text-block img-responsive',

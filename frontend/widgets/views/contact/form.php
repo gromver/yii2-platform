@@ -9,7 +9,7 @@ use yii\captcha\Captcha;
 
 ?>
 <div class="site-contact">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1 class="page-title title-contact"><?= Html::encode($this->title) ?></h1>
 
     <?= Html::tag('p', Yii::t('gromver.platform', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.')) ?>
 

@@ -15,6 +15,6 @@ if ($this->context->showTranslations) {
     ]);
 }
 
-echo Html::tag('h2', Html::encode($model->title));
+echo Html::tag('h1', Html::encode($model->title), ['class' => 'page-title title-page']);
 
 echo Html::tag('div', $model->detail_text);

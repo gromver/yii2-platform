@@ -4,7 +4,7 @@
  * @var $model string|\gromver\platform\common\models\Category
  */ ?>
 
-<h2><?=\yii\helpers\Html::encode($model->title)?></h2>
+<h1 class="page-title title-category"><?=\yii\helpers\Html::encode($model->title)?></h1>
 
 <?= \gromver\platform\frontend\widgets\PostList::widget([
     'id' => 'cat-posts',
