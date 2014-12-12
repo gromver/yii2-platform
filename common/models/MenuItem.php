@@ -444,7 +444,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
     public function getViewLink()
     {
         if ($this->link_type == self::LINK_ROUTE) {
-            return '/' . $this->path;
+            return Yii::$app->urlManagerFrontend->createUrl('/' . $this->path, $this->language);
         } else {
             return $this->link;
         }
@@ -454,7 +454,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
      */
     public static function viewLink($model) {
         if ($model['link_type']==self::LINK_ROUTE) {
-            return '/' . $model['path'];
+            return Yii::$app->urlManagerFrontend->createUrl('/' . $model['path']);
         } else {
             return $model['link'];
         }

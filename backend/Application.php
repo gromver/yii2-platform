@@ -36,6 +36,12 @@ class Application extends \gromver\platform\common\Application {
                     'enablePrettyUrl' => true,
                     'showScriptName' => false,
                 ],
+                'urlManagerFrontend' => [
+                    'class' => 'gromver\platform\common\components\UrlManager',
+                    'enablePrettyUrl' => true,
+                    'showScriptName' => false,
+                    'baseUrl' => '/',
+                ],
                 'user' => [
                     'class' => 'gromver\platform\common\components\User',
                     'idParam' => '__idBackend',
