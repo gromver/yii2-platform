@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'onclick' => \gromver\widgets\ModalIFrame::emitDataJs([
                                     'id' => $model->id,
                                     'description' => Yii::t('gromver.platform', 'Menu Item: {title}', ['title' => $model->title]),
-                                    'link' => $model->viewLink,
+                                    'link' => Yii::$app->urlManagerFrontend->createUrl($model->viewLink),
                                     'value' => $model->id . ':' . $model->alias
                                 ]),
                         ]);

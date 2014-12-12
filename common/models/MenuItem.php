@@ -11,6 +11,7 @@ namespace gromver\platform\common\models;
 
 use dosamigos\transliterator\TransliteratorHelper;
 use gromver\platform\backend\behaviors\NestedSetBehavior;
+use gromver\platform\common\components\UrlManager;
 use gromver\platform\common\interfaces\ViewableInterface;
 use Yii;
 use yii\behaviors\BlameableBehavior;
@@ -444,7 +445,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
     public function getViewLink()
     {
         if ($this->link_type == self::LINK_ROUTE) {
-            return Yii::$app->urlManagerFrontend->createUrl('/' . $this->path, $this->language);
+            return ['/' . $this->path, UrlManager::LANGUAGE_PARAM => $this->language];
         } else {
             return $this->link;
         }
@@ -454,7 +455,7 @@ class MenuItem extends ActiveRecord implements ViewableInterface
      */
     public static function viewLink($model) {
         if ($model['link_type']==self::LINK_ROUTE) {
-            return Yii::$app->urlManagerFrontend->createUrl('/' . $model['path']);
+            return ['/' . $model['path'], UrlManager::LANGUAGE_PARAM => $model['language']];
         } else {
             return $model['link'];
         }
