@@ -3,7 +3,7 @@
 Grom Platform позволяет разрабатывать приложение не отвлекаясь на реализацию CMS.
 
 ## Прочесть
-Платформа разрабатывалась на базе [advanced application template](http://www.yiiframework.com/doc-2.0/guide-tutorial-advanced-app.html), уже давно стало очевидно, что этот шаблон приложения избыточен для Grom Platform, поэтому с момента написания этих строк, разработка yii2-platform прекращается в пользу yii2-platform-basic, адаптируемого под basic application template. В проекте yii2-platform-basic упор будет сделан на мобильные девайсы, поэтому все кто имеет опыт разработки мобильных приложений, присоединяйтесь к проекту! Пишите на gromver5@gmail.com, делитесь вашими идеями, опытом, знаниями. Вместе мы сделаем проект лучше! :)
+Платформа разрабатывалась на базе [advanced application template](http://www.yiiframework.com/doc-2.0/guide-tutorial-advanced-app.html), уже давно стало очевидно, что этот шаблон приложения избыточен для Grom Platform, поэтому с момента написания этих строк, разработка yii2-platform прекращается в пользу [yii2-platform-basic](https://github.com/gromver/yii2-platform-basic), адаптируемого под basic application template. В проекте yii2-platform-basic упор будет сделан на мобильные девайсы, поэтому все кто имеет опыт разработки мобильных приложений, присоединяйтесь к проекту! Пишите на gromver5@gmail.com, делитесь вашими идеями, опытом, знаниями. Вместе мы сделаем проект лучше! :)
 
 ## Демо сайт
 http://menst.webfactional.com
